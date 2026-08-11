@@ -1,0 +1,86 @@
+.add-btn{
+    position: fixed;
+    right: 16px;
+    bottom: 30px;
+    width: 56px;
+    height: 56px;
+    border: 0;
+    border-radius: 50%;
+    background-color: rgba(42, 54, 71, 1);
+
+    img{
+        width: 30px;
+    }
+}
+
+.overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 12px;
+}
+.dialog{
+    position: relative;
+    width: min(396px, 100%);
+    border: 1px solid black;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+header{
+    padding: 120px 32px;
+    color: white;
+    background-color: rgba(42, 54, 71, 1);
+    font-size: 20px;
+
+    h2{
+        margin: 0;
+        font-size: 42px;
+    }
+}
+
+form{
+    display: grid;
+    gap: 16px;
+    padding: 70px 24px;
+}
+
+label{
+    display: flex;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    input{
+        width: 100%;
+        border: 0;
+        outline: 0;
+    }
+
+    img{
+        width: 22px;
+    }
+}
+
+.close{
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    border: 0;
+    color: white;
+    background: none;
+    font-size: 24px;
+}
+
+.create{
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    background: rgba(42, 54, 71, 1);
+    font-weight: bold;
+}
