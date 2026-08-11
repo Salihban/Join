@@ -4,15 +4,29 @@
     min-width: 320px;
     width: 100%;
     padding: 16px;
-
     background-color: styles.$bg-color;
     color: styles.$text-color;
 
+    .legal-notice-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+    }
+
     h1 {
         @include styles.font-bold;
-        font-size: 47px;
+        font-size: 35px;
         line-height: 1.1;
         margin-bottom: 20px;
+    }
+
+    .back-link img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
     }
 
     h2 {
@@ -123,6 +137,10 @@
             }
         }
     }
+
+    .back-link{
+        display: none;
+    }
 }
 
 @include styles.desktop {
@@ -149,5 +167,9 @@
                 font-size: 18px;
             }
         }
+    }
+
+    .back-link{
+        display: none;
     }
 }
