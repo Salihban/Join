@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'app/styles/main.scss' as *;
+
+
+* {
+margin: 0;
+padding: 0;
+scroll-behavior: smooth;
+box-sizing: border-box;
+text-decoration: none;
+position: relative;
+list-style: none;
+font-size: inherit;
+color: inherit;
+font-family: inherit;
+background: initial;
+border: initial;
+}
+
