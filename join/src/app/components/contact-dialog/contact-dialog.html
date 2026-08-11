@@ -5,12 +5,21 @@
 @if(dialogOpen) {
     <div class="overlay">
         <div class="dialog">
-            <button class="close" (click)="dialogOpen = false">X</button>
+            <button class="close" (click)="dialogOpen = false">x</button>
 
             <header>
                 <h2>Add contact</h2>
                 <p>Tasks are better with a team!</p>
+                <div class="line"></div>
             </header>
+            
+            <div class="avatar">
+                @if (initials) {
+                    <span>{{ initials }}</span>
+                } @else {
+                    <img src="assets/icons/profile.svg" alt="">
+                }
+            </div>
 
             <form [formGroup]="contactForm"]>
                 <label>

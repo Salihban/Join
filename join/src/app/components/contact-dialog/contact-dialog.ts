@@ -11,12 +11,17 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 export class ContactDialog {
   private fb = inject(FormBuilder);
 
-
   dialogOpen = false;
 
-  contactForm = this.fb.nonNullable.group({
+  contactForm = this.fb.group({
     name:'',
     email:'',
     phone:''
   });
+
+  get initials(): string {
+    const name = this.contactForm.value.name?.trim() || '';
+
+    return name.split(/\s+/).slice(0, 2).map(word => word.charAt(0).toUpperCase()).join('');
+  }
 }
