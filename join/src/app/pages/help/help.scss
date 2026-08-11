@@ -4,7 +4,7 @@
     min-width: 320px;
     width: 100%;
     min-height: 100vh;
-    padding: 16px 36px;
+    padding: 10px 20px;
     background-color: styles.$bg-color;
     color: styles.$text-color;
     @include styles.font-regular;
@@ -32,12 +32,6 @@
     color: styles.$word;
     text-decoration: none;
     font-size: 36px;
-    line-height: 1;
-    transition: transform 0.2s ease;
-
-    &:hover {
-        transform: translateX(-4px);
-    }
 }
 
 .help-content {
