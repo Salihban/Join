@@ -1,16 +1,17 @@
-/* inter-regular - latin */
-@mixin font-regular {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+/* Inter Regular */
+@font-face {
   font-family: 'Inter';
+  font-display: swap;
   font-style: normal;
   font-weight: 400;
-  src: url('/join/public/assets/fonts/inter-v20-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/assets/fonts/inter-v20-latin-regular.woff2') format('woff2');
 }
-/* inter-700 - latin */
-@mixin font-bold {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+
+/* Inter Bold */
+@font-face {
   font-family: 'Inter';
+  font-display: swap;
   font-style: normal;
   font-weight: 700;
-  src: url('/join/public/assets/fonts/inter-v20-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('/assets/fonts/inter-v20-latin-700.woff2') format('woff2');
 }

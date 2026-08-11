@@ -1,29 +1,39 @@
+@use '../../styles/main' as styles;
+
 .legal-notice-container {
     min-width: 320px;
     width: 100%;
     padding: 16px;
-    background-color: rgba(246, 247, 248, 1);
-    color: rgba(0, 0, 0, 1);
+
+    background-color: styles.$bg-color;
+    color: styles.$text-color;
 
     h1 {
+        @include styles.font-bold;
+
         font-size: 47px;
         margin-bottom: 20px;
     }
 
     h2 {
+        @include styles.font-bold;
+
         font-size: 27px;
         margin-top: 20px;
         margin-bottom: 10px;
     }
 
     h3 {
+        @include styles.font-bold;
+
         font-size: 20px;
         margin-top: 20px;
         margin-bottom: 10px;
     }
 
-
     p {
+        @include styles.font-regular;
+
         font-size: 14px;
         line-height: 1.4;
         margin-bottom: 12px;
@@ -34,6 +44,8 @@
         margin-bottom: 16px;
 
         li {
+            @include styles.font-regular;
+
             font-size: 14px;
             line-height: 1.4;
             margin-bottom: 4px;
@@ -41,7 +53,9 @@
     }
 
     .link {
-        color: rgba(18, 70, 88, 1);
+        @include styles.font-regular;
+
+        color: styles.$word;
         text-decoration: none;
 
         &:hover {
