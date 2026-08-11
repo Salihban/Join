@@ -4,7 +4,7 @@
     min-width: 320px;
     width: 100%;
     min-height: 100vh;
-    padding: 10px 20px;
+    padding: 16px;
     background-color: styles.$bg-color;
     color: styles.$text-color;
     @include styles.font-regular;
@@ -20,18 +20,17 @@
     h1 {
         @include styles.font-bold;
         margin: 0;
-        font-size: 47px;
+        font-size: 35px;
         line-height: 1.1;
     }
 }
 
-.back-link {
+.back-link img {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: styles.$word;
-    text-decoration: none;
-    font-size: 36px;
+    width: 18px;
+    height: 18px;
 }
 
 .help-content {
@@ -95,10 +94,10 @@
             line-height: 1.25;
         }
     }
+}
 
-    .enjoy-title {
-        margin-top: 36px;
-    }
+.enjoy-title {
+    display: none;
 }
 
 @include styles.tablet {
@@ -164,6 +163,15 @@
         }
     }
 
+    .back-link {
+        display: none;
+    }
+
+    .enjoy-title {
+        display: block;
+        margin-top: 36px;
+    }
+
     @include styles.desktop {
         .help-container {
             padding: 32px 36px;
@@ -200,5 +208,13 @@
                 }
             }
         }
+    }
+    .back-link {
+        display: none;
+    }
+
+    .enjoy-title {
+        display: block;
+        margin-top: 36px;
     }
 }
