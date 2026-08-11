@@ -1,0 +1,210 @@
+@use '../../styles/main' as styles;
+
+.help-container {
+    min-width: 320px;
+    width: 100%;
+    min-height: 100vh;
+    padding: 16px 36px;
+    background-color: styles.$bg-color;
+    color: styles.$text-color;
+    @include styles.font-regular;
+}
+
+.help-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+
+    h1 {
+        @include styles.font-bold;
+        margin: 0;
+        font-size: 47px;
+        line-height: 1.1;
+    }
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: styles.$word;
+    text-decoration: none;
+    font-size: 36px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: translateX(-4px);
+    }
+}
+
+.help-content {
+    max-width: 1200px;
+
+    p {
+        @include styles.font-regular;
+        margin: 0 0 20px;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    h2 {
+        @include styles.font-bold;
+        margin: 28px 0 16px;
+        font-size: 27px;
+        line-height: 1.2;
+    }
+
+    h3 {
+        @include styles.font-bold;
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.2;
+    }
+}
+
+.link {
+    color: styles.$word;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.help-steps {
+    margin: 0 0 28px;
+    padding-left: 70px;
+
+    li {
+        padding-left: 0;
+        margin-bottom: 22px;
+
+        font-size: 24px;
+        font-weight: 700;
+
+        &::marker {
+            @include styles.font-bold;
+        }
+    }
+
+    .step-content {
+        padding-left: 10px;
+
+        p {
+            margin-top: 2px;
+            margin-bottom: 0;
+
+            font-size: 16px;
+            line-height: 1.25;
+        }
+    }
+
+    .enjoy-title {
+        margin-top: 36px;
+    }
+}
+
+@include styles.tablet {
+    .help-container {
+        padding: 20px 36px;
+    }
+
+    .help-header {
+        h1 {
+            font-size: 52px;
+        }
+    }
+
+    .help-content {
+        p {
+            font-size: 17px;
+        }
+
+        h2 {
+            font-size: 34px;
+        }
+    }
+
+    .help-steps {
+        padding-left: 72px;
+
+        .step-content {
+            p {
+                font-size: 17px;
+            }
+        }
+    }
+}
+
+@include styles.laptop {
+    .help-container {
+        padding: 24px 36px;
+    }
+
+    .help-content {
+        max-width: 1250px;
+
+        p {
+            font-size: 18px;
+        }
+
+        h2 {
+            font-size: 36px;
+        }
+    }
+
+    .help-steps {
+        padding-left: 72px;
+
+        li {
+            margin-bottom: 24px;
+        }
+
+        .step-content {
+            p {
+                font-size: 18px;
+            }
+        }
+    }
+
+    @include styles.desktop {
+        .help-container {
+            padding: 32px 36px;
+        }
+
+        .help-header {
+            h1 {
+                font-size: 61px;
+            }
+        }
+
+        .help-content {
+            max-width: 1400px;
+
+            p {
+                font-size: 16px;
+            }
+
+            h2 {
+                font-size: 27px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+        }
+
+        .help-steps {
+            padding-left: 72px;
+
+            .step-content {
+                p {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
