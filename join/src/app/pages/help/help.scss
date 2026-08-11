@@ -89,7 +89,6 @@
         p {
             margin-top: 2px;
             margin-bottom: 0;
-
             font-size: 16px;
             line-height: 1.25;
         }
@@ -101,10 +100,6 @@
 }
 
 @include styles.tablet {
-    .help-container {
-        padding: 20px 36px;
-    }
-
     .help-header {
         h1 {
             font-size: 52px;
@@ -133,10 +128,6 @@
 }
 
 @include styles.laptop {
-    .help-container {
-        padding: 24px 36px;
-    }
-
     .help-content {
         max-width: 1250px;
 
@@ -173,10 +164,6 @@
     }
 
     @include styles.desktop {
-        .help-container {
-            padding: 32px 36px;
-        }
-
         .help-header {
             h1 {
                 font-size: 61px;
