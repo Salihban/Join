@@ -4,8 +4,8 @@
 
 @if(dialogOpen) {
     <div class="overlay">
-        <div class="dialog">
-            <button class="close" (click)="dialogOpen = false">x</button>
+        <div class="dialog" [class.closing]="closing" (animationend)="animationEnd()">
+            <button class="close" (click)="closeDialog()">x</button>
 
             <header>
                 <h2>Add contact</h2>

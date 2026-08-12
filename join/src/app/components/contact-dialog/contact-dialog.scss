@@ -1,7 +1,7 @@
 .add-btn{
     position: fixed;
     right: 16px;
-    bottom: 30px;
+    bottom: 20px;
     width: 56px;
     height: 56px;
     border: 0;
@@ -32,26 +32,41 @@
     animation: slideUp 350ms ease-out;
 }
 
+.closing{
+    animation: slideDown 350ms;
+}
+
 @keyframes slideUp{
     from {
         transform: translateY(100vh);
-    }
+    }}
+@keyframes slideDown{
     to {
-        transform: translateY(0);
+        transform: translateY(100vh);
     }
 }
 
 header{
-    padding: 80px 32px;
+    padding: 90px 32px;
     color: white;
     background-color: rgba(42, 54, 71, 1);
     font-size: 20px;
     border-radius: 15px 15px 0 0;
 
     h2{
-        margin: 0;
+        margin: 0 0 8px;
         font-size: 42px;
     }
+
+    p{
+        margin: 0 0 12px;
+    }
+}
+
+.line{
+    width: 90px;
+    height: 3px;
+    background-color: rgba(41, 171, 226, 1);
 }
 
 .avatar img{
