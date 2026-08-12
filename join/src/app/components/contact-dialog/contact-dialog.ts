@@ -18,10 +18,4 @@ export class ContactDialog {
     email:'',
     phone:''
   });
-
-  get initials(): string {
-    const name = this.contactForm.value.name?.trim() || '';
-
-    return name.split(/\s+/).slice(0, 2).map(word => word.charAt(0).toUpperCase()).join('');
-  }
 }

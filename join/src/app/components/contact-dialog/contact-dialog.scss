@@ -26,14 +26,27 @@
     width: min(396px, 100%);
     border: 1px solid black;
     border-radius: 15px;
-    overflow: hidden;
+    z-index: 100;
+    background-color: white;
+
+    animation: slideUp 350ms ease-out;
+}
+
+@keyframes slideUp{
+    from {
+        transform: translateY(100vh);
+    }
+    to {
+        transform: translateY(0);
+    }
 }
 
 header{
-    padding: 120px 32px;
+    padding: 80px 32px;
     color: white;
     background-color: rgba(42, 54, 71, 1);
     font-size: 20px;
+    border-radius: 15px 15px 0 0;
 
     h2{
         margin: 0;
@@ -41,10 +54,10 @@ header{
     }
 }
 
-.avatar{
+.avatar img{
     position: absolute;
-    top: 280px;
-    left: 25%;
+    top: 210px;
+    left: 30%;
     width: 120px;
     height: 120px;
 }
@@ -52,12 +65,12 @@ header{
 form{
     display: grid;
     gap: 16px;
-    padding: 70px 24px;
+    padding: 100px 24px;
 }
 
 label{
     display: flex;
-    padding: 12px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 10px;
 
@@ -83,8 +96,9 @@ label{
 }
 
 .create{
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    bottom: 15px;
+    left: 30%;
     padding: 14px;
     border: 0;
     border-radius: 10px;
