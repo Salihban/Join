@@ -1,4 +1,5 @@
 .header-content-section {
+.header-content-section{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -91,4 +92,17 @@
     flex-direction: row-reverse;
     gap: 30px;
 }
+}
+
+button{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid rgba(42, 54, 71, 1);
+    a{
+        width: 30px;
+        height: 30px;
+        color:  rgba(18, 70, 88, 1);
+        font-weight: bold;
+    }
 }

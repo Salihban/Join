@@ -1,0 +1,48 @@
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 16px;
+    box-sizing: border-box;
+
+    &__contact {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        height: 50px;
+        padding: 10px 4px;
+        border-bottom: 1px solid #00000014;
+    }
+
+    &__initials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #FF7A00;
+        color: white;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    &__information {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    &__name {
+        margin: 0;
+        color: black;
+        font-size: 20px;
+    }
+
+    &__email {
+        color: #007CEE;
+        font-size: 16px;
+        text-decoration: none;
+    }
+}
