@@ -10,7 +10,7 @@ import { Header } from './layout/header/header';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, ContactList,  Aside, LegalNotice, PrivacyPolicy, Help],
+  imports: [RouterOutlet, Header, ContactList, Aside, LegalNotice, PrivacyPolicy, Help],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
