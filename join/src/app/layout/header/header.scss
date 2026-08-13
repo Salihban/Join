@@ -15,6 +15,12 @@
         height: 40px;
         font-weight: bold;
     }
+    p{
+        display: none;
+    }
+    .help-img{
+        display: none;
+    }
     .user-button{
         cursor: pointer;
     }
@@ -61,4 +67,28 @@
 
 .dropdown.open {
     transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+    header{
+        margin-left: 250px;
+    }
+    .header-content-section{
+        p{
+            display: block;
+        }
+    }
+.header-content-section{
+            .help-img{
+        display: block;
+    }
+        >img{
+        display: none;
+    }
+}
+.user-menu{
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 30px;
+}
 }
