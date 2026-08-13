@@ -21,14 +21,6 @@
         margin-bottom: 20px;
     }
 
-    .back-link img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 18px;
-        height: 18px;
-    }
-
     h2 {
         @include styles.font-bold;
         font-size: 27px;
@@ -137,10 +129,6 @@
             }
         }
     }
-
-    .back-link{
-        display: none;
-    }
 }
 
 @include styles.desktop {
@@ -167,9 +155,5 @@
                 font-size: 18px;
             }
         }
-    }
-
-    .back-link{
-        display: none;
     }
 }
