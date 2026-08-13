@@ -1,1 +1,21 @@
-<p>contact-list works!</p>
+<section class="contact-list">
+    @for (contact of dbService.contacts(); track contact.id) {
+    <article class="contact-list__contact">
+        <div class="contact-list__initials">
+            {{ contact.initials }}
+        </div>
+
+        <div class="contact-list__information">
+            <p class="contact-list__name">
+                {{ contact.name }}
+            </p>
+
+            <a class="contact-list__email" [href]="'mailto:' + contact.email">
+                {{ contact.email }}
+            </a>
+        </div>
+    </article>
+    } @empty {
+    <p class="contact-list__empty">Keine Kontakte vorhanden.</p>
+    }
+</section>

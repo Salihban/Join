@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Supabase } from '../../supabase';
 
 @Component({
   selector: 'app-contact-list',
+  standalone: true,
   imports: [],
   templateUrl: './contact-list.html',
-  styleUrl: './contact-list.scss',
+  styleUrl: './contact-list.scss'
 })
-export class ContactList {}
+export class ContactList {
+  dbService = inject(Supabase);
+  ngOnInit() {
+    this.dbService.getContacts();
+  }
+}

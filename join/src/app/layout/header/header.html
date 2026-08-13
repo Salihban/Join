@@ -1,1 +1,25 @@
-<p>header works!</p>
+<header>
+    <section class="header-content-section">
+        <img src="/assets/icons/logo.svg" alt="">
+        <p>Kanban Project Management Tool</p>
+        <div class="user-menu">
+            <button class="user-button" (click)="toggleMenu()">
+                SM
+            </button>
+                        <a href="">
+        <img class="help-img"  src="/assets/icons/help (1).png" alt="">
+        </a>
+            <div class="dropdown" [class.open]="menuOpen">
+                <a routerLink="/help">Help</a>
+                <a routerLink="/legal-notice">Legal Notice</a>
+                <a routerLink="/privacy-policy">Privacy Policy</a>
+
+                <button class="logout" (click)="logout()">
+                    Log out
+                </button>
+            </div>
+        </div>
+    <img src="/assets/icons/logo.svg" alt="logo-icon">
+    <button><a href="">SM</a></button>
+    </section>
+</header>
