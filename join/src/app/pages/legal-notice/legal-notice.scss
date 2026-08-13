@@ -1,0 +1,175 @@
+@use '../../styles/main' as styles;
+
+.legal-notice-container {
+    min-width: 320px;
+    width: 100%;
+    padding: 16px;
+    background-color: styles.$bg-color;
+    color: styles.$text-color;
+
+    .legal-notice-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+    }
+
+    h1 {
+        @include styles.font-bold;
+        font-size: 35px;
+        line-height: 1.1;
+        margin-bottom: 20px;
+    }
+
+    .back-link img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+    }
+
+    h2 {
+        @include styles.font-bold;
+        font-size: 27px;
+        line-height: 1.2;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        @include styles.font-bold;
+        font-size: 20px;
+        line-height: 1.2;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        @include styles.font-regular;
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    ul {
+        padding-left: 20px;
+        margin-bottom: 16px;
+
+        li {
+            @include styles.font-regular;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+    }
+
+    .link {
+        @include styles.font-regular;
+        color: styles.$word;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .contact-text {
+        margin-top: 20px;
+    }
+
+    .date {
+        margin-top: 16px;
+        margin-bottom: 32px;
+    }
+}
+
+
+@include styles.tablet {
+    .legal-notice-container {
+
+        h1 {
+            font-size: 52px;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 23px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        ul {
+            li {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+@include styles.laptop {
+    .legal-notice-container {
+
+        h1 {
+            font-size: 60px;
+        }
+
+        h2 {
+            font-size: 36px;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 17px;
+        }
+
+        ul {
+            li {
+                font-size: 17px;
+            }
+        }
+    }
+
+    .back-link{
+        display: none;
+    }
+}
+
+@include styles.desktop {
+    .legal-notice-container {
+
+        h1 {
+            font-size: 61px;
+        }
+
+        h2 {
+            font-size: 27px;
+        }
+
+        h3 {
+            font-size: 22px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        ul {
+            li {
+                font-size: 18px;
+            }
+        }
+    }
+
+    .back-link{
+        display: none;
+    }
+}
