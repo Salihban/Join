@@ -53,6 +53,10 @@ header{
     font-size: 20px;
     border-radius: 15px 15px 0 0;
 
+    .join-logo{
+        display: none;
+    }
+
     h2{
         margin: 0 0 8px;
         font-size: 42px;
@@ -81,6 +85,10 @@ form{
     display: grid;
     gap: 16px;
     padding: 100px 24px;
+
+    .canncel{
+        display: none;
+    }
 }
 
 label{
@@ -132,19 +140,40 @@ label{
     }
 
     header{
-        padding: 180px 40px 40px;
         border-radius: 25px 0 0 25px;
+        img{
+            margin-bottom: 10px;
+        }
+
+        .join-logo{
+        display: block;
+        width: 55px;
+        }
     }
 
     .avatar{
-        position: absolute;
-        top: 190px;
-        left: 40%;
+        display: none;
     }
 
     form{
         align-content: center;
         padding: 100px 50px;
+
+        .canncel{
+            display: block;
+            color: black;
+            border-radius: 10px;
+        }
+
+        .form-buttons{
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+    }
+
+    .create{
+        position: static;
     }
 
     .close{
@@ -152,41 +181,56 @@ label{
     }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1440px) {
+@media screen and (min-width: 1160px) {
     .dialog{
         max-width: 1212px;
-        grid-template-columns: 42% 58%;
+        height: 600px;
+        grid-template-columns: 40% 60%;
     }
 
     header{
-        padding: 190px 45px;
+        padding: 190px 30px;
 
         h2{
-            font-size: 52px;
+            font-size: 61px;
+        }
+
+        p{
+            font-size: 27px;
         }
     }
 
     .avatar{
-        top: -30px;
-        left: 45%;
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: 42%;
     }
 
     form{
-        padding: 50px 0 70px 220px;
+        width: auto;
+        padding: 0 50px 0 180px;
         gap: 32px;
 
         label{
-            width: 422px;
+            width: 100%;
 
             input{
+                width: 100%;
                 font-size: 20px;
             }
         }
-    }
 
-    .create{
-        position: absolute;
-        bottom: 70px;
-        left: 78%;
+        .create{
+            width: 214px;
+            height: 60px;
+            font-size: 21px;
+        }
+
+        .canncel{
+            width: 126px;
+            height: 60px;
+            font-size: 20px;
+        }
     }
 }

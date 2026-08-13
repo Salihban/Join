@@ -8,6 +8,7 @@
             <button class="close" (click)="closeDialog()">x</button>
 
             <header>
+                <img class="join-logo" src="assets/icons/logo-white.svg" alt="">
                 <h2>Add contact</h2>
                 <p>Tasks are better with a team!</p>
                 <div class="line"></div>
@@ -30,11 +31,15 @@
                     <input type="tel" formControlName="phone" placeholder="Phone">
                     <img src="assets/icons/input_call.svg" alt="">
                 </label>
+                <div class="form-buttons">
+                    <button class="canncel" type="button" (click)="closeDialog()">
+                        Canncel x
+                    </button>
+                    <button class="create">
+                        Create contact
+                    </button>
+                </div>
             </form>
-
-            <button class="create">
-                Create contact
-            </button>
         </div>
     </div>
 }
