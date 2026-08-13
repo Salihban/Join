@@ -34,8 +34,12 @@ aside {
         width: 30px;
         height: 30px;
     }
-    p {
+    a {
         color: rgba(255, 255, 255, 1);
+    }
+    &:hover{
+        background-color: rgba(9, 25, 49, 1);
+;
     }
 }
 
@@ -78,6 +82,10 @@ aside {
         width: 230px;
         flex-direction: row;
         gap: 10px;
+        border-radius: 0;
+        p{
+            width: 65px;
+        }
     }
     .privacy-policy-legal-notice-wrapper{
         height: 100px;
