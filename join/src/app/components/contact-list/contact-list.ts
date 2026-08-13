@@ -10,7 +10,6 @@ import { Supabase } from '../../supabase';
 })
 export class ContactList {
   dbService = inject(Supabase);
-
   ngOnInit() {
     this.dbService.getContacts();
   }
