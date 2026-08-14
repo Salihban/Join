@@ -10,6 +10,12 @@
     @include styles.font-regular;
 }
 
+.help-inner {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
 .help-header {
     position: relative;
     display: flex;
@@ -25,12 +31,31 @@
     }
 }
 
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .back-link img {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 18px;
     height: 18px;
+    transition: transform 0.05s ease, background-color 0.05s ease;
+}
+
+.back-link:hover {
+    background-color: rgba(231, 231, 231, 1);
+}
+
+.back-link:hover img {
+    transform: scale(1.1);
 }
 
 .help-content {
@@ -154,10 +179,6 @@
         }
     }
 
-    .back-link {
-        display: none;
-    }
-
     .enjoy-title {
         display: block;
         margin-top: 36px;
@@ -196,9 +217,16 @@
             }
         }
     }
-    .back-link {
-        display: none;
-    }
+
+.back-link {
+    width: 26px;
+    height: 26px;
+}
+
+    .back-link img {
+    width: 21px;
+    height: 20px;
+}
 
     .enjoy-title {
         display: block;

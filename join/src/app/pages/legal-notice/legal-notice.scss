@@ -7,6 +7,12 @@
     background-color: styles.$bg-color;
     color: styles.$text-color;
 
+    .legal-notice-inner {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
     .legal-notice-header {
         display: flex;
         align-items: center;

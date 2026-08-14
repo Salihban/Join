@@ -7,6 +7,12 @@
     background-color: styles.$bg-color;
     color: styles.$text-color;
 
+    .privacy-policy-inner {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
     .privacy-policy-header {
         display: flex;
         align-items: center;
