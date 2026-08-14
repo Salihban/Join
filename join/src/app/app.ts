@@ -7,10 +7,11 @@ import { Help } from "./pages/help/help";
 import { ContactDialog } from './components/contact-dialog/contact-dialog';
 import { Aside } from './layout/aside/aside';
 import { Header } from './layout/header/header';
+import { ContactInfo } from './components/contact-info/contact-info';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, ContactList, Aside, LegalNotice, PrivacyPolicy, Help],
+  imports: [RouterOutlet, Header, ContactList, Aside, LegalNotice, PrivacyPolicy, Help, ContactInfo],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
