@@ -1,1 +1,57 @@
-<p>contact-info works!</p>
+<div class="contact-menu">
+<button type="button" class="add-btn" (click)="toggleMenu()">
+    <img src="assets/icons/more_vert.svg" alt="add contact icon">
+</button>
+
+    @if (menuOpen) {
+        <div class="menu-options">
+            <button type="button" (click)="openEditDialog()">
+                <img src="assets/icons/popup_edit.svg" alt="Edit-icon"> Edit
+            </button>
+
+            <button type="button" (click)="deleteContact()">
+                <img src="assets/icons/popup_delete.svg" alt="Delete-icon"> Delete
+            </button>
+        </div>
+    }
+</div>
+@if(dialogOpen) {
+    <div class="overlay">
+        <div class="dialog" [class.closing]="closing" (animationend)="animationEnd()">
+            <button class="close" (click)="closeDialog()">x</button>
+
+            <header>
+                <img class="join-logo" src="assets/icons/logo-white.svg" alt="">
+                <h2>Edit contact</h2>
+                <div class="line"></div>
+            </header>
+            
+            <div class="avatar">
+                    <img src="assets/icons/profile.svg" alt="">
+            </div>
+
+            <form [formGroup]="contactForm"]>
+                <label>
+                    <input formControlName="name" placeholder="Name">
+                    <img src="assets/icons/input_person.svg" alt="">
+                </label>
+                <label>
+                    <input type="email" formControlName="email" placeholder="Email">
+                    <img src="assets/icons/input_mail.svg" alt="">
+                </label>
+                <label>
+                    <input type="tel" formControlName="phone" placeholder="Phone">
+                    <img src="assets/icons/input_call.svg" alt="">
+                </label>
+                <div class="form-buttons">
+                    <button class="cancel" type="button" (click)="closeDialog()">
+                        Delete
+                    </button>
+                    <button class="create">
+                        Save <img src="assets/icons/check.svg" alt="check-icon">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
