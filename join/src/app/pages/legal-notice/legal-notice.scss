@@ -3,9 +3,11 @@
 .legal-notice-container {
     min-width: 320px;
     width: 100%;
-    padding: 16px;
+    padding: 100px 97px;
     background-color: styles.$bg-color;
     color: styles.$text-color;
+    height: calc(100dvh - 96px);
+    overflow-y: auto;
 
     .legal-notice-inner {
         width: 100%;
