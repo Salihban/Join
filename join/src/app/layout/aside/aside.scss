@@ -1,3 +1,4 @@
+@use "../../styles/fonts";
 aside {
     display: flex;
     align-items: center;
@@ -27,7 +28,7 @@ aside {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 70px;
+    width: 80px;
     height: 70px;
     border-radius: 10px;
     img{
@@ -36,39 +37,40 @@ aside {
     }
     a {
         color: rgba(255, 255, 255, 1);
+        font-family: Inter;
     }
     &:hover{
         background-color: rgba(9, 25, 49, 1);
-;
     }
 }
 
 .privacy-policy-legal-notice-wrapper{
     display: none;
+    a{
+        font-family: Inter;
+    }
 }
 
 
 
 @media (min-width: 768px) {
     aside {
-        position: fixed;
-        left: 0;
-        top: 0;
         height: 100dvh;
         width: 230px;
     }
     .aside-content-section{
         display: flex;
         flex-direction: column;
+        height: 100dvh;
     }
     .join-icon-wrapper{
         display: flex;
         justify-content: center;
-        height: 400px;
+        height: 200px;
         width: 100%;
         >img{
             width: 100px;
-            height: 100px;
+            height: 120px;
         }
     }
     .d-none{
@@ -79,12 +81,11 @@ aside {
         align-items: center;
     }
     .nav-icon-wrapper {
-        width: 230px;
+        width: 100%;
         flex-direction: row;
-        gap: 10px;
         border-radius: 0;
-        p{
-            width: 65px;
+        .board-img{
+            margin-right: 20px;
         }
     }
     .privacy-policy-legal-notice-wrapper{
@@ -94,7 +95,7 @@ aside {
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
-        gap: 10px;
+        gap: 16px;
         a{
             color: rgba(255, 255, 255, 1);
         }
