@@ -1,7 +1,7 @@
 .add-btn{
     position: fixed;
     right: 16px;
-    bottom: 20px;
+    bottom: 90px;
     width: 56px;
     height: 56px;
     border: 0;
@@ -75,7 +75,7 @@ header{
 
 .avatar img{
     position: absolute;
-    top: 210px;
+    top: -60px;
     left: 30%;
     width: 120px;
     height: 120px;
@@ -116,18 +116,30 @@ label{
     color: white;
     background: none;
     font-size: 24px;
+    z-index: 15;
+}
+
+.form-buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    gap: 32px;
 }
 
 .create{
-    position: absolute;
-    bottom: 15px;
-    left: 30%;
-    padding: 14px;
+    width: 200px;
+    height: 50px;
+    font-size: 21px;
     border: 0;
     border-radius: 10px;
     color: white;
     background: rgba(42, 54, 71, 1);
-    font-weight: bold;
+
+    img{
+        width: 16px;
+        height: 16px;
+        margin-top: 5px;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -161,8 +173,13 @@ label{
 
         .canncel{
             display: block;
+            width: 100px;
+            height: 50px;
+            font-size: 21px;
             color: black;
+            border: 1px solid #535252;
             border-radius: 10px;
+            color: #535252;
         }
 
         .form-buttons{
