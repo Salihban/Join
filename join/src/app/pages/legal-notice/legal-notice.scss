@@ -7,6 +7,12 @@
     background-color: styles.$bg-color;
     color: styles.$text-color;
 
+    .legal-notice-inner {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
     .legal-notice-header {
         display: flex;
         align-items: center;
@@ -19,14 +25,6 @@
         font-size: 35px;
         line-height: 1.1;
         margin-bottom: 20px;
-    }
-
-    .back-link img {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 18px;
-        height: 18px;
     }
 
     h2 {
@@ -137,10 +135,6 @@
             }
         }
     }
-
-    .back-link{
-        display: none;
-    }
 }
 
 @include styles.desktop {
@@ -167,9 +161,5 @@
                 font-size: 18px;
             }
         }
-    }
-
-    .back-link{
-        display: none;
     }
 }
