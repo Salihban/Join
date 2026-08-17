@@ -75,11 +75,18 @@
 
 .dropdown.open {
     transform: translateX(0);
+    a{
+        cursor: pointer;
+    }
+    .logout{
+        font-family: Inter;
+    }
 }
 
 @media (min-width: 768px) {
     header{
         .header-content-section{
+            max-width: 1440px;
         width: 100%;
         .help-img{
         display: block;
