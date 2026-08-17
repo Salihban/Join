@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './legal-notice.html',
   styleUrl: './legal-notice.scss',
 })
-export class LegalNotice {}
+export class LegalNotice {
+  constructor(private location: Location){}
+
+  goBack(): void {
+    this.location.back();
+  }
+}
