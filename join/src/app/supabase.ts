@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
 
 export interface Contact {
@@ -9,17 +9,45 @@ export interface Contact {
     phone: string;
 }
 
+export interface ContactGroup {
+    letter: string;
+    contacts: Contact[];
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class Supabase {
-    supabaseUrl = 'https://mbifznamhyihpgduvqru.supabase.co';
-    supabaseKey = 'sb_publishable_JUaeWi8_jhlIrDYKFIr-HQ_ZPNiPis2';
+    readonly supabaseUrl: string = 'https://mbifznamhyihpgduvqru.supabase.co';
+    readonly supabaseKey: string = 'sb_publishable_JUaeWi8_jhlIrDYKFIr-HQ_ZPNiPis2';
+    readonly supabase = createClient(this.supabaseUrl, this.supabaseKey);
 
-    supabase = createClient(this.supabaseUrl, this.supabaseKey);
-    contacts = signal<Contact[]>([]);
+    readonly contacts = signal<Contact[]>([]);
+    readonly groupedContacts = computed<ContactGroup[]>(() => {
+        const sortedContacts = [...this.contacts()].sort((a, b) =>
+            a.name.localeCompare(b.name, 'de')
+        );
 
-    async getContacts() {
+        const groups: ContactGroup[] = [];
+
+        for (const contact of sortedContacts) {
+            const letter: string = contact.name.charAt(0).toUpperCase();
+
+            let group = groups.find(group => group.letter === letter);
+
+            if (!group) {
+                group = {
+                    letter: letter,
+                    contacts: []
+                };
+                groups.push(group);
+            }
+            group.contacts.push(contact);
+        }
+        return groups;
+    });
+
+    async getContacts(): Promise<void> {
         const { data: contacts, error } = await this.supabase
             .from('contacts')
             .select('id, name, initials, email, phone');
