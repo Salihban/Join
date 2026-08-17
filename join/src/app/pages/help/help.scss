@@ -4,10 +4,12 @@
     min-width: 320px;
     width: 100%;
     min-height: 100vh;
-    padding: 16px;
+    padding: 100px 97px;
     background-color: styles.$bg-color;
     color: styles.$text-color;
     @include styles.font-regular;
+    height: calc(100dvh - 96px);
+    overflow-y: auto;
 }
 
 .help-inner {
