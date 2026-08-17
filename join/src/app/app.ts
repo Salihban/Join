@@ -11,7 +11,7 @@ import { ContactInfo } from './components/contact-info/contact-info';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, ContactList, Aside, LegalNotice, PrivacyPolicy, Help, ContactInfo],
+  imports: [RouterOutlet, Header, ContactList, Aside, LegalNotice, PrivacyPolicy, Help, ContactInfo, ContactDialog],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
