@@ -1,6 +1,11 @@
 @use '../../styles/main.scss' as *;
 @use'../../styles/mixin' as mixin;
 
+.contact-list-wrapper {
+    @include mixin.flex($justify: center);
+    width: 100%;
+}
+
 .contact-list {
     @include mixin.flex($direction: column, $align: flex-start);
     width: 100%;

@@ -1,4 +1,6 @@
-<section class="contact-list">
+
+<div class="contact-list-wrapper">
+    <section class="contact-list">
     @for (group of dbService.groupedContacts(); track group.letter) {
     <section class="contact-list__group">
         <h2 class="contact-list__letter">
@@ -7,7 +9,7 @@
         <div class="contact-list__divider"></div>
         @for (contact of group.contacts; track contact.id) {
         <article class="contact-list__contact">
-            <div class="contact-list__initials">
+            <div class="contact-list__initials" [style.background-color]="getRandomColor()">
                 {{ contact.initials }}
             </div>
             <div class="contact-list__information">
@@ -25,3 +27,4 @@
     <p class="contact-list__empty">Keine Kontakte vorhanden.</p>
     }
 </section>
+</div>
