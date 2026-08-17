@@ -1,21 +1,30 @@
-<section class="contact-list">
-    @for (contact of dbService.contacts(); track contact.id) {
-    <article class="contact-list__contact">
-        <div class="contact-list__initials">
-            {{ contact.initials }}
-        </div>
 
-        <div class="contact-list__information">
-            <p class="contact-list__name">
-                {{ contact.name }}
-            </p>
-
-            <a class="contact-list__email" [href]="'mailto:' + contact.email">
-                {{ contact.email }}
-            </a>
-        </div>
-    </article>
+<div class="contact-list-wrapper">
+    <section class="contact-list">
+    @for (group of dbService.groupedContacts(); track group.letter) {
+    <section class="contact-list__group">
+        <h2 class="contact-list__letter">
+            {{ group.letter }}
+        </h2>
+        <div class="contact-list__divider"></div>
+        @for (contact of group.contacts; track contact.id) {
+        <article class="contact-list__contact">
+            <div class="contact-list__initials" [style.background-color]="getRandomColor()">
+                {{ contact.initials }}
+            </div>
+            <div class="contact-list__information">
+                <p class="contact-list__name">
+                    {{ contact.name }}
+                </p>
+                <a class="contact-list__email" [href]="'mailto:' + contact.email">
+                    {{ contact.email }}
+                </a>
+            </div>
+        </article>
+        }
+    </section>
     } @empty {
     <p class="contact-list__empty">Keine Kontakte vorhanden.</p>
     }
 </section>
+</div>
