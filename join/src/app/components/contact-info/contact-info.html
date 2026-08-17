@@ -1,3 +1,40 @@
+<div class="overhead-wrapper">
+    <div class="overhead-content">
+        <h2>Contacts</h2>
+        <p>Better with a team</p>
+        <div class="line"></div>
+    </div>
+
+    <div class="return-button">
+        <button>
+            <a routerLink="#contactList"><img src="assets/icons/arrow_left.svg" alt=""></a>
+        </button>
+    </div>
+</div>
+
+@if (dbService.selectedContact(); as contact) {
+    <section class="contact-details">
+        <div class="contact-person">
+            <div class="contact-list__initials">
+                {{ contact.initials }}
+            </div>
+            <h3>{{ contact.name }}</h3>
+        </div>
+
+        <p>Contact Information</p>
+
+        <strong>Email</strong>
+        <a class="contact-list__email" [href]="'mailto:' + contact.email">
+            {{contact.email}}
+        </a>
+
+        <strong>Phone</strong>
+        <a [href]="'tel' + contact.phone">
+            {{contact.phone}}
+        </a>
+    </section>
+}
+
 <div class="contact-menu">
 <button type="button" class="add-btn" (click)="toggleMenu()">
     <img src="assets/icons/more_vert.svg" alt="add contact icon">
@@ -30,7 +67,7 @@
                     <img src="assets/icons/profile.svg" alt="">
             </div>
 
-            <form [formGroup]="contactForm"]>
+            <form [formGroup]="contactForm"] (ngSubmit)="saveContact()">
                 <label>
                     <input formControlName="name" placeholder="Name">
                     <img src="assets/icons/input_person.svg" alt="">
@@ -44,10 +81,10 @@
                     <img src="assets/icons/input_call.svg" alt="">
                 </label>
                 <div class="form-buttons">
-                    <button class="cancel" type="button" (click)="closeDialog()">
+                    <button class="cancel" type="button" (click)="deleteContact()">
                         Delete
                     </button>
-                    <button class="create">
+                    <button type="submit" class="create">
                         Save <img src="assets/icons/check.svg" alt="check-icon">
                     </button>
                 </div>

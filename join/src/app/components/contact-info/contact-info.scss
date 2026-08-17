@@ -1,4 +1,87 @@
+@use '../../styles/main.scss' as *;
 @use '../../styles/mixin' as mixin;
+
+.overhead-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    padding: 32px 20px;
+
+    .overhead-content{
+        width: auto;
+        height: 100px;
+        padding: 0;
+        color: black;
+        font-size: 20px;
+
+        h2{
+            margin: 0 0 8px;
+            font-size: 42px;
+        }
+
+        p{
+            margin: 0 0 12px;
+        }
+    }
+
+    .contact-list__email{
+        color: $email;
+    }
+
+    .return-button{
+        width:auto;
+        height: 100px;
+
+        button{
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+.contact-details{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 500px;
+    
+    p{
+        margin: 24px 0 20px;
+        font-size: 20px;
+    }
+
+    strong{
+        margin-bottom: 8px;
+    }
+
+    a{
+        margin-bottom: 20px;
+        text-decoration: none;
+    }
+}
+
+.contact-person{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    h3{
+        font-size: 28px;
+    }
+
+    .contact-list__initials{
+        @include mixin.flex($direction: row, $justify: center, $align: center);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #FF7A00;
+        color: white;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
 
 .add-btn{
     width: 56px;
@@ -15,7 +98,7 @@
 .contact-menu{
     position: fixed;
     right: 16px;
-    bottom: 20px;
+    bottom: 90px;
     z-index: 30;
 }
 

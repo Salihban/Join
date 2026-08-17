@@ -23,6 +23,10 @@ export class Supabase {
     readonly supabase = createClient(this.supabaseUrl, this.supabaseKey);
 
     readonly contacts = signal<Contact[]>([]);
+    readonly selectedContact = signal<Contact | null>(null);
+    selectContact(contact: Contact): void {
+    this.selectedContact.set(contact);
+    }
     readonly groupedContacts = computed<ContactGroup[]>(() => {
         const sortedContacts = [...this.contacts()].sort((a, b) =>
             a.name.localeCompare(b.name, 'de')
@@ -60,4 +64,26 @@ export class Supabase {
         if (!contacts) return;
         this.contacts.set(contacts);
     }
+
+    async updateContact(
+        id: string,
+        values: Pick<Contact, 'name' | 'email' | 'phone'>
+    ): Promise<void> {
+    await this.supabase
+        .from('contacts')
+        .update(values)
+        .eq('id', id);
+
+    await this.getContacts();
+    }
+
+    async deleteContact(id: string): Promise<void> {
+        await this.supabase
+        .from('contacts')
+        .delete()
+        .eq('id', id);
+
+    this.selectedContact.set(null);
+    await this.getContacts();
+}
 }

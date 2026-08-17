@@ -6,6 +6,11 @@
 
 
 <app-header></app-header>
-<app-contact-list />
-<app-contact-dialog></app-contact-dialog>
+<main>
+    @if (dbService.selectedContact()) {
+        <app-contact-info></app-contact-info>
+    } @else {
+        <app-contact-list></app-contact-list>
+    }
+</main>
 <app-aside></app-aside>
