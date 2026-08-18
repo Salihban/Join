@@ -1,43 +1,40 @@
-.contacts{
-    display: none;
+.app-layout{
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    height: 100dvh;
 }
 
-.contact-info{
-    display: none;
+.page{
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    min-width: 0;
+    overflow: hidden;
 }
 
-@media screen and (min-width: 786px){
-    .contacts{
-        display: grid;
-        grid-template-columns: 360px 1fr;
-        min-height: calc(100vh - 100px);
-        margin-left: 230px;
-    }
-
-    .contact-info, .contact-list{
-        display: block;
-    }
-
-    .contacts.selected .contact-list{
-        display: block;
-    }
+main{
+    overflow: auto;
 }
 
-@media (min-width: 320px){
-    .aside{
-        display: none;
+@media screen and (max-width: 768px){
+    .app-layout{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
     }
-}
 
-@media (min-width: 768px) {
-    .div1 {
-        width: 100%;
-        display: flex;
+    .page{
+        display: contents;
     }
-    .aside{
-        display: block;
+
+    app-header{
+        grid-row: 1;
     }
-    .footer{
-        display: none;
+
+    main{
+        grid-row: 2;
+    }
+
+    app-aside{
+        grid-row: 3;
     }
 }
