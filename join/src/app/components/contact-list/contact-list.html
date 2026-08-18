@@ -9,7 +9,7 @@
         <div class="contact-list__divider"></div>
         @for (contact of group.contacts; track contact.id) {
         <article class="contact-list__contact" (click)="dbService.selectContact(contact)">
-            <div class="contact-list__initials" [style.background-color]="getRandomColor()">
+            <div class="contact-list__initials" [style.background-color]="contact.color">
                 {{ contact.initials }}
             </div>
             <div class="contact-list__information">

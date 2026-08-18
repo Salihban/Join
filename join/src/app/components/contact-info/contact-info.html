@@ -17,7 +17,7 @@
 @if (dbService.selectedContact(); as contact) {
     <section class="contact-details">
         <div class="contact-person">
-            <div class="contact-list__initials">
+            <div class="contact-list__initials" [style.background-color]="contact.color">
                 {{ contact.initials }}
             </div>
             <div class="head-and-links">

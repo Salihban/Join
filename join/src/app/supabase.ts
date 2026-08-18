@@ -7,6 +7,7 @@ export interface Contact {
     initials: string;
     email: string;
     phone: string;
+    color: string;
 }
 
 export interface ContactGroup {
@@ -22,6 +23,7 @@ export interface NewContact {
 
 interface ContactInsert extends NewContact {
     initials: string;
+    color: string;
 }
 
 @Injectable({
@@ -34,8 +36,15 @@ export class Supabase {
     readonly supabase = createClient(this.supabaseUrl, this.supabaseKey);
     readonly contacts = signal<Contact[]>([]);
     readonly selectedContact = signal<Contact | null>(null);
+
+    readonly contactColors = [
+        '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF',
+        '#00BEE8', '#1FD7C1', '#FF745E', '#FFA35E',
+        '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B',
+        '#FFE62B', '#FF4646'
+    ];
     selectContact(contact: Contact): void {
-    this.selectedContact.set(contact);
+        this.selectedContact.set(contact);
     }
     readonly groupedContacts = computed<ContactGroup[]>(() => {
         const sortedContacts = [...this.contacts()].sort((a, b) =>
@@ -63,7 +72,7 @@ export class Supabase {
     async getContacts(): Promise<void> {
         const { data: contacts, error } = await this.supabase
             .from('contacts')
-            .select('id, name, initials, email, phone');
+            .select('id, name, initials, email, phone,color');
 
         if (error) {
             console.error('Fehler beim Laden', error);
@@ -73,35 +82,36 @@ export class Supabase {
         if (!contacts) return;
         this.contacts.set(contacts);
     }
-  
+
     async updateContact(
         id: string,
         values: Pick<Contact, 'name' | 'email' | 'phone'>
     ): Promise<void> {
-    await this.supabase
-        .from('contacts')
-        .update(values)
-        .eq('id', id);
+        await this.supabase
+            .from('contacts')
+            .update(values)
+            .eq('id', id);
 
-    await this.getContacts();
+        await this.getContacts();
     }
 
     async deleteContact(id: string): Promise<void> {
         await this.supabase
-        .from('contacts')
-        .delete()
-        .eq('id', id);
+            .from('contacts')
+            .delete()
+            .eq('id', id);
 
-    this.selectedContact.set(null);
-    await this.getContacts();
-}
+        this.selectedContact.set(null);
+        await this.getContacts();
+    }
 
     async addContact(contact: NewContact): Promise<string | null> {
         const contactWithInitials: ContactInsert = {
             name: this.formatName(contact.name),
             email: contact.email,
             phone: contact.phone,
-            initials: this.createInitials(contact.name)
+            initials: this.createInitials(contact.name),
+            color: this.getRandomColor()
         };
         const { error } = await this.supabase
             .from('contacts')
@@ -135,5 +145,13 @@ export class Supabase {
             .join('');
 
         return initials;
+    }
+
+    private getRandomColor(): string {
+        const randomIndex = Math.floor(
+            Math.random() * this.contactColors.length
+        );
+
+        return this.contactColors[randomIndex];
     }
 }
