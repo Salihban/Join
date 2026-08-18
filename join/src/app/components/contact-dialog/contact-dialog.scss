@@ -1,4 +1,6 @@
-.add-btn{
+@use '../../styles/main.scss' as *;
+
+.add-btn {
     position: fixed;
     right: 16px;
     bottom: 90px;
@@ -8,12 +10,12 @@
     border-radius: 50%;
     background-color: rgba(42, 54, 71, 1);
 
-    img{
+    img {
         width: 30px;
     }
 }
 
-.overlay{
+.overlay {
     position: fixed;
     inset: 0;
     z-index: 100;
@@ -21,7 +23,8 @@
     place-items: center;
     padding: 12px;
 }
-.dialog{
+
+.dialog {
     position: relative;
     width: min(396px, 100%);
     border: 1px solid black;
@@ -32,48 +35,50 @@
     animation: slideUp 350ms ease-out;
 }
 
-.closing{
+.closing {
     animation: slideDown 350ms;
 }
 
-@keyframes slideUp{
+@keyframes slideUp {
     from {
         transform: translateY(100vh);
-    }}
-@keyframes slideDown{
+    }
+}
+
+@keyframes slideDown {
     to {
         transform: translateY(100vh);
     }
 }
 
-header{
+header {
     padding: 90px 32px;
     color: white;
     background-color: rgba(42, 54, 71, 1);
     font-size: 20px;
     border-radius: 15px 15px 0 0;
 
-    .join-logo{
+    .join-logo {
         display: none;
     }
 
-    h2{
+    h2 {
         margin: 0 0 8px;
         font-size: 42px;
     }
 
-    p{
+    p {
         margin: 0 0 12px;
     }
 }
 
-.line{
+.line {
     width: 90px;
     height: 3px;
     background-color: rgba(41, 171, 226, 1);
 }
 
-.avatar img{
+.avatar img {
     position: absolute;
     top: -60px;
     left: 30%;
@@ -81,34 +86,38 @@ header{
     height: 120px;
 }
 
-form{
+form {
     display: grid;
     gap: 16px;
     padding: 100px 24px;
 
-    .canncel{
+    .canncel {
         display: none;
     }
 }
 
-label{
+label {
     display: flex;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 10px;
 
-    input{
+    input {
         width: 100%;
         border: 0;
         outline: 0;
     }
 
-    img{
+    img {
         width: 22px;
+    }
+
+    &.input-error {
+        border-color: $error;
     }
 }
 
-.close{
+.close {
     position: absolute;
     top: 22px;
     right: 22px;
@@ -119,14 +128,14 @@ label{
     z-index: 15;
 }
 
-.form-buttons{
+.form-buttons {
     display: flex;
     justify-content: center;
     margin-top: 16px;
     gap: 32px;
 }
 
-.create{
+.create {
     width: 200px;
     height: 50px;
     font-size: 21px;
@@ -135,15 +144,21 @@ label{
     color: white;
     background: rgba(42, 54, 71, 1);
 
-    img{
+    img {
         width: 16px;
         height: 16px;
         margin-top: 5px;
     }
 }
 
+.form-error {
+    margin-block: -10px;
+    color: $error;
+    font-size: 16px;
+}
+
 @media screen and (min-width: 768px) {
-    .dialog{
+    .dialog {
         width: 90%;
         max-width: 900px;
         display: grid;
@@ -151,27 +166,28 @@ label{
         border-radius: 25px;
     }
 
-    header{
+    header {
         border-radius: 25px 0 0 25px;
-        img{
+
+        img {
             margin-bottom: 10px;
         }
 
-        .join-logo{
-        display: block;
-        width: 55px;
+        .join-logo {
+            display: block;
+            width: 55px;
         }
     }
 
-    .avatar{
+    .avatar {
         display: none;
     }
 
-    form{
+    form {
         align-content: center;
         padding: 100px 50px;
 
-        .canncel{
+        .canncel {
             display: block;
             width: 100px;
             height: 50px;
@@ -182,69 +198,69 @@ label{
             color: #535252;
         }
 
-        .form-buttons{
+        .form-buttons {
             display: flex;
             justify-content: flex-start;
             gap: 20px;
         }
     }
 
-    .create{
+    .create {
         position: static;
     }
 
-    .close{
+    .close {
         color: black;
     }
 }
 
 @media screen and (min-width: 1160px) {
-    .dialog{
+    .dialog {
         max-width: 1212px;
         height: 600px;
         grid-template-columns: 40% 60%;
     }
 
-    header{
+    header {
         padding: 190px 30px;
 
-        h2{
+        h2 {
             font-size: 61px;
         }
 
-        p{
+        p {
             font-size: 27px;
         }
     }
 
-    .avatar{
+    .avatar {
         display: block;
         position: absolute;
         top: -10px;
         left: 42%;
     }
 
-    form{
+    form {
         width: auto;
         padding: 0 50px 0 180px;
         gap: 32px;
 
-        label{
+        label {
             width: 100%;
 
-            input{
+            input {
                 width: 100%;
                 font-size: 20px;
             }
         }
 
-        .create{
+        .create {
             width: 214px;
             height: 60px;
             font-size: 21px;
         }
 
-        .canncel{
+        .canncel {
             width: 126px;
             height: 60px;
             font-size: 20px;
