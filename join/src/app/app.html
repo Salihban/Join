@@ -6,11 +6,13 @@
 
 
 <app-header></app-header>
-<main>
-    @if (dbService.selectedContact()) {
-        <app-contact-info></app-contact-info>
-    } @else {
+<main class="contacts" [class.selected]="dbService.selectedContact()">
+    <div class="contact-list">
         <app-contact-list></app-contact-list>
-    }
+    </div>
+
+    <div class="contact-info">
+            <app-contact-info></app-contact-info>
+    </div>
 </main>
 <app-aside></app-aside>

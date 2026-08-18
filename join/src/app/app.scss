@@ -1,0 +1,25 @@
+.contacts{
+    display: none;
+}
+
+.contact-info{
+    display: none;
+}
+
+@media screen and (min-width: 786px){
+    .contacts{
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        min-height: calc(100vh - 100px);
+        margin-left: 230px;
+    }
+
+    .contact-info, .contact-list{
+        display: block;
+    }
+
+    .contacts.selected .contact-list{
+        display: block;
+    }
+}
+

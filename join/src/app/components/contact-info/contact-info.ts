@@ -28,6 +28,7 @@ export class ContactInfo {
     this.contactForm.patchValue(contact);
     this.menuOpen = false;
     this.dialogOpen = true;
+    document.body.style.overflow = 'hidden';
   }
 
   closeDialog(){
@@ -37,6 +38,7 @@ export class ContactInfo {
       if (this.closing){
         this.dialogOpen = false;
         this.closing = false;
+        document.body.style.overflow = '';
       }
     }
   

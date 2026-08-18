@@ -18,7 +18,18 @@
             <div class="contact-list__initials">
                 {{ contact.initials }}
             </div>
-            <h3>{{ contact.name }}</h3>
+            <div class="head-and-links">
+                <h3>{{ contact.name }}</h3>
+                    <div class="edit-links">
+                <button type="button" (click)="openEditDialog()">
+                    <img src="assets/icons/popup_edit.svg" alt="Edit-icon"> Edit
+                </button>
+
+                <button type="button" (click)="deleteContact()">
+                    <img src="assets/icons/popup_delete.svg" alt="Delete-icon"> Delete
+                </button>
+                    </div>
+            </div>
         </div>
 
         <p>Contact Information</p>

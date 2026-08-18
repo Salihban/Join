@@ -5,7 +5,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     width: 100%;
     padding: 32px 20px;
 
@@ -40,6 +39,7 @@
         }
     }
 }
+
 
 .contact-details{
     display: flex;
@@ -138,17 +138,16 @@
     display: grid;
     place-items: center;
     padding: 12px;
+    background-color: rgb(0, 0, 0, 0.7);
 }
 
 .dialog{
     position: relative;
     width: min(396px, 100%);
-    border: 1px solid black;
     border-radius: 15px;
     z-index: 100;
     background-color: white;
     @include mixin.font-bold;
-
     animation: slideUp 350ms ease-out;
 }
 
@@ -170,7 +169,6 @@ header{
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     height: 320px;
     color: white;
     background-color: rgba(42, 54, 71, 1);
@@ -242,6 +240,7 @@ label{
     background: none;
     font-size: 24px;
     z-index: 15;
+    cursor: pointer;
 }
 
 .form-buttons{
@@ -259,6 +258,7 @@ label{
     border: 1px solid #535252;
     border-radius: 10px;
     color: #535252;
+    cursor: pointer;
 }
 
 .create{
@@ -269,10 +269,165 @@ label{
     border-radius: 10px;
     color: white;
     background: rgba(42, 54, 71, 1);
+    cursor: pointer;
 
     img{
         width: 16px;
         height: 16px;
         margin-top: 5px;
+    }
+}
+
+@media screen and (min-width: 786px) {
+    .return-button{
+        display: none;
+    }
+
+    .contact-menu{
+        display: none;
+    }
+
+    .overhead-wrapper{
+        padding: 100px;
+    }
+
+    .overhead-content{
+        display: flex;
+        align-items: center;
+
+        width: 1000px;
+        gap: 32px;
+    }
+
+    .contact-details{
+        padding: 0 0 0 100px;
+        gap: 16px;
+
+        .contact-list__initials{
+            width: 120px;
+            height: 120px;
+        }
+
+        .head-and-links{
+            width: auto;
+            margin-left: 16px;
+            font-size: 16px;
+            .edit-links{
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                padding: 16px 0 0 0;
+
+                button:hover{
+                    cursor: pointer;
+                    transform: scale(1.1);
+                    color: rgba(42, 54, 71, 1);
+                }
+            }
+            h3{
+            font-size: 47px;
+            }
+        }
+
+        
+
+        p{
+            font-size: 20px;
+        }
+
+        strong{
+            font-weight: bold;
+        }
+    }
+
+    .dialog{
+        display: grid;
+        grid-template-columns: 40% 60%;
+
+        width: 90%;
+        max-width: 1212px;
+        height: 600px;
+        border-radius: 25px;
+        border: 0;
+        animation: slideIn 350ms ease-out;
+    }
+
+    .closing{
+        animation: slideOut 350ms ease-in;
+    }
+
+    @keyframes slideIn{
+    from {
+        transform: translateX(100vw);
+    }}
+    @keyframes slideOut{
+    to {
+        transform: translateX(100vw);
+        }
+    }
+
+    header{
+        border-radius: 25px 0 0 25px;
+        padding: 120px 30px 190px 30px;
+        height: 600px;
+        img{
+            margin-bottom: 24px;
+        }
+
+        h2{
+            font-size: 61px;
+        }
+
+        .join-logo{
+        display: block;
+        width: 55px;
+        }
+    }
+
+    .avatar{
+        display: block;
+        position: absolute;
+        top: 270px;
+        left: 45%;
+    }
+
+    form{
+        align-content: center;
+        padding: 0 50px 0 250px;
+        gap: 40px;
+
+        label{
+            width: 100%;
+
+            input{
+                width: 100%;
+                font-size: 20px;
+            }
+        }
+
+        .canncel{
+            display: block;
+            width: 100px;
+            height: 50px;
+            font-size: 21px;
+            color: black;
+            border: 1px solid #535252;
+            border-radius: 10px;
+            color: #535252;
+        }
+
+        .form-buttons{
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+    }
+
+    .create{
+        position: static;
+    }
+
+    .close{
+        color: black;
     }
 }
