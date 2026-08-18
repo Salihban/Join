@@ -23,3 +23,21 @@
     }
 }
 
+@media (min-width: 320px){
+    .aside{
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .div1 {
+        width: 100%;
+        display: flex;
+    }
+    .aside{
+        display: block;
+    }
+    .footer{
+        display: none;
+    }
+}

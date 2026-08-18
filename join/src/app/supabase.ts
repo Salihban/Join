@@ -14,14 +14,24 @@ export interface ContactGroup {
     contacts: Contact[];
 }
 
+export interface NewContact {
+    name: string;
+    email: string;
+    phone: string;
+}
+
+interface ContactInsert extends NewContact {
+    initials: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
+
 export class Supabase {
     readonly supabaseUrl: string = 'https://mbifznamhyihpgduvqru.supabase.co';
     readonly supabaseKey: string = 'sb_publishable_JUaeWi8_jhlIrDYKFIr-HQ_ZPNiPis2';
     readonly supabase = createClient(this.supabaseUrl, this.supabaseKey);
-
     readonly contacts = signal<Contact[]>([]);
     readonly selectedContact = signal<Contact | null>(null);
     selectContact(contact: Contact): void {
@@ -31,7 +41,6 @@ export class Supabase {
         const sortedContacts = [...this.contacts()].sort((a, b) =>
             a.name.localeCompare(b.name, 'de')
         );
-
         const groups: ContactGroup[] = [];
 
         for (const contact of sortedContacts) {
@@ -64,7 +73,7 @@ export class Supabase {
         if (!contacts) return;
         this.contacts.set(contacts);
     }
-
+  
     async updateContact(
         id: string,
         values: Pick<Contact, 'name' | 'email' | 'phone'>
@@ -86,4 +95,45 @@ export class Supabase {
     this.selectedContact.set(null);
     await this.getContacts();
 }
+
+    async addContact(contact: NewContact): Promise<string | null> {
+        const contactWithInitials: ContactInsert = {
+            name: this.formatName(contact.name),
+            email: contact.email,
+            phone: contact.phone,
+            initials: this.createInitials(contact.name)
+        };
+        const { error } = await this.supabase
+            .from('contacts')
+            .insert(contactWithInitials);
+
+        if (error) {
+            console.error('Fehler beim Hinzufügen', error);
+            return 'The contact could not be added. It may already exist or contain invalid characters';
+        }
+        await this.getContacts();
+        return null;
+    }
+
+    private formatName(name: string): string {
+        const nameFormated = name.trim()
+            .split(/\s+/)
+            .map(part =>
+                part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+            )
+            .join(' ');
+
+        return nameFormated;
+    }
+
+    private createInitials(name: string): string {
+        const initials = name.trim()
+            .split(/\s+/)
+            .filter(part => part.length > 0)
+            .map(part => part.charAt(0).toUpperCase())
+            .slice(0, 2)
+            .join('');
+
+        return initials;
+    }
 }

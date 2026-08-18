@@ -3,11 +3,18 @@
 .help-container {
     min-width: 320px;
     width: 100%;
-    min-height: 100vh;
-    padding: 16px;
+    padding: 50px 16px;
     background-color: styles.$bg-color;
     color: styles.$text-color;
     @include styles.font-regular;
+    height: calc(100dvh - 96px);
+    overflow-y: auto;
+}
+
+.help-inner {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 .help-header {
@@ -25,12 +32,31 @@
     }
 }
 
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .back-link img {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 18px;
     height: 18px;
+    transition: transform 0.05s ease, background-color 0.05s ease;
+}
+
+.back-link:hover {
+    background-color: rgba(231, 231, 231, 1);
+}
+
+.back-link:hover img {
+    transform: scale(1.1);
 }
 
 .help-content {
@@ -154,16 +180,16 @@
         }
     }
 
-    .back-link {
-        display: none;
-    }
-
     .enjoy-title {
         display: block;
         margin-top: 36px;
     }
 
     @include styles.desktop {
+        .help-container {
+            padding: 100px 97px;
+        }
+
         .help-header {
             h1 {
                 font-size: 61px;
@@ -196,8 +222,15 @@
             }
         }
     }
+
     .back-link {
-        display: none;
+        width: 26px;
+        height: 26px;
+    }
+
+    .back-link img {
+        width: 21px;
+        height: 20px;
     }
 
     .enjoy-title {
