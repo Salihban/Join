@@ -8,9 +8,9 @@ import { Location } from '@angular/common';
   styleUrl: './help.scss',
 })
 export class Help {
-  constructor(private location: Location){}
+  // constructor(private location: Location){}
 
-  goBack(): void {
-    this.location.back();
-  }
+  // goBack(): void {
+  //   this.location.back();
+  // }
 }

@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './privacy-policy.scss',
 })
 export class PrivacyPolicy {
-  constructor(private location: Location){}
+  // constructor(private location: Location){}
 
-  goBack(): void {
-    this.location.back();
-  }
+  // goBack(): void {
+  //   this.location.back();
+  // }
 }
