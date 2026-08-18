@@ -81,18 +81,30 @@
             </div>
 
             <form [formGroup]="contactForm"] (ngSubmit)="saveContact()">
-                <label>
+                <label [class.input-error]="contactForm.controls.name.touched && contactForm.controls.name.invalid">
                     <input formControlName="name" placeholder="Name">
                     <img src="assets/icons/input_person.svg" alt="">
                 </label>
-                <label>
+                @if (contactForm.controls.name.touched && contactForm.controls.name.invalid) {
+                    <p class="form-error">Please enter a name</p>
+                }
+
+                <label [class.input-error]="contactForm.controls.email.touched && contactForm.controls.email.invalid">
                     <input type="email" formControlName="email" placeholder="Email">
                     <img src="assets/icons/input_mail.svg" alt="">
                 </label>
-                <label>
+                @if (contactForm.controls.email.touched && contactForm.controls.email.invalid){
+                    <p class="form-error">Please enter a valid phone number</p>
+                }
+
+                <label [class.input-error]="contactForm.controls.phone.touched && contactForm.controls.phone.invalid">
                     <input type="tel" formControlName="phone" placeholder="Phone">
                     <img src="assets/icons/input_call.svg" alt="">
                 </label>
+                @if (contactForm.controls.phone.touched && contactForm.controls.phone.invalid) {
+                    <p class="form-error">Please enter a valid phone number</p>
+                }
+
                 <div class="form-buttons">
                     <button class="cancel" type="button" (click)="deleteContact()">
                         Delete

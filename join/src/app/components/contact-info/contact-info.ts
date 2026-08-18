@@ -44,9 +44,24 @@ export class ContactInfo {
   
 
   contactForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required]]
+    name: ['',
+      [Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50),
+      Validators.pattern(/^[a-zA-ZäöüÄÖÜß\s-]+$/)
+      ]],
+
+    email: ['',
+      [Validators.required,
+      Validators.email,
+      Validators.pattern(
+        /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*){1,2}$/)
+      ]],
+
+    phone: ['',
+      [Validators.required,
+      Validators.maxLength(20),
+      Validators.pattern(/^\+?\d+$/)]]
   });
 
   async saveContact(): Promise<void> {
