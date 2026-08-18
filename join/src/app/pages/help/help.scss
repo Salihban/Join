@@ -3,11 +3,12 @@
 .help-container {
     min-width: 320px;
     width: 100%;
-    min-height: 100vh;
-    padding: 16px;
+    padding: 50px 16px;
     background-color: styles.$bg-color;
     color: styles.$text-color;
     @include styles.font-regular;
+    height: calc(100dvh - 96px);
+    overflow-y: auto;
 }
 
 .help-inner {
@@ -185,6 +186,10 @@
     }
 
     @include styles.desktop {
+        .help-container {
+            padding: 100px 97px;
+        }
+
         .help-header {
             h1 {
                 font-size: 61px;
@@ -218,15 +223,15 @@
         }
     }
 
-.back-link {
-    width: 26px;
-    height: 26px;
-}
+    .back-link {
+        width: 26px;
+        height: 26px;
+    }
 
     .back-link img {
-    width: 21px;
-    height: 20px;
-}
+        width: 21px;
+        height: 20px;
+    }
 
     .enjoy-title {
         display: block;

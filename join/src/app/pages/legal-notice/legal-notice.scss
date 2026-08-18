@@ -3,9 +3,11 @@
 .legal-notice-container {
     min-width: 320px;
     width: 100%;
-    padding: 16px;
+    padding: 50px 16px;
     background-color: styles.$bg-color;
     color: styles.$text-color;
+    height: calc(100dvh - 96px);
+    overflow-y: auto;
 
     .legal-notice-inner {
         width: 100%;
@@ -23,9 +25,35 @@
     h1 {
         @include styles.font-bold;
         font-size: 35px;
-        line-height: 1.1;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
+
+    .back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.back-link img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.05s ease, background-color 0.05s ease;
+}
+
+.back-link:hover {
+    background-color: rgba(231, 231, 231, 1);
+}
+
+.back-link:hover img {
+    transform: scale(1.1);
+}
 
     h2 {
         @include styles.font-bold;
@@ -139,6 +167,7 @@
 
 @include styles.desktop {
     .legal-notice-container {
+        padding: 100px 97px;
 
         h1 {
             font-size: 61px;
@@ -161,5 +190,13 @@
                 font-size: 18px;
             }
         }
+    }
+
+    .back-link {
+        display: none;
+    }
+
+    .back-link img {
+        display: none;
     }
 }
