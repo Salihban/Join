@@ -294,9 +294,25 @@ label{
     .overhead-content{
         display: flex;
         align-items: center;
-
-        width: 1000px;
+        width: 100px;
         gap: 32px;
+    }
+
+    .overhead-content h2{
+        font-size: 47px;
+    }
+
+    .overhead-toggle{
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 24px;
+        font-size: 27px;
+
+        .line{
+            width: 3px;
+            height: 70px;
+        }
     }
 
     .contact-details{
