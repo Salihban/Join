@@ -204,6 +204,10 @@ header{
     height: 120px;
 }
 
+.edit-links{
+    display: none;
+}
+
 form{
     display: grid;
     gap: 16px;
@@ -405,6 +409,10 @@ label{
         position: absolute;
         top: 270px;
         left: 45%;
+    }
+
+    .edit-links{
+        display: block;
     }
 
     form{

@@ -1,15 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../supabase';
-import { RouterLink } from "@angular/router";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-contact-info',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule],
   templateUrl: './contact-info.html',
   styleUrl: './contact-info.scss',
 })
 export class ContactInfo {
+  constructor(private location: Location){}
+
+  goBack(): void {
+    this.location.back();
+  }
+  
   private fb = inject(FormBuilder);
   dbService = inject(Supabase);
 
