@@ -1,11 +1,11 @@
-<app-header></app-header>
-<main class="contacts" [class.selected]="dbService.selectedContact()">
-    <div class="contact-list">
-        <app-contact-list></app-contact-list>
+<div class="app-layout">
+    <app-aside></app-aside>
+
+    <div class="page">
+        <app-header></app-header>
+
+        <main>
+            <router-outlet></router-outlet>
+        </main>
     </div>
-    <div class="contact-info">
-            <app-contact-info></app-contact-info>
-    </div>
-</main>
-<app-aside></app-aside>
-<router-outlet></router-outlet>
+</div>

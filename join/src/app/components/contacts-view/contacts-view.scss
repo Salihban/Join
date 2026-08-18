@@ -1,0 +1,31 @@
+.contacts{
+    min-height: 100%;
+}
+
+.contact-info{
+    display: none;
+}
+
+.contacts.selected {
+    .contact-list{
+    display: none;
+    }
+    .contact-info{
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .contacts{
+        display: grid;
+        grid-template-columns: 360px 1fr;
+    }
+
+    .contacts.selected .contact-list{
+        display: block;
+    }
+
+    .contact-info{
+        display: block;
+    }
+}
