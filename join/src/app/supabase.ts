@@ -33,6 +33,10 @@ export class Supabase {
     readonly supabaseKey: string = 'sb_publishable_JUaeWi8_jhlIrDYKFIr-HQ_ZPNiPis2';
     readonly supabase = createClient(this.supabaseUrl, this.supabaseKey);
     readonly contacts = signal<Contact[]>([]);
+    readonly selectedContact = signal<Contact | null>(null);
+    selectContact(contact: Contact): void {
+    this.selectedContact.set(contact);
+    }
     readonly groupedContacts = computed<ContactGroup[]>(() => {
         const sortedContacts = [...this.contacts()].sort((a, b) =>
             a.name.localeCompare(b.name, 'de')
@@ -69,7 +73,28 @@ export class Supabase {
         if (!contacts) return;
         this.contacts.set(contacts);
     }
+  
+    async updateContact(
+        id: string,
+        values: Pick<Contact, 'name' | 'email' | 'phone'>
+    ): Promise<void> {
+    await this.supabase
+        .from('contacts')
+        .update(values)
+        .eq('id', id);
 
+    await this.getContacts();
+    }
+
+    async deleteContact(id: string): Promise<void> {
+        await this.supabase
+        .from('contacts')
+        .delete()
+        .eq('id', id);
+
+    this.selectedContact.set(null);
+    await this.getContacts();
+}
 
     async addContact(contact: NewContact): Promise<string | null> {
         const contactWithInitials: ContactInsert = {
@@ -90,7 +115,6 @@ export class Supabase {
         return null;
     }
 
-
     private formatName(name: string): string {
         const nameFormated = name.trim()
             .split(/\s+/)
@@ -101,7 +125,6 @@ export class Supabase {
 
         return nameFormated;
     }
-
 
     private createInitials(name: string): string {
         const initials = name.trim()

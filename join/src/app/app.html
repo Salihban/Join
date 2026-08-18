@@ -1,7 +1,10 @@
-<div class="div1">
-<app-aside class="aside"></app-aside>
-<div class="div2">
 <app-header></app-header>
-<app-legal-notice></app-legal-notice>
-<app-aside class="footer"></app-aside>
-</div>
+<main class="contacts" [class.selected]="dbService.selectedContact()">
+    <div class="contact-list">
+        <app-contact-list></app-contact-list>
+    </div>
+    <div class="contact-info">
+            <app-contact-info></app-contact-info>
+    </div>
+</main>
+<app-aside></app-aside>
