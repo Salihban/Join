@@ -20,6 +20,10 @@ export interface NewContact {
     phone: string;
 }
 
+interface ContactInsert extends NewContact {
+    initials: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -68,9 +72,15 @@ export class Supabase {
 
 
     async addContact(contact: NewContact): Promise<string | null> {
+        const contactWithInitials: ContactInsert = {
+            name: this.formatName(contact.name),
+            email: contact.email,
+            phone: contact.phone,
+            initials: this.createInitials(contact.name)
+        };
         const { error } = await this.supabase
             .from('contacts')
-            .insert(contact);
+            .insert(contactWithInitials);
 
         if (error) {
             console.error('Fehler beim Hinzufügen', error);
@@ -78,5 +88,29 @@ export class Supabase {
         }
         await this.getContacts();
         return null;
+    }
+
+
+    private formatName(name: string): string {
+        const nameFormated = name.trim()
+            .split(/\s+/)
+            .map(part =>
+                part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+            )
+            .join(' ');
+
+        return nameFormated;
+    }
+
+
+    private createInitials(name: string): string {
+        const initials = name.trim()
+            .split(/\s+/)
+            .filter(part => part.length > 0)
+            .map(part => part.charAt(0).toUpperCase())
+            .slice(0, 2)
+            .join('');
+
+        return initials;
     }
 }
