@@ -17,13 +17,12 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 32px;
+        margin-bottom: 20px;
     }
 
     h1 {
         @include styles.font-bold;
-        font-size: 35px;
-        line-height: 1.1;
+        font-size: 37px;
         margin-bottom: 20px;
     }
 
@@ -157,13 +156,10 @@
         p {
             font-size: 18px;
         }
-    }
 
-    .back-link {
+        .back-link img {
         display: none;
     }
-
-    .back-link img {
-        display: none;
     }
+    
 }
