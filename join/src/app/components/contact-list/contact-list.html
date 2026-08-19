@@ -1,12 +1,14 @@
 <div id="contactList" class="contact-list-wrapper">
     <section class="contact-list">
-        <button class="contact-list__add" type="button" (click)="dialog.open()">
+        <button class="contact-list__add" type="button" (click)="contactDialog.open()">
             <span>Add new contact</span>
             <img src="assets/icons/person_add.svg" alt="">
         </button>
 
-        <app-contact-dialog #dialog></app-contact-dialog>
-
+        <app-contact-dialog #contactDialog (contactSaved)="onContactSaved()"></app-contact-dialog>
+        @if (showToast()) {
+        <div class="toast-notification"><span class="text">Contact succesfully created </span></div>
+        }
         @for (group of dbService.groupedContacts(); track group.letter) {
         <section class="contact-list__group">
             <h2 class="contact-list__letter">

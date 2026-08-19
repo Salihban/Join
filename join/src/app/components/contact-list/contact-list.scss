@@ -130,3 +130,37 @@
         }
     }
 }
+
+.toast-notification {
+    position: fixed;
+    top: 850px;
+    right: 650px;
+        animation: slideUp 350ms ease-out;
+    height: 70px;
+    width: 320px;
+    padding: 20px;
+
+    background-color: rgba(42, 54, 71, 1);
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+
+    .text {
+        @include mixin.flex($justify: center);
+        @include mixin.font-bold;
+        font-size: 20px;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateX(100vh);
+    }
+}
+
+@keyframes slideDown {
+    to {
+        transform: translateX(100vh);
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Supabase } from '../../supabase';
 import { ContactDialog } from '../contact-dialog/contact-dialog';
 
@@ -12,7 +12,17 @@ import { ContactDialog } from '../contact-dialog/contact-dialog';
 export class ContactList {
   dbService = inject(Supabase);
 
+  showToast = signal(false);
+
   ngOnInit(): void {
     this.dbService.getContacts();
+  }
+
+  onContactSaved() {
+    this.showToast.set(true);
+
+    setTimeout(() => {
+      this.showToast.set(false);
+    }, 3000);
   }
 }
