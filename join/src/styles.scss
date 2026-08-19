@@ -11,3 +11,9 @@ font-family: inherit;
 background: initial;
 border: initial;
 }
+
+@media(min-width:768px) {
+    app-contact-dialog .add-btn{
+        display: none;
+    }
+}

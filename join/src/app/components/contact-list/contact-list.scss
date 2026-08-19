@@ -9,8 +9,9 @@
 .contact-list {
     @include mixin.flex($direction: column, $align: flex-start);
     width: 100%;
+    min-width: 360px;
     max-width: 400px;
-    padding: 16px;
+    padding-left: 24px;
     box-sizing: border-box;
     font-family: inter;
 
@@ -19,24 +20,25 @@
     }
 
     &__letter {
-        margin: 0;
-        padding: 10px 4px 14px;
+        padding: 17px 36px;
         color: black;
-        font-size: 16px;
+        font-size: clamp(16px, 2dvw, 20px);
+        ;
         font-weight: 400;
     }
 
     &__divider {
         width: 100%;
         height: 1px;
+        margin-bottom: 10px;
         background-color: $divider;
     }
 
     &__contact {
         @include mixin.flex($direction: row, $align: center);
-        gap: 14px;
+        gap: 35px;
         min-height: 50px;
-        padding: 10px 4px
+        padding: 15px 24px
     }
 
     &__initials {
@@ -65,5 +67,66 @@
         color: $email;
         font-size: 16px;
         text-decoration: none;
+    }
+
+    &__add {
+        @include mixin.flex($justify: center);
+        @include mixin.font-bold;
+        gap: 16px;
+        width: 340px;
+        height: 56px;
+        padding: 0 24px;
+        color: white;
+        background-color: $standard-btn;
+        border-radius: 10px;
+        line-height: 1.2;
+        font-size: 21px;
+        cursor: pointer;
+
+        >img {
+            width: 30px;
+            height: 21px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .contact-list__add {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .contact-list {
+        &__add {
+            margin-top: 24px;
+
+            &:hover {
+                background-color: $btn-hover;
+                box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+            }
+
+            &:active {
+                background-color: $dark-btn;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        &__contact {
+            border-radius: 10px;
+
+            &:hover:not(&--selected) {
+                background-color: $cta-info;
+            }
+
+            &--selected {
+                background-color: $standard-btn;
+
+                .contact-list__name,
+                .contact-list__email {
+                    color: white;
+                }
+            }
+        }
     }
 }
