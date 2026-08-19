@@ -1,15 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../supabase';
-import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-contact-info',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule],
   templateUrl: './contact-info.html',
   styleUrl: './contact-info.scss',
 })
 export class ContactInfo {
+
+  goBack(): void {
+    console.log('zurück wurde geklickt')
+    this.dbService.selectedContact.set(null);
+  }
+  
   private fb = inject(FormBuilder);
   dbService = inject(Supabase);
 
@@ -44,9 +49,24 @@ export class ContactInfo {
   
 
   contactForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', [Validators.required]]
+    name: ['',
+      [Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(50),
+      Validators.pattern(/^[a-zA-ZäöüÄÖÜß\s-]+$/)
+      ]],
+
+    email: ['',
+      [Validators.required,
+      Validators.email,
+      Validators.pattern(
+        /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*){1,2}$/)
+      ]],
+
+    phone: ['',
+      [Validators.required,
+      Validators.maxLength(20),
+      Validators.pattern(/^\+?\d+$/)]]
   });
 
   async saveContact(): Promise<void> {

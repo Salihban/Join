@@ -7,6 +7,12 @@ import { Location } from '@angular/common';
   templateUrl: './help.html',
   styleUrl: './help.scss',
 })
+
+export class Help {constructor(private location: Location){}
+  // goBack(): void {
+  //   this.location.back();
+  // }
+  // 
 export class Help {
   constructor(private location: Location){}
 

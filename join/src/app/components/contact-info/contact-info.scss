@@ -1,5 +1,13 @@
-@use '../../styles/main.scss' as *;
+@use '../../styles/fonts';
+@use '../../styles/variablen as *';
 @use '../../styles/mixin' as mixin;
+:host{
+    font-family: 'Inter', sans-serif;
+}
+
+button, input, textarea, select{
+    font: inherit;
+}
 
 .overhead-wrapper{
     display: flex;
@@ -25,21 +33,23 @@
         }
     }
 
-    .contact-list__email{
-        color: $email;
-    }
-
     .return-button{
+        position: relative;
         width:auto;
-        height: 100px;
+        height: 32px;
+        z-index: 39;
+        cursor: pointer;
 
         button{
             width: 32px;
             height: 32px;
         }
+
+        img{
+            pointer-events: none;
+        }
     }
 }
-
 
 .contact-details{
     display: flex;
@@ -204,6 +214,10 @@ header{
     height: 120px;
 }
 
+.edit-links{
+    display: none;
+}
+
 form{
     display: grid;
     gap: 16px;
@@ -345,8 +359,6 @@ label{
             }
         }
 
-        
-
         p{
             font-size: 20px;
         }
@@ -405,6 +417,10 @@ label{
         position: absolute;
         top: 270px;
         left: 45%;
+    }
+
+    .edit-links{
+        display: block;
     }
 
     form{
