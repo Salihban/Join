@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-privacy-policy',
   imports: [],
@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './privacy-policy.scss',
 })
 export class PrivacyPolicy {
-  // constructor(private location: Location){}
+  constructor(private location: Location){}
 
-  // goBack(): void {
-  //   this.location.back();
-  // }
+  goBack(): void {
+    this.location.back();
+  }
 }
