@@ -1,5 +1,4 @@
-@use '../../styles/fonts';
-@use '../../styles/variablen as *';
+@use '../../styles/main.scss' as *;
 @use '../../styles/mixin' as mixin;
 :host{
     font-family: 'Inter', sans-serif;
