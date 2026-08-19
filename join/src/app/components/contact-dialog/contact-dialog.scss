@@ -9,6 +9,7 @@
     border: 0;
     border-radius: 50%;
     background-color: rgba(42, 54, 71, 1);
+    z-index: 10;
 
     img {
         width: 30px;
@@ -88,7 +89,7 @@ header {
 
 form {
     display: grid;
-    gap: 16px;
+    gap: 10px;
     padding: 100px 24px;
 
     .canncel {
@@ -152,10 +153,11 @@ label {
 }
 
 .form-error {
-    margin-block: -10px;
     color: $error;
     font-size: 16px;
+    margin: -20px 0 0;
 }
+
 
 @media screen and (min-width: 768px) {
     .dialog {
@@ -236,14 +238,13 @@ label {
     .avatar {
         display: block;
         position: absolute;
-        top: -10px;
+        top: 300px;
         left: 42%;
     }
 
     form {
         width: auto;
         padding: 0 50px 0 180px;
-        gap: 32px;
 
         label {
             width: 100%;
@@ -267,3 +268,4 @@ label {
         }
     }
 }
+

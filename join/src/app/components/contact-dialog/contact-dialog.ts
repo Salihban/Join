@@ -15,7 +15,7 @@ export class ContactDialog {
   private dbService = inject(Supabase);
 
   closing = false;
-  dialogOpen = false;
+  dialogOpen = signal(false);
   submitted = false;
   databaseError = signal("");
 
@@ -82,8 +82,12 @@ export class ContactDialog {
 
   animationEnd() {
     if (this.closing) {
-      this.dialogOpen = false;
+      this.dialogOpen.set(false);
       this.closing = false;
     }
+  }
+
+  open(){
+    this.dialogOpen.set(true);
   }
 }
