@@ -1,5 +1,8 @@
-@use '../../styles/main.scss' as *;
+@use '../../styles/fonts' as *;
 @use '../../styles/mixin' as mixin;
+:host{
+    font-family: 'Inter', sans-serif;
+}
 
 .overhead-wrapper{
     display: flex;
@@ -25,21 +28,23 @@
         }
     }
 
-    .contact-list__email{
-        color: $email;
-    }
-
     .return-button{
+        position: relative;
         width:auto;
-        height: 100px;
+        height: 32px;
+        z-index: 39;
+        cursor: pointer;
 
         button{
             width: 32px;
             height: 32px;
         }
+
+        img{
+            pointer-events: none;
+        }
     }
 }
-
 
 .contact-details{
     display: flex;
@@ -348,8 +353,6 @@ label{
             font-size: 47px;
             }
         }
-
-        
 
         p{
             font-size: 20px;

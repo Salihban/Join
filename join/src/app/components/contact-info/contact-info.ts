@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../supabase';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-contact-info',
@@ -10,10 +9,10 @@ import { Location } from '@angular/common';
   styleUrl: './contact-info.scss',
 })
 export class ContactInfo {
-  constructor(private location: Location){}
 
   goBack(): void {
-    this.location.back();
+    console.log('zurück wurde geklickt')
+    this.dbService.selectedContact.set(null);
   }
   
   private fb = inject(FormBuilder);
