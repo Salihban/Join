@@ -2,18 +2,32 @@
 @use'../../styles/mixin' as mixin;
 
 .contact-list-wrapper {
-    @include mixin.flex($justify: center);
+    @include mixin.flex($justify: center, $align: stretch, $direction: column);
     width: 100%;
+    height: 100%;
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
+
 }
 
 .contact-list {
     @include mixin.flex($direction: column, $align: flex-start);
     width: 100%;
     min-width: 360px;
-    max-width: 400px;
-    padding-left: 24px;
+    height: 100%;
+    max-width: 424px;
+    padding: 24px;
     box-sizing: border-box;
     font-family: inter;
+
+    &__scroll {
+        width: 100%;
+        min-height: 0;
+        scrollbar-width: thin;
+        flex: 1;
+        padding-right: 12px;
+        overflow-y: auto;
+        overflow-x: clip;
+    }
 
     &__group {
         width: 100%;
@@ -38,7 +52,7 @@
         @include mixin.flex($direction: row, $align: center);
         gap: 35px;
         min-height: 50px;
-        padding: 15px 24px
+        padding: 15px 24px;
     }
 
     &__initials {
@@ -54,28 +68,39 @@
 
     &__information {
         @include mixin.flex($direction : column, $align: start);
+        min-width: 0;
         gap: 3px;
+        flex: 1;
     }
 
     &__name {
         margin: 0;
+        max-width: 100%;
         color: black;
         font-size: 20px;
+        overflow: clip;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     &__email {
         color: $email;
+        max-width: 100%;
         font-size: 16px;
         text-decoration: none;
+        white-space: nowrap;
+        overflow: clip;
+        text-overflow: ellipsis;
     }
 
     &__add {
         @include mixin.flex($justify: center);
         @include mixin.font-bold;
         gap: 16px;
-        width: 340px;
+        width: 100%;
         height: 56px;
         padding: 0 24px;
+        margin-bottom: 16px;
         color: white;
         background-color: $standard-btn;
         border-radius: 10px;
@@ -99,7 +124,6 @@
 @media (min-width: 768px) {
     .contact-list {
         &__add {
-            margin-top: 24px;
 
             &:hover {
                 background-color: $btn-hover;
