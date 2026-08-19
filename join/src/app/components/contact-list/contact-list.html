@@ -1,30 +1,37 @@
-
 <div id="contactList" class="contact-list-wrapper">
     <section class="contact-list">
-    @for (group of dbService.groupedContacts(); track group.letter) {
-    <section class="contact-list__group">
-        <h2 class="contact-list__letter">
-            {{ group.letter }}
-        </h2>
-        <div class="contact-list__divider"></div>
-        @for (contact of group.contacts; track contact.id) {
-        <article class="contact-list__contact" (click)="dbService.selectContact(contact)">
-            <div class="contact-list__initials" [style.background-color]="contact.color">
-                {{ contact.initials }}
-            </div>
-            <div class="contact-list__information">
-                <p class="contact-list__name">
-                    {{ contact.name }}
-                </p>
-                <a class="contact-list__email" [href]="'mailto:' + contact.email">
-                    {{ contact.email }}
-                </a>
-            </div>
-        </article>
+        <button class="contact-list__add" type="button" (click)="dialog.open()">
+            <span>Add new contact</span>
+            <img src="assets/icons/person_add.svg" alt="">
+        </button>
+
+        <app-contact-dialog #dialog></app-contact-dialog>
+
+        @for (group of dbService.groupedContacts(); track group.letter) {
+        <section class="contact-list__group">
+            <h2 class="contact-list__letter">
+                {{ group.letter }}
+            </h2>
+            <div class="contact-list__divider"></div>
+            @for (contact of group.contacts; track contact.id) {
+            <article class="contact-list__contact" [class.contact-list__contact--selected]="
+    dbService.selectedContact()?.id === contact.id" (click)="dbService.selectContact(contact)">
+                <div class="contact-list__initials" [style.background-color]="contact.color">
+                    {{ contact.initials }}
+                </div>
+                <div class="contact-list__information">
+                    <p class="contact-list__name">
+                        {{ contact.name }}
+                    </p>
+                    <a class="contact-list__email">
+                        {{ contact.email }}
+                    </a>
+                </div>
+            </article>
+            }
+        </section>
+        } @empty {
+        <p class="contact-list__empty">Keine Kontakte vorhanden.</p>
         }
     </section>
-    } @empty {
-    <p class="contact-list__empty">Keine Kontakte vorhanden.</p>
-    }
-</section>
 </div>

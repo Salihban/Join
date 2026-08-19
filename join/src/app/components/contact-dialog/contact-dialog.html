@@ -1,8 +1,8 @@
-<button class="add-btn" (click)="dialogOpen = true">
+<button class="add-btn" (click)="open()">
     <img src="assets/icons/person_add.svg" alt="add contact icon">
 </button>
 
-@if(dialogOpen || databaseError()) {
+@if(dialogOpen() || databaseError()) {
 <div class="overlay">
     <div class="dialog" [class.closing]="closing" (animationend)="animationEnd()">
         <button class="close" (click)="closeDialog()">x</button>
