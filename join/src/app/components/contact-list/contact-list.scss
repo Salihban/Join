@@ -1,10 +1,22 @@
 @use '../../styles/main.scss' as *;
 @use'../../styles/mixin' as mixin;
+@use'../../styles/main' as styles;
 
 .contact-list-wrapper {
     @include mixin.flex($justify: center);
     width: 100%;
 }
+
+.toast-notification {
+    position: fixed;
+    top: 850px;
+    right: 650px;
+    z-index: 999999;
+    background-color: #2e7d32;
+    padding: 12px 24px;
+    border-radius: 8px;
+}
+
 
 .contact-list {
     @include mixin.flex($direction: column, $align: flex-start);
@@ -15,11 +27,11 @@
     box-sizing: border-box;
     font-family: inter;
 
-    &__group {
+    &group {
         width: 100%;
     }
 
-    &__letter {
+    &letter {
         padding: 17px 36px;
         color: black;
         font-size: clamp(16px, 2dvw, 20px);
@@ -27,21 +39,21 @@
         font-weight: 400;
     }
 
-    &__divider {
+    &divider {
         width: 100%;
         height: 1px;
         margin-bottom: 10px;
         background-color: $divider;
     }
 
-    &__contact {
+    &contact {
         @include mixin.flex($direction: row, $align: center);
         gap: 35px;
         min-height: 50px;
         padding: 15px 24px
     }
 
-    &__initials {
+    &initials {
         @include mixin.flex($direction: row, $justify: center, $align: center);
         width: 40px;
         height: 40px;
@@ -52,24 +64,24 @@
         font-weight: 400;
     }
 
-    &__information {
+    &information {
         @include mixin.flex($direction : column, $align: start);
         gap: 3px;
     }
 
-    &__name {
+    &name {
         margin: 0;
         color: black;
         font-size: 20px;
     }
 
-    &__email {
+    &email {
         color: $email;
         font-size: 16px;
         text-decoration: none;
     }
 
-    &__add {
+&add {
         @include mixin.flex($justify: center);
         @include mixin.font-bold;
         gap: 16px;
@@ -91,14 +103,14 @@
 }
 
 @media (max-width: 767px) {
-    .contact-list__add {
+    .contact-listadd {
         display: none;
     }
 }
 
 @media (min-width: 768px) {
     .contact-list {
-        &__add {
+        &add {
             margin-top: 24px;
 
             &:hover {
@@ -112,7 +124,7 @@
             }
         }
 
-        &__contact {
+        &contact {
             border-radius: 10px;
 
             &:hover:not(&--selected) {
@@ -122,8 +134,8 @@
             &--selected {
                 background-color: $standard-btn;
 
-                .contact-list__name,
-                .contact-list__email {
+                .contact-listname,
+                .contact-listemail {
                     color: white;
                 }
             }
@@ -132,6 +144,7 @@
 }
 
 .toast-notification {
+    @include styles.font-bold;
     position: fixed;
     top: 850px;
     right: 650px;
@@ -146,11 +159,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     font-weight: 500;
 
-    .text {
-        @include mixin.flex($justify: center);
-        @include mixin.font-bold;
-        font-size: 20px;
-    }
+
 }
 
 @keyframes slideUp {

@@ -154,4 +154,14 @@ export class Supabase {
 
         return this.contactColors[randomIndex];
     }
+
+    toastMessage = signal('');
+
+    // 2. DIESE METHODE HINZUFÜGEN:
+    triggerToast(message: string) {
+        this.toastMessage.set(message);
+        setTimeout(() => {
+            this.toastMessage.set('');
+        }, 3000);
+    }
 }
