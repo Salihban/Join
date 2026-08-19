@@ -2,7 +2,7 @@
 @use'../../styles/mixin' as mixin;
 
 .contact-list-wrapper {
-    @include mixin.flex($justify: center, $align: stretch, $direction: column);
+    @include mixin.flex($justify: center, $align: stretch);
     width: 100%;
     height: 100%;
     box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
@@ -116,9 +116,13 @@
 }
 
 @media (max-width: 767px) {
+
     .contact-list__add {
         display: none;
     }
+
+    
+
 }
 
 @media (min-width: 768px) {
