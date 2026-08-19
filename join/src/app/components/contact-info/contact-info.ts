@@ -14,7 +14,7 @@ export class ContactInfo {
     console.log('zurück wurde geklickt')
     this.dbService.selectedContact.set(null);
   }
-  
+
   private fb = inject(FormBuilder);
   dbService = inject(Supabase);
 
@@ -22,11 +22,11 @@ export class ContactInfo {
   dialogOpen = false;
   menuOpen = false;
 
-  toggleMenu(): void{
+  toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  openEditDialog(): void{
+  openEditDialog(): void {
     const contact = this.dbService.selectedContact();
     if (!contact) return;
 
@@ -36,17 +36,16 @@ export class ContactInfo {
     document.body.style.overflow = 'hidden';
   }
 
-  closeDialog(){
+  closeDialog() {
     this.closing = true;
   }
-    animationEnd(){
-      if (this.closing){
-        this.dialogOpen = false;
-        this.closing = false;
-        document.body.style.overflow = '';
-      }
+  animationEnd() {
+    if (this.closing) {
+      this.dialogOpen = false;
+      this.closing = false;
+      document.body.style.overflow = '';
     }
-  
+  }
 
   contactForm = this.fb.nonNullable.group({
     name: ['',

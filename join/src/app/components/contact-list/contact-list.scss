@@ -6,6 +6,29 @@
     width: 100%;
 }
 
+/* In contact-list.scss */
+
+.toast-notification {
+    /* 1. WICHTIG: Holt das Element aus dem normalen HTML-Fluss heraus */
+    position: relative;
+
+    /* 2. Positioniert es frei auf dem Bildschirm (oben rechts) */
+    top: 20px;
+    right: 20px;
+
+    /* 3. Stellt sicher, dass es über allen anderen Elementen/Buttons liegt */
+    z-index: 999999;
+
+    /* Styling */
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+}
+
+
 .contact-list {
     @include mixin.flex($direction: column, $align: flex-start);
     width: 100%;
