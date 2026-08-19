@@ -4,6 +4,10 @@
     font-family: 'Inter', sans-serif;
 }
 
+button, input, textarea, select{
+    font: inherit;
+}
+
 .overhead-wrapper{
     display: flex;
     justify-content: space-between;
