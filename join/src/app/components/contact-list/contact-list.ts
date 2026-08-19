@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { Supabase } from '../../supabase';
 import { ContactDialog } from '../contact-dialog/contact-dialog';
 
@@ -11,6 +11,25 @@ import { ContactDialog } from '../contact-dialog/contact-dialog';
 })
 export class ContactList {
   dbService = inject(Supabase);
+
+constructor() {
+  effect(() => {
+    const selectedContact = this.dbService.selectedContact();
+    if (!selectedContact) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+    const contactElement = document.getElementById(selectedContact.id);
+
+      if (contactElement) {
+        contactElement.scrollIntoView({
+          block: 'nearest',
+        });
+      }
+    });
+  });
+}
 
   ngOnInit(): void {
     this.dbService.getContacts();

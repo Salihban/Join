@@ -113,15 +113,21 @@ export class Supabase {
             initials: this.createInitials(contact.name),
             color: this.getRandomColor()
         };
-        const { error } = await this.supabase
+        const { data,error } = await this.supabase
             .from('contacts')
-            .insert(contactWithInitials);
+            .insert(contactWithInitials)
+            .select('id, name, initials, email, phone,color')
+            .single();
 
         if (error) {
             console.error('Fehler beim Hinzufügen', error);
             return 'The contact could not be added. It may already exist or contain invalid characters';
         }
         await this.getContacts();
+
+        if(data) {
+            this.selectContact(data);
+        }
         return null;
     }
 
