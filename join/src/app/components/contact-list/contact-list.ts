@@ -1,4 +1,4 @@
-import { Component, inject, effect } from '@angular/core';
+import { Component, inject, effect, signal, OnInit } from '@angular/core';
 import { Supabase } from '../../supabase';
 import { ContactDialog } from '../contact-dialog/contact-dialog';
 
@@ -9,8 +9,9 @@ import { ContactDialog } from '../contact-dialog/contact-dialog';
   templateUrl: './contact-list.html',
   styleUrl: './contact-list.scss'
 })
-export class ContactList {
+export class ContactList implements OnInit{
   dbService = inject(Supabase);
+  toastMessage = signal('');
 
 constructor() {
   effect(() => {
@@ -34,4 +35,17 @@ constructor() {
   ngOnInit(): void {
     this.dbService.getContacts();
   }
+
+  onContactSaved() {
+        this.dbService.triggerToast('Contact succesfully created');
+    }
+
+    onContactDeleted() {
+        this.triggerToast('Contact Delete succsessfull');
+    }
+
+    private triggerToast(message: string) {
+        this.toastMessage.set(message);
+        setTimeout(() => this.toastMessage.set(''), 3000);
+    }
 }

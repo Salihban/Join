@@ -160,4 +160,13 @@ export class Supabase {
 
         return this.contactColors[randomIndex];
     }
+
+    toastMessage = signal('');
+
+    triggerToast(message: string) {
+        this.toastMessage.set(message);
+        setTimeout(() => {
+            this.toastMessage.set('');
+        }, 3000);
+    }
 }
