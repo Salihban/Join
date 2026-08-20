@@ -13,7 +13,7 @@
 .contact-list {
     @include mixin.flex($direction: column, $align: flex-start);
     width: 100%;
-    min-width: 360px;
+    min-width: 320px;
     height: 100%;
     padding: 24px;
     box-sizing: border-box;
