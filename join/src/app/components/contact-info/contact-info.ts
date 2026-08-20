@@ -66,6 +66,7 @@ export class ContactInfo {
 
     phone: ['',
       [Validators.required,
+        Validators.minLength(7),
       Validators.maxLength(20),
       Validators.pattern(/^\+?\d+$/)]]
   });
