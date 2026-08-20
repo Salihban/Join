@@ -1,5 +1,6 @@
 @use '../../styles/main.scss' as *;
 @use'../../styles/mixin' as mixin;
+@use'../../styles/main' as styles;
 
 .contact-list-wrapper {
     @include mixin.flex($justify: center, $align: stretch);
@@ -156,4 +157,33 @@
             }
         }
     }
+
+    .toast-notification {
+    @include styles.font-bold;
+    position: fixed;
+    top: 850px;
+    right: 650px;
+    animation: slideUp 350ms ease-out;
+    height: 70px;
+    width: 320px;
+    padding: 20px 0 20px 40px;
+
+    background-color: rgba(42, 54, 71, 1);
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateX(100vh);
+    }
+}
+
+@keyframes slideDown {
+    to {
+        transform: translateX(100vh);
+    }
+}
 }

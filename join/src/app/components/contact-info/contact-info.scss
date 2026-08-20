@@ -159,7 +159,6 @@ button, input, textarea, select{
     border-radius: 15px;
     z-index: 100;
     background-color: white;
-    @include mixin.font-bold;
     animation: slideUp 350ms ease-out;
 }
 
