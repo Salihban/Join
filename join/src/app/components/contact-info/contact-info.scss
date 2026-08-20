@@ -64,6 +64,10 @@ button, input, textarea, select{
         margin-bottom: 8px;
     }
 
+    .contact-list__email{
+        color: $email;
+    }
+
     a{
         margin-bottom: 20px;
         text-decoration: none;
@@ -86,7 +90,7 @@ button, input, textarea, select{
         border-radius: 50%;
         background-color: #FF7A00;
         color: white;
-        font-size: 16px;
+        font-size: 50px;
         font-weight: 400;
     }
 }
@@ -155,7 +159,6 @@ button, input, textarea, select{
     border-radius: 15px;
     z-index: 100;
     background-color: white;
-    @include mixin.font-bold;
     animation: slideUp 350ms ease-out;
 }
 

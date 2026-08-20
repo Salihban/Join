@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../supabase';
 
@@ -14,6 +14,7 @@ export class ContactDialog {
   private fb = inject(FormBuilder);
   private dbService = inject(Supabase);
 
+  contactSaved = output<void>();
   closing = false;
   dialogOpen = signal(false);
   submitted = false;
@@ -62,6 +63,7 @@ export class ContactDialog {
       return;
     }
     this.closeDialog();
+    this.contactSaved.emit();
   }
 
 

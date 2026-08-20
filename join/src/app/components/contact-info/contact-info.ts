@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Supabase } from '../../supabase';
 
@@ -18,6 +18,7 @@ export class ContactInfo {
   private fb = inject(FormBuilder);
   dbService = inject(Supabase);
 
+  contactDeleted = output<void>();
   closing = false;
   dialogOpen = false;
   menuOpen = false;
@@ -78,6 +79,8 @@ export class ContactInfo {
     }
     await this.dbService.updateContact(contact.id, this.contactForm.getRawValue());
     this.dialogOpen = false;
+
+    this.dbService.triggerToast('Contact succesfully saved');
   }
 
   async deleteContact(): Promise<void> {
@@ -87,5 +90,8 @@ export class ContactInfo {
     await this.dbService.deleteContact(contact.id);
     this.menuOpen = false;
     this.dialogOpen = false;
+
+    this.dbService.selectedContact.set(null);
+    this.dbService.triggerToast('Contact succesfully deleted');
   }
 }

@@ -5,7 +5,7 @@
         <img src="assets/icons/person_add.svg" alt="">
     </button>
 
-        <app-contact-dialog #dialog></app-contact-dialog>
+        <app-contact-dialog #dialog (contactSaved)="onContactSaved()"></app-contact-dialog>
 
         <div class="contact-list__scroll">
         @for (group of dbService.groupedContacts(); track group.letter) {
@@ -16,7 +16,7 @@
             <div class="contact-list__divider"></div>
             @for (contact of group.contacts; track contact.id) {
             <article class="contact-list__contact" [class.contact-list__contact--selected]="
-    dbService.selectedContact()?.id === contact.id" (click)="dbService.selectContact(contact)">
+                dbService.selectedContact()?.id === contact.id" (click)="dbService.selectContact(contact)">
                 <div class="contact-list__initials" [style.background-color]="contact.color">
                     {{ contact.initials }}
                 </div>
@@ -37,3 +37,9 @@
         </div>
     </section>
 </div>
+
+@if (dbService.toastMessage()) {
+    <div class="toast-notification">
+        {{ dbService.toastMessage() }}
+    </div>
+}
