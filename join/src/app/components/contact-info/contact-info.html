@@ -85,25 +85,19 @@
                 <input formControlName="name" placeholder="Name">
                 <img src="assets/icons/input_person.svg" alt="">
             </label>
-            @if (contactForm.controls.name.touched && contactForm.controls.name.invalid) {
-            <p class="form-error">Please enter a name</p>
-            }
+            <p class="form-error" [style.visibility]="contactForm.controls.name.touched && contactForm.controls.name.invalid ? 'visible' : 'hidden'">Please enter a name</p>
 
             <label [class.input-error]="contactForm.controls.email.touched && contactForm.controls.email.invalid">
                 <input type="text" formControlName="email" placeholder="Email">
                 <img src="assets/icons/input_mail.svg" alt="">
             </label>
-            @if (contactForm.controls.email.touched && contactForm.controls.email.invalid){
-            <p class="form-error">Please enter a valid phone number</p>
-            }
+            <p class="form-error" [style.visibility]="contactForm.controls.email.touched && contactForm.controls.email.invalid ? 'visible' : 'hidden'">Please enter a valid email</p>
 
             <label [class.input-error]="contactForm.controls.phone.touched && contactForm.controls.phone.invalid">
                 <input type="tel" formControlName="phone" placeholder="Phone">
                 <img src="assets/icons/input_call.svg" alt="">
             </label>
-            @if (contactForm.controls.phone.touched && contactForm.controls.phone.invalid) {
-            <p class="form-error">Please enter a valid phone number</p>
-            }
+            <p class="form-error" [style.visibility]="contactForm.controls.phone.touched && contactForm.controls.phone.invalid ? 'visible' : 'hidden'">Please enter a valid phone number</p>
 
             <div class="form-buttons">
                 <button class="cancel" type="button" (click)="deleteContact()">
