@@ -403,6 +403,10 @@ label {
 
             h3 {
                 font-size: 47px;
+                overflow: clip;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                max-width: 550px;
             }
         }
 
