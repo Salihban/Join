@@ -24,21 +24,20 @@ export class ContactDialog {
     name: ['',
       [Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(50),
       Validators.pattern(/^[a-zA-ZäöüÄÖÜß\s-]+$/)
       ]],
 
     email: ['',
       [Validators.required,
-      Validators.email,
-      Validators.pattern(
-        /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*){1,2}$/)
+      Validators.pattern(/^[^\s@]+@[^\s@]+(?:\.[^\s@]+)+$/)
       ]],
 
     phone: ['',
       [Validators.required,
+      Validators.minLength(7),
       Validators.maxLength(20),
-      Validators.pattern(/^\+?\d+$/)]]
+      Validators.pattern(/^\+?[\d\s]+$/)
+      ]]
   });
 
 
@@ -89,7 +88,7 @@ export class ContactDialog {
     }
   }
 
-  open(){
+  open() {
     this.dialogOpen.set(true);
   }
 }

@@ -9,6 +9,11 @@ import { Supabase } from '../../supabase';
   styleUrl: './contact-info.scss',
 })
 export class ContactInfo {
+
+  goBack(): void {
+    this.dbService.selectedContact.set(null);
+  }
+  
   private fb = inject(FormBuilder);
   dbService = inject(Supabase);
 
@@ -17,10 +22,6 @@ export class ContactInfo {
   closing = false;
   dialogOpen = false;
   menuOpen = false;
-
-  goBack(): void {
-    this.dbService.selectedContact.set(null);
-  }
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
@@ -37,40 +38,36 @@ export class ContactInfo {
     document.body.style.overflow = 'hidden';
   }
 
-  closeDialog(): void {
-    this.dialogOpen = false;
-    this.closing = false;
-    document.body.style.overflow = '';
+  closeDialog() {
+    this.closing = true;
+  }
+  animationEnd() {
+    if (this.closing) {
+      this.dialogOpen = false;
+      this.closing = false;
+      document.body.style.overflow = '';
+    }
   }
 
+
   contactForm = this.fb.nonNullable.group({
-    name: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(50),
-        Validators.pattern(/^[a-zA-ZäöüÄÖÜß\s-]+$/),
-      ],
-    ],
-    email: [
-      '',
-      [
-        Validators.required,
-        Validators.email,
-        Validators.pattern(
-          /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*){1,2}$/
-        ),
-      ],
-    ],
-    phone: [
-      '',
-      [
-        Validators.required,
-        Validators.maxLength(20),
-        Validators.pattern(/^\+?[\d\s-]+$/),
-      ],
-    ],
+    name: ['',
+      [Validators.required,
+      Validators.minLength(2),
+      Validators.pattern(/^[a-zA-ZäöüÄÖÜß\s-]+$/)
+      ]],
+
+    email: ['',
+      [Validators.required,
+      Validators.pattern(/^[^\s@]+@[^\s@]+(?:\.[^\s@]+)+$/)
+      ]],
+
+    phone: ['',
+      [Validators.required,
+      Validators.minLength(7),
+      Validators.maxLength(20),
+      Validators.pattern(/^\+?[\d\s]+$/)
+      ]]
   });
 
   async saveContact(): Promise<void> {

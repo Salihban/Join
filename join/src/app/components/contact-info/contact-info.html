@@ -14,116 +14,105 @@
 </div>
 
 @if (dbService.selectedContact(); as contact) {
-    <section class="contact-details">
-        <div class="contact-person">
-            <div class="contact-list__initials" [style.background-color]="contact.color">
-                {{ contact.initials }}
-            </div>
-            <div class="head-and-links">
-                <h3>{{ contact.name }}</h3>
-                <div class="edit-links">
-                    <button type="button" (click)="openEditDialog()">
-                        <img src="assets/icons/popup_edit.svg" alt="Edit-icon" /> Edit
-                    </button>
+<section class="contact-details">
+    <div class="contact-person">
+        <div class="contact-list__initials" [style.background-color]="contact.color">
+            {{ contact.initials }}
+        </div>
+        <div class="head-and-links">
+            <h3>{{ contact.name }}</h3>
+            <div class="edit-links">
+                <button type="button" (click)="openEditDialog()">
+                    <img src="assets/icons/popup_edit.svg" alt="Edit-icon"> Edit
+                </button>
 
-                    <button type="button" (click)="deleteContact()">
-                        <img src="assets/icons/popup_delete.svg" alt="Delete-icon" /> Delete
-                    </button>
-                </div>
+                <button type="button" (click)="deleteContact()">
+                    <img src="assets/icons/popup_delete.svg" alt="Delete-icon"> Delete
+                </button>
             </div>
         </div>
+    </div>
 
-        <p>Contact Information</p>
+    <p>Contact Information</p>
 
-        <strong>Email</strong>
-        <a class="contact-list__email" [href]="'mailto:' + contact.email">
-            {{ contact.email }}
-        </a>
+    <strong>Email</strong>
+    <a class="contact-list__email" [href]="'mailto:' + contact.email">
+        {{contact.email}}
+    </a>
 
-        <strong>Phone</strong>
-        <a [href]="'tel:' + contact.phone">
-            {{ contact.phone }}
-        </a>
-    </section>
+    <strong>Phone</strong>
+    <a [href]="'tel' + contact.phone">
+        {{contact.phone}}
+    </a>
+</section>
 }
 
 <div class="contact-menu">
     <button type="button" class="add-btn" (click)="toggleMenu()">
-        <img src="assets/icons/more_vert.svg" alt="add contact icon" />
+        <img src="assets/icons/more_vert.svg" alt="add contact icon">
     </button>
 
     @if (menuOpen) {
-        <div class="menu-options">
-            <button type="button" (click)="openEditDialog()">
-                <img src="assets/icons/popup_edit.svg" alt="Edit-icon" /> Edit
-            </button>
+    <div class="menu-options">
+        <button type="button" (click)="openEditDialog()">
+            <img src="assets/icons/popup_edit.svg" alt="Edit-icon"> Edit
+        </button>
 
-            <button type="button" (click)="deleteContact()">
-                <img src="assets/icons/popup_delete.svg" alt="Delete-icon" /> Delete
-            </button>
-        </div>
+        <button type="button" (click)="deleteContact()">
+            <img src="assets/icons/popup_delete.svg" alt="Delete-icon"> Delete
+        </button>
+    </div>
     }
 </div>
+@if(dialogOpen) {
+<div class="overlay">
+    <div class="dialog" [class.closing]="closing" (animationend)="animationEnd()">
+        <button class="close" (click)="closeDialog()">x</button>
 
-@if (dialogOpen) {
-    <div class="overlay">
-        <div class="dialog" [class.closing]="closing">
-            <button class="close" type="button" (click)="closeDialog()">x</button>
+        <header>
+            <img class="join-logo" src="assets/icons/logo-white.svg" alt="">
+            <h2>Edit contact</h2>
+            <div class="line"></div>
+        </header>
 
-            <header>
-                <img class="join-logo" src="assets/icons/logo-white.svg" alt="" />
-                <h2>Edit contact</h2>
-                <div class="line"></div>
-            </header>
-
-            <div class="avatar">
-                <img src="assets/icons/profile.svg" alt="" />
-            </div>
-
-            <form [formGroup]="contactForm">
-                <label
-                    [class.input-error]="
-                        contactForm.controls.name.touched && contactForm.controls.name.invalid
-                    "
-                >
-                    <input formControlName="name" placeholder="Name" />
-                    <img src="assets/icons/input_person.svg" alt="" />
-                </label>
-                @if (contactForm.controls.name.touched && contactForm.controls.name.invalid) {
-                    <p class="form-error">Please enter a name</p>
-                }
-
-                <label
-                    [class.input-error]="
-                        contactForm.controls.email.touched && contactForm.controls.email.invalid
-                    "
-                >
-                    <input type="email" formControlName="email" placeholder="Email" />
-                    <img src="assets/icons/input_mail.svg" alt="" />
-                </label>
-                @if (contactForm.controls.email.touched && contactForm.controls.email.invalid) {
-                    <p class="form-error">Please enter a valid email address</p>
-                }
-
-                <label
-                    [class.input-error]="
-                        contactForm.controls.phone.touched && contactForm.controls.phone.invalid
-                    "
-                >
-                    <input type="tel" formControlName="phone" placeholder="Phone" />
-                    <img src="assets/icons/input_call.svg" alt="" />
-                </label>
-                @if (contactForm.controls.phone.touched && contactForm.controls.phone.invalid) {
-                    <p class="form-error">Please enter a valid phone number</p>
-                }
-
-                <div class="form-buttons">
-                    <button class="cancel" type="button" (click)="deleteContact()">Delete</button>
-                    <button type="button" class="create" (click)="saveContact()">
-                        Save <img src="assets/icons/check.svg" alt="check-icon" />
-                    </button>
-                </div>
-            </form>
+        <div class="avatar">
+            <img src="assets/icons/profile.svg" alt="">
         </div>
+
+        <form [formGroup]="contactForm" ] (ngSubmit)="saveContact()">
+            <label [class.input-error]="contactForm.controls.name.touched && contactForm.controls.name.invalid">
+                <input formControlName="name" placeholder="Name">
+                <img src="assets/icons/input_person.svg" alt="">
+            </label>
+            @if (contactForm.controls.name.touched && contactForm.controls.name.invalid) {
+            <p class="form-error">Please enter a name</p>
+            }
+
+            <label [class.input-error]="contactForm.controls.email.touched && contactForm.controls.email.invalid">
+                <input type="text" formControlName="email" placeholder="Email">
+                <img src="assets/icons/input_mail.svg" alt="">
+            </label>
+            @if (contactForm.controls.email.touched && contactForm.controls.email.invalid){
+            <p class="form-error">Please enter a valid phone number</p>
+            }
+
+            <label [class.input-error]="contactForm.controls.phone.touched && contactForm.controls.phone.invalid">
+                <input type="tel" formControlName="phone" placeholder="Phone">
+                <img src="assets/icons/input_call.svg" alt="">
+            </label>
+            @if (contactForm.controls.phone.touched && contactForm.controls.phone.invalid) {
+            <p class="form-error">Please enter a valid phone number</p>
+            }
+
+            <div class="form-buttons">
+                <button class="cancel" type="button" (click)="deleteContact()">
+                    Delete
+                </button>
+                <button type="submit" class="create">
+                    Save <img src="assets/icons/check.svg" alt="check-icon">
+                </button>
+            </div>
+        </form>
     </div>
+</div>
 }
