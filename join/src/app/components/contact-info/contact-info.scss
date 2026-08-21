@@ -1,83 +1,99 @@
 @use '../../styles/main.scss' as *;
 @use '../../styles/mixin' as mixin;
-:host{
+:host {
     font-family: 'Inter', sans-serif;
 }
 
-button, input, textarea, select{
+button,
+input,
+textarea,
+select {
     font: inherit;
 }
 
-.overhead-wrapper{
+    .head-and-links{
+        h3{
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: clip;
+            text-overflow: ellipsis;
+        }
+    }
+
+.overhead-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 32px 20px;
 
-    .overhead-content{
+    .overhead-content {
         width: auto;
         height: 100px;
         padding: 0;
         color: black;
         font-size: 20px;
 
-        h2{
+        h2 {
             margin: 0 0 8px;
             font-size: 42px;
         }
 
-        p{
+        p {
             margin: 0 0 12px;
         }
     }
 
-    .return-button{
+    .return-button {
         position: relative;
-        width:auto;
+        width: auto;
         height: 32px;
         z-index: 39;
 
         margin-bottom: 50px;
         cursor: pointer;
 
-        button{
+        button {
             width: 32px;
             height: 32px;
         }
 
-        img{
+        img {
             pointer-events: none;
         }
     }
 }
 
-.contact-details{
+.contact-details {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    
-    p{
+
+    p {
         margin: 24px 0 20px;
         font-size: 20px;
     }
 
-    strong{
+    strong {
         margin-bottom: 8px;
     }
 
-    .contact-list__email{
+    .contact-list__email {
         color: $email;
+        overflow: clip;
+        text-overflow: ellipsis;
+        max-width: 150px;
+        white-space: nowrap;
     }
 
-    a{
+    a {
         margin-bottom: 20px;
         text-decoration: none;
     }
     animation: slide-in-from-right 300ms ease-out forwards;
 }
 
-@keyframes slide-in-from-right{
+@keyframes slide-in-from-right {
     from {
         transform: translateX(100%);
         opacity: 0;
@@ -88,16 +104,16 @@ button, input, textarea, select{
     }
 }
 
-.contact-person{
+.contact-person {
     display: flex;
     align-items: center;
     gap: 20px;
 
-    h3{
+    h3 {
         font-size: 28px;
     }
 
-    .contact-list__initials{
+    .contact-list__initials {
         @include mixin.flex($direction: row, $justify: center, $align: center);
         width: 80px;
         aspect-ratio: 1;
@@ -108,32 +124,32 @@ button, input, textarea, select{
     }
 }
 
-.add-btn{
+.add-btn {
     width: 56px;
     height: 56px;
     border: 0;
     border-radius: 50%;
     background-color: rgba(42, 54, 71, 1);
 
-    img{
+    img {
         width: 30px;
     }
 }
 
-.contact-menu{
+.contact-menu {
     position: fixed;
     right: 16px;
     bottom: 90px;
     z-index: 30;
 }
 
-.menu-backdrop{
+.menu-backdrop {
     position: fixed;
     inset: 0;
     z-index: 9;
 }
 
-.menu-options{
+.menu-options {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -153,7 +169,7 @@ button, input, textarea, select{
     box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.menu-options button{
+.menu-options button {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -163,7 +179,7 @@ button, input, textarea, select{
     cursor: pointer;
 }
 
-.overlay{
+.overlay {
     position: fixed;
     inset: 0;
     z-index: 100;
@@ -173,7 +189,7 @@ button, input, textarea, select{
     background-color: rgb(0, 0, 0, 0.7);
 }
 
-.dialog{
+.dialog {
     position: relative;
     width: min(396px, 100%);
     border-radius: 15px;
@@ -182,21 +198,22 @@ button, input, textarea, select{
     animation: slideUp 350ms ease-out;
 }
 
-.closing{
+.closing {
     animation: slideDown 350ms;
 }
 
-@keyframes slideUp{
+@keyframes slideUp {
     from {
         transform: translateY(100vh);
-    }}
-@keyframes slideDown{
+    }
+}
+@keyframes slideDown {
     to {
         transform: translateY(100vh);
     }
 }
 
-header{
+header {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -207,27 +224,27 @@ header{
     padding: 0 24px;
     border-radius: 15px 15px 0 0;
 
-    .join-logo{
+    .join-logo {
         display: none;
     }
 
-    h2{
+    h2 {
         margin: 0 0 8px;
         font-size: 42px;
     }
 
-    p{
+    p {
         margin: 0 0 12px;
     }
 }
 
-.line{
+.line {
     width: 90px;
     height: 3px;
     background-color: rgba(41, 171, 226, 1);
 }
 
-.avatar img{
+.avatar img {
     position: absolute;
     top: -60px;
     left: 30%;
@@ -235,38 +252,38 @@ header{
     height: 120px;
 }
 
-.edit-links{
+.edit-links {
     display: none;
 }
 
-form{
+form {
     display: grid;
     gap: 16px;
     padding: 80px 24px;
 
-    .canncel{
+    .canncel {
         display: none;
     }
 }
 
-label{
+label {
     display: flex;
     padding: 8px;
     border: 1px solid #535252;
     border-radius: 10px;
 
-    input{
+    input {
         width: 100%;
         border: 0;
         outline: 0;
     }
 
-    img{
+    img {
         width: 22px;
     }
 }
 
-.close{
+.close {
     position: absolute;
     top: 22px;
     right: 22px;
@@ -278,14 +295,14 @@ label{
     cursor: pointer;
 }
 
-.form-buttons{
+.form-buttons {
     display: flex;
     justify-content: center;
     margin-top: 16px;
     gap: 32px;
 }
 
-.cancel{
+.cancel {
     display: block;
     width: 100px;
     height: 50px;
@@ -296,7 +313,7 @@ label{
     cursor: pointer;
 }
 
-.create{
+.create {
     width: 100px;
     height: 50px;
     font-size: 21px;
@@ -306,7 +323,7 @@ label{
     background: rgba(42, 54, 71, 1);
     cursor: pointer;
 
-    img{
+    img {
         width: 16px;
         height: 16px;
         margin-top: 5px;
@@ -322,82 +339,86 @@ label{
 }
 
 @media screen and (min-width: 786px) {
-    .return-button{
+    .return-button {
         display: none;
     }
 
-    .contact-menu{
+    .contact-menu {
         display: none;
     }
 
-    .overhead-wrapper{
+    .overhead-wrapper {
         padding: 100px;
     }
 
-    .overhead-content{
+    .overhead-content {
         display: flex;
         align-items: center;
         width: 100px;
         gap: 32px;
     }
 
-    .overhead-content h2{
+    .overhead-content h2 {
         font-size: 47px;
     }
 
-    .overhead-toggle{
+    .overhead-toggle {
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
         gap: 24px;
         font-size: 27px;
 
-        .line{
+        .line {
             width: 3px;
             height: 70px;
         }
     }
 
-    .contact-details{
+    .contact-details {
         padding: 0 0 0 100px;
         gap: 16px;
 
-        .contact-list__initials{
+        .contact-list__initials {
             width: 120px;
             height: 120px;
         }
 
-        .head-and-links{
+        .head-and-links {
             width: auto;
             margin-left: 16px;
             font-size: 16px;
-            .edit-links{
+            .edit-links {
                 display: flex;
                 align-items: center;
                 gap: 24px;
                 padding: 16px 0 0 0;
 
-                button:hover{
+                button:hover {
                     cursor: pointer;
                     transform: scale(1.1);
                     color: rgba(42, 54, 71, 1);
                 }
             }
-            h3{
-            font-size: 47px;
+            h3 {
+                font-size: 47px;
+                white-space: nowrap;
+                overflow: clip;
+                text-overflow: ellipsis;
+                max-width: 550px;
             }
         }
 
-        p{
+        p {
             font-size: 20px;
         }
 
-        strong{
+        strong {
             font-weight: bold;
         }
     }
 
-    .dialog{
+    .dialog {
         display: grid;
         grid-template-columns: 40% 60%;
 
@@ -409,63 +430,64 @@ label{
         animation: slideIn 350ms ease-out;
     }
 
-    .closing{
+    .closing {
         animation: slideOut 350ms ease-in;
     }
 
-    @keyframes slideIn{
-    from {
-        transform: translateX(100vw);
-    }}
-    @keyframes slideOut{
-    to {
-        transform: translateX(100vw);
+    @keyframes slideIn {
+        from {
+            transform: translateX(100vw);
+        }
+    }
+    @keyframes slideOut {
+        to {
+            transform: translateX(100vw);
         }
     }
 
-    header{
+    header {
         border-radius: 25px 0 0 25px;
         padding: 120px 30px 190px 30px;
         height: 600px;
-        img{
+        img {
             margin-bottom: 24px;
         }
 
-        h2{
+        h2 {
             font-size: 61px;
         }
 
-        .join-logo{
-        display: block;
-        width: 55px;
+        .join-logo {
+            display: block;
+            width: 55px;
         }
     }
 
-    .avatar{
+    .avatar {
         display: block;
         position: absolute;
         top: 270px;
         left: 45%;
     }
 
-    .edit-links{
+    .edit-links {
         display: block;
     }
 
-    form{
+    form {
         align-content: center;
         padding: 0 50px 0 250px;
 
-        label{
+        label {
             width: 100%;
 
-            input{
+            input {
                 width: 100%;
                 font-size: 20px;
             }
         }
 
-        .canncel{
+        .canncel {
             display: block;
             width: 100px;
             height: 50px;
@@ -476,18 +498,18 @@ label{
             color: #535252;
         }
 
-        .form-buttons{
+        .form-buttons {
             display: flex;
             justify-content: flex-start;
             gap: 20px;
         }
     }
 
-    .create{
+    .create {
         position: static;
     }
 
-    .close{
+    .close {
         color: black;
     }
 }
