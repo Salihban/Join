@@ -27,7 +27,7 @@
             <p class="form-error">Please enter a name</p>
             }
             <label [class.input-error]="submitted && contactForm.get('email')?.invalid">
-                <input type="email" formControlName="email" placeholder="Email">
+                <input type="text" formControlName="email" placeholder="Email">
                 <img src="assets/icons/input_mail.svg" alt="">
             </label>
             @if (submitted && contactForm.get('email')?.invalid) {
@@ -41,7 +41,7 @@
             <p class="form-error">Please enter a phone number</p>
             }
 
-            @if (databaseError())  {
+            @if (databaseError()) {
             <p class="form-error">{{ databaseError() }}</p>
             }
             <div class="form-buttons">

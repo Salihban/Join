@@ -92,6 +92,17 @@ export class Supabase {
             .update(values)
             .eq('id', id);
 
+            const current = this.selectedContact();
+            if(current && current.id ===id) {
+                this.selectedContact.set({
+                    id:current.id,
+                    name:values.name,
+                    email:values.email,
+                    phone:values.phone,
+                    initials:current.initials,
+                    color:current.color
+                });
+            }
         await this.getContacts();
     }
 

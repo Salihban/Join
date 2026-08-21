@@ -14,7 +14,7 @@ export class ContactInfo {
     console.log('zurück wurde geklickt')
     this.dbService.selectedContact.set(null);
   }
-  
+
   private fb = inject(FormBuilder);
   dbService = inject(Supabase);
 
@@ -23,11 +23,11 @@ export class ContactInfo {
   dialogOpen = false;
   menuOpen = false;
 
-  toggleMenu(): void{
+  toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  openEditDialog(): void{
+  openEditDialog(): void {
     const contact = this.dbService.selectedContact();
     if (!contact) return;
 
@@ -37,38 +37,36 @@ export class ContactInfo {
     document.body.style.overflow = 'hidden';
   }
 
-  closeDialog(){
+  closeDialog() {
     this.closing = true;
   }
-    animationEnd(){
-      if (this.closing){
-        this.dialogOpen = false;
-        this.closing = false;
-        document.body.style.overflow = '';
-      }
+  animationEnd() {
+    if (this.closing) {
+      this.dialogOpen = false;
+      this.closing = false;
+      document.body.style.overflow = '';
     }
-  
+  }
+
 
   contactForm = this.fb.nonNullable.group({
     name: ['',
       [Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(50),
       Validators.pattern(/^[a-zA-ZäöüÄÖÜß\s-]+$/)
       ]],
 
     email: ['',
       [Validators.required,
-      Validators.email,
-      Validators.pattern(
-        /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*){1,2}$/)
+      Validators.pattern(/^[^\s@]+@[^\s@]+(?:\.[^\s@]+)+$/)
       ]],
 
     phone: ['',
       [Validators.required,
-        Validators.minLength(7),
+      Validators.minLength(7),
       Validators.maxLength(20),
-      Validators.pattern(/^\+?\d+$/)]]
+      Validators.pattern(/^\+?[\d\s]+$/)
+      ]]
   });
 
   async saveContact(): Promise<void> {
