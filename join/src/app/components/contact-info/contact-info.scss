@@ -72,6 +72,10 @@ select {
 
     .contact-list__email {
         color: $email;
+        overflow: clip;
+        text-overflow: ellipsis;
+        max-width: 150px;
+        white-space: nowrap;
     }
 
     a {
