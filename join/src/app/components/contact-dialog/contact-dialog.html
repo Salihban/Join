@@ -23,23 +23,17 @@
                 <input formControlName="name" placeholder="Name">
                 <img src="assets/icons/input_person.svg" alt="">
             </label>
-            @if (submitted && contactForm.get('name')?.invalid) {
-            <p class="form-error">Please enter a name</p>
-            }
+            <p class="form-error" [style.visibility]="submitted && contactForm.get('name')?.invalid ? 'visible' : 'hidden'">Please enter a name</p>
             <label [class.input-error]="submitted && contactForm.get('email')?.invalid">
                 <input type="text" formControlName="email" placeholder="Email">
                 <img src="assets/icons/input_mail.svg" alt="">
             </label>
-            @if (submitted && contactForm.get('email')?.invalid) {
-            <p class="form-error">Please enter a valid email address</p>
-            }
+            <p class="form-error" [style.visibility]="submitted && contactForm.get('email')?.invalid ? 'visible' : 'hidden'">Please enter a valid email address</p>
             <label [class.input-error]="submitted && contactForm.get('phone')?.invalid">
                 <input type="tel" formControlName="phone" placeholder="Phone">
                 <img src="assets/icons/input_call.svg" alt="">
             </label>
-            @if (submitted && contactForm.get('phone')?.invalid) {
-            <p class="form-error">Please enter a phone number</p>
-            }
+            <p class="form-error" [style.visibility]="submitted && contactForm.get('phone')?.invalid ? 'visible' : 'hidden'">Please enter a phone number</p>
 
             @if (databaseError()) {
             <p class="form-error">{{ databaseError() }}</p>
