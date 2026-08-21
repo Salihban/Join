@@ -145,6 +145,7 @@ label {
     border-radius: 10px;
     color: white;
     background: rgba(42, 54, 71, 1);
+    cursor: pointer;
 
     img {
         width: 16px;
@@ -159,6 +160,9 @@ label {
     margin: -10px 0 0;
 }
 
+.canncel{
+    cursor: pointer;
+}
 
 @media screen and (min-width: 768px) {
     .dialog {
