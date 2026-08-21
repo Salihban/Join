@@ -54,6 +54,7 @@
 </button>
 
     @if (menuOpen) {
+    <div class="menu-backdrop" (click)="menuOpen = false"></div>
         <div class="menu-options">
             <button type="button" (click)="openEditDialog()">
                 <img src="assets/icons/popup_edit.svg" alt="Edit-icon"> Edit
