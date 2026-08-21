@@ -11,14 +11,14 @@ import { Supabase } from '../../supabase';
 export class ContactInfo {
 
   goBack(): void {
-    console.log('zurück wurde geklickt')
     this.dbService.selectedContact.set(null);
   }
-
+  
   private fb = inject(FormBuilder);
   dbService = inject(Supabase);
 
   contactDeleted = output<void>();
+
   closing = false;
   dialogOpen = false;
   menuOpen = false;
@@ -33,6 +33,7 @@ export class ContactInfo {
 
     this.contactForm.patchValue(contact);
     this.menuOpen = false;
+    this.closing = false;
     this.dialogOpen = true;
     document.body.style.overflow = 'hidden';
   }
@@ -76,21 +77,28 @@ export class ContactInfo {
       this.contactForm.markAllAsTouched();
       return;
     }
-    await this.dbService.updateContact(contact.id, this.contactForm.getRawValue());
-    this.dialogOpen = false;
 
-    this.dbService.triggerToast('Contact succesfully saved');
+    this.dialogOpen = false;
+    this.closing = false;
+    document.body.style.overflow = '';
+
+    this.dbService.triggerToast('Contact successfully saved');
+
+  
+    await this.dbService.updateContact(contact.id, this.contactForm.getRawValue());
   }
 
   async deleteContact(): Promise<void> {
     const contact = this.dbService.selectedContact();
     if (!contact) return;
 
-    await this.dbService.deleteContact(contact.id);
     this.menuOpen = false;
     this.dialogOpen = false;
+    this.closing = false;
+    document.body.style.overflow = '';
 
-    this.dbService.selectedContact.set(null);
-    this.dbService.triggerToast('Contact succesfully deleted');
+    this.dbService.triggerToast('Contact successfully deleted');
+
+    await this.dbService.deleteContact(contact.id);
   }
 }
