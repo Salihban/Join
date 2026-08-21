@@ -19,56 +19,56 @@ export class ContactInfo {
   dbService = inject(Supabase);
 
   contactDeleted = output<void>();
+
   closing = false;
   dialogOpen = false;
   menuOpen = false;
 
-  toggleMenu(): void{
+  toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  openEditDialog(): void{
+  openEditDialog(): void {
     const contact = this.dbService.selectedContact();
     if (!contact) return;
 
     this.contactForm.patchValue(contact);
     this.menuOpen = false;
+    this.closing = false;
     this.dialogOpen = true;
     document.body.style.overflow = 'hidden';
   }
 
-  closeDialog(){
+  closeDialog() {
     this.closing = true;
   }
-    animationEnd(){
-      if (this.closing){
-        this.dialogOpen = false;
-        this.closing = false;
-        document.body.style.overflow = '';
-      }
+  animationEnd() {
+    if (this.closing) {
+      this.dialogOpen = false;
+      this.closing = false;
+      document.body.style.overflow = '';
     }
-  
+  }
+
 
   contactForm = this.fb.nonNullable.group({
     name: ['',
       [Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(50),
       Validators.pattern(/^[a-zA-ZäöüÄÖÜß\s-]+$/)
       ]],
 
     email: ['',
       [Validators.required,
-      Validators.email,
-      Validators.pattern(
-        /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)?@[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*(?:\.[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*){1,2}$/)
+      Validators.pattern(/^[^\s@]+@[^\s@]+(?:\.[^\s@]+)+$/)
       ]],
 
     phone: ['',
       [Validators.required,
-        Validators.minLength(7),
+      Validators.minLength(7),
       Validators.maxLength(20),
-      Validators.pattern(/^\+?\d+$/)]]
+      Validators.pattern(/^\+?[\d\s]+$/)
+      ]]
   });
 
   async saveContact(): Promise<void> {
@@ -78,21 +78,28 @@ export class ContactInfo {
       this.contactForm.markAllAsTouched();
       return;
     }
-    await this.dbService.updateContact(contact.id, this.contactForm.getRawValue());
-    this.dialogOpen = false;
 
-    this.dbService.triggerToast('Contact succesfully saved');
+    this.dialogOpen = false;
+    this.closing = false;
+    document.body.style.overflow = '';
+
+    this.dbService.triggerToast('Contact successfully saved');
+
+  
+    await this.dbService.updateContact(contact.id, this.contactForm.getRawValue());
   }
 
   async deleteContact(): Promise<void> {
     const contact = this.dbService.selectedContact();
     if (!contact) return;
 
-    await this.dbService.deleteContact(contact.id);
     this.menuOpen = false;
     this.dialogOpen = false;
+    this.closing = false;
+    document.body.style.overflow = '';
 
-    this.dbService.selectedContact.set(null);
-    this.dbService.triggerToast('Contact succesfully deleted');
+    this.dbService.triggerToast('Contact successfully deleted');
+
+    await this.dbService.deleteContact(contact.id);
   }
 }
