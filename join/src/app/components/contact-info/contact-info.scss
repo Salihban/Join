@@ -37,6 +37,8 @@ button, input, textarea, select{
         width:auto;
         height: 32px;
         z-index: 39;
+
+        margin-bottom: 50px;
         cursor: pointer;
 
         button{
@@ -72,6 +74,18 @@ button, input, textarea, select{
         margin-bottom: 20px;
         text-decoration: none;
     }
+    animation: slide-in-from-right 300ms ease-out forwards;
+}
+
+@keyframes slide-in-from-right{
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .contact-person{
@@ -86,12 +100,11 @@ button, input, textarea, select{
     .contact-list__initials{
         @include mixin.flex($direction: row, $justify: center, $align: center);
         width: 80px;
-        height: 80px;
+        aspect-ratio: 1;
+        flex-shrink: 0;
         border-radius: 50%;
-        background-color: #FF7A00;
         color: white;
-        font-size: 50px;
-        font-weight: 400;
+        font-size: 45px;
     }
 }
 
@@ -114,6 +127,12 @@ button, input, textarea, select{
     z-index: 30;
 }
 
+.menu-backdrop{
+    position: fixed;
+    inset: 0;
+    z-index: 9;
+}
+
 .menu-options{
     position: absolute;
     right: 0;
@@ -128,6 +147,7 @@ button, input, textarea, select{
     height: 100px;
     border-radius: 20px 20px 0 20px;
     gap: 16px;
+    z-index: 10;
     padding: 0 0 0 16px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);

@@ -11,6 +11,7 @@ import { Supabase } from '../../supabase';
 export class ContactInfo {
 
   goBack(): void {
+    this.menuOpen = false;
     this.dbService.selectedContact.set(null);
   }
   
