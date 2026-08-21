@@ -11,7 +11,7 @@ import { Supabase } from '../../supabase';
 export class ContactInfo {
 
   goBack(): void {
-    console.log('zurück wurde geklickt')
+    this.menuOpen = false;
     this.dbService.selectedContact.set(null);
   }
   
