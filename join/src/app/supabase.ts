@@ -87,22 +87,28 @@ export class Supabase {
         id: string,
         values: Pick<Contact, 'name' | 'email' | 'phone'>
     ): Promise<void> {
+        const newInitials = this.createInitials(values.name);
         await this.supabase
             .from('contacts')
-            .update(values)
+            .update({
+                name: values.name,
+                email: values.email,
+                phone: values.phone,
+                initials: newInitials,
+            })
             .eq('id', id);
 
-            const current = this.selectedContact();
-            if(current && current.id ===id) {
-                this.selectedContact.set({
-                    id:current.id,
-                    name:values.name,
-                    email:values.email,
-                    phone:values.phone,
-                    initials:current.initials,
-                    color:current.color
-                });
-            }
+        const current = this.selectedContact();
+        if (current && current.id === id) {
+            this.selectedContact.set({
+                id: current.id,
+                name: values.name,
+                email: values.email,
+                phone: values.phone,
+                initials: newInitials,
+                color: current.color
+            });
+        }
         await this.getContacts();
     }
 
@@ -124,7 +130,7 @@ export class Supabase {
             initials: this.createInitials(contact.name),
             color: this.getRandomColor()
         };
-        const { data,error } = await this.supabase
+        const { data, error } = await this.supabase
             .from('contacts')
             .insert(contactWithInitials)
             .select('id, name, initials, email, phone,color')
@@ -136,7 +142,7 @@ export class Supabase {
         }
         await this.getContacts();
 
-        if(data) {
+        if (data) {
             this.selectContact(data);
         }
         return null;
