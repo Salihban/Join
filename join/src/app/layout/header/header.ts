@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,8 +10,14 @@ import { RouterLink } from '@angular/router';
 export class Header {
   menuOpen = false;
 
-toggleMenu(): void {
+toggleMenu(event: MouseEvent): void {
+  event.stopPropagation();
   this.menuOpen = !this.menuOpen;
+}
+
+@HostListener('document:click')
+closeMenu(): void {
+  this.menuOpen = false;
 }
 
 logout(): void {

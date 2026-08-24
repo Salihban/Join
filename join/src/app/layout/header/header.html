@@ -3,14 +3,14 @@
         <img src="assets/icons/logo.svg" alt="">
         <p>Kanban Project Management Tool</p>
         <div class="user-menu">
-            <button class="user-button" (click)="toggleMenu()">
+            <button class="user-button" (click)="toggleMenu($event)">
                 SM
             </button>
                         <a routerLink="/help">
         <img class="help-img"  src="assets/icons/help (1).png" alt="">
         </a>
             <div class="dropdown" [class.open]="menuOpen">
-                <a routerLink="/help">Help</a>
+                <a class="help-none" routerLink="/help">Help</a>
                 <a routerLink="/legal-notice">Legal Notice</a>
                 <a routerLink="/privacy-policy">Privacy Policy</a>
 
