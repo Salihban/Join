@@ -44,7 +44,11 @@ export class Supabase {
         '#FFE62B', '#FF4646'
     ];
     selectContact(contact: Contact): void {
-        this.selectedContact.set(contact);
+        this.selectedContact.set(null);
+
+        setTimeout(() => {
+            this.selectedContact.set(contact);
+        })
     }
     readonly groupedContacts = computed<ContactGroup[]>(() => {
         const sortedContacts = [...this.contacts()].sort((a, b) =>
