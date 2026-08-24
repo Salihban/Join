@@ -16,7 +16,7 @@ main{
     overflow: auto;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 1024px){
     .app-layout{
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr auto;
@@ -36,5 +36,11 @@ main{
 
     app-aside{
         grid-row: 3;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    main{
+        padding-bottom: 80px;
     }
 }

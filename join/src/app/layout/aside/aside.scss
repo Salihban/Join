@@ -1,8 +1,19 @@
 @use "../../styles/fonts";
+:host {
+position: fixed;
+left: 0;
+right: 0;
+bottom: 0;
+width: 100%;
+height: 80px;
+z-index: 100;
+}
+
 aside {
     display: flex;
     align-items: center;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     background-color: rgba(42, 54, 71, 1);
 }
 
@@ -53,10 +64,15 @@ aside {
     a{
         font-family: Inter;
 }
-
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1025px) {
+    :host{
+        position: static;
+        width: 230px;
+        height: 100dvh;
+        flex: 0 0 230px;
+    }
 
     aside {
         height: 100dvh;
