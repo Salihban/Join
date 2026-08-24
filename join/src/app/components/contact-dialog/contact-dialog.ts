@@ -28,9 +28,9 @@ export class ContactDialog {
       ]],
 
     email: ['',
-      [Validators.required,
-      Validators.pattern(/^[^\s@]+@[^\s@]+(?:\.[^\s@]+)+$/)
-      ]],
+  [Validators.required,
+  Validators.pattern(/^(?!.*[._-]{2})([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9])@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/)
+  ]],
 
     phone: ['',
       [Validators.required,
@@ -80,6 +80,10 @@ export class ContactDialog {
   }
 
 
+
+  onInput(controlName: 'name' | 'email' | 'phone'): void {
+    this.contactForm.get(controlName)?.markAsDirty();
+  }
 
   animationEnd() {
     if (this.closing) {

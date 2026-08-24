@@ -19,21 +19,21 @@
         </div>
 
         <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
-            <label [class.input-error]="submitted && contactForm.get('name')?.invalid">
-                <input formControlName="name" placeholder="Name">
+            <label [class.input-error]="contactForm.get('name')?.dirty && contactForm.get('name')?.invalid">
+                <input formControlName="name" placeholder="Name" (input)="onInput('name')">
                 <img src="assets/icons/input_person.svg" alt="">
             </label>
-            <p class="form-error" [style.visibility]="submitted && contactForm.get('name')?.invalid ? 'visible' : 'hidden'">Please enter a name</p>
-            <label [class.input-error]="submitted && contactForm.get('email')?.invalid">
-                <input type="text" formControlName="email" placeholder="Email">
+            <p class="form-error" [style.visibility]="contactForm.get('name')?.dirty && contactForm.get('name')?.invalid ? 'visible' : 'hidden'">Please enter a name</p>
+            <label [class.input-error]="contactForm.get('email')?.dirty && contactForm.get('email')?.invalid">
+                <input type="text" formControlName="email" placeholder="Email" (input)="onInput('email')">
                 <img src="assets/icons/input_mail.svg" alt="">
             </label>
-            <p class="form-error" [style.visibility]="submitted && contactForm.get('email')?.invalid ? 'visible' : 'hidden'">Please enter a valid email address</p>
-            <label [class.input-error]="submitted && contactForm.get('phone')?.invalid">
-                <input type="tel" formControlName="phone" placeholder="Phone">
+            <p class="form-error" [style.visibility]="contactForm.get('email')?.dirty && contactForm.get('email')?.invalid ? 'visible' : 'hidden'">Please enter a valid email address</p>
+            <label [class.input-error]="contactForm.get('phone')?.dirty && contactForm.get('phone')?.invalid">
+                <input type="tel" formControlName="phone" placeholder="Phone" (input)="onInput('phone')">
                 <img src="assets/icons/input_call.svg" alt="">
             </label>
-            <p class="form-error" [style.visibility]="submitted && contactForm.get('phone')?.invalid ? 'visible' : 'hidden'">Please enter a phone number</p>
+            <p class="form-error" [style.visibility]="contactForm.get('phone')?.dirty && contactForm.get('phone')?.invalid ? 'visible' : 'hidden'">Please enter a phone number</p>
 
             @if (databaseError()) {
             <p class="form-error">{{ databaseError() }}</p>
