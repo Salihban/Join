@@ -66,8 +66,9 @@ export class Supabase {
             }
             group.contacts.push(contact);
         }
+        
         return groups;
-    });
+    }); 
 
     async getContacts(): Promise<void> {
         const { data: contacts, error } = await this.supabase
