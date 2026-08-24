@@ -42,6 +42,10 @@ export class ContactInfo {
   closeDialog() {
     this.closing = true;
   }
+  onInput(controlName: 'name' | 'email' | 'phone'): void {
+    this.contactForm.get(controlName)?.markAsDirty();
+  }
+
   animationEnd() {
     if (this.closing) {
       this.dialogOpen = false;
@@ -59,9 +63,9 @@ export class ContactInfo {
       ]],
 
     email: ['',
-      [Validators.required,
-      Validators.pattern(/^[^\s@]+@[^\s@]+(?:\.[^\s@]+)+$/)
-      ]],
+  [Validators.required,
+  Validators.pattern(/^(?!.*[._-]{2})([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9])@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/)
+  ]],
 
     phone: ['',
       [Validators.required,
