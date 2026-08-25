@@ -64,7 +64,7 @@ export class ContactInfo {
 
     email: ['',
   [Validators.required,
-  Validators.pattern(/^(?!.*[._-]{2})([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9])@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/)
+  Validators.pattern(/^(?!.*[._-]{2})([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9])@[a-zA-Z-]+(?:\.[a-zA-Z-]+)+$/)
   ]],
 
     phone: ['',
