@@ -22,23 +22,7 @@
 @media screen and (min-width: 1025px){
     .contacts{
         display: grid;
-        grid-template-columns: 424px 1fr;
-        grid-template-rows: 100%;
-    }
-
-    .contacts.selected .contact-list{
-        display: block;
-    }
-
-    .contact-info{
-        display: block;
-    }
-}
-
-@media screen and (min-width: 1025px){
-    .contacts{
-        display: grid;
-        grid-template-columns: 424px 1fr;
+        grid-template-columns: clamp(320px, 32vw, 424px) minmax(0, 1fr);
         grid-template-rows: 100%;
     }
 
