@@ -103,9 +103,15 @@ select {
     align-items: center;
     gap: 20px;
 
+    .head-and-links{
+        min-width: 0;
     h3 {
         font-size: 28px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        line-height: 1.1;
     }
+}
 
     .contact-list__initials {
         @include mixin.flex($direction: row, $justify: center, $align: center);
@@ -403,9 +409,6 @@ label {
 
             h3 {
                 font-size: 47px;
-                overflow: clip;
-                white-space: nowrap;
-                text-overflow: ellipsis;
                 max-width: 550px;
             }
         }
