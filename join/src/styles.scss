@@ -12,6 +12,18 @@ background: initial;
 border: initial;
 }
 
+html, body{
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+app-root{
+    display: block;
+    width: 100%;
+    overflow-x: clip;
+}
+
 @media(min-width:768px) {
     app-contact-dialog .add-btn{
         display: none;
