@@ -1,9 +1,14 @@
 .contacts{
     height: 100%;
+    min-width: 0;
+    overflow-x: clip;
+
 }
 
 .contact-info{
     display: none;
+    min-width: 0;
+    overflow-x: clip;
 }
 
 .contacts.selected {
