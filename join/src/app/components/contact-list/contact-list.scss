@@ -123,12 +123,12 @@
     align-items: center;
     position: fixed;
     top: 60dvh;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     animation: slideUp 350ms ease-out;
     height: 70px;
     width: 320px;
     padding: 20px;
-
     background-color: rgba(42, 54, 71, 1);
     color: #ffffff;
     border-radius: 8px;
@@ -154,24 +154,25 @@
     }
 }
 
-@media (min-width: 767px){
+@media (min-width: 767px) {
     .toast-notification {
-    @include styles.font-bold;
-    top: 75dvh;
-    left: 200px;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateX(100vh);
+        @include styles.font-bold;
+        top: 75dvh;
+        left: 50%;
+        transform: translateX(-50%); 
     }
-}
 
-@keyframes slideDown {
-    to {
-        transform: translateX(100vh);
+    @keyframes slideUp {
+        from {
+            transform: translateX(100vh);
+        }
     }
-}
+
+    @keyframes slideDown {
+        to {
+            transform: translateX(100vh);
+        }
+    }
 }
 
 @media (min-width: 1025px) {
@@ -208,31 +209,31 @@
     }
 
     .toast-notification {
-    @include styles.font-bold;
-    position: fixed;
-    top: 70dvh;
-    left: 850px;
-    animation: slideUp 350ms ease-out;
-    height: 70px;
-    width: 320px;
-    padding: 20px 20px;
-
-    background-color: rgba(42, 54, 71, 1);
-    color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    font-weight: 500;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateX(100vh);
+        @include styles.font-bold;
+        position: fixed;
+        top: 70dvh;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: slideUp 350ms ease-out;
+        height: 70px;
+        width: 320px;
+        padding: 20px 20px;
+        background-color: rgba(42, 54, 71, 1);
+        color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        font-weight: 500;
     }
-}
 
-@keyframes slideDown {
-    to {
-        transform: translateX(100vh);
+    @keyframes slideUp {
+        from {
+            transform: translateX(100vh);
+        }
     }
-}
+
+    @keyframes slideDown {
+        to {
+            transform: translateX(100vh);
+        }
+    }
 }
