@@ -16,7 +16,7 @@ export class TaskForm {
     taskForm = this.formBuilder.nonNullable.group({
         title: ['', Validators.required],
         description: [''],
-        dueData: ['', Validators.required],
+        dueDate: ['', Validators.required],
         priority: ['medium' as Priority],
         assignedContactIds: this.formBuilder.nonNullable.control<string[]>([]),
         category: ['', Validators.required],
@@ -34,7 +34,7 @@ export class TaskForm {
         this.taskForm.reset({
             title: '',
             description: '',
-            dueData: '',
+            dueDate: '',
             priority: 'medium',
             assignedContactIds: [],
             category: ''

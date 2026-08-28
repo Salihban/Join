@@ -1,1 +1,50 @@
-<p>task-form works!</p>
+<form [formGroup]="taskForm" (ngSubmit)="submitForm()">
+    <h1>Add Task</h1>
+
+    <label for="title">Title*</label>
+    <input id="title" formControlName="title" placeholder="Enter a title">
+    @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
+        <span class="error">This field is required</span>
+    }
+
+    <label for="description">description</label>
+    <textarea id="description" formControlName="description" placeholder="Enter a description"></textarea>
+
+    <label for="dueDate">Due Date*</label>
+    <input id="dueDate" type="date" formControlName="dueDate">
+    @if (taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid) {
+        <span class="error">This field is required</span>
+    }
+
+    <p>Priority</p>
+
+    <div class="Priority-buttons">
+        @for (priority of priorities; track priority) {
+            <button type="button" [class.active]="taskForm.controls.priority.value === priority"
+            (click)="setPriority(priority)">
+                {{ priority }}
+            </button>
+        }
+    </div>
+
+    <label>Assigned to</label>
+    <button type="button">Select contacts to assign</button>
+
+    <label for="category">Category*</label>
+    <select id="category" formControlName="category">
+        <option value="">Select task category</option>
+        <option value="technical_task">technical Task</option>
+        <option value="user_story">User Story</option>
+    </select>
+    @if (taskForm.controls.category.touched && taskForm.controls.category.invalid) {
+        <span class="error">This field is required</span>
+    }
+
+    <label for="subtask">Subtasks</label>
+    <input id="subtask" placeholder="Add new subtask">
+
+    <div class="form-actions">
+        <button type="button" (click)="clearForm()">Clear</button>
+        <button type="submit">Create Task</button>
+    </div>
+</form>
