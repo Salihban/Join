@@ -27,8 +27,38 @@
         }
     </div>
 
-    <label>Assigned to</label>
-    <button type="button">Select contacts to assign</button>
+    <div class="Assigned-field">
+        <label>Assigned to</label>
+
+        <button type="button" (click)="toggleDropDown()">
+            Select contacts to assign <span>+</span>
+        </button>
+        @if (dropdownOpen) {
+            <div class="contact-dropdown">
+                @for (contact of contacts(); track contact.id) {
+                    <label class="contact-option">
+                        <span class="contact-initials" [style.backgroundColor]="contact.color">
+                            {{ contact.initials }}
+                        </span>
+
+                        <span>{{ contact.name }}</span>
+
+                        <input type="checkbox" [checked]="isSelected(contact.id)"
+                        (change)="toggleContact(contact.id)">
+                    </label>
+                } @empty {
+                    <p>No contacts available</p>
+                }
+            </div>
+        }
+        <div class="selected-contacts">
+            @for (contact of selectContacts; track contact.id) {
+                <span class="contact-initials" [style.backgroundColor]="contact.color" [title]="contact.name">
+                    {{ contact.initials }}
+                </span>
+            }
+        </div>
+    </div>
 
     <label for="category">Category*</label>
     <select id="category" formControlName="category">
