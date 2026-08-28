@@ -1,6 +1,6 @@
 import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Supabase } from '../../supabase';
+import { Supabase } from '../../services/supabase';
 
 @Component({
   selector: 'app-contact-info',

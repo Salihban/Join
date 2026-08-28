@@ -1,5 +1,5 @@
 import { Component, inject, effect, signal, OnInit } from '@angular/core';
-import { Supabase } from '../../supabase';
+import { Supabase } from '../../services/supabase';
 import { ContactDialog } from '../contact-dialog/contact-dialog';
 
 @Component({

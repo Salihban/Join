@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ContactList } from '../contact-list/contact-list';
 import { ContactInfo } from '../contact-info/contact-info';
-import { Supabase } from '../../supabase';
+import { Supabase } from '../../services/supabase';
 
 
 @Component({
