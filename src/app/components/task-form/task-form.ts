@@ -23,6 +23,11 @@ export class TaskForm {
         subtasks: this.formBuilder.array<FormControl<string>>([])
     });
 
+    priorities: Priority[] = ['urgent', 'medium', 'low'];
+    setPriority(priority: Priority): void {
+        this.taskForm.controls.priority.setValue(priority);
+    }
+
     submitForm(): void {
         if (this.taskForm.invalid) {
             this.taskForm.markAllAsTouched();
