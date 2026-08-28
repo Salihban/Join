@@ -14,6 +14,7 @@ export class TaskForm implements OnInit{
     private formBuilder = inject(FormBuilder);
     readonly dbService = inject(Supabase);
     readonly contacts = this.dbService.contacts;
+    dropdownOpen = false;
 
     ngOnInit(): void {
         this.dbService.getContacts();
