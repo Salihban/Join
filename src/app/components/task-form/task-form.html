@@ -89,6 +89,6 @@
 
     <div class="form-actions">
         <button type="button" (click)="clearForm()">Clear</button>
-        <button type="submit">Create Task</button>
+        <button type="submit" [disabled]="isSaving">{{ isSaving ? 'Creating...' : 'Create Task'}}</button>
     </div>
 </form>

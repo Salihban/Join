@@ -21,6 +21,16 @@ export interface NewContact {
     phone: string;
 }
 
+export interface NewTask {
+    title: string;
+    description: string;
+    dueDate: string;
+    priority: 'urgent' | 'medium' | 'low';
+    category: string;
+    assignedContactIds: Array<string | number>;
+    subtasks: string[];
+}
+
 interface ContactInsert extends NewContact {
     initials: string;
     color: string;
@@ -181,7 +191,6 @@ export class Supabase {
 
         return this.contactColors[randomIndex];
     }
-
     toastMessage = signal('');
 
     triggerToast(message: string) {
@@ -189,5 +198,63 @@ export class Supabase {
         setTimeout(() => {
             this.toastMessage.set('');
         }, 3000);
+    }
+
+    async addTask(task: NewTask): Promise<boolean> {
+        const { data, error } = await this.supabase.from('task').insert({
+            title: task.title.trim(),
+            description: task.description.trim(),
+            due_date: task.dueDate,
+            priority: task.priority,
+            category: task.category,
+            status: 'todo'
+        }).select('id').single();
+
+    if (error || !data) {
+    console.error('Task konnte nicht gespeichert werden:', error);
+    return false;
+    }
+
+    const assigneesSaved = await this.addTaskAssignees(data.id, task.assignedContactIds);
+    const subtasksSaved = await this.addSubtasks(data.id, task.subtasks);
+
+    if (!assigneesSaved || !subtasksSaved) {
+    await this.supabase.from('task').delete().eq('id', data.id);
+    return false;
+    }
+    return true;
+}
+
+    private async addTaskAssignees(
+        taskId: number,
+        contactIds: Array<string | number>
+    ): Promise<boolean> {
+    if (!contactIds.length) return true;
+
+    const rows = contactIds.map(contactId => ({
+        task_id: taskId,
+        contact_id: contactId
+    }));
+    const { error } = await this.supabase.from('task_assignees').insert(rows);
+
+    if (error) console.error('Assignees-Fehler:', error);
+    return !error;
+    }
+
+    private async addSubtasks(
+        taskId: number,
+        subtasks: string[]
+    ): Promise<boolean> {
+    if (!subtasks.length) return true;
+
+    const rows = subtasks.map(title => ({
+        task_id: taskId,
+        title,
+        completed: false
+    }));
+    const { error } = await this.supabase.from('subtask').insert(rows);
+
+    if (error) console.error('Subtask-Fehler:', error);
+    return !error;
     }
 }

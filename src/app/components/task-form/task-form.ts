@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Contact, Supabase } from '../../supabase';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -17,10 +17,12 @@ export class TaskForm implements OnInit{
     subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
 
-
     ngOnInit(): void {
         this.dbService.getContacts();
     }
+
+    @Output() taskCreated = new EventEmitter<void>();
+    isSaving = false;
 
     toggleDropDown(): void {
         this.dropdownOpen = !this.dropdownOpen;
@@ -74,11 +76,29 @@ export class TaskForm implements OnInit{
         this.taskForm.controls.subtasks.removeAt(index);
     }
 
-    submitForm(): void {
+    async submitForm(): Promise<void> {
+        const title = this.taskForm.controls.title;
+
+        if (!title.value.trim()) {
+            title.setErrors({required: true});
+        }
+
         if (this.taskForm.invalid) {
             this.taskForm.markAllAsTouched();
             return;
         }
+        this.isSaving = true;
+
+        const success = await this.dbService.addTask(this.taskForm.getRawValue());
+        this.isSaving = false;
+
+        if (!success) {
+            this.dbService.triggerToast('Task could not be created');
+            return;
+        }
+        this.dbService.triggerToast('Task successfully created');
+        this.taskCreated.emit();
+        this.clearForm();
     }
 
     clearForm(): void {
