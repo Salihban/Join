@@ -14,7 +14,9 @@ export class TaskForm implements OnInit{
     private formBuilder = inject(FormBuilder);
     readonly dbService = inject(Supabase);
     readonly contacts = this.dbService.contacts;
+    subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
+
 
     ngOnInit(): void {
         this.dbService.getContacts();
@@ -58,6 +60,20 @@ export class TaskForm implements OnInit{
         this.taskForm.controls.priority.setValue(priority);
     }
 
+    addSubtask(event?: Event): void {
+        event?.preventDefault();
+        const title = this.subtaskInput.value.trim();
+        const subtasks = this.taskForm.controls.subtasks;
+
+        if (title || subtasks.value.includes(title)) return;
+        subtasks.push(this.formBuilder.nonNullable.control(title));
+        this.subtaskInput.reset();
+    }
+
+    removeSubtask(index: number): void {
+        this.taskForm.controls.subtasks.removeAt(index);
+    }
+
     submitForm(): void {
         if (this.taskForm.invalid) {
             this.taskForm.markAllAsTouched();
@@ -75,5 +91,6 @@ export class TaskForm implements OnInit{
             category: ''
         });
     this.taskForm.controls.subtasks.clear();
+    this.subtaskInput.reset();
     }
 }

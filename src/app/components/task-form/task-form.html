@@ -71,7 +71,21 @@
     }
 
     <label for="subtask">Subtasks</label>
-    <input id="subtask" placeholder="Add new subtask">
+
+    <div class="subtask-input">
+    <input id="subtask" [formControl]="subtaskInput" placeholder="Add new subtask" (keydown)="addSubtask($event)">
+    <button type="button" (click)="addSubtask()">+</button>
+    </div>
+
+    <div class="subtask-list">
+        @for (subtask of taskForm.controls.subtasks.controls; track $index) {
+            <div class="subtask">
+                <span>{{ subtask.value }}</span>
+
+                <button type="button" (click)="removeSubtask($index)">x</button>
+            </div>
+        }
+    </div>
 
     <div class="form-actions">
         <button type="button" (click)="clearForm()">Clear</button>
