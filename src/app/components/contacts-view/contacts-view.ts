@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
+import { ContactService } from '../../services/contact';
 import { ContactList } from '../contact-list/contact-list';
 import { ContactInfo } from '../contact-info/contact-info';
-import { Supabase } from '../../supabase';
+
+
 
 
 @Component({
@@ -11,5 +13,5 @@ import { Supabase } from '../../supabase';
     styleUrl: './contacts-view.scss',
 })
 export class ContactsView {
-    dbService = inject(Supabase)
+    contactService = inject(ContactService);
 }

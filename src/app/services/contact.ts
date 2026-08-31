@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { createClient } from '@supabase/supabase-js';
+import { Supabase } from '../services/supabase';
 
 export interface Contact {
     id: string;
@@ -29,11 +29,7 @@ interface ContactInsert extends NewContact {
 @Injectable({
     providedIn: 'root'
 })
-
-export class Supabase {
-    readonly supabaseUrl: string = 'https://mbifznamhyihpgduvqru.supabase.co';
-    readonly supabaseKey: string = 'sb_publishable_JUaeWi8_jhlIrDYKFIr-HQ_ZPNiPis2';
-    readonly supabase = createClient(this.supabaseUrl, this.supabaseKey);
+export class ContactService {
     readonly contacts = signal<Contact[]>([]);
     readonly selectedContact = signal<Contact | null>(null);
 
@@ -43,27 +39,33 @@ export class Supabase {
         '#FC71FF', '#FFC701', '#0038FF', '#C3FF2B',
         '#FFE62B', '#FF4646'
     ];
+
     selectContact(contact: Contact): void {
         this.selectedContact.set(null);
 
         setTimeout(() => {
             this.selectedContact.set(contact);
-        })
+        });
     }
+
+
+
+    constructor(private readonly supabaseService: Supabase) { }
+
     readonly groupedContacts = computed<ContactGroup[]>(() => {
         const sortedContacts = [...this.contacts()].sort((a, b) =>
             a.name.localeCompare(b.name, 'de')
         );
-        const groups: ContactGroup[] = [];
 
+        const groups: ContactGroup[] = [];
         for (const contact of sortedContacts) {
-            const letter: string = contact.name.charAt(0).toUpperCase();
+            const letter = contact.name.charAt(0).toUpperCase();
 
             let group = groups.find(group => group.letter === letter);
 
             if (!group) {
                 group = {
-                    letter: letter,
+                    letter,
                     contacts: []
                 };
                 groups.push(group);
@@ -73,58 +75,71 @@ export class Supabase {
         return groups;
     });
 
+
+
     async getContacts(): Promise<void> {
-        const { data: contacts, error } = await this.supabase
+        const { data, error } = await this.supabaseService.supabase
             .from('contacts')
-            .select('id, name, initials, email, phone,color');
+            .select('id, name, initials, email, phone, color');
 
         if (error) {
             console.error('Fehler beim Laden', error);
             return;
         }
 
-        if (!contacts) return;
-        this.contacts.set(contacts);
+        this.contacts.set(data ?? []);
     }
+
+
 
     async updateContact(
         id: string,
         values: Pick<Contact, 'name' | 'email' | 'phone'>
     ): Promise<void> {
-        const newInitials = this.createInitials(values.name);
-        await this.supabase
+        const initials = this.createInitials(values.name);
+
+        const { error } = await this.supabaseService.supabase
             .from('contacts')
             .update({
                 name: values.name,
                 email: values.email,
                 phone: values.phone,
-                initials: newInitials,
+                initials
             })
             .eq('id', id);
 
-        const current = this.selectedContact();
-        if (current && current.id === id) {
+        if (error) {
+            return;
+        }
+
+        const currentContact = this.selectedContact();
+
+        if (currentContact?.id === id) {
             this.selectedContact.set({
-                id: current.id,
-                name: values.name,
-                email: values.email,
-                phone: values.phone,
-                initials: newInitials,
-                color: current.color
+                ...currentContact,
+                ...values,
+                initials
             });
         }
         await this.getContacts();
     }
 
+
+
     async deleteContact(id: string): Promise<void> {
-        await this.supabase
+        const { error } = await this.supabaseService.supabase
             .from('contacts')
             .delete()
             .eq('id', id);
 
+        if (error) {
+            return;
+        }
         this.selectedContact.set(null);
         await this.getContacts();
     }
+
+
 
     async addContact(contact: NewContact): Promise<string | null> {
         const contactWithInitials: ContactInsert = {
@@ -134,16 +149,18 @@ export class Supabase {
             initials: this.createInitials(contact.name),
             color: this.getRandomColor()
         };
-        const { data, error } = await this.supabase
+
+        const { data, error } = await this.supabaseService.supabase
             .from('contacts')
             .insert(contactWithInitials)
-            .select('id, name, initials, email, phone,color')
+            .select('id, name, initials, email, phone, color')
             .single();
 
         if (error) {
             console.error('Fehler beim Hinzufügen', error);
             return 'The contact could not be added. It may already exist or contain invalid characters';
         }
+
         await this.getContacts();
 
         if (data) {
@@ -152,40 +169,45 @@ export class Supabase {
         return null;
     }
 
+
+
     private formatName(name: string): string {
-        const nameFormated = name.trim()
+        return name
+            .trim()
             .split(/\s+/)
             .map(part =>
-                part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-            )
+                part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
             .join(' ');
-
-        return nameFormated;
     }
 
+
+
     private createInitials(name: string): string {
-        const initials = name.trim()
+        return name
+            .trim()
             .split(/\s+/)
             .filter(part => part.length > 0)
             .map(part => part.charAt(0).toUpperCase())
             .slice(0, 2)
             .join('');
-
-        return initials;
     }
+
+
 
     private getRandomColor(): string {
         const randomIndex = Math.floor(
             Math.random() * this.contactColors.length
         );
-
         return this.contactColors[randomIndex];
     }
 
+
+
     toastMessage = signal('');
 
-    triggerToast(message: string) {
+    triggerToast(message: string): void {
         this.toastMessage.set(message);
+
         setTimeout(() => {
             this.toastMessage.set('');
         }, 3000);

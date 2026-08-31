@@ -8,7 +8,7 @@
         <app-contact-dialog #dialog (contactSaved)="onContactSaved()"></app-contact-dialog>
 
         <div class="contact-list__scroll">
-        @for (group of dbService.groupedContacts(); track group.letter) {
+        @for (group of contactService.groupedContacts(); track group.letter) {
         <section class="contact-list__group">
             <h2 class="contact-list__letter">
                 {{ group.letter }}
@@ -16,7 +16,7 @@
             <div class="contact-list__divider"></div>
             @for (contact of group.contacts; track contact.id) {
             <article [id]="contact.id"  class="contact-list__contact" [class.contact-list__contact--selected]="
-    dbService.selectedContact()?.id === contact.id" (click)="dbService.selectContact(contact)">
+    contactService.selectedContact()?.id === contact.id" (click)="contactService.selectContact(contact)">
                 <div class="contact-list__initials" [style.background-color]="contact.color">
                     {{ contact.initials }}
                 </div>
@@ -38,8 +38,8 @@
     </section>
 </div>
 
-@if (dbService.toastMessage()) {
+@if (contactService.toastMessage()) {
     <div class="toast-notification">
-        {{ dbService.toastMessage() }}
+        {{ contactService.toastMessage() }}
     </div>
 }
