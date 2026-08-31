@@ -21,6 +21,16 @@ export interface NewContact {
     phone: string;
 }
 
+export interface NewTask {
+    title: string;
+    description: string;
+    dueDate: string;
+    priority: 'urgent' | 'medium' | 'low';
+    category: string;
+    assignedContactIds: Array<string | number>;
+    subtasks: string[];
+}
+
 interface ContactInsert extends NewContact {
     initials: string;
     color: string;
@@ -48,8 +58,6 @@ export class ContactService {
         });
     }
 
-
-
     constructor(private readonly supabaseService: Supabase) { }
 
     readonly groupedContacts = computed<ContactGroup[]>(() => {
@@ -75,8 +83,6 @@ export class ContactService {
         return groups;
     });
 
-
-
     async getContacts(): Promise<void> {
         const { data, error } = await this.supabaseService.supabase
             .from('contacts')
@@ -89,8 +95,6 @@ export class ContactService {
 
         this.contacts.set(data ?? []);
     }
-
-
 
     async updateContact(
         id: string,
@@ -124,8 +128,6 @@ export class ContactService {
         await this.getContacts();
     }
 
-
-
     async deleteContact(id: string): Promise<void> {
         const { error } = await this.supabaseService.supabase
             .from('contacts')
@@ -138,8 +140,6 @@ export class ContactService {
         this.selectedContact.set(null);
         await this.getContacts();
     }
-
-
 
     async addContact(contact: NewContact): Promise<string | null> {
         const contactWithInitials: ContactInsert = {
@@ -169,8 +169,6 @@ export class ContactService {
         return null;
     }
 
-
-
     private formatName(name: string): string {
         return name
             .trim()
@@ -179,8 +177,6 @@ export class ContactService {
                 part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
             .join(' ');
     }
-
-
 
     private createInitials(name: string): string {
         return name
@@ -192,16 +188,12 @@ export class ContactService {
             .join('');
     }
 
-
-
     private getRandomColor(): string {
         const randomIndex = Math.floor(
             Math.random() * this.contactColors.length
         );
         return this.contactColors[randomIndex];
     }
-
-
 
     toastMessage = signal('');
 

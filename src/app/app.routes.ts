@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Board } from './pages/board/board';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
         path: 'add-task',
         loadComponent: () =>
             import('./pages/add-task/add-task').then(m => m.AddTask)
+    },
+    {
+        path: 'board',
+        loadComponent: () =>
+            import('./pages/board/board').then(m => m.Board)
     }
-
 ];

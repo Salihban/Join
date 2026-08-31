@@ -1,14 +1,11 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Aside } from './layout/aside/aside';
 import { Header } from './layout/header/header';
-import { Board } from "./pages/board/board";
-
-
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Aside, Board],
+  imports: [RouterOutlet, Header, Aside],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
