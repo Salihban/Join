@@ -1,1 +1,29 @@
-<p>task-card works!</p>
+<section class="task-card">
+    <div class="task-card-content-wrapper">
+        <div class="task-card-content-headline">
+            <!-- <span>{{categoryName}}</span> -->
+        </div>
+        <div class="task-card-text-content">
+            <!-- <h3>{{task.title}}</h3> -->
+            <!-- <p class="task-card-description">{{task.description}}</p> -->
+        </div>
+        <div class="subtask-content-wrapper">
+            <div class="progress-container">
+                <div class="progress-bar"><mat-progress-bar  mode = "determinate"  value = "40" ></mat-progress-bar></div>
+            </div>
+            <p>1/2 Subtask</p>
+        </div>
+        <div class="initial-wrapper">
+            <div class="initial-content">
+                <!-- @for (contact of task.assingnedContacts; track contact.id) {
+                    <span class="initials" [style.backgroundColor]="contact.color"[title]="contact.name">
+                        {{contact.initials}}
+                    </span>
+                } -->
+            </div>
+            <div>
+                <img src="/assets/icons_sprint2/prio_medium.svg" alt="">
+            </div>
+        </div>
+    </div>
+</section>
