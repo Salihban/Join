@@ -1,1 +1,73 @@
-<p>board works!</p>
+<main class="board-container">
+    <div class="board-inner">
+        <header class="board-header">
+            <div class="header-top">
+                <h1 class="board-title">Board</h1>
+                <button class="btn-add-main mobile-only" type="button" aria-label="Task hinzufügen">
+                    <img src="/assets/icons_sprint2/add.svg" alt="Add Task" />
+                </button>
+            </div>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Find Task" class="search-input"/>
+                    <span class="search-divider"></span>
+                    <button class="search-btn" type="button" aria-label="Suchen">
+                        <img src="/assets/icons_sprint2/search.svg" alt="" class="icon-search" />
+                    </button>
+                </div>
+
+                <button class="btn-add-main desktop-only" type="button">
+                    <img src="/assets/icons_sprint2/add_task.png" alt="Add Task" />
+                </button>
+            </div>
+        </header>
+
+        <section class="columns-grid">
+            <div class="board-column">
+                <div class="column-header">
+                    <h2 class="column-title">To do</h2>
+                    <button class="btn-add-column" type="button">
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col"/>
+                    </button>
+                </div>
+                <div class="column-content">
+                    <div class="empty-state">No tasks To do</div>
+                </div>
+            </div>
+
+            <div class="board-column">
+                <div class="column-header">
+                    <h2 class="column-title">In progress</h2>
+                    <button class="btn-add-column" type="button">
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col"/>
+                    </button>
+                </div>
+                <div class="column-content">
+                    <div class="empty-state">No tasks In progress</div>
+                </div>
+            </div>
+
+            <div class="board-column">
+                <div class="column-header">
+                    <h2 class="column-title">Await feedback</h2>
+                    <button class="btn-add-column" type="button">
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col"/>
+                    </button>
+                </div>
+                <div class="column-content">
+                    <div class="empty-state">No tasks Await feedback</div>
+                </div>
+            </div>
+
+            <div class="board-column">
+                <div class="column-header">
+                    <h2 class="column-title">Done</h2>
+                </div>
+                <div class="column-content">
+                    <div class="empty-state">No tasks Done</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
