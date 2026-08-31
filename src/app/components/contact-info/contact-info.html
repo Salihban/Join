@@ -13,7 +13,7 @@
     </div>
 </div>
 
-@if (dbService.selectedContact(); as contact) {
+@if (contactService.selectedContact(); as contact) {
 <section class="contact-details">
     <div class="contact-person">
         <div class="contact-list__initials" [style.background-color]="contact.color">

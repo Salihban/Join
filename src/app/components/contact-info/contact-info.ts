@@ -1,6 +1,6 @@
 import { Component, inject, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Supabase } from '../../services/supabase';
+import { ContactService } from '../../services/contact';
 
 @Component({
   selector: 'app-contact-info',
@@ -12,11 +12,11 @@ export class ContactInfo {
 
   goBack(): void {
     this.menuOpen = false;
-    this.dbService.selectedContact.set(null);
+    this.contactService.selectedContact.set(null);
   }
   
   private fb = inject(FormBuilder);
-  dbService = inject(Supabase);
+  contactService = inject(ContactService);
 
   contactDeleted = output<void>();
 
@@ -29,7 +29,7 @@ export class ContactInfo {
   }
 
   openEditDialog(): void {
-    const contact = this.dbService.selectedContact();
+    const contact = this.contactService.selectedContact();
     if (!contact) return;
 
     this.contactForm.patchValue(contact);
@@ -76,7 +76,7 @@ export class ContactInfo {
   });
 
   async saveContact(): Promise<void> {
-    const contact = this.dbService.selectedContact();
+    const contact = this.contactService.selectedContact();
 
     if (!contact || this.contactForm.invalid) {
       this.contactForm.markAllAsTouched();
@@ -87,14 +87,14 @@ export class ContactInfo {
     this.closing = false;
     document.body.style.overflow = '';
 
-    this.dbService.triggerToast('Contact successfully saved');
+    this.contactService.triggerToast('Contact successfully saved');
 
   
-    await this.dbService.updateContact(contact.id, this.contactForm.getRawValue());
+    await this.contactService.updateContact(contact.id, this.contactForm.getRawValue());
   }
 
   async deleteContact(): Promise<void> {
-    const contact = this.dbService.selectedContact();
+    const contact = this.contactService.selectedContact();
     if (!contact) return;
 
     this.menuOpen = false;
@@ -102,8 +102,8 @@ export class ContactInfo {
     this.closing = false;
     document.body.style.overflow = '';
 
-    this.dbService.triggerToast('Contact successfully deleted');
+    this.contactService.triggerToast('Contact successfully deleted');
 
-    await this.dbService.deleteContact(contact.id);
+    await this.contactService.deleteContact(contact.id);
   }
 }
