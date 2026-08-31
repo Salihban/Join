@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-// import { Task } from '../../supabase';
+import { Task } from '../../services/task';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
@@ -9,11 +9,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     styleUrl: './task-card.scss',
 })
 export class TaskCard {
-    // @Input({required: true}) task!: Task;
+    @Input({required: true}) task!: Task;
 
-    // get categoryName(): string {
-    //     return this.task.category === 'user_story'
-    //             ? 'User Story'
-    //             : 'Technical Task';
-    // }
+    get categoryName(): string {
+        return this.task.category === 'user_story'
+                ? 'User Story'
+                : 'Technical Task';
+    }
 }
