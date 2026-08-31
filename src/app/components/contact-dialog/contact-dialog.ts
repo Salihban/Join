@@ -1,6 +1,6 @@
 import { Component, inject, signal, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Supabase } from '../../supabase';
+import { ContactService } from '../../services/contact';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -12,7 +12,7 @@ import { Supabase } from '../../supabase';
 
 export class ContactDialog {
   private fb = inject(FormBuilder);
-  private dbService = inject(Supabase);
+  private contactService = inject(ContactService);
 
   contactSaved = output<void>();
   closing = false;
@@ -51,7 +51,7 @@ export class ContactDialog {
     }
 
     const formValue = this.contactForm.value;
-    const errorMessage = await this.dbService.addContact({
+    const errorMessage = await this.contactService.addContact({
       name: formValue.name ?? '',
       email: formValue.email ?? '',
       phone: formValue.phone ?? ''

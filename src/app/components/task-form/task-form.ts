@@ -1,5 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { Contact, Supabase } from '../../supabase';
+import { Contact, ContactService } from '../../services/contact';
+import { TaskService } from '../../services/task';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 type Priority = 'urgent' | 'medium' | 'low';
@@ -12,13 +13,14 @@ type Priority = 'urgent' | 'medium' | 'low';
 })
 export class TaskForm implements OnInit{
     private formBuilder = inject(FormBuilder);
-    readonly dbService = inject(Supabase);
-    readonly contacts = this.dbService.contacts;
+    readonly contactService = inject(ContactService);
+    readonly taskService = inject(TaskService);
+    readonly contacts = this.contactService.contacts;
     subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
 
     ngOnInit(): void {
-        this.dbService.getContacts();
+        this.contactService.getContacts();
     }
 
     @Output() taskCreated = new EventEmitter<void>();
@@ -89,14 +91,14 @@ export class TaskForm implements OnInit{
         }
         this.isSaving = true;
 
-        const success = await this.dbService.addTask(this.taskForm.getRawValue());
+        const success = await this.taskService.addTask(this.taskForm.getRawValue());
         this.isSaving = false;
 
         if (!success) {
-            this.dbService.triggerToast('Task could not be created');
+            this.contactService.triggerToast('Task could not be created');
             return;
         }
-        this.dbService.triggerToast('Task successfully created');
+        this.contactService.triggerToast('Task successfully created');
         this.taskCreated.emit();
         this.clearForm();
     }
