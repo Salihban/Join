@@ -11,13 +11,14 @@ type Priority = 'urgent' | 'medium' | 'low';
     templateUrl: './task-form.html',
     styleUrl: './task-form.scss',
 })
-export class TaskForm implements OnInit{
+export class TaskForm implements OnInit {
     private formBuilder = inject(FormBuilder);
     readonly contactService = inject(ContactService);
     readonly taskService = inject(TaskService);
     readonly contacts = this.contactService.contacts;
     subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
+    categoryDropdownOpen = false;
 
     ngOnInit(): void {
         this.contactService.getContacts();
@@ -35,8 +36,25 @@ export class TaskForm implements OnInit{
         const ids = control.value;
 
         control.setValue(
-            ids.includes(contactId)? ids.filter(id => id !== contactId): [...ids, contactId]
+            ids.includes(contactId) ? ids.filter(id => id !== contactId) : [...ids, contactId]
         );
+    }
+
+    closeAssigneeDropdown(): void {
+        this.dropdownOpen = false;
+    }
+
+    toggleCategoryDropDown(): void {
+        this.categoryDropdownOpen = !this.categoryDropdownOpen;
+    }
+
+    closeCategoryDropdown(): void {
+        this.categoryDropdownOpen = false;
+    }
+
+    selectCategory(category: string): void {
+        this.taskForm.controls.category.setValue(category);
+        this.categoryDropdownOpen = false;
     }
 
     isSelected(contactId: string): boolean {
@@ -82,7 +100,7 @@ export class TaskForm implements OnInit{
         const title = this.taskForm.controls.title;
 
         if (!title.value.trim()) {
-            title.setErrors({required: true});
+            title.setErrors({ required: true });
         }
 
         if (this.taskForm.invalid) {
@@ -112,7 +130,7 @@ export class TaskForm implements OnInit{
             assignedContactIds: [],
             category: ''
         });
-    this.taskForm.controls.subtasks.clear();
-    this.subtaskInput.reset();
+        this.taskForm.controls.subtasks.clear();
+        this.subtaskInput.reset();
     }
 }

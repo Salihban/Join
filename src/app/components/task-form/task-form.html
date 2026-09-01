@@ -1,94 +1,154 @@
-<form [formGroup]="taskForm" (ngSubmit)="submitForm()">
-    <h1>Add Task</h1>
+<form [formGroup]="taskForm" (ngSubmit)="submitForm()" class="task-form">
+    <h1 class="task-form__title">Add Task</h1>
 
-    <label for="title">Title*</label>
-    <input id="title" formControlName="title" placeholder="Enter a title">
-    @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
-        <span class="error">This field is required</span>
-    }
+    <div class="task-form__content">
+        <div class="task-form__left">
+            <label class="task-form__label" for="title">Title<span class="required-star">*</span></label>
+            <input class="task-form__input" id="title" formControlName="title" placeholder="Enter a title">
+            @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
+            <span class="task-form__error error">This field is required</span>
+            }
 
-    <label for="description">description</label>
-    <textarea id="description" formControlName="description" placeholder="Enter a description"></textarea>
+            <label class="task-form__label" for="description">Description</label>
+            <textarea class="task-form__textarea" id="description" formControlName="description"
+                placeholder="Enter a description"></textarea>
 
-    <label for="dueDate">Due Date*</label>
-    <input id="dueDate" type="date" formControlName="dueDate">
-    @if (taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid) {
-        <span class="error">This field is required</span>
-    }
+            <label class="task-form__label" for="dueDate">Due Date<span class="required-star">*</span></label>
+            <input class="task-form__input" id="dueDate" type="date" formControlName="dueDate">
+            @if (taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid) {
+            <span class="task-form__error error">This field is required</span>
+            }
 
-    <p>Priority</p>
+        </div>
 
-    <div class="Priority-buttons">
-        @for (priority of priorities; track priority) {
-            <button type="button" [class.active]="taskForm.controls.priority.value === priority"
-            (click)="setPriority(priority)">
-                {{ priority }}
-            </button>
-        }
-    </div>
+        <div class="task-form__right">
+            <p class="task-form__text">Priority</p>
 
-    <div class="Assigned-field">
-        <label>Assigned to</label>
+            <div class="task-form__priority-buttons Priority-buttons">
+                @for (priority of priorities; track priority) {
+                <button type="button" [class.active]="taskForm.controls.priority.value === priority"
+                    [class.priority-urgent]="priority === 'urgent'" [class.priority-medium]="priority === 'medium'"
+                    [class.priority-low]="priority === 'low'" (click)="setPriority(priority)"
+                    class="task-form__priority-button">
+                    <span>{{ priority }}</span>
 
-        <button type="button" (click)="toggleDropDown()">
-            Select contacts to assign <span>+</span>
-        </button>
-        @if (dropdownOpen) {
-            <div class="contact-dropdown">
-                @for (contact of contacts(); track contact.id) {
-                    <label class="contact-option">
-                        <span class="contact-initials" [style.backgroundColor]="contact.color">
+                    @if (priority === 'urgent') {
+                    <span class="material-symbols-outlined task-form__priority-icon task-form__priority-icon--urgent">
+                        keyboard_double_arrow_up
+                    </span>
+                    }
+
+                    @if (priority === 'medium') {
+                    <span class="material-symbols-outlined task-form__priority-icon task-form__priority-icon--medium">
+                        drag_handle
+                    </span>
+                    }
+
+                    @if (priority === 'low') {
+                    <span class="material-symbols-outlined task-form__priority-icon task-form__priority-icon--low">
+                        keyboard_double_arrow_down
+                    </span>
+                    }
+
+                </button>
+                }
+            </div>
+
+            <div class="task-form__assigned Assigned-field" (focusout)="closeAssigneeDropdown()">
+                <label class="task-form__label">Assigned to</label>
+
+                <button type="button" (click)="toggleDropDown()" class="task-form__assigned-trigger">
+                    <span> Select contacts to assign </span>
+
+                    <span class="material-symbols-outlined task-form__assigned-arrow">
+                        {{ dropdownOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                    </span>
+                </button>
+                @if (dropdownOpen) {
+                <div class="task-form__assigned-dropdown contact-dropdown">
+                    @for (contact of contacts(); track contact.id) {
+                    <label class="task-form__assigned-option contact-option">
+                        <span class="task-form__assigned-initials contact-initials"
+                            [style.backgroundColor]="contact.color">
                             {{ contact.initials }}
                         </span>
 
                         <span>{{ contact.name }}</span>
 
-                        <input type="checkbox" [checked]="isSelected(contact.id)"
-                        (change)="toggleContact(contact.id)">
+                        <input type="checkbox" [checked]="isSelected(contact.id)" (change)="toggleContact(contact.id)">
                     </label>
-                } @empty {
+                    } @empty {
                     <p>No contacts available</p>
+                    }
+                </div>
+                }
+                <div class="task-form__assigned-selected selected-contacts">
+                    @for (contact of selectContacts; track contact.id) {
+                    <span class="task-form__assigned-initials contact-initials" [style.backgroundColor]="contact.color"
+                        [title]="contact.name">
+                        {{ contact.initials }}
+                    </span>
+                    }
+                </div>
+            </div>
+
+            <label class="task-form__label" for="category">Category<span class="required-star">*</span></label>
+            <div class="task-form__category" (focusout)="closeCategoryDropdown()">
+                <button type="button" class="task-form__category-trigger" (click)="toggleCategoryDropDown()">
+                    <span>
+                        @if (taskForm.controls.category.value === 'technical_task') {
+                        Technical Task
+                        } @else if (taskForm.controls.category.value === 'user_story') {
+                        User Story
+                        } @else {
+                        Select task category
+                        }
+                    </span>
+
+                    <span class="material-symbols-outlined task-form__category-arrow">
+                        {{ categoryDropdownOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                    </span>
+                </button>
+
+                @if (categoryDropdownOpen) {
+                <div class="task-form__category-dropdown">
+                    <button type="button" class="task-form__category-option" (click)="selectCategory('technical_task')">
+                        Technical Task
+                    </button>
+
+                    <button type="button" class="task-form__category-option" (click)="selectCategory('user_story')">
+                        User Story
+                    </button>
+                </div>
                 }
             </div>
-        }
-        <div class="selected-contacts">
-            @for (contact of selectContacts; track contact.id) {
-                <span class="contact-initials" [style.backgroundColor]="contact.color" [title]="contact.name">
-                    {{ contact.initials }}
-                </span>
+            @if (taskForm.controls.category.touched && taskForm.controls.category.invalid) {
+            <span class="task-form__error error">This field is required</span>
             }
+
+            <label class="task-form__label" for="subtask">Subtasks</label>
+
+            <div class="task-form__subtask-input subtask-input">
+                <input id="subtask" [formControl]="subtaskInput" placeholder="Add new subtask"
+                    (keydown)="addSubtask($event)" class="task-form__input">
+                <button type="button" (click)="addSubtask()" class="task-form__subtask-add">+</button>
+            </div>
+
+            <div class="task-form__subtask-list subtask-list">
+                @for (subtask of taskForm.controls.subtasks.controls; track $index) {
+                <div class="task-form__subtask subtask">
+                    <span>{{ subtask.value }}</span>
+
+                    <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-remove">x</button>
+                </div>
+                }
+            </div>
         </div>
     </div>
 
-    <label for="category">Category*</label>
-    <select id="category" formControlName="category">
-        <option value="">Select task category</option>
-        <option value="technical_task">technical Task</option>
-        <option value="user_story">User Story</option>
-    </select>
-    @if (taskForm.controls.category.touched && taskForm.controls.category.invalid) {
-        <span class="error">This field is required</span>
-    }
-
-    <label for="subtask">Subtasks</label>
-
-    <div class="subtask-input">
-    <input id="subtask" [formControl]="subtaskInput" placeholder="Add new subtask" (keydown)="addSubtask($event)">
-    <button type="button" (click)="addSubtask()">+</button>
-    </div>
-
-    <div class="subtask-list">
-        @for (subtask of taskForm.controls.subtasks.controls; track $index) {
-            <div class="subtask">
-                <span>{{ subtask.value }}</span>
-
-                <button type="button" (click)="removeSubtask($index)">x</button>
-            </div>
-        }
-    </div>
-
-    <div class="form-actions">
-        <button type="button" (click)="clearForm()">Clear</button>
-        <button type="submit" [disabled]="isSaving">{{ isSaving ? 'Creating...' : 'Create Task'}}</button>
+    <div class="task-form__actions form-actions">
+        <button type="button" (click)="clearForm()" class="task-form__button">Clear<span class="material-symbols-outlined">close</span></button>
+        <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">{{ isSaving ?
+            'Creating...' : 'Create Task'}}<span class="material-symbols-outlined">check</span></button>
     </div>
 </form>
