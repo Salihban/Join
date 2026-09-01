@@ -10,6 +10,7 @@
 /* #endregion */
 
 /* #region Task Form */
+
 .task-form {
     display: flex;
     flex-direction: column;
@@ -343,6 +344,11 @@
             color: white;
         }
     }
+}
+
+.required-star {
+    color: $star;
+    margin-left: 2px;
 }
 
 /* #endregion */

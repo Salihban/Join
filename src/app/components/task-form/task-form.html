@@ -3,7 +3,7 @@
 
     <div class="task-form__content">
         <div class="task-form__left">
-            <label class="task-form__label" for="title">Title*</label>
+            <label class="task-form__label" for="title">Title<span class="required-star">*</span></label>
             <input class="task-form__input" id="title" formControlName="title" placeholder="Enter a title">
             @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
             <span class="task-form__error error">This field is required</span>
@@ -13,7 +13,7 @@
             <textarea class="task-form__textarea" id="description" formControlName="description"
                 placeholder="Enter a description"></textarea>
 
-            <label class="task-form__label" for="dueDate">Due Date*</label>
+            <label class="task-form__label" for="dueDate">Due Date<span class="required-star">*</span></label>
             <input class="task-form__input" id="dueDate" type="date" formControlName="dueDate">
             @if (taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid) {
             <span class="task-form__error error">This field is required</span>
@@ -92,7 +92,7 @@
                 </div>
             </div>
 
-            <label class="task-form__label" for="category">Category*</label>
+            <label class="task-form__label" for="category">Category<span class="required-star">*</span></label>
             <div class="task-form__category" (focusout)="closeCategoryDropdown()">
                 <button type="button" class="task-form__category-trigger" (click)="toggleCategoryDropDown()">
                     <span>
