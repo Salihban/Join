@@ -147,8 +147,8 @@
     </div>
 
     <div class="task-form__actions form-actions">
-        <button type="button" (click)="clearForm()" class="task-form__button">Clear</button>
+        <button type="button" (click)="clearForm()" class="task-form__button">Clear<span class="material-symbols-outlined">close</span></button>
         <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">{{ isSaving ?
-            'Creating...' : 'Create Task'}}</button>
+            'Creating...' : 'Create Task'}}<span class="material-symbols-outlined">check</span></button>
     </div>
 </form>

@@ -7,6 +7,7 @@
     display: block;
     width: 100%;
 }
+
 /* #endregion */
 
 
@@ -38,6 +39,7 @@
         flex-direction: column;
         width: 100%;
     }
+
     /* #endregion */
 
     /* #region Labels And Validation */
@@ -60,6 +62,7 @@
         font-size: 12px;
         color: $error;
     }
+
     /* #endregion */
 
     /* #region General Form Fields */
@@ -113,6 +116,7 @@
     &__input#dueDate {
         color: $placeholder;
     }
+
     /* #endregion */
 
     /* #region Priority */
@@ -187,6 +191,7 @@
             color: $prio-low;
         }
     }
+
     /* #endregion */
 
     /* #region Assigned Contacts */
@@ -240,6 +245,7 @@
         gap: 10px;
         margin-top: 10px;
     }
+
     /* #endregion */
 
     /* #region Category */
@@ -285,6 +291,7 @@
             background: $assignees-hover;
         }
     }
+
     /* #endregion */
 
     /* #region Subtasks */
@@ -319,21 +326,24 @@
         color: $text-color;
         font-size: 20px;
     }
+
     /* #endregion */
 
     /* #region Form Actions */
     &__actions {
-        @include mixin.flex(row, stretch, center);
+        @include mixin.flex(row, flex-end, center);
         width: 100%;
-        gap: 26px;
+        gap: 32px;
         margin-top: 18px;
         padding-top: 0;
     }
 
 
     &__button {
-        flex: 1;
-        min-height: 56px;
+        @include mixin.flex(row, center, center);
+        gap: 6px;
+        flex: 0 0 auto;
+        min-height: 46px;
         padding: 10px 14px;
         border: 1px solid $active-input;
         border-radius: 10px;
@@ -351,7 +361,12 @@
             background: #293147;
             color: white;
         }
+
+        .material-symbols-outlined {
+            font-size: 20px;
+        }
     }
+
     /* #endregion */
 }
 
@@ -359,6 +374,7 @@
     color: $star;
     margin-left: 2px;
 }
+
 /* #endregion */
 
 
@@ -412,4 +428,5 @@
         }
     }
 }
+
 /* #endregion */
