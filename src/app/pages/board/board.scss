@@ -9,7 +9,7 @@ $font-inter-2: 'Open Sans', sans-serif;
     height: calc(100dvh - 96px);
     overflow-y: auto;
     background-color: styles.$bg-color;
-    padding: 10px;
+    padding: 16px;
 }
 
 .board-inner {
@@ -38,7 +38,6 @@ $font-inter-2: 'Open Sans', sans-serif;
         font-weight: 700;
         line-height: 120%;
         color: #000000;
-        margin: 0;
     }
 
     .header-actions {
@@ -55,7 +54,6 @@ $font-inter-2: 'Open Sans', sans-serif;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        padding: 0;
 
         &.mobile-only {
             width: 40px;
@@ -79,7 +77,6 @@ $font-inter-2: 'Open Sans', sans-serif;
     border-radius: 10px;
     padding: 8px 16px;
     gap: 10px;
-    box-sizing: border-box;
 
     .search-input {
         flex: 1;
@@ -123,7 +120,6 @@ $font-inter-2: 'Open Sans', sans-serif;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    min-width: 0;
 
     .column-header {
         display: flex;
@@ -134,9 +130,7 @@ $font-inter-2: 'Open Sans', sans-serif;
             font-family: $font-inter;
             font-size: 27px;
             font-weight: 700;
-            line-height: 120%;
             color: styles.$main-color;
-            margin: 0;
         }
 
         .btn-add-column {
@@ -145,7 +139,6 @@ $font-inter-2: 'Open Sans', sans-serif;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            padding: 0;
 
             .icon-plus-col {
                 width: 30px;
@@ -159,8 +152,8 @@ $font-inter-2: 'Open Sans', sans-serif;
     }
 
     .empty-state {
-        width: 392px;
-        min-height: 48px;
+        width: 100%;
+        height: 48px;
         background-color: styles.$empty-bg;
         border: 1px dashed styles.$empty-border;
         border-radius: 10px;
@@ -178,75 +171,72 @@ $font-inter-2: 'Open Sans', sans-serif;
     .board-container {
         gap: 32px;
     }
-
-    .columns-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-    }
 }
 
 @include mixin.desktop {
     .board-container {
-        padding: 80px 80px 0px 50px;
+        max-width: 1440px;
+        padding: 80px 50px;
     }
 
-        .board-column {
-            .column-header {
-                .column-title {
-                    font-size: 20px;
-                }
+    .board-column {
+        .column-header {
+            width: 252px;
 
-                .btn-add-column {
-                    .icon-plus-col {
-                        width: 24px;
-                        height: 24px;
-                    }
-                }
-            }
-        }
-
-        .column-content {
-            .empty-state {
-                width: 252px;
-                min-height: 48px;
-            }
-        }
-
-        .board-header {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-
-            .header-top {
-                width: auto;
+            .column-title {
+                font-size: 20px;
             }
 
-            .header-actions {
-                width: auto;
-                gap: 32px;
-            }
-
-            .search-container {
-                width: 312px;
-            }
-
-            .btn-add-main {
-                &.mobile-only {
-                    display: none;
-                }
-
-                &.desktop-only {
-                    display: flex;
-                    width: 160px;
-                    height: 48px;
+            .btn-add-column {
+                .icon-plus-col {
+                    width: 24px;
+                    height: 24px;
                 }
             }
-        }
-
-        .columns-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
         }
     }
+
+    .column-content {
+        .empty-state {
+            width: 252px;
+            height: 48px;
+        }
+    }
+
+    .board-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .header-top {
+            width: auto;
+        }
+
+        .header-actions {
+            width: auto;
+            gap: 32px;
+        }
+
+        .search-container {
+            width: 312px;
+        }
+
+        .btn-add-main {
+            &.mobile-only {
+                display: none;
+            }
+
+            &.desktop-only {
+                display: flex;
+                width: 160px;
+                height: 48px;
+            }
+        }
+    }
+
+    .columns-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+}
