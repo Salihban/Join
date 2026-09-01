@@ -32,10 +32,10 @@
     <h3>Subtask</h3>
 
     <div class="subtasks">
-        @for (Subtask of task.subtasks; track subtask.id) {
+        @for (Subtask of task.subtasks; track Subtask.id) {
             <label>
-                <input type="checkbox" [checked]="subtask.completed">
-                {{ <subtask.title }}
+                <input type="checkbox" [checked]="Subtask.completed">
+                {{ Subtask.title }}
             </label>
         }
     </div>
