@@ -1,17 +1,18 @@
 @use '../../styles/main.scss' as *;
 @use '../../styles/mixin' as mixin;
 
+
 /* #region Host */
 :host {
     display: block;
     width: 100%;
 }
-
 /* #endregion */
 
-/* #region Task Form */
 
+/* #region Task Form */
 .task-form {
+    /* #region Layout */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -19,7 +20,6 @@
     color: $text-color;
 
     &__title {
-
         @include mixin.font-bold;
         margin: 0 0 32px;
         font-size: 40px;
@@ -27,7 +27,6 @@
     }
 
     &__content {
-
         @include mixin.flex(column, flex-start, center);
         width: 100%;
         gap: 10px;
@@ -39,7 +38,9 @@
         flex-direction: column;
         width: 100%;
     }
+    /* #endregion */
 
+    /* #region Labels And Validation */
     &__label,
     &__text {
         display: block;
@@ -59,7 +60,9 @@
         font-size: 12px;
         color: $error;
     }
+    /* #endregion */
 
+    /* #region General Form Fields */
     &__input,
     &__textarea,
     &__assigned-trigger,
@@ -87,7 +90,6 @@
     &__assigned-trigger,
     &__category-trigger {
         @include mixin.flex(row, space-between, center);
-        font: inherit;
         text-align: left;
     }
 
@@ -111,7 +113,9 @@
     &__input#dueDate {
         color: $placeholder;
     }
+    /* #endregion */
 
+    /* #region Priority */
     &__priority-buttons {
         display: flex;
         width: 100%;
@@ -166,7 +170,6 @@
     }
 
     &__priority-icon {
-
         font-size: 20px;
         line-height: 1;
 
@@ -184,7 +187,9 @@
             color: $prio-low;
         }
     }
+    /* #endregion */
 
+    /* #region Assigned Contacts */
     &__assigned {
         margin-bottom: 20px;
         position: relative;
@@ -204,7 +209,6 @@
         border-radius: 10px;
         background: white;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.20);
-        overflow: hidden;
     }
 
     &__assigned-option {
@@ -223,7 +227,6 @@
     }
 
     &__assigned-initials {
-
         @include mixin.flex(row, center, center);
         width: 42px;
         height: 42px;
@@ -233,12 +236,13 @@
     }
 
     &__assigned-selected {
-
         @include mixin.flex(row, flex-start, center);
         gap: 10px;
         margin-top: 10px;
     }
+    /* #endregion */
 
+    /* #region Category */
     &__category {
         position: relative;
         width: 100%;
@@ -251,6 +255,7 @@
         font-size: 20px;
         line-height: 1;
     }
+
 
     &__category-dropdown {
         position: absolute;
@@ -265,6 +270,7 @@
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.20);
     }
 
+
     &__category-option {
         display: block;
         width: 100%;
@@ -272,23 +278,19 @@
         border: 0;
         background: transparent;
         color: $text-color;
-        font: inherit;
         text-align: left;
+
 
         &:hover {
             background: $assignees-hover;
         }
     }
+    /* #endregion */
 
+    /* #region Subtasks */
     &__subtask-input {
-
         @include mixin.flex(row, flex-start, center);
         gap: 10px;
-
-        .task-form__input {
-            flex: 1;
-            margin: 0;
-        }
     }
 
     // bleibt der plus button oder nicht ???
@@ -306,6 +308,7 @@
     //     margin-top: 10px;
     // }
 
+
     // &__subtask {
     //     display: flex;
     //     align-items: center;
@@ -316,7 +319,9 @@
         color: $text-color;
         font-size: 20px;
     }
+    /* #endregion */
 
+    /* #region Form Actions */
     &__actions {
         @include mixin.flex(row, stretch, center);
         width: 100%;
@@ -324,6 +329,7 @@
         margin-top: 18px;
         padding-top: 0;
     }
+
 
     &__button {
         flex: 1;
@@ -335,29 +341,30 @@
         color: $text-color;
         font-size: 16px;
 
+
         &:hover:not(:disabled) {
             border: 2px solid $active-input;
         }
+
 
         &--submit {
             background: #293147;
             color: white;
         }
     }
+    /* #endregion */
 }
 
 .required-star {
     color: $star;
     margin-left: 2px;
 }
-
 /* #endregion */
 
-/* #region Media Queries Desktop */
 
+/* #region Media Queries Desktop */
 @media (min-width: 768px) {
     .task-form {
-
         padding: 64px min(7dvw, 100px) 40px;
 
         &__title {
@@ -405,5 +412,4 @@
         }
     }
 }
-
 /* #endregion */
