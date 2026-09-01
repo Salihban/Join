@@ -18,6 +18,7 @@
     color: $text-color;
 
     &__title {
+
         @include mixin.font-bold;
         margin: 0 0 32px;
         font-size: 40px;
@@ -25,8 +26,8 @@
     }
 
     &__content {
-        display: flex;
-        flex-direction: column;
+
+        @include mixin.flex(column, flex-start, center);
         width: 100%;
         gap: 10px;
     }
@@ -36,7 +37,6 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        // min-width: 0;
     }
 
     &__label,
@@ -101,7 +101,6 @@
         margin-bottom: 20px;
     }
 
-    &__input#title,
     &__input#dueDate {
         color: $placeholder;
     }
@@ -114,13 +113,12 @@
     }
 
     &__priority-button {
-        display: flex;
+        @include mixin.flex(row, center, center);
+
         flex: 1;
-        align-items: center;
-        justify-content: center;
         min-height: 41px;
         border: 1px solid $border-add-input;
-        border-radius: 9px;
+        border-radius: 10px;
         background: white;
         color: $text-color;
         font-size: 16px;
@@ -135,9 +133,43 @@
 
         &.active {
             @include mixin.font-bold;
+            color: white;
+
+            .task-form__priority-icon {
+                color: white;
+            }
+        }
+
+        &.priority-urgent.active {
+            border-color: $prio-urgent;
+            background: $prio-urgent;
+        }
+
+        &.priority-medium.active {
             border-color: $prio-medium;
             background: $prio-medium;
-            color: white;
+        }
+
+        &.priority-low.active {
+            border-color: $prio-low;
+            background: $prio-low;
+        }
+    }
+
+    &__priority-icon {
+        font-size: 22px;
+        line-height: 1;
+
+        &--urgent {
+            color: $prio-urgent;
+        }
+
+        &--medium {
+            color: $prio-medium;
+        }
+
+        &--low {
+            color: $prio-low;
         }
     }
 
@@ -148,9 +180,8 @@
     }
 
     &__assigned-trigger {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+
+        @include mixin.flex(row, space-between, center);
         text-align: left;
     }
 
@@ -171,8 +202,7 @@
     }
 
     &__assigned-option {
-        display: flex;
-        align-items: center;
+        @include mixin.flex(row, flex-start, center);
         gap: 6px;
         margin: 0;
         padding: 10px;
@@ -187,9 +217,8 @@
     }
 
     &__assigned-initials {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+
+        @include mixin.flex(row, center, center);
         width: 42px;
         height: 42px;
         border-radius: 50%;
@@ -198,13 +227,15 @@
     }
 
     &__assigned-selected {
-        display: flex;
+
+        @include mixin.flex(row, flex-start, center);
         gap: 10px;
         margin-top: 10px;
     }
 
     &__subtask-input {
-        display: flex;
+
+        @include mixin.flex(row, flex-start, center);
         gap: 10px;
 
         .task-form__input {
@@ -240,8 +271,7 @@
     }
 
     &__actions {
-        display: flex;
-        justify-content: stretch;
+        @include mixin.flex(row, stretch, center);
         width: 100%;
         gap: 26px;
         margin-top: 18px;
@@ -323,5 +353,5 @@
         }
     }
 }
-/* #endregion */
 
+/* #endregion */
