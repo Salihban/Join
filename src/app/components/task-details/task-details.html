@@ -1,1 +1,51 @@
-<p>task-details works!</p>
+<section class="task-details">
+    <button class="close-button" (click)="closeDetails.emit()">x</button>
+
+    <span class="category">{{ task.category }}</span>
+
+    <h1>{{ task.title }}</h1>
+    <p>{{ task.description }}</p>
+
+    <div class="detail-row">
+        <span>Due Date:</span>
+        <span>{{ task.due_date }}</span>
+    </div>
+    
+    <div class="detail-row">
+        <span>Priority:</span>
+        <span>{{ task.priority }}</span>
+    </div>
+
+    <h3>Assigned To:</h3>
+
+    <div class="contacts">
+        @for (contact of task.assignedContacts; track contact.id) {
+            <div class="contact">
+                <span class="contact-avatar" [style.background-color]="contact.color">
+                    {{ contact.initials }}
+                </span>
+                <span>{{ contact.name }}</span>
+            </div>
+        }
+    </div>
+
+    <h3>Subtask</h3>
+
+    <div class="subtasks">
+        @for (Subtask of task.subtasks; track subtask.id) {
+            <label>
+                <input type="checkbox" [checked]="subtask.completed">
+                {{ <subtask.title }}
+            </label>
+        }
+    </div>
+
+    <div class="actions-btn">
+        <button type="button" (click)="editTask.emit(task)">
+            <img src="assets/icons_sprint2/edit.svg" alt="">Edit
+        </button>
+        <button type="button" (click)="requestDelete()">
+            <img src="assets/icons_sprint2/delete.svg" alt="">Delete
+        </button>
+    </div>
+</section>
