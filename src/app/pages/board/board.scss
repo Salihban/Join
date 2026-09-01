@@ -17,7 +17,7 @@ $font-inter-2: 'Open Sans', sans-serif;
     max-width: 1440px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 45px;
 }
 
 .board-header {
@@ -187,62 +187,66 @@ $font-inter-2: 'Open Sans', sans-serif;
 }
 
 @include mixin.desktop {
-    .board-column {
-        .column-header {
-            .column-title {
-                font-size: 20px;
-            }
+    .board-container {
+        padding: 80px 80px 0px 50px;
+    }
 
-            .btn-add-column {
-                .icon-plus-col {
-                    width: 24px;
-                    height: 24px;
+        .board-column {
+            .column-header {
+                .column-title {
+                    font-size: 20px;
+                }
+
+                .btn-add-column {
+                    .icon-plus-col {
+                        width: 24px;
+                        height: 24px;
+                    }
                 }
             }
         }
-    }
 
-    .column-content {
-        .empty-state {
-            width: 252px;
-            min-height: 48px;
-        }
-    }
-
-    .board-header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
-        .header-top {
-            width: auto;
-        }
-
-        .header-actions {
-            width: auto;
-            gap: 32px;
-        }
-
-        .search-container {
-            width: 312px;
-        }
-
-        .btn-add-main {
-            &.mobile-only {
-                display: none;
-            }
-
-            &.desktop-only {
-                display: flex;
-                width: 160px;
-                height: 48px;
+        .column-content {
+            .empty-state {
+                width: 252px;
+                min-height: 48px;
             }
         }
-    }
 
-    .columns-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
+        .board-header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .header-top {
+                width: auto;
+            }
+
+            .header-actions {
+                width: auto;
+                gap: 32px;
+            }
+
+            .search-container {
+                width: 312px;
+            }
+
+            .btn-add-main {
+                &.mobile-only {
+                    display: none;
+                }
+
+                &.desktop-only {
+                    display: flex;
+                    width: 160px;
+                    height: 48px;
+                }
+            }
+        }
+
+        .columns-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
     }
-}
