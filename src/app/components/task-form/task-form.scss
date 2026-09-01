@@ -14,7 +14,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 100dvh;
     padding: 40px 10px 16px;
     color: $text-color;
 
@@ -144,6 +143,8 @@
 
     &__assigned {
         margin-bottom: 20px;
+        position: relative;
+        width: 100%;
     }
 
     &__assigned-trigger {
@@ -268,5 +269,59 @@
     }
 }
 
+/* #endregion */
+
+/* #region Media Queries Desktop */
+
+@media (min-width: 768px) {
+    .task-form {
+
+        padding: 64px min(7dvw, 100px) 40px;
+
+        &__title {
+            margin-bottom: 40px;
+            font-size: clamp(48px, 5dvw, 61px);
+        }
+
+        &__content {
+            flex-direction: row;
+            gap: 38px;
+        }
+
+        &__left,
+        &__right {
+            flex: 1;
+            width: auto;
+        }
+
+        &__left {
+            padding-right: 38px;
+            border-right: 2px solid $divider;
+        }
+
+        &__textarea {
+            min-height: 120px;
+        }
+
+        &__priority-buttons {
+            gap: 14px;
+        }
+
+        &__priority-button {
+            min-height: 46px;
+        }
+
+        &__actions {
+            justify-content: flex-end;
+            gap: 12px;
+            padding-top: 64px;
+        }
+
+        &__button {
+            flex: 0 0 auto;
+            min-height: 46px;
+        }
+    }
+}
 /* #endregion */
 
