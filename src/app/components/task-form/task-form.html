@@ -27,10 +27,8 @@
             <div class="task-form__priority-buttons Priority-buttons">
                 @for (priority of priorities; track priority) {
                 <button type="button" [class.active]="taskForm.controls.priority.value === priority"
-                    [class.priority-urgent]="priority === 'urgent'" 
-                    [class.priority-medium]="priority === 'medium'"
-                    [class.priority-low]="priority === 'low'" 
-                    (click)="setPriority(priority)"
+                    [class.priority-urgent]="priority === 'urgent'" [class.priority-medium]="priority === 'medium'"
+                    [class.priority-low]="priority === 'low'" (click)="setPriority(priority)"
                     class="task-form__priority-button">
                     <span>{{ priority }}</span>
 
@@ -56,11 +54,15 @@
                 }
             </div>
 
-            <div class="task-form__assigned Assigned-field">
+            <div class="task-form__assigned Assigned-field" (focusout)="closeAssigneeDropdown()">
                 <label class="task-form__label">Assigned to</label>
 
                 <button type="button" (click)="toggleDropDown()" class="task-form__assigned-trigger">
-                    Select contacts to assign <span>+</span>
+                    <span> Select contacts to assign </span>
+
+                    <span class="material-symbols-outlined task-form__assigned-arrow">
+                        {{ dropdownOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                    </span>
                 </button>
                 @if (dropdownOpen) {
                 <div class="task-form__assigned-dropdown contact-dropdown">
@@ -91,11 +93,35 @@
             </div>
 
             <label class="task-form__label" for="category">Category*</label>
-            <select id="category" formControlName="category" class="task-form__select">
-                <option value="">Select task category</option>
-                <option value="technical_task">technical Task</option>
-                <option value="user_story">User Story</option>
-            </select>
+            <div class="task-form__category" (focusout)="closeCategoryDropdown()">
+                <button type="button" class="task-form__category-trigger" (click)="toggleCategoryDropDown()">
+                    <span>
+                        @if (taskForm.controls.category.value === 'technical_task') {
+                        Technical Task
+                        } @else if (taskForm.controls.category.value === 'user_story') {
+                        User Story
+                        } @else {
+                        Select task category
+                        }
+                    </span>
+
+                    <span class="material-symbols-outlined task-form__category-arrow">
+                        {{ categoryDropdownOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+                    </span>
+                </button>
+
+                @if (categoryDropdownOpen) {
+                <div class="task-form__category-dropdown">
+                    <button type="button" class="task-form__category-option" (click)="selectCategory('technical_task')">
+                        Technical Task
+                    </button>
+
+                    <button type="button" class="task-form__category-option" (click)="selectCategory('user_story')">
+                        User Story
+                    </button>
+                </div>
+                }
+            </div>
             @if (taskForm.controls.category.touched && taskForm.controls.category.invalid) {
             <span class="task-form__error error">This field is required</span>
             }

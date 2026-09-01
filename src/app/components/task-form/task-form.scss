@@ -61,8 +61,8 @@
 
     &__input,
     &__textarea,
-    &__select,
-    &__assigned-trigger {
+    &__assigned-trigger,
+    &__category-trigger {
         width: 100%;
         border: 1px solid $border-add-input;
         border-radius: 10px;
@@ -77,10 +77,17 @@
     }
 
     &__input,
-    &__select,
-    &__assigned-trigger {
+    &__assigned-trigger,
+    &__category-trigger {
         min-height: 34px;
         padding: 8px 12px;
+    }
+
+    &__assigned-trigger,
+    &__category-trigger {
+        @include mixin.flex(row, space-between, center);
+        font: inherit;
+        text-align: left;
     }
 
     &__input::placeholder,
@@ -96,8 +103,7 @@
     }
 
     &__input#title,
-    &__input#dueDate,
-    &__select#category {
+    &__input#dueDate {
         margin-bottom: 20px;
     }
 
@@ -117,11 +123,13 @@
 
         flex: 1;
         min-height: 41px;
+        max-width: 136px;
         border: 1px solid $border-add-input;
         border-radius: 10px;
         background: white;
         color: $text-color;
         font-size: 16px;
+        gap: 6px;
         transition:
             box-shadow 120ms ease,
             border-color 120ms ease,
@@ -157,10 +165,12 @@
     }
 
     &__priority-icon {
-        font-size: 22px;
+
+        font-size: 20px;
         line-height: 1;
 
         &--urgent {
+            transform: scaleX(1.5);
             color: $prio-urgent;
         }
 
@@ -169,6 +179,7 @@
         }
 
         &--low {
+            transform: scaleX(1.5);
             color: $prio-low;
         }
     }
@@ -177,12 +188,6 @@
         margin-bottom: 20px;
         position: relative;
         width: 100%;
-    }
-
-    &__assigned-trigger {
-
-        @include mixin.flex(row, space-between, center);
-        text-align: left;
     }
 
     &__assigned-dropdown {
@@ -197,7 +202,7 @@
         border: 1px solid $border-add-input;
         border-radius: 10px;
         background: white;
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.40);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.20);
         overflow: hidden;
     }
 
@@ -231,6 +236,47 @@
         @include mixin.flex(row, flex-start, center);
         gap: 10px;
         margin-top: 10px;
+    }
+
+    &__category {
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    &__assigned-arrow,
+    &__category-arrow {
+        flex: 0 0 auto;
+        font-size: 20px;
+        line-height: 1;
+    }
+
+    &__category-dropdown {
+        position: absolute;
+        z-index: 20;
+        right: 0;
+        left: 0;
+        top: calc(100% - 1px);
+        overflow: hidden;
+        border: 1px solid $border-add-input;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.20);
+    }
+
+    &__category-option {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        border: 0;
+        background: transparent;
+        color: $text-color;
+        font: inherit;
+        text-align: left;
+
+        &:hover {
+            background: $assignees-hover;
+        }
     }
 
     &__subtask-input {
