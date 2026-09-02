@@ -240,6 +240,7 @@ header {
 }
 
 .line {
+    margin-top: 15px;
     width: 90px;
     height: 3px;
     background-color: rgba(41, 171, 226, 1);
@@ -459,7 +460,7 @@ label {
         }
 
         h2 {
-            font-size: 61px;
+            // font-size: 61px;
         }
 
         .join-logo {
