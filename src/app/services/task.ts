@@ -54,6 +54,22 @@ import { Contact } from './contact';
     return this.saveTaskRelations(data.id, task);
     }
 
+    async updateTask(taskId: number, task: NewTask): Promise<boolean> {
+    const { error } = await this.dbService.supabase.from('task').update({
+        title: task.title.trim(),
+        description: task.description.trim(),
+        due_date: task.dueDate,
+        priority: task.priority,
+        category: task.category,
+    }).eq('id', taskId);
+    return !error;
+}
+
+    async deleteTask(taskId: number): Promise<boolean> {
+    const { error } = await this.dbService.supabase.from('task').delete().eq('id', taskId);
+    return !error;
+}
+
     private async saveTaskRelations(
         taskId: number,
         task: NewTask
