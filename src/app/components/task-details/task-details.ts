@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Task } from '../../services/task';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Task, TaskService } from '../../services/task';
 import { TaskForm } from '../task-form/task-form';
 
 @Component({
@@ -10,17 +10,20 @@ import { TaskForm } from '../task-form/task-form';
 })
 export class TaskDetails {
     isEditing = false;
-
+    private taskService = inject(TaskService);
     @Input({ required: true }) task!: Task;
     @Output() closeDetails = new EventEmitter<void>();
     @Output() taskUpdated = new EventEmitter<Task>();
     @Output() deleteTask = new EventEmitter<number>();
 
-    requestDelete(): void {
+    async requestDelete(): Promise<void> {
     const confirmed = confirm(`Möchtest du den Task "${this.task.title}" wirklich löschen?`);
+    if (!confirmed) return;
 
-    if (confirmed) {
+    const success = await this.taskService.deleteTask(this.task.id);
+    if (success) {
         this.deleteTask.emit(this.task.id);
+        this.closeDetails.emit();
     }
 }
 
