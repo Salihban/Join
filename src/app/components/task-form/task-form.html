@@ -30,7 +30,7 @@
                     [class.priority-urgent]="priority === 'urgent'" [class.priority-medium]="priority === 'medium'"
                     [class.priority-low]="priority === 'low'" (click)="setPriority(priority)"
                     class="task-form__priority-button">
-                    <span>{{ priority }}</span>
+                    <span>{{ priority | titlecase}}</span>
 
                     @if (priority === 'urgent') {
                     <span class="material-symbols-outlined task-form__priority-icon task-form__priority-icon--urgent">
