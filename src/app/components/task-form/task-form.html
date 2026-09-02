@@ -1,4 +1,4 @@
-<form [formGroup]="taskForm" (ngSubmit)="submitForm()" class="task-form">
+<form [formGroup]="taskForm" (ngSubmit)="submitForm()" (click)="closeAllDropdowns()" class="task-form">
     <h1 class="task-form__title">Add Task</h1>
 
     <div class="task-form__content">
@@ -54,10 +54,10 @@
                 }
             </div>
 
-            <div class="task-form__assigned Assigned-field" (focusout)="closeAssigneeDropdown()">
+            <div class="task-form__assigned Assigned-field">
                 <label class="task-form__label">Assigned to</label>
 
-                <button type="button" (click)="toggleDropDown()" class="task-form__assigned-trigger">
+                <button type="button" (click)="toggleDropDown(); $event.stopPropagation()" class="task-form__assigned-trigger">
                     <span> Select contacts to assign </span>
 
                     <span class="material-symbols-outlined task-form__assigned-arrow">
@@ -65,7 +65,7 @@
                     </span>
                 </button>
                 @if (dropdownOpen) {
-                <div class="task-form__assigned-dropdown contact-dropdown">
+                <div class="task-form__assigned-dropdown contact-dropdown" (click)="$event.stopPropagation()">
                     @for (contact of contacts(); track contact.id) {
                     <label class="task-form__assigned-option contact-option">
                         <span class="task-form__assigned-initials contact-initials"
@@ -93,8 +93,8 @@
             </div>
 
             <label class="task-form__label" for="category">Category<span class="required-star">*</span></label>
-            <div class="task-form__category" (focusout)="closeCategoryDropdown()">
-                <button type="button" class="task-form__category-trigger" (click)="toggleCategoryDropDown()">
+            <div class="task-form__category">
+                <button type="button" class="task-form__category-trigger" (click)="toggleCategoryDropDown(); $event.stopPropagation()">
                     <span>
                         @if (taskForm.controls.category.value === 'technical_task') {
                         Technical Task
@@ -111,7 +111,7 @@
                 </button>
 
                 @if (categoryDropdownOpen) {
-                <div class="task-form__category-dropdown">
+                <div class="task-form__category-dropdown" (click)="$event.stopPropagation()">
                     <button type="button" class="task-form__category-option" (click)="selectCategory('technical_task')">
                         Technical Task
                     </button>

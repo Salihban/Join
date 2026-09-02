@@ -29,6 +29,7 @@ export class TaskForm implements OnInit {
     isSaving = false;
 
     toggleDropDown(): void {
+        this.categoryDropdownOpen = false;
         this.dropdownOpen = !this.dropdownOpen;
     }
 
@@ -41,16 +42,14 @@ export class TaskForm implements OnInit {
         );
     }
 
-    closeAssigneeDropdown(): void {
-        setTimeout(() => this.dropdownOpen = false);
-    }
-
     toggleCategoryDropDown(): void {
+        this.dropdownOpen = false;
         this.categoryDropdownOpen = !this.categoryDropdownOpen;
     }
 
-    closeCategoryDropdown(): void {
-        setTimeout(() => this.categoryDropdownOpen = false);
+    closeAllDropdowns(): void {
+        this.dropdownOpen = false;
+        this.categoryDropdownOpen = false;
     }
 
     selectCategory(category: string): void {
