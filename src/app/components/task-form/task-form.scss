@@ -246,6 +246,18 @@
         border-radius: 50%;
         color: white;
         font-size: 16px;
+
+        &--more {
+            background-color: transparent;
+            cursor: pointer;
+            color: $text-color;
+            font-weight: 500;
+            font-size: 16px;
+
+            .material-symbols-outlined {
+                font-size: 28px;
+            }
+        }
     }
 
     &__assigned-selected {

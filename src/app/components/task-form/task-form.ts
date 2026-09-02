@@ -20,6 +20,7 @@ export class TaskForm implements OnInit {
     subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
     categoryDropdownOpen = false;
+    showAllContacts = false;
 
     @Input() task?: Task;
     @Output() taskCreated =new EventEmitter<void>();
@@ -63,6 +64,10 @@ export class TaskForm implements OnInit {
     toggleDropDown(): void {
         this.categoryDropdownOpen = false;
         this.dropdownOpen = !this.dropdownOpen;
+    }
+
+    toggleShowAllContacts(): void {
+        this.showAllContacts = !this.showAllContacts;
     }
 
     toggleContact(contactId: string): void {

@@ -88,10 +88,20 @@
                 </div>
                 }
                 <div class="task-form__assigned-selected selected-contacts">
-                    @for (contact of selectContacts; track contact.id) {
+                    @for (contact of showAllContacts ? selectContacts : selectContacts.slice(0, 3); track contact.id) {
                     <span class="task-form__assigned-initials contact-initials" [style.backgroundColor]="contact.color"
                         [title]="contact.name">
                         {{ contact.initials }}
+                    </span>
+                    }
+                    @if (selectContacts.length > 3) {
+                    <span class="task-form__assigned-initials task-form__assigned-initials--more"
+                        (click)="toggleShowAllContacts(); $event.stopPropagation()">
+                        @if (showAllContacts) {
+                            <span class="material-symbols-outlined">expand_less</span>
+                        } @else {
+                            +{{ selectContacts.length - 3 }}
+                        }
                     </span>
                     }
                 </div>
