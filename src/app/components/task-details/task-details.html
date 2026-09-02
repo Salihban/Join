@@ -1,6 +1,7 @@
 <section class="task-details">
     <button class="close-button" (click)="closeDetails.emit()">x</button>
 
+    @if (!isEditing) {
     <span class="category">{{ task.category }}</span>
 
     <h1>{{ task.title }}</h1>
@@ -29,23 +30,28 @@
         }
     </div>
 
-    <h3>Subtask</h3>
+<h3>Subtasks</h3>
 
-    <div class="subtasks">
-        @for (Subtask of task.subtasks; track Subtask.id) {
-            <label>
-                <input type="checkbox" [checked]="Subtask.completed">
-                {{ Subtask.title }}
-            </label>
-        }
-    </div>
+<div class="subtasks">
+    @for (Subtask of task?.subtasks; track Subtask.id) {
+    <label>
+        <input type="checkbox" [checked]="Subtask.completed">
+        {{ Subtask.title }}
+    </label>
+    }
+</div>
 
-    <div class="actions-btn">
-        <button type="button" (click)="editTask.emit(task)">
-            <img src="assets/icons_sprint2/edit.svg" alt="">Edit
-        </button>
-        <button type="button" (click)="requestDelete()">
-            <img src="assets/icons_sprint2/delete.svg" alt="">Delete
-        </button>
-    </div>
+<div class="actions-btn">
+    <button type="button" (click)="startEditing()">
+        <img src="assets/icons_sprite2/edit.svg" alt="">Edit
+    </button>
+
+    <button type="button" (click)="requestDelete()">
+    <img src="assets/icons_sprite2/delete.svg" alt="">
+    Delete
+    </button>
+</div>
+} @else {
+    <app-task-form [task]="task" (taskUpdated)="onTaskUpdate($event)" (cancelled)="cancelEditing()"></app-task-form>
+}
 </section>

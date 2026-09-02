@@ -1,6 +1,6 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Contact, ContactService } from '../../services/contact';
-import { TaskService } from '../../services/task';
+import { TaskService, Task } from '../../services/task';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TitleCasePipe } from '@angular/common';
 
@@ -21,11 +21,43 @@ export class TaskForm implements OnInit {
     dropdownOpen = false;
     categoryDropdownOpen = false;
 
+    @Input() task?: Task;
+    @Output() taskCreated =new EventEmitter<void>();
+    @Output() taskUpdated = new EventEmitter<Task>();
+    @Output() cancelled = new EventEmitter<void>();
+
     ngOnInit(): void {
         this.contactService.getContacts();
+
+        if (this.task) {
+            this.loadTaskIntoForm();
+        }
     }
 
-    @Output() taskCreated = new EventEmitter<void>();
+    private loadTaskIntoForm(): void {
+    if (!this.task) return;
+
+    this.taskForm.patchValue({
+        title: this.task.title,
+        description: this.task.description,
+        dueDate: this.task.due_date,
+        priority: this.task.priority,
+        category: this.task.category,
+        assignedContactIds: this.task.assignedContacts.map(
+        contact => contact.id
+    ),
+});
+
+    const subtasks = this.taskForm.controls.subtasks;
+    subtasks.clear();
+
+    this.task.subtasks.forEach(subtask => {
+    subtasks.push(
+    this.formBuilder.nonNullable.control(subtask.title)
+    );
+});
+}
+
     isSaving = false;
 
     toggleDropDown(): void {
@@ -107,10 +139,35 @@ export class TaskForm implements OnInit {
             this.taskForm.markAllAsTouched();
             return;
         }
-        this.isSaving = true;
+    this.isSaving = true;
+    const formValue = this.taskForm.getRawValue();
 
-        const success = await this.taskService.addTask(this.taskForm.getRawValue());
-        this.isSaving = false;
+    const success = this.task ? await this.taskService.updateTask(this.task.id, formValue)
+    : await this.taskService.addTask(formValue);
+
+    this.isSaving = false;
+    if (!success) {
+    this.contactService.triggerToast('Task could not be saved');
+    return;
+    }
+
+    if (this.task) {
+    this.taskUpdated.emit({
+    ...this.task,
+    title: formValue.title.trim(),
+    description: formValue.description.trim(),
+    due_date: formValue.dueDate,
+    priority: formValue.priority,
+    category: formValue.category as Task['category'],
+    });
+
+    this.contactService.triggerToast('Task successfully updated');
+    return;
+    }
+
+    this.contactService.triggerToast('Task successfully created');
+    this.taskCreated.emit();
+    this.clearForm();
 
         if (!success) {
             this.contactService.triggerToast('Task could not be created');
@@ -132,5 +189,12 @@ export class TaskForm implements OnInit {
         });
         this.taskForm.controls.subtasks.clear();
         this.subtaskInput.reset();
+    }
+
+    cancelForm(): void {
+        if (this.task) {
+            this.cancelled.emit();
+        }
+        this.clearForm();
     }
 }
