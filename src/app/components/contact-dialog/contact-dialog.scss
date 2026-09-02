@@ -54,6 +54,9 @@
 
 header {
     padding: 90px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     color: white;
     background-color: rgba(42, 54, 71, 1);
     font-size: 20px;
@@ -64,25 +67,29 @@ header {
     }
 
     h2 {
-        margin: 0 0 8px;
         font-size: 42px;
+        font-weight: 700;
+        line-height: 1.2;
     }
 
     p {
         margin: 0 0 12px;
+        font-weight: 400;
+        line-height: 1.2;
+    }
+    
+    .line {
+        width: 90px;
+        height: 3px;
+        background-color: rgba(41, 171, 226, 1);
     }
 }
 
-.line {
-    width: 90px;
-    height: 3px;
-    background-color: rgba(41, 171, 226, 1);
-}
 
 .avatar img {
     position: absolute;
     top: -60px;
-    left: 30%;
+    left: 33%;
     width: 120px;
     height: 120px;
 }
@@ -228,10 +235,19 @@ label {
         max-width: 1212px;
         height: 600px;
         grid-template-columns: 40% 60%;
+        display: grid;
+        top: 50px;
     }
 
     header {
-        padding: 190px 30px 100px 30px;
+        justify-content: center;
+
+        .join-logo {
+            display: block; 
+            width: 56px;
+            height: 66px;
+            margin-bottom: 16px;
+        }
 
         h2 {
             font-size: 61px;
@@ -245,7 +261,7 @@ label {
     .avatar {
         display: block;
         position: absolute;
-        top: 300px;
+        top: 250px;
         left: 42%;
     }
 
