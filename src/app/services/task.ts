@@ -62,7 +62,16 @@ import { Contact } from './contact';
         priority: task.priority,
         category: task.category,
     }).eq('id', taskId);
-    return !error;
+    if (error) return false; 
+
+    const { error: assigneeError} = await this.dbService.supabase.from('task_assignees').delete().eq('task_id', taskId);
+    const { error: subtaskError} = await this.dbService.supabase.from('subtask').delete().eq('task_id', taskId);
+
+    if (assigneeError || subtaskError) return false;
+
+    const assigneesSaved = await this.addTaskAssignees(taskId, task.assignedContactIds);
+    const subtasksSaved = await this.addSubtasks(taskId, task.subtasks);
+    return assigneesSaved && subtasksSaved;
 }
 
     async deleteTask(taskId: number): Promise<boolean> {
