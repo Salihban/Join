@@ -349,7 +349,7 @@
     &__actions {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-end;
         position: fixed;
         bottom: 82px;
         left: 0;
