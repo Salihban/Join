@@ -336,7 +336,7 @@
         bottom: 82px;
         left: 0;
         right: 0;
-        z-index: 200;
+        z-index: 20;
         gap: 32px;
         padding: 8px 16px 8px 16px;
         background: $bg-color;
@@ -355,16 +355,33 @@
         background: transparent;
         color: $text-color;
         font-size: 16px;
+        cursor: pointer;
+
+        transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
 
 
         &:hover:not(:disabled) {
-            border: 2px solid $active-input;
+            box-shadow: 0 6px 12px rgba(18, 70, 88, 0.35);
         }
 
 
         &--submit {
-            background: #293147;
+            background: $dark-btn;
             color: white;
+
+            &:hover:not(:disabled) {
+            background-color: $active-input;
+            color: white;
+            border-color:$dark-btn;
+            box-shadow: 0 6px 12px rgba(18, 70, 88, 0.35); 
+        }
+        }
+
+        &:not(&--submit):hover:not(:disabled) {
+            border: 2px solid $active-input;
         }
 
         .material-symbols-outlined {
