@@ -47,13 +47,30 @@ $font-inter-2: 'Open Sans', sans-serif;
     }
 
     .btn-add-main {
-        background-color: styles.$main-color;
+        background-color: rgba(42, 54, 71, 1);
+        color: #FFFFFF;
+        font-family: $font-inter;
+        font-size: 21px;
+        font-weight: 700;
         border-radius: 10px;
-        border: none;
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 4px;
         cursor: pointer;
+        transition: background-color 100ms ease-in-out,
+            box-shadow 100ms ease-in-out;
+
+        .icon-plus {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+
+        &:hover {
+            background-color: rgba(41, 171, 226, 1);
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        }
 
         &.mobile-only {
             width: 40px;
@@ -70,13 +87,19 @@ $font-inter-2: 'Open Sans', sans-serif;
 .search-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
-    min-height: 48px;
-    background-color: #FFFFFF;
+    height: 48px;
+    background-color: rgba(255, 255, 255, 1);
     border: 1px solid styles.$border-search;
     border-radius: 10px;
     padding: 8px 16px;
     gap: 10px;
+    transition: border-color 0.15s ease-in-out;
+
+    &:hover {
+        border-color: transparent;
+    }
 
     .search-input {
         flex: 1;
@@ -90,8 +113,8 @@ $font-inter-2: 'Open Sans', sans-serif;
 
     .search-divider {
         width: 1px;
-        height: 24px;
-        background-color: #D1D1D1;
+        height: 31px;
+        background-color: styles.$border-search;
     }
 
     .search-btn {
@@ -102,10 +125,16 @@ $font-inter-2: 'Open Sans', sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 6px;
+        border-radius: 50%; 
 
         .icon-search {
             width: 18px;
             height: 18px;
+        }
+
+        &:hover {
+            background-color: rgba(209, 209, 209, 0.44);
         }
     }
 }
@@ -227,7 +256,7 @@ $font-inter-2: 'Open Sans', sans-serif;
             }
 
             &.desktop-only {
-                display: flex;
+                display: inline-flex;
                 width: 160px;
                 height: 48px;
             }
