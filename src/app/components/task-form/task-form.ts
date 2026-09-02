@@ -165,4 +165,11 @@ export class TaskForm implements OnInit {
         this.taskForm.controls.subtasks.clear();
         this.subtaskInput.reset();
     }
+
+    cancelForm(): void {
+        if (this.task) {
+            this.cancelled.emit();
+        }
+        this.clearForm();
+    }
 }
