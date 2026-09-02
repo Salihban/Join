@@ -138,7 +138,6 @@
                 @for (subtask of taskForm.controls.subtasks.controls; track $index) {
                 <div class="task-form__subtask subtask">
                     <span>{{ subtask.value }}</span>
-
                     <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-remove">x</button>
                 </div>
                 }
@@ -146,9 +145,16 @@
         </div>
     </div>
 
-    <div class="task-form__actions form-actions">
-        <button type="button" (click)="clearForm()" class="task-form__button">Clear<span class="material-symbols-outlined">close</span></button>
-        <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">{{ isSaving ?
-            'Creating...' : 'Create Task'}}<span class="material-symbols-outlined">check</span></button>
+    <div class="task-form__bottom">
+        <p class="task-form__required-hint">
+            <span class="required-star">*</span>
+            This field is required
+        </p>
+        <div class="task-form__actions form-actions">
+            <button type="button" (click)="clearForm()" class="task-form__button">Clear<span
+                    class="material-symbols-outlined">close</span></button>
+            <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">{{ isSaving ?
+                'Creating...' : 'Create Task'}}<span class="material-symbols-outlined">check</span></button>
+        </div>
     </div>
 </form>
