@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 40px 10px 16px;
+    padding: 40px 16px 150px;
     color: $text-color;
 
     &__title {
@@ -56,11 +56,15 @@
     }
 
     &__error {
-        display: block;
-        margin-top: -12px;
-        margin-bottom: 16px;
+        margin: 0;
+        min-height: 20px;
         font-size: 12px;
         color: $error;
+        visibility: hidden;
+    }
+
+    &__error:not(:last-child) {
+        margin-bottom: 14px;
     }
 
     /* #endregion */
@@ -80,6 +84,10 @@
         &:focus {
             outline: none;
             border-color: $active-input;
+        }
+
+        &.input-error {
+            border-color: $error;
         }
     }
 
@@ -103,14 +111,14 @@
 
     &__textarea {
         min-height: 88px;
-        margin-bottom: 28px;
+        margin-bottom: 14px;
         padding: 10px 12px;
         resize: vertical;
     }
 
     &__input#title,
     &__input#dueDate {
-        margin-bottom: 20px;
+        margin-bottom: 0;
     }
 
     &__input#dueDate {
@@ -123,7 +131,7 @@
     &__priority-buttons {
         display: flex;
         width: 100%;
-        margin-bottom: 18px;
+        margin-bottom: 14px;
         gap: 14px;
     }
 
@@ -196,7 +204,7 @@
 
     /* #region Assigned Contacts */
     &__assigned {
-        margin-bottom: 20px;
+        margin-bottom: 14px;
         position: relative;
         width: 100%;
     }
@@ -252,7 +260,6 @@
     &__category {
         position: relative;
         width: 100%;
-        margin-bottom: 20px;
     }
 
     &__assigned-arrow,
@@ -261,7 +268,6 @@
         font-size: 20px;
         line-height: 1;
     }
-
 
     &__category-dropdown {
         position: absolute;
@@ -275,7 +281,6 @@
         background: white;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.20);
     }
-
 
     &__category-option {
         display: block;
@@ -300,7 +305,6 @@
         gap: 10px;
     }
 
-    // bleibt der plus button oder nicht ???
     &__subtask-add {
         flex: 0 0 36px;
         min-height: 34px;
@@ -311,17 +315,6 @@
         font-size: 20px;
     }
 
-    // &__subtask-list {
-    //     margin-top: 10px;
-    // }
-
-
-    // &__subtask {
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: space-between;
-    // }
-
     &__subtask-remove {
         color: $text-color;
         font-size: 20px;
@@ -329,13 +322,36 @@
 
     /* #endregion */
 
+    /* #region Form Bottom */
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__required-hint {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-top: 16px;
+        color: $text-color;
+        font-size: 16px;
+    }
+    /* #endregion Form Bottom */
+
     /* #region Form Actions */
     &__actions {
-        @include mixin.flex(row, flex-end, center);
-        width: 100%;
-        gap: 32px;
-        margin-top: 18px;
-        padding-top: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        position: fixed;
+        bottom: 82px;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        gap: 16px;
+        padding: 8px 16px;
+        background: $bg-color;
+        box-shadow: none;
     }
 
 
@@ -350,16 +366,33 @@
         background: transparent;
         color: $text-color;
         font-size: 16px;
+        cursor: pointer;
+
+        transition:
+            background-color 0.2s ease,
+            color 0.2s ease,
+            box-shadow 0.2s ease;
 
 
         &:hover:not(:disabled) {
-            border: 2px solid $active-input;
+            box-shadow: 0 6px 12px rgba(18, 70, 88, 0.35);
         }
 
 
         &--submit {
-            background: #293147;
+            background: $dark-btn;
             color: white;
+
+            &:hover:not(:disabled) {
+                background-color: $active-input;
+                color: white;
+                border-color: $dark-btn;
+                box-shadow: 0 6px 12px rgba(18, 70, 88, 0.35);
+            }
+        }
+
+        &:not(&--submit):hover:not(:disabled) {
+            border: 2px solid $active-input;
         }
 
         .material-symbols-outlined {
@@ -416,10 +449,24 @@
             min-height: 46px;
         }
 
+        &__bottom {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        &__required-hint {
+            margin-top: 0;
+        }
+
         &__actions {
+            position: static;
             justify-content: flex-end;
             gap: 12px;
-            padding-top: 64px;
+            padding: 0;
+            background: transparent;
+            box-shadow: none;
         }
 
         &__button {
