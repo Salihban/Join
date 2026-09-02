@@ -2,12 +2,13 @@ import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { Contact, ContactService } from '../../services/contact';
 import { TaskService } from '../../services/task';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TitleCasePipe } from '@angular/common';
 
 type Priority = 'urgent' | 'medium' | 'low';
 
 @Component({
     selector: 'app-task-form',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, TitleCasePipe],
     templateUrl: './task-form.html',
     styleUrl: './task-form.scss',
 })
@@ -41,7 +42,7 @@ export class TaskForm implements OnInit {
     }
 
     closeAssigneeDropdown(): void {
-        this.dropdownOpen = false;
+        setTimeout(() => this.dropdownOpen = false);
     }
 
     toggleCategoryDropDown(): void {
@@ -49,7 +50,7 @@ export class TaskForm implements OnInit {
     }
 
     closeCategoryDropdown(): void {
-        this.categoryDropdownOpen = false;
+        setTimeout(() => this.categoryDropdownOpen = false);
     }
 
     selectCategory(category: string): void {
@@ -87,7 +88,7 @@ export class TaskForm implements OnInit {
         const title = this.subtaskInput.value.trim();
         const subtasks = this.taskForm.controls.subtasks;
 
-        if (title || subtasks.value.includes(title)) return;
+        if (!title || subtasks.value.includes(title)) return;
         subtasks.push(this.formBuilder.nonNullable.control(title));
         this.subtaskInput.reset();
     }
