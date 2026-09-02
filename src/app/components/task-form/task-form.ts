@@ -139,10 +139,35 @@ export class TaskForm implements OnInit {
             this.taskForm.markAllAsTouched();
             return;
         }
-        this.isSaving = true;
+    this.isSaving = true;
+    const formValue = this.taskForm.getRawValue();
 
-        const success = await this.taskService.addTask(this.taskForm.getRawValue());
-        this.isSaving = false;
+    const success = this.task ? await this.taskService.updateTask(this.task.id, formValue)
+    : await this.taskService.addTask(formValue);
+
+    this.isSaving = false;
+    if (!success) {
+    this.contactService.triggerToast('Task could not be saved');
+    return;
+    }
+
+    if (this.task) {
+    this.taskUpdated.emit({
+    ...this.task,
+    title: formValue.title.trim(),
+    description: formValue.description.trim(),
+    due_date: formValue.dueDate,
+    priority: formValue.priority,
+    category: formValue.category as Task['category'],
+    });
+
+    this.contactService.triggerToast('Task successfully updated');
+    return;
+    }
+
+    this.contactService.triggerToast('Task successfully created');
+    this.taskCreated.emit();
+    this.clearForm();
 
         if (!success) {
             this.contactService.triggerToast('Task could not be created');
