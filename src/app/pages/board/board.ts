@@ -1,12 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { NewTask, Task, TaskService } from '../../services/task';
 import { TaskCard } from '../../components/task-card/task-card';
+import { TaskDetails } from '../../components/task-details/task-details';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'app-board',
     standalone: true,
-    imports: [TaskCard, DragDropModule],
+    imports: [TaskCard, TaskDetails, DragDropModule],
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })
@@ -17,6 +18,7 @@ export class Board implements OnInit {
     doneTasks = signal<Task[]>([]);
 
     private taskService = inject(TaskService);
+    selectedTask = signal<Task | null>(null);
 
     async ngOnInit(): Promise<void> {
         await this.loadTasks();

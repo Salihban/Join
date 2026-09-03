@@ -35,14 +35,6 @@
                         />
                     </button>
                 </div>
-                <div class="column-content" cdkDropList id="todoList" [cdkDropListData]="todoTasks()" (cdkDropListDropped)="drop($event)">
-                    @for (task of todoTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task"></app-task-card>
-                    } @empty {
-                        <div class="empty-state">No tasks To do</div>
-                    }
-                </div>
-            </div>
 
             <div class="board-column">
                 <div class="column-header">
@@ -57,7 +49,7 @@
                 </div>
                 <div class="column-content" cdkDropList id="inProgressList" [cdkDropListData]="inProgressTasks()" (cdkDropListDropped)="drop($event)">
                     @for (task of inProgressTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task"></app-task-card>
+                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
                     } @empty {
                         <div class="empty-state">No tasks In progress</div>
                     }
@@ -77,7 +69,7 @@
                 </div>
                 <div class="column-content" cdkDropList id="awaitFeedbackList" [cdkDropListData]="awaitFeedbackTasks()" (cdkDropListDropped)="drop($event)">
                     @for (task of awaitFeedbackTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task"></app-task-card>
+                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
                     } @empty {
                         <div class="empty-state">No tasks Await feedback</div>
                     }
@@ -90,7 +82,7 @@
                 </div>
                 <div class="column-content" cdkDropList id="doneList" [cdkDropListData]="doneTasks()" (cdkDropListDropped)="drop($event)">
                     @for (task of doneTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task"></app-task-card>
+                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
                     } @empty {
                         <div class="empty-state">No tasks Done</div>
                     }
@@ -98,4 +90,12 @@
             </div>
         </section>
     </div>
+
+    @if (selectedTask(); as task) {
+        <div class="task-overlay" (click)="selectedTask.set(null)">
+            <div (click)="$event.stopPropagation()">
+                <app-task-details [task]="task" (closeDetails)="selectedTask.set(null)"></app-task-details>
+            </div>
+        </div>
+    }
 </main>

@@ -1,0 +1,25 @@
+.task-details{
+    width: min(525px, 90vw);
+    max-height: 90vh;
+
+    padding: 40px;
+    background: white;
+    border-radius: 30px;
+    overflow-y: auto;
+    animation: slide-in 300ms ease-out;
+}
+
+.task-details h1{
+    margin: 20px 0;
+    font-size: 48px;
+    line-height: 1.1;
+}
+
+@keyframes slide-in{
+    from {
+        transform: translateX(100vw);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
