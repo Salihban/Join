@@ -55,6 +55,16 @@ import { Contact } from './contact';
     return this.saveTaskRelations(data.id, task);
     }
 
+    async updateSubtaskCompleted(id: number, completed: boolean): Promise<boolean> {
+    const { error } = await this.dbService.supabase.from('subtask').update({ completed }).eq('id', id);
+
+    if (error) {
+    console.error(error);
+    return false;
+    }
+    return true;
+}
+
     async updateTask(taskId: number, task: NewTask): Promise<boolean> {
     const { error } = await this.dbService.supabase.from('task').update({
         title: task.title.trim(),

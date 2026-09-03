@@ -35,7 +35,7 @@
 <div class="subtasks">
     @for (Subtask of task?.subtasks; track Subtask.id) {
     <label>
-        <input type="checkbox" [checked]="Subtask.completed">
+        <input type="checkbox" [checked]="Subtask.completed" (change)="toggleSubtask(Subtask, $event)">
         {{ Subtask.title }}
     </label>
     }

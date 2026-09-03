@@ -40,4 +40,13 @@ export class TaskDetails {
     this.isEditing = false;
     this.taskUpdated.emit(updatedTask);
     }
+
+    async toggleSubtask(subtask: any, event: Event): Promise<void> {
+    const completed = (event.target as HTMLInputElement).checked;
+    const success = await this.taskService.updateSubtaskCompleted(subtask.id,completed);
+    if (success) {
+    subtask.completed = completed;
+    this.taskUpdated.emit(this.task);
+    }
+}
 }

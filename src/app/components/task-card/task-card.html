@@ -8,8 +8,8 @@
             <p class="task-card-description">{{task.description}}</p>
         </div>
         <div class="subtask-content-wrapper">
-                <div class="progress-bar"><mat-progress-bar  mode = "determinate"  value = "40" ></mat-progress-bar>
-                <p>1/2 Subtask</p>
+                <div class="progress-bar"><mat-progress-bar  mode = "determinate"  [value]="progressValue" ></mat-progress-bar>
+                <p>{{ completedSubtasks }}/{{ totalSubtasks }} Subtasks</p>
                 </div>
             </div>
         </div>
