@@ -351,13 +351,21 @@
     }
 
     &__subtask-list {
+        width: 100%;
         margin: 8px 0 0 0;
-        padding-left: 20px;
+        max-height: 70px;
+        overflow-y: auto;
     }
 
     &__subtask-item {
-        display: list-item;
+        display: flex;
+        align-items: center;
         padding: 6px 0;
+    }
+
+    &__subtask-bullet {
+        margin-right: 8px;
+        color: $text-color;
     }
 
     &__subtask-row {
@@ -480,7 +488,7 @@
 /* #region Media Queries Desktop */
 @media (min-width: 768px) {
     .task-form {
-        padding: 64px min(7dvw, 100px) 40px;
+        padding: 20px 80px;
 
         &__title {
             margin-bottom: 40px;
@@ -490,6 +498,7 @@
         &__content {
             flex-direction: row;
             gap: 38px;
+            align-items: flex-start;
         }
 
         &__left,
