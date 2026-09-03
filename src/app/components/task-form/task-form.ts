@@ -21,6 +21,7 @@ export class TaskForm implements OnInit {
     dropdownOpen = false;
     categoryDropdownOpen = false;
     showAllContacts = false;
+    editingIndex: number | null = null;
 
     @Input() task?: Task;
     @Output() taskCreated =new EventEmitter<void>();
@@ -121,6 +122,18 @@ export class TaskForm implements OnInit {
 
     addSubtask(event?: Event): void {
         event?.preventDefault();
+
+        if (this.editingIndex !== null) {
+            const title = this.subtaskInput.value.trim();
+            const subtasks = this.taskForm.controls.subtasks;
+            if (title) {
+                subtasks.controls[this.editingIndex].setValue(title);
+            }
+            this.subtaskInput.reset();
+            this.editingIndex = null;
+            return;
+        }
+
         const title = this.subtaskInput.value.trim();
         const subtasks = this.taskForm.controls.subtasks;
 
@@ -129,7 +142,19 @@ export class TaskForm implements OnInit {
         this.subtaskInput.reset();
     }
 
+    editSubtask(index: number): void {
+        const subtasks = this.taskForm.controls.subtasks;
+        this.subtaskInput.setValue(subtasks.value[index]);
+        this.editingIndex = index;
+    }
+
+    cancelEdit(): void {
+        this.subtaskInput.reset();
+        this.editingIndex = null;
+    }
+
     removeSubtask(index: number): void {
+        if (this.editingIndex === index) this.cancelEdit();
         this.taskForm.controls.subtasks.removeAt(index);
     }
 

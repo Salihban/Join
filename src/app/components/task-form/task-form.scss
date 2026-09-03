@@ -313,23 +313,76 @@
 
     /* #region Subtasks */
     &__subtask-input {
-        @include mixin.flex(row, flex-start, center);
-        gap: 10px;
+        position: relative;
     }
 
-    &__subtask-add {
-        flex: 0 0 36px;
-        min-height: 34px;
-        border: 1px solid $border-add-input;
-        border-radius: 8px;
-        background: white;
-        color: $text-color;
-        font-size: 20px;
+    &__subtask-input .task-form__input {
+        padding-right: 60px;
     }
 
-    &__subtask-remove {
+    &__subtask-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        cursor: pointer;
         color: $text-color;
-        font-size: 20px;
+
+        .material-symbols-outlined {
+            font-size: 22px;
+        }
+
+        &:hover {
+            background: $assignees-hover;
+        }
+
+        &--check {
+            right: 8px;
+        }
+
+        &--close {
+            right: 38px;
+        }
+    }
+
+    &__subtask-list {
+        margin: 8px 0 0 0;
+        padding-left: 20px;
+    }
+
+    &__subtask-item {
+        display: list-item;
+        padding: 6px 0;
+    }
+
+    &__subtask-row {
+        display: flex;
+        align-items: center;
+    }
+
+    &__subtask-text {
+        flex: 1;
+        font-size: 16px;
+    }
+
+    &__subtask-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        color: $text-color;
+        cursor: pointer;
+        border-radius: 4px;
+
+        .material-symbols-outlined {
+            font-size: 20px;
+        }
     }
 
     /* #endregion */
@@ -348,6 +401,7 @@
         color: $text-color;
         font-size: 16px;
     }
+
     /* #endregion Form Bottom */
 
     /* #region Form Actions */
