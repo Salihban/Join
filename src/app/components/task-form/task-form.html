@@ -71,7 +71,7 @@
                 </button>
                 @if (dropdownOpen) {
                 <div class="task-form__assigned-dropdown contact-dropdown" (click)="$event.stopPropagation()">
-                    @for (contact of contacts(); track contact.id) {
+                    @for (contact of sortedContacts(); track contact.id) {
                     <label class="task-form__assigned-option contact-option">
                         <span class="task-form__assigned-initials contact-initials"
                             [style.backgroundColor]="contact.color">
@@ -88,10 +88,20 @@
                 </div>
                 }
                 <div class="task-form__assigned-selected selected-contacts">
-                    @for (contact of selectContacts; track contact.id) {
+                    @for (contact of showAllContacts ? selectContacts : selectContacts.slice(0, 3); track contact.id) {
                     <span class="task-form__assigned-initials contact-initials" [style.backgroundColor]="contact.color"
                         [title]="contact.name">
                         {{ contact.initials }}
+                    </span>
+                    }
+                    @if (selectContacts.length > 3) {
+                    <span class="task-form__assigned-initials task-form__assigned-initials--more"
+                        (click)="toggleShowAllContacts(); $event.stopPropagation()">
+                        @if (showAllContacts) {
+                            <span class="material-symbols-outlined">expand_less</span>
+                        } @else {
+                            +{{ selectContacts.length - 3 }}
+                        }
                     </span>
                     }
                 </div>
@@ -136,20 +146,34 @@
 
             <label class="task-form__label" for="subtask">Subtasks</label>
 
-            <div class="task-form__subtask-input subtask-input">
+            <div class="task-form__subtask-input">
                 <input id="subtask" [formControl]="subtaskInput" placeholder="Add new subtask"
-                    (keydown)="addSubtask($event)" class="task-form__input">
-                <button type="button" (click)="addSubtask()" class="task-form__subtask-add">+</button>
-            </div>
-
-            <div class="task-form__subtask-list subtask-list">
-                @for (subtask of taskForm.controls.subtasks.controls; track $index) {
-                <div class="task-form__subtask subtask">
-                    <span>{{ subtask.value }}</span>
-                    <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-remove">x</button>
-                </div>
+                    (keydown.enter)="addSubtask($event)" class="task-form__input" autocomplete="off">
+                @if (subtaskInput.value) {
+                    <span class="task-form__subtask-icon task-form__subtask-icon--check" (click)="addSubtask()">
+                        <span class="material-symbols-outlined">check</span>
+                    </span>
+                    <span class="task-form__subtask-icon task-form__subtask-icon--close" (click)="cancelEdit()">
+                        <span class="material-symbols-outlined">close</span>
+                    </span>
                 }
             </div>
+
+            <ul class="task-form__subtask-list">
+                @for (subtask of taskForm.controls.subtasks.controls; track $index) {
+                    <li class="task-form__subtask-item">
+                        <div class="task-form__subtask-row">
+                            <span class="task-form__subtask-text">{{ subtask.value }}</span>
+                            <button type="button" (click)="editSubtask($index)" class="task-form__subtask-action">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                            <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-action">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 

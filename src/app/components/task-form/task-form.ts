@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, computed, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Contact, ContactService } from '../../services/contact';
 import { TaskService, Task } from '../../services/task';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,9 +17,14 @@ export class TaskForm implements OnInit {
     readonly contactService = inject(ContactService);
     readonly taskService = inject(TaskService);
     readonly contacts = this.contactService.contacts;
+    readonly sortedContacts = computed(() =>
+        [...this.contacts()].sort((a, b) => a.name.localeCompare(b.name))
+    );
     subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
     categoryDropdownOpen = false;
+    showAllContacts = false;
+    editingIndex: number | null = null;
 
     @Input() task?: Task;
     @Output() taskCreated =new EventEmitter<void>();
@@ -63,6 +68,10 @@ export class TaskForm implements OnInit {
     toggleDropDown(): void {
         this.categoryDropdownOpen = false;
         this.dropdownOpen = !this.dropdownOpen;
+    }
+
+    toggleShowAllContacts(): void {
+        this.showAllContacts = !this.showAllContacts;
     }
 
     toggleContact(contactId: string): void {
@@ -116,6 +125,18 @@ export class TaskForm implements OnInit {
 
     addSubtask(event?: Event): void {
         event?.preventDefault();
+
+        if (this.editingIndex !== null) {
+            const title = this.subtaskInput.value.trim();
+            const subtasks = this.taskForm.controls.subtasks;
+            if (title) {
+                subtasks.controls[this.editingIndex].setValue(title);
+            }
+            this.subtaskInput.reset();
+            this.editingIndex = null;
+            return;
+        }
+
         const title = this.subtaskInput.value.trim();
         const subtasks = this.taskForm.controls.subtasks;
 
@@ -124,7 +145,19 @@ export class TaskForm implements OnInit {
         this.subtaskInput.reset();
     }
 
+    editSubtask(index: number): void {
+        const subtasks = this.taskForm.controls.subtasks;
+        this.subtaskInput.setValue(subtasks.value[index]);
+        this.editingIndex = index;
+    }
+
+    cancelEdit(): void {
+        this.subtaskInput.reset();
+        this.editingIndex = null;
+    }
+
     removeSubtask(index: number): void {
+        if (this.editingIndex === index) this.cancelEdit();
         this.taskForm.controls.subtasks.removeAt(index);
     }
 
