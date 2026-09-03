@@ -49,4 +49,8 @@ export class TaskDetails {
     this.taskUpdated.emit(this.task);
     }
 }
+
+    get categoryName(): string {
+        return this.task.category === 'user_story' ? 'User Story' : 'Technical Task';
+    }
 }

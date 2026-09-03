@@ -1,25 +1,177 @@
-.task-details{
-    width: min(525px, 90vw);
-    max-height: 90vh;
+:host {
+    display: block;
+}
 
+.task-details {
+    position: relative;
+    width: min(525px, calc(100vw - 32px));
+    max-height: 90vh;
     padding: 40px;
+    box-sizing: border-box;
+    overflow-y: auto;
+
     background: white;
     border-radius: 30px;
-    overflow-y: auto;
+    color: #2a3647;
     animation: slide-in 300ms ease-out;
 }
 
-.task-details h1{
-    margin: 20px 0;
-    font-size: 48px;
-    line-height: 1.1;
+.close-button {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+
+    border: none;
+    background: transparent;
+    color: #2a3647;
+    font-size: 28px;
+    cursor: pointer;
 }
 
-@keyframes slide-in{
+.category {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 20px;
+    border-radius: 8px;
+    background: #0038ff;
+    color: white;
+    font-size: 20px;
+}
+
+.category.technical-task {
+    background: #1fd7c1;
+}
+
+.task-details h1 {
+    max-width: 430px;
+    margin: 24px 0 16px;
+    font-size: 48px;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+}
+
+.task-details > p {
+    margin: 0 0 20px;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.task-details h3 {
+    margin: 24px 0 14px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+.contact-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+}
+
+.subtasks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 20px;
+}
+
+.subtasks label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.subtasks input {
+    width: 20px;
+    height: 20px;
+    accent-color: #2a3647;
+    cursor: pointer;
+}
+
+.actions-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 28px;
+}
+
+.actions-btn button {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #2a3647;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.actions-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+@keyframes slide-in {
     from {
-        transform: translateX(100vw);
+    transform: translateX(100vw);
     }
     to {
-        transform: translateX(0);
+    transform: translateX(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .task-details {
+        padding: 28px 22px;
+        border-radius: 24px;
+    }
+
+    .task-details h1 {
+        font-size: 36px;
+    }
+
+    .close-button {
+        top: 22px;
+        right: 22px;
+    }
+
+    .detail-row {
+        grid-template-columns: 120px 1fr;
     }
 }
