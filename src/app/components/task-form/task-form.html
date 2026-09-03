@@ -1,23 +1,27 @@
-<form [formGroup]="taskForm" (ngSubmit)="submitForm()" class="task-form">
+<form [formGroup]="taskForm" (ngSubmit)="submitForm()" (click)="closeAllDropdowns()" class="task-form">
     <h1 class="task-form__title">Add Task</h1>
 
     <div class="task-form__content">
         <div class="task-form__left">
             <label class="task-form__label" for="title">Title<span class="required-star">*</span></label>
-            <input class="task-form__input" id="title" formControlName="title" placeholder="Enter a title">
-            @if (taskForm.controls.title.touched && taskForm.controls.title.invalid) {
-            <span class="task-form__error error">This field is required</span>
-            }
+            <input class="task-form__input" id="title" formControlName="title" placeholder="Enter a title"
+                [class.input-error]="taskForm.controls.title.touched && taskForm.controls.title.invalid">
+            <p class="task-form__error"
+                [style.visibility]="taskForm.controls.title.touched && taskForm.controls.title.invalid ? 'visible' : 'hidden'">
+                This field is required
+            </p>
 
             <label class="task-form__label" for="description">Description</label>
             <textarea class="task-form__textarea" id="description" formControlName="description"
                 placeholder="Enter a description"></textarea>
 
             <label class="task-form__label" for="dueDate">Due Date<span class="required-star">*</span></label>
-            <input class="task-form__input" id="dueDate" type="date" formControlName="dueDate">
-            @if (taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid) {
-            <span class="task-form__error error">This field is required</span>
-            }
+            <input class="task-form__input" id="dueDate" type="date" formControlName="dueDate"
+                [class.input-error]="taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid">
+            <p class="task-form__error"
+                [style.visibility]="taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid ? 'visible' : 'hidden'">
+                This field is required
+            </p>
 
         </div>
 
@@ -54,10 +58,11 @@
                 }
             </div>
 
-            <div class="task-form__assigned Assigned-field" (focusout)="closeAssigneeDropdown()">
+            <div class="task-form__assigned Assigned-field">
                 <label class="task-form__label">Assigned to</label>
 
-                <button type="button" (click)="toggleDropDown()" class="task-form__assigned-trigger">
+                <button type="button" (click)="toggleDropDown(); $event.stopPropagation()"
+                    class="task-form__assigned-trigger">
                     <span> Select contacts to assign </span>
 
                     <span class="material-symbols-outlined task-form__assigned-arrow">
@@ -65,8 +70,8 @@
                     </span>
                 </button>
                 @if (dropdownOpen) {
-                <div class="task-form__assigned-dropdown contact-dropdown">
-                    @for (contact of contacts(); track contact.id) {
+                <div class="task-form__assigned-dropdown contact-dropdown" (click)="$event.stopPropagation()">
+                    @for (contact of sortedContacts(); track contact.id) {
                     <label class="task-form__assigned-option contact-option">
                         <span class="task-form__assigned-initials contact-initials"
                             [style.backgroundColor]="contact.color">
@@ -83,18 +88,30 @@
                 </div>
                 }
                 <div class="task-form__assigned-selected selected-contacts">
-                    @for (contact of selectContacts; track contact.id) {
+                    @for (contact of showAllContacts ? selectContacts : selectContacts.slice(0, 3); track contact.id) {
                     <span class="task-form__assigned-initials contact-initials" [style.backgroundColor]="contact.color"
                         [title]="contact.name">
                         {{ contact.initials }}
+                    </span>
+                    }
+                    @if (selectContacts.length > 3) {
+                    <span class="task-form__assigned-initials task-form__assigned-initials--more"
+                        (click)="toggleShowAllContacts(); $event.stopPropagation()">
+                        @if (showAllContacts) {
+                            <span class="material-symbols-outlined">expand_less</span>
+                        } @else {
+                            +{{ selectContacts.length - 3 }}
+                        }
                     </span>
                     }
                 </div>
             </div>
 
             <label class="task-form__label" for="category">Category<span class="required-star">*</span></label>
-            <div class="task-form__category" (focusout)="closeCategoryDropdown()">
-                <button type="button" class="task-form__category-trigger" (click)="toggleCategoryDropDown()">
+            <div class="task-form__category">
+                <button type="button" class="task-form__category-trigger"
+                    (click)="toggleCategoryDropDown(); $event.stopPropagation()"
+                    [class.input-error]="taskForm.controls.category.touched && taskForm.controls.category.invalid">
                     <span>
                         @if (taskForm.controls.category.value === 'technical_task') {
                         Technical Task
@@ -111,7 +128,7 @@
                 </button>
 
                 @if (categoryDropdownOpen) {
-                <div class="task-form__category-dropdown">
+                <div class="task-form__category-dropdown" (click)="$event.stopPropagation()">
                     <button type="button" class="task-form__category-option" (click)="selectCategory('technical_task')">
                         Technical Task
                     </button>
@@ -122,33 +139,57 @@
                 </div>
                 }
             </div>
-            @if (taskForm.controls.category.touched && taskForm.controls.category.invalid) {
-            <span class="task-form__error error">This field is required</span>
-            }
+            <p class="task-form__error"
+                [style.visibility]="taskForm.controls.category.touched && taskForm.controls.category.invalid ? 'visible' : 'hidden'">
+                This field is required
+            </p>
 
             <label class="task-form__label" for="subtask">Subtasks</label>
 
-            <div class="task-form__subtask-input subtask-input">
+            <div class="task-form__subtask-input">
                 <input id="subtask" [formControl]="subtaskInput" placeholder="Add new subtask"
-                    (keydown)="addSubtask($event)" class="task-form__input">
-                <button type="button" (click)="addSubtask()" class="task-form__subtask-add">+</button>
-            </div>
-
-            <div class="task-form__subtask-list subtask-list">
-                @for (subtask of taskForm.controls.subtasks.controls; track $index) {
-                <div class="task-form__subtask subtask">
-                    <span>{{ subtask.value }}</span>
-
-                    <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-remove">x</button>
-                </div>
+                    (keydown.enter)="addSubtask($event)" class="task-form__input" autocomplete="off">
+                @if (subtaskInput.value) {
+                    <span class="task-form__subtask-icon task-form__subtask-icon--check" (click)="addSubtask()">
+                        <span class="material-symbols-outlined">check</span>
+                    </span>
+                    <span class="task-form__subtask-icon task-form__subtask-icon--close" (click)="cancelEdit()">
+                        <span class="material-symbols-outlined">close</span>
+                    </span>
                 }
             </div>
+
+            <ul class="task-form__subtask-list">
+                @for (subtask of taskForm.controls.subtasks.controls; track $index) {
+                    <li class="task-form__subtask-item">
+                        <div class="task-form__subtask-row">
+                            <span class="task-form__subtask-text">{{ subtask.value }}</span>
+                            <button type="button" (click)="editSubtask($index)" class="task-form__subtask-action">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                            <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-action">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 
-    <div class="task-form__actions form-actions">
-        <button type="button" (click)="clearForm()" class="task-form__button">Clear<span class="material-symbols-outlined">close</span></button>
-        <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">{{ isSaving ?
-            'Creating...' : 'Create Task'}}<span class="material-symbols-outlined">check</span></button>
+    <div class="task-form__bottom">
+        <p class="task-form__required-hint">
+            <span class="required-star">*</span>
+            This field is required
+        </p>
+
+        <div class="task-form__actions form-actions">
+            <button type="button" (click)="cancelForm()" class="task-form__button">{{ task ? 'Cancel' : 'Clear' }}<span
+                    class="material-symbols-outlined">close</span></button>
+            <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">{{ isSaving
+                ?
+                (task ? 'Saving...' : 'Creating...') : (task ? 'Save' : 'Create Task')}}<span
+                    class="material-symbols-outlined">check</span></button>
+        </div>
     </div>
 </form>

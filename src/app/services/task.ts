@@ -54,6 +54,31 @@ import { Contact } from './contact';
     return this.saveTaskRelations(data.id, task);
     }
 
+    async updateTask(taskId: number, task: NewTask): Promise<boolean> {
+    const { error } = await this.dbService.supabase.from('task').update({
+        title: task.title.trim(),
+        description: task.description.trim(),
+        due_date: task.dueDate,
+        priority: task.priority,
+        category: task.category,
+    }).eq('id', taskId);
+    if (error) return false; 
+
+    const { error: assigneeError} = await this.dbService.supabase.from('task_assignees').delete().eq('task_id', taskId);
+    const { error: subtaskError} = await this.dbService.supabase.from('subtask').delete().eq('task_id', taskId);
+
+    if (assigneeError || subtaskError) return false;
+
+    const assigneesSaved = await this.addTaskAssignees(taskId, task.assignedContactIds);
+    const subtasksSaved = await this.addSubtasks(taskId, task.subtasks);
+    return assigneesSaved && subtasksSaved;
+}
+
+    async deleteTask(taskId: number): Promise<boolean> {
+    const { error } = await this.dbService.supabase.from('task').delete().eq('id', taskId);
+    return !error;
+}
+
     private async saveTaskRelations(
         taskId: number,
         task: NewTask
@@ -98,5 +123,12 @@ import { Contact } from './contact';
 
     const { error } = await this.dbService.supabase.from('subtask').insert(rows);
     return !error;
+    }
+
+    async getTasks(): Promise<Task[]> {
+        const { data, error } = await this.dbService.supabase.from('task').select('*');
+        console.log('TASKS:', data);
+        console.log('ERROR:', error);
+        return data ?? [];
     }
 }
