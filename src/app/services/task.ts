@@ -124,4 +124,11 @@ import { Contact } from './contact';
     const { error } = await this.dbService.supabase.from('subtask').insert(rows);
     return !error;
     }
+
+    async getTasks(): Promise<Task[]> {
+        const { data, error } = await this.dbService.supabase.from('task').select('*');
+        console.log('TASKS:', data);
+        console.log('ERROR:', error);
+        return data ?? [];
+    }
 }
