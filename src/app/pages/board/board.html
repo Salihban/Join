@@ -36,6 +36,14 @@
                     </button>
                 </div>
 
+                <div class="column-content" cdkDropList id="todoList" [cdkDropListData]="todoTasks()" (cdkDropListDropped)="drop($event)">
+                    @for (task of todoTasks(); track task.id) {
+                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    } @empty {
+                    <div class="empty-state">No tasks To do</div>
+                    } 
+                </div>
+            </div>
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">In progress</h2>
