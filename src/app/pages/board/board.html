@@ -102,7 +102,7 @@
     @if (selectedTask(); as task) {
         <div class="task-overlay" (click)="selectedTask.set(null)">
             <div (click)="$event.stopPropagation()">
-                <app-task-details [task]="task" (closeDetails)="selectedTask.set(null)"></app-task-details>
+                <app-task-details [task]="task" (taskUpdated)="loadTasks()" (closeDetails)="selectedTask.set(null)"></app-task-details>
             </div>
         </div>
     }

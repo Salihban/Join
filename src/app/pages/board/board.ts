@@ -24,7 +24,7 @@ export class Board implements OnInit {
         await this.loadTasks();
     }
 
-    private async loadTasks(): Promise<void> {
+    async loadTasks(): Promise<void> {
         const allTasks = await this.taskService.getTasks();
         this.filterTasksByStatus(allTasks);
     }

@@ -1,8 +1,9 @@
 <section class="task-details">
-    <button class="close-button" (click)="closeDetails.emit()">x</button>
+    <button class="close-button" (click)="closeDetails.emit()">X</button>
 
     @if (!isEditing) {
-    <span class="category">{{ task.category }}</span>
+    <span class="category" [class.technical-task]="task.category === 'technical_task'">
+    {{ categoryName }}</span>
 
     <h1>{{ task.title }}</h1>
     <p>{{ task.description }}</p>
@@ -35,7 +36,7 @@
 <div class="subtasks">
     @for (Subtask of task?.subtasks; track Subtask.id) {
     <label>
-        <input type="checkbox" [checked]="Subtask.completed">
+        <input type="checkbox" [checked]="Subtask.completed" (change)="toggleSubtask(Subtask, $event)">
         {{ Subtask.title }}
     </label>
     }
@@ -43,11 +44,11 @@
 
 <div class="actions-btn">
     <button type="button" (click)="startEditing()">
-        <img src="assets/icons_sprite2/edit.svg" alt="">Edit
+        <img src="/assets/icons_sprint2/edit.svg" alt="">Edit
     </button>
 
     <button type="button" (click)="requestDelete()">
-    <img src="assets/icons_sprite2/delete.svg" alt="">
+    <img src="/assets/icons_sprint2/delete.svg" alt="">
     Delete
     </button>
 </div>
