@@ -3,6 +3,8 @@ import { NewTask, Task, TaskService } from '../../services/task';
 import { TaskCard } from '../../components/task-card/task-card';
 import { TaskDetails } from '../../components/task-details/task-details';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskOverlay } from '../../components/task-overlay/task-overlay';
 
 @Component({
     selector: 'app-board',
@@ -69,7 +71,7 @@ export class Board implements OnInit {
                 };
 
                 const success = await this.taskService.updateTask(movedTask.id, updatedTaskPayload);
-                
+
                 if (!success) {
                     console.error('Speichern fehlgeschlagen! Lade Aufgaben neu...');
                     await this.loadTasks();
@@ -93,5 +95,20 @@ export class Board implements OnInit {
             default:
                 return null;
         }
+    }
+
+    private dialog = inject(MatDialog);
+
+    openAddTaskDialog(): void {
+        this.dialog.open(TaskOverlay, {
+            width: '1200px',
+            maxWidth: '90dvw',
+            maxHeight: '120dvh',
+            panelClass: 'task-dialog-panel'
+        }).afterClosed().subscribe(result => {
+            if (result) {
+                this.loadTasks();
+            }
+        });
     }
 }
