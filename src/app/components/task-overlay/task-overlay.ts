@@ -12,12 +12,10 @@ export class TaskOverlay {
     private dialogRef = inject(MatDialogRef<TaskOverlay>);
 
     onTaskCreated():void {
-        console.log('[TaskFormDialog] Task created,closing dialog');
         this.dialogRef.close(true);
     }
 
     onClose(): void {
-        console.log('[TaskFormDialog] Close button clicked');
         this.dialogRef.close(false);
     }
 }
