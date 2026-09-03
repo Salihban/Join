@@ -371,6 +371,7 @@
     &__subtask-row {
         display: flex;
         align-items: center;
+        flex: 1;
     }
 
     &__subtask-text {
