@@ -269,3 +269,19 @@ $font-inter-2: 'Open Sans', sans-serif;
         gap: 24px;
     }
 }
+
+.task-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(0, 0, 0, 0.35);
+
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.task-overlay > div{
+    max-height: 90vh;
+    overflow-y: auto;
+}
