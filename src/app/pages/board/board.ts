@@ -52,10 +52,6 @@ export class Board implements OnInit {
             const movedTask = event.container.data[event.currentIndex];
             const newStatus = this.getStatusFromContainerId(event.container.id);
 
-            console.log('Container ID:', event.container.id);
-            console.log('Neuer Status:', newStatus);
-            console.log('Verschobene Task ID:', movedTask?.id);
-
             if (newStatus && movedTask?.id) {
                 movedTask.status = newStatus as any;
 
@@ -71,7 +67,6 @@ export class Board implements OnInit {
                 };
 
                 const success = await this.taskService.updateTask(movedTask.id, updatedTaskPayload);
-                console.log('Update Status in Supabase erfolgreich?:', success);
                 
                 if (!success) {
                     console.error('Speichern fehlgeschlagen! Lade Aufgaben neu...');
