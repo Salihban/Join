@@ -8,6 +8,7 @@ import { Contact } from './contact';
         dueDate: string;
         priority: 'urgent' | 'medium' | 'low';
         category: string;
+        status?: string;
         assignedContactIds: Array<string | number>;
         subtasks: string[];
     }
@@ -61,6 +62,7 @@ import { Contact } from './contact';
         due_date: task.dueDate,
         priority: task.priority,
         category: task.category,
+        ...(task.status && { status: task.status })
     }).eq('id', taskId);
     if (error) return false; 
 
