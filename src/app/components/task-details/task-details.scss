@@ -142,6 +142,10 @@
     cursor: pointer;
 }
 
+.actions-btn button:hover{
+    transform: scale(1.1);
+}
+
 .actions-btn img {
     width: 18px;
     height: 18px;
@@ -149,10 +153,13 @@
 
 @keyframes slide-in {
     from {
-    transform: translateX(100vw);
+        transform: translateX(100%);
+        opacity: 0;
     }
+
     to {
-    transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
