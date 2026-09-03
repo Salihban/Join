@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, computed, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Contact, ContactService } from '../../services/contact';
 import { TaskService, Task } from '../../services/task';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,6 +17,9 @@ export class TaskForm implements OnInit {
     readonly contactService = inject(ContactService);
     readonly taskService = inject(TaskService);
     readonly contacts = this.contactService.contacts;
+    readonly sortedContacts = computed(() =>
+        [...this.contacts()].sort((a, b) => a.name.localeCompare(b.name))
+    );
     subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
     categoryDropdownOpen = false;

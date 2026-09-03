@@ -71,7 +71,7 @@
                 </button>
                 @if (dropdownOpen) {
                 <div class="task-form__assigned-dropdown contact-dropdown" (click)="$event.stopPropagation()">
-                    @for (contact of contacts(); track contact.id) {
+                    @for (contact of sortedContacts(); track contact.id) {
                     <label class="task-form__assigned-option contact-option">
                         <span class="task-form__assigned-initials contact-initials"
                             [style.backgroundColor]="contact.color">
