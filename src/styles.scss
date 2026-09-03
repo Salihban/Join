@@ -179,3 +179,27 @@ app-root {
         display: none;
     }
 }
+
+.task-dialog-panel {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.cdk-overlay-dark-backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+// !important ist hier nötig, weil Angular-Komponenten-Styles durch ViewEncapsulation eine höhere Spezifität haben als globale Overrides
+// position: fixed ist für die normale Seite okay, bricht aber den Dialog auf Mobile.
+
+.task-dialog-panel .task-form {
+    padding-bottom: 16px !important;
+}
+
+.task-dialog-panel .task-form__actions {
+    @media (max-width: 767px) {
+        position: static !important;
+    }
+}
+
+
