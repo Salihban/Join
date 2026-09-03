@@ -235,11 +235,11 @@ $font-inter-2: 'Open Sans', sans-serif;
 }
 
 app-task-card {
-    cursor: grab;
+    cursor: pointer;
     display: block;
 
     &:active {
-        cursor: grabbing;
+        cursor: pointer;
     }
 }
 
