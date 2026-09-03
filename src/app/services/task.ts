@@ -8,6 +8,7 @@ import { Contact } from './contact';
         dueDate: string;
         priority: 'urgent' | 'medium' | 'low';
         category: string;
+        status?: string;
         assignedContactIds: Array<string | number>;
         subtasks: string[];
     }
@@ -61,6 +62,7 @@ import { Contact } from './contact';
         due_date: task.dueDate,
         priority: task.priority,
         category: task.category,
+        ...(task.status && { status: task.status })
     }).eq('id', taskId);
     if (error) return false; 
 
@@ -126,9 +128,11 @@ import { Contact } from './contact';
     }
 
     async getTasks(): Promise<Task[]> {
-        const { data, error } = await this.dbService.supabase.from('task').select('*');
-        console.log('TASKS:', data);
-        console.log('ERROR:', error);
-        return data ?? [];
+        const { data, error } = await this.dbService.supabase.from('task').select(`*, subtasks:subtask!subtask_task_id_fkey(*), task_assignees(contact:contacts(*))`);
+        if (error) return [];
+        return (data ?? []).map((task: any) => ({
+            ...task, subtasks: task.subtasks ?? [], assignedContacts: (task.task_assignees ?? []).map(
+                (item: any) => item.contact),
+        })) as Task[];
     }
 }
