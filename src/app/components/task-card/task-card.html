@@ -1,17 +1,17 @@
 <section class="task-card">
     <div class="task-card-content-wrapper">
         <div class="task-card-content-headline">
-            <span>{{categoryName}}</span>
+            <span class="catagory-name">{{categoryName}}</span>
         </div>
         <div class="task-card-text-content">
             <h3>{{task.title}}</h3> 
             <p class="task-card-description">{{task.description}}</p>
         </div>
         <div class="subtask-content-wrapper">
-            <div class="progress-container">
-                <div class="progress-bar"><mat-progress-bar  mode = "determinate"  value = "40" ></mat-progress-bar></div>
+                <div class="progress-bar"><mat-progress-bar  mode = "determinate"  value = "40" ></mat-progress-bar>
+                <p>1/2 Subtask</p>
+                </div>
             </div>
-            <p>1/2 Subtask</p>
         </div>
         <div class="initial-wrapper">
             <div class="initial-content">
@@ -22,8 +22,7 @@
                 }
             </div>
             <div>
-                <img src="/assets/icons_sprint2/prio_medium.svg" alt="">
+                <img [src]="'/assets/icons_sprint2/prio_' + (task.priority || 'medium') + '.svg'" [alt]="task.priority">
             </div>
         </div>
-    </div>
 </section>
