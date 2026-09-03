@@ -159,9 +159,10 @@
                 }
             </div>
 
-            <ul class="task-form__subtask-list">
+            <div class="task-form__subtask-list">
                 @for (subtask of taskForm.controls.subtasks.controls; track $index) {
-                    <li class="task-form__subtask-item">
+                    <div class="task-form__subtask-item">
+                        <span class="task-form__subtask-bullet">•</span>
                         <div class="task-form__subtask-row">
                             <span class="task-form__subtask-text">{{ subtask.value }}</span>
                             <button type="button" (click)="editSubtask($index)" class="task-form__subtask-action">
@@ -171,9 +172,9 @@
                                 <span class="material-symbols-outlined">delete</span>
                             </button>
                         </div>
-                    </li>
+                    </div>
                 }
-            </ul>
+            </div>
         </div>
     </div>
 
