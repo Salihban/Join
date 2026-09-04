@@ -97,11 +97,9 @@ export class Board implements OnInit {
 
     async drop(event: CdkDragDrop<Task[]>): Promise<void> {
         const movedTask = event.item.data as Task;
-
         if (!movedTask) {
             return;
         }
-
         if (event.previousContainer === event.container) {
             this.updateListSignal(event.container.id, (currentList) => {
                 const list = [...currentList];
