@@ -158,8 +158,8 @@ $font-inter-2: 'Open Sans', sans-serif;
 .board-column {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    min-height: 0;
+    height: auto;
+    max-height: none;
     gap: 16px;
 
     .column-header {
@@ -349,4 +349,48 @@ app-task-card {
 .task-overlay > div{
     max-height: 90vh;
     overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+    .board-container, .board-inner, .columns-grid {
+    height: auto;
+    max-height: none;
+    min-height: 0;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    main {
+    padding-bottom: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .columns-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    }
+
+    .board-column {
+    width: 100%;
+    height: auto;
+    }
+
+    .column-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 120px;
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
+    gap: 16px;
+    flex: none;
+    }
+
+    app-task-card {
+    display: block;
+    min-width: 0;
+    }
 }
