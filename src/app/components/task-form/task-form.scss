@@ -6,10 +6,10 @@
 :host {
     display: block;
     width: 100%;
+    height: 100%;
 }
 
 /* #endregion */
-
 
 /* #region Task Form */
 .task-form {
@@ -312,8 +312,16 @@
     /* #endregion */
 
     /* #region Subtasks */
+    &__subtask-area {
+        display: flex;
+        flex-direction: column;
+        height: 120px;
+        overflow: hidden;
+    }
+
     &__subtask-input {
         position: relative;
+        flex-shrink: 0;
     }
 
     &__subtask-input .task-form__input {
@@ -352,8 +360,8 @@
 
     &__subtask-list {
         width: 100%;
-        margin: 8px 0 0 0;
-        max-height: 70px;
+        flex: 1;
+        min-height: 0;
         overflow-y: auto;
     }
 
@@ -477,7 +485,6 @@
 
     /* #endregion */
 }
-
 .required-star {
     color: $star;
     margin-left: 2px;
@@ -489,7 +496,6 @@
 /* #region Media Queries Desktop */
 @media (min-width: 768px) {
     .task-form {
-        padding: 20px 80px;
 
         &__title {
             margin-bottom: 40px;
@@ -525,7 +531,12 @@
             min-height: 46px;
         }
 
+        &__subtask-area {
+            max-height: 120px;
+        }
+
         &__bottom {
+            margin-top: auto;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
@@ -549,6 +560,42 @@
             flex: 0 0 auto;
             min-height: 46px;
         }
+    }
+}
+
+.task-form.details-mode{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+
+    .task-form__content{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .task-form__left, .task-form__right{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    }
+
+    .task-form__required-hint{
+        display: none;
+    }
+
+    .task-form__actions {
+    position: static;
+    flex-shrink: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 16px 0 0;
+    padding: 8px 0;
+    background: white;
     }
 }
 
