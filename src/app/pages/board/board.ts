@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CdkDragDrop, CdkDropList, CdkDropListGroup, CdkDrag, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList, CdkDropListGroup, CdkDrag } from '@angular/cdk/drag-drop';
 import { TaskService, Task, NewTask } from '../../services/task';
 import { TaskDetails } from '../../components/task-details/task-details';
 import { TaskCard } from '../../components/task-card/task-card';
@@ -26,8 +26,12 @@ export class Board implements OnInit {
     }
 
     async loadTasks(): Promise<void> {
-        const allTasks = await this.taskService.getTasks();
-        this.filterTasksByStatus(allTasks ?? []);
+        try {
+            const allTasks = await this.taskService.getTasks();
+            this.filterTasksByStatus(allTasks ?? []);
+        } catch (error) {
+            console.error('[Board] Fehler beim Laden der Tasks:', error);
+        }
     }
 
     private filterTasksByStatus(allTasks: Task[]): void {
@@ -38,30 +42,36 @@ export class Board implements OnInit {
     }
 
     async drop(event: CdkDragDrop<Task[]>): Promise<void> {
-        if (event.previousContainer === event.container) {
-            const currentList = [...event.container.data];
-            moveItemInArray(currentList, event.previousIndex, event.currentIndex);
-            this.setSignalByContainerId(event.container.id, currentList);
-        } else {
-            const prevList = [...event.previousContainer.data];
-            const currentList = [...event.container.data];
+        const movedTask = event.item.data as Task;
 
-            transferArrayItem(
-                prevList,
-                currentList,
-                event.previousIndex,
-                event.currentIndex
+        if (!movedTask) {
+            return;
+        }
+
+        if (event.previousContainer === event.container) {
+            this.updateListSignal(event.container.id, (currentList) => {
+                const list = [...currentList];
+                const [item] = list.splice(event.previousIndex, 1);
+                list.splice(event.currentIndex, 0, item);
+                return list;
+            });
+        } else {
+            this.updateListSignal(event.previousContainer.id, (currentList) => 
+                currentList.filter(t => t.id !== movedTask.id)
             );
 
-            this.setSignalByContainerId(event.previousContainer.id, prevList);
-            this.setSignalByContainerId(event.container.id, currentList);
-
-            const movedTask = currentList[event.currentIndex];
             const newStatus = this.getStatusFromContainerId(event.container.id);
-
-            if (newStatus && movedTask?.id) {
+            if (newStatus) {
                 movedTask.status = newStatus as any;
+            }
 
+            this.updateListSignal(event.container.id, (currentList) => {
+                const list = [...currentList];
+                list.splice(event.currentIndex, 0, movedTask);
+                return list;
+            });
+
+            if (newStatus && movedTask.id) {
                 const updatedTaskPayload: NewTask = {
                     title: movedTask.title ?? '',
                     description: movedTask.description ?? '',
@@ -69,32 +79,32 @@ export class Board implements OnInit {
                     priority: movedTask.priority ?? 'medium',
                     category: movedTask.category ?? 'technical_task',
                     status: newStatus,
-                    assignedContactIds: movedTask.assignedContacts ? movedTask.assignedContacts.map(c => c.id) : [],
-                    subtasks: movedTask.subtasks ? movedTask.subtasks.map(s => s.title) : []
+                    assignedContactIds: movedTask.assignedContacts ? movedTask.assignedContacts.map((c: any) => c.id) : [],
+                    subtasks: movedTask.subtasks ? movedTask.subtasks.map((s: any) => s.title) : []
                 };
 
-                const success = await this.taskService.updateTask(movedTask.id, updatedTaskPayload);
-
-                if (!success) {
-                    await this.loadTasks();
+                try {
+                    await this.taskService.updateTask(movedTask.id, updatedTaskPayload);
+                } catch (error) {
+                    console.error('[Board] Fehler beim Speichern', error);
                 }
             }
         }
     }
 
-    private setSignalByContainerId(containerId: string, newList: Task[]): void {
+    private updateListSignal(containerId: string, updateFn: (tasks: Task[]) => Task[]): void {
         switch (containerId) {
             case 'todoList':
-                this.todoTasks.set(newList);
+                this.todoTasks.update(updateFn);
                 break;
             case 'inProgressList':
-                this.inProgressTasks.set(newList);
+                this.inProgressTasks.update(updateFn);
                 break;
             case 'awaitFeedbackList':
-                this.awaitFeedbackTasks.set(newList);
+                this.awaitFeedbackTasks.update(updateFn);
                 break;
             case 'doneList':
-                this.doneTasks.set(newList);
+                this.doneTasks.update(updateFn);
                 break;
         }
     }
