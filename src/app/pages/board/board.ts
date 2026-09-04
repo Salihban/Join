@@ -3,6 +3,10 @@ import { CdkDragDrop, CdkDropList, CdkDropListGroup, CdkDrag } from '@angular/cd
 import { TaskService, Task, NewTask } from '../../services/task';
 import { TaskDetails } from '../../components/task-details/task-details';
 import { TaskCard } from '../../components/task-card/task-card';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { TaskOverlay } from '../../components/task-overlay/task-overlay';
+
 
 @Component({
     selector: 'app-board',
@@ -93,6 +97,26 @@ export class Board implements OnInit {
         this.doneTasks.set(
             allTasks.filter(t => (t.status as string) === 'done')
         );
+    }
+
+    private dialog = inject(MatDialog);
+    private router = inject(Router);
+
+    openAddTaskDialog(): void {
+        if (window.innerWidth < 768) {
+            this.router.navigate(['/add-task']);
+            return;
+        }
+        this.dialog.open(TaskOverlay, {
+            width: '1200px',
+            maxWidth: '90dvw',
+            maxHeight: '120dvh',
+            panelClass: 'task-dialog-panel'
+        }).afterClosed().subscribe(result => {
+            if (result) {
+                this.loadTasks();
+            }
+        });
     }
 
     async drop(event: CdkDragDrop<Task[]>): Promise<void> {
