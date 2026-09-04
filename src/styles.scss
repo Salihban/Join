@@ -181,8 +181,10 @@ app-root {
 }
 
 .task-dialog-panel {
+    height: 90dvh;
+    display: flex;
+    flex-direction: column;
     border-radius: 16px;
-    overflow: hidden;
 }
 
 .cdk-overlay-dark-backdrop {
