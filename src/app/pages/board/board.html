@@ -3,7 +3,7 @@
         <header class="board-header">
             <div class="header-top">
                 <h1 class="board-title">Board</h1>
-                <button class="btn-add-main mobile-only" type="button" aria-label="Task hinzufügen">
+                <button class="btn-add-main mobile-only" type="button" aria-label="Task hinzufügen" (click)="openAddTaskDialog()">
                     <img src="/assets/icons_sprint2/add.svg" alt="Add Task" />
                 </button>
             </div>
@@ -16,7 +16,7 @@
                     </button>
                 </div>
 
-                <button class="btn-add-main desktop-only" type="button">
+                <button class="btn-add-main desktop-only" type="button" (click)="openAddTaskDialog()">
                     <span>Add task</span>
                     <img src="/assets/icons_sprint2/add2.svg" alt="" class="icon-plus" />
                 </button>
@@ -27,7 +27,7 @@
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">To do</h2>
-                    <button class="btn-add-column" type="button">
+                    <button class="btn-add-column" type="button" (click)="openAddTaskDialog()">
                         <img
                             src="/assets/icons_sprint2/plus button mobile.svg"
                             alt=""
@@ -47,7 +47,7 @@
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">In progress</h2>
-                    <button class="btn-add-column" type="button">
+                    <button class="btn-add-column" type="button" (click)="openAddTaskDialog()">
                         <img
                             src="/assets/icons_sprint2/plus button mobile.svg"
                             alt=""
@@ -67,7 +67,7 @@
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">Await feedback</h2>
-                    <button class="btn-add-column" type="button">
+                    <button class="btn-add-column" type="button" (click)="openAddTaskDialog()">
                         <img
                             src="/assets/icons_sprint2/plus button mobile.svg"
                             alt=""
