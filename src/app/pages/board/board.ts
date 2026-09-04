@@ -208,5 +208,11 @@ export class Board implements OnInit {
                 return null;
         }
     }
+
+    onTaskDelete(taskId: number): void{
+        this.allTasks.update(tasks => tasks.filter(task => task.id !== taskId));
+        this.filterTasksByStatus(this.allTasks());
+        this.selectedTask.set(null);
+    }
 }
 
