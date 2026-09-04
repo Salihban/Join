@@ -4,6 +4,7 @@ import { TaskCard } from '../../components/task-card/task-card';
 import { TaskDetails } from '../../components/task-details/task-details';
 import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { TaskOverlay } from '../../components/task-overlay/task-overlay';
 
 @Component({
@@ -98,8 +99,13 @@ export class Board implements OnInit {
     }
 
     private dialog = inject(MatDialog);
+    private router = inject(Router);
 
     openAddTaskDialog(): void {
+        if (window.innerWidth < 768) {
+            this.router.navigate(['/add-task']);
+            return;
+        }
         this.dialog.open(TaskOverlay, {
             width: '1200px',
             maxWidth: '90dvw',
