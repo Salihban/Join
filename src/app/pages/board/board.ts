@@ -1,13 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { NewTask, Task, TaskService } from '../../services/task';
-import { TaskCard } from '../../components/task-card/task-card';
+import { CdkDragDrop, CdkDropList, CdkDropListGroup, CdkDrag, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TaskService, Task, NewTask } from '../../services/task';
 import { TaskDetails } from '../../components/task-details/task-details';
-import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TaskCard } from '../../components/task-card/task-card';
 
 @Component({
     selector: 'app-board',
     standalone: true,
-    imports: [TaskCard, TaskDetails, DragDropModule],
+    imports: [CdkDropList, CdkDropListGroup, CdkDrag, TaskCard, TaskDetails],
     templateUrl: './board.html',
     styleUrl: './board.scss',
 })
@@ -17,8 +17,9 @@ export class Board implements OnInit {
     awaitFeedbackTasks = signal<Task[]>([]);
     doneTasks = signal<Task[]>([]);
 
-    private taskService = inject(TaskService);
     selectedTask = signal<Task | null>(null);
+
+    private taskService = inject(TaskService);
 
     async ngOnInit(): Promise<void> {
         await this.loadTasks();
@@ -26,7 +27,7 @@ export class Board implements OnInit {
 
     async loadTasks(): Promise<void> {
         const allTasks = await this.taskService.getTasks();
-        this.filterTasksByStatus(allTasks);
+        this.filterTasksByStatus(allTasks ?? []);
     }
 
     private filterTasksByStatus(allTasks: Task[]): void {
@@ -38,20 +39,24 @@ export class Board implements OnInit {
 
     async drop(event: CdkDragDrop<Task[]>): Promise<void> {
         if (event.previousContainer === event.container) {
-            moveItemInArray(
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex
-            );
+            const currentList = [...event.container.data];
+            moveItemInArray(currentList, event.previousIndex, event.currentIndex);
+            this.setSignalByContainerId(event.container.id, currentList);
         } else {
+            const prevList = [...event.previousContainer.data];
+            const currentList = [...event.container.data];
+
             transferArrayItem(
-                event.previousContainer.data,
-                event.container.data,
+                prevList,
+                currentList,
                 event.previousIndex,
                 event.currentIndex
             );
 
-            const movedTask = event.container.data[event.currentIndex];
+            this.setSignalByContainerId(event.previousContainer.id, prevList);
+            this.setSignalByContainerId(event.container.id, currentList);
+
+            const movedTask = currentList[event.currentIndex];
             const newStatus = this.getStatusFromContainerId(event.container.id);
 
             if (newStatus && movedTask?.id) {
@@ -69,29 +74,38 @@ export class Board implements OnInit {
                 };
 
                 const success = await this.taskService.updateTask(movedTask.id, updatedTaskPayload);
-                
+
                 if (!success) {
-                    console.error('Speichern fehlgeschlagen! Lade Aufgaben neu...');
                     await this.loadTasks();
                 }
-            } else {
-                console.warn('Task ID oder Status konnte nicht ermittelt werden.');
             }
+        }
+    }
+
+    private setSignalByContainerId(containerId: string, newList: Task[]): void {
+        switch (containerId) {
+            case 'todoList':
+                this.todoTasks.set(newList);
+                break;
+            case 'inProgressList':
+                this.inProgressTasks.set(newList);
+                break;
+            case 'awaitFeedbackList':
+                this.awaitFeedbackTasks.set(newList);
+                break;
+            case 'doneList':
+                this.doneTasks.set(newList);
+                break;
         }
     }
 
     private getStatusFromContainerId(containerId: string): string | null {
         switch (containerId) {
-            case 'todoList':
-                return 'todo';
-            case 'inProgressList':
-                return 'in_progress';
-            case 'awaitFeedbackList':
-                return 'await_feedback';
-            case 'doneList':
-                return 'done';
-            default:
-                return null;
+            case 'todoList': return 'todo';
+            case 'inProgressList': return 'in_progress';
+            case 'awaitFeedbackList': return 'await_feedback';
+            case 'doneList': return 'done';
+            default: return null;
         }
     }
 }

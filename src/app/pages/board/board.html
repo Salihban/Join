@@ -28,37 +28,33 @@
                 <div class="column-header">
                     <h2 class="column-title">To do</h2>
                     <button class="btn-add-column" type="button">
-                        <img
-                            src="/assets/icons_sprint2/plus button mobile.svg"
-                            alt=""
-                            class="icon-plus-col"
-                        />
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col" />
                     </button>
                 </div>
 
                 <div class="column-content" cdkDropList id="todoList" [cdkDropListData]="todoTasks()" (cdkDropListDropped)="drop($event)">
                     @for (task of todoTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
-                    <div class="empty-state">No tasks To do</div>
-                    } 
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    @if (todoTasks().length === 0) {
+                        <div class="empty-state">No tasks To do</div>
+                    }
                 </div>
             </div>
+
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">In progress</h2>
                     <button class="btn-add-column" type="button">
-                        <img
-                            src="/assets/icons_sprint2/plus button mobile.svg"
-                            alt=""
-                            class="icon-plus-col"
-                        />
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col" />
                     </button>
                 </div>
+                
                 <div class="column-content" cdkDropList id="inProgressList" [cdkDropListData]="inProgressTasks()" (cdkDropListDropped)="drop($event)">
                     @for (task of inProgressTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    @if (inProgressTasks().length === 0) {
                         <div class="empty-state">No tasks In progress</div>
                     }
                 </div>
@@ -68,17 +64,16 @@
                 <div class="column-header">
                     <h2 class="column-title">Await feedback</h2>
                     <button class="btn-add-column" type="button">
-                        <img
-                            src="/assets/icons_sprint2/plus button mobile.svg"
-                            alt=""
-                            class="icon-plus-col"
-                        />
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col" />
                     </button>
                 </div>
+
                 <div class="column-content" cdkDropList id="awaitFeedbackList" [cdkDropListData]="awaitFeedbackTasks()" (cdkDropListDropped)="drop($event)">
                     @for (task of awaitFeedbackTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    
+                    @if (awaitFeedbackTasks().length === 0) {
                         <div class="empty-state">No tasks Await feedback</div>
                     }
                 </div>
@@ -88,10 +83,13 @@
                 <div class="column-header">
                     <h2 class="column-title">Done</h2>
                 </div>
+
                 <div class="column-content" cdkDropList id="doneList" [cdkDropListData]="doneTasks()" (cdkDropListDropped)="drop($event)">
                     @for (task of doneTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    
+                    @if (doneTasks().length === 0) {
                         <div class="empty-state">No tasks Done</div>
                     }
                 </div>
