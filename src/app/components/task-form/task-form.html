@@ -154,34 +154,36 @@
 
             <label class="task-form__label" for="subtask">Subtasks</label>
 
-            <div class="task-form__subtask-input">
-                <input id="subtask" [formControl]="subtaskInput" placeholder="Add new subtask"
-                    (keydown.enter)="addSubtask($event)" class="task-form__input" autocomplete="off">
-                @if (subtaskInput.value) {
-                    <span class="task-form__subtask-icon task-form__subtask-icon--check" (click)="addSubtask()">
-                        <span class="material-symbols-outlined">check</span>
-                    </span>
-                    <span class="task-form__subtask-icon task-form__subtask-icon--close" (click)="cancelEdit()">
-                        <span class="material-symbols-outlined">close</span>
-                    </span>
-                }
-            </div>
+            <div class="task-form__subtask-area">
+                <div class="task-form__subtask-input">
+                    <input id="subtask" [formControl]="subtaskInput" placeholder="Add new subtask"
+                        (keydown.enter)="addSubtask($event)" class="task-form__input" autocomplete="off">
+                    @if (subtaskInput.value) {
+                        <span class="task-form__subtask-icon task-form__subtask-icon--check" (click)="addSubtask()">
+                            <span class="material-symbols-outlined">check</span>
+                        </span>
+                        <span class="task-form__subtask-icon task-form__subtask-icon--close" (click)="cancelEdit()">
+                            <span class="material-symbols-outlined">close</span>
+                        </span>
+                    }
+                </div>
 
-            <div class="task-form__subtask-list">
-                @for (subtask of taskForm.controls.subtasks.controls; track $index) {
-                    <div class="task-form__subtask-item">
-                        <span class="task-form__subtask-bullet">•</span>
-                        <div class="task-form__subtask-row">
-                            <span class="task-form__subtask-text">{{ subtask.value }}</span>
-                            <button type="button" (click)="editSubtask($index)" class="task-form__subtask-action">
-                                <span class="material-symbols-outlined">edit</span>
-                            </button>
-                            <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-action">
-                                <span class="material-symbols-outlined">delete</span>
-                            </button>
+                <div class="task-form__subtask-list">
+                    @for (subtask of taskForm.controls.subtasks.controls; track $index) {
+                        <div class="task-form__subtask-item">
+                            <span class="task-form__subtask-bullet">•</span>
+                            <div class="task-form__subtask-row">
+                                <span class="task-form__subtask-text">{{ subtask.value }}</span>
+                                <button type="button" (click)="editSubtask($index)" class="task-form__subtask-action">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button type="button" (click)="removeSubtask($index)" class="task-form__subtask-action">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
