@@ -1,6 +1,9 @@
-<form [formGroup]="taskForm" (ngSubmit)="submitForm()" (click)="closeAllDropdowns()" class="task-form">
-    <h1 class="task-form__title">Add Task</h1>
+<form [formGroup]="taskForm" [class.details-mode]="detailsModus" (ngSubmit)="submitForm()"
+    (click)="closeAllDropdowns()" class="task-form" [attr.id]="detailsModus ? 'task-details-form': null">
 
+    @if (!detailsModus) {
+    <h1 class="task-form__title">Add Task</h1>
+    }
     <div class="task-form__content">
         <div class="task-form__left">
             <label class="task-form__label" for="title">Title<span class="required-star">*</span></label>
@@ -184,13 +187,18 @@
             This field is required
         </p>
 
+        @if (!detailsModus) {
         <div class="task-form__actions form-actions">
-            <button type="button" (click)="cancelForm()" class="task-form__button">{{ task ? 'Cancel' : 'Clear' }}<span
-                    class="material-symbols-outlined">close</span></button>
-            <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">{{ isSaving
-                ?
-                (task ? 'Saving...' : 'Creating...') : (task ? 'Save' : 'Create Task')}}<span
-                    class="material-symbols-outlined">check</span></button>
+            <button type="button" (click)="cancelForm()" class="task-form__button">
+                {{ task ? 'Cancel' : 'Clear' }} <span class="material-symbols-outlined">close</span>
+            </button>
+            
+
+            <button type="submit" [disabled]="isSaving" class="task-form__button task-form__button--submit">
+            {{ isSaving? 'Saving...': detailsModus ? 'Ok': task ? 'Save' : 'Create Task' }}
+            <span class="material-symbols-outlined">check</span>
+            </button>
         </div>
+        }
     </div>
 </form>

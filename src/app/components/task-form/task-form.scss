@@ -10,7 +10,6 @@
 
 /* #endregion */
 
-
 /* #region Task Form */
 .task-form {
     /* #region Layout */
@@ -477,7 +476,6 @@
 
     /* #endregion */
 }
-
 .required-star {
     color: $star;
     margin-left: 2px;
@@ -489,7 +487,6 @@
 /* #region Media Queries Desktop */
 @media (min-width: 768px) {
     .task-form {
-        padding: 20px 80px;
 
         &__title {
             margin-bottom: 40px;
@@ -549,6 +546,42 @@
             flex: 0 0 auto;
             min-height: 46px;
         }
+    }
+}
+
+.task-form.details-mode{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+
+    .task-form__content{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .task-form__left, .task-form__right{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    }
+
+    .task-form__required-hint{
+        display: none;
+    }
+
+    .task-form__actions {
+    position: static;
+    flex-shrink: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 16px 0 0;
+    padding: 8px 0;
+    background: white;
     }
 }
 

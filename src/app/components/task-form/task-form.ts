@@ -27,6 +27,7 @@ export class TaskForm implements OnInit {
     editingIndex: number | null = null;
 
     @Input() task?: Task;
+    @Input() detailsModus = false;
     @Output() taskCreated =new EventEmitter<void>();
     @Output() taskUpdated = new EventEmitter<Task>();
     @Output() cancelled = new EventEmitter<void>();
