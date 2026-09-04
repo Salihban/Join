@@ -9,13 +9,15 @@
             </div>
             <div class="header-actions">
                 <div class="search-container">
-                    <input type="text" placeholder="Find Task" class="search-input" />
+                    <input type="text" placeholder="Find Task" class="search-input" (input)="onSearch($event)"/>
                     <span class="search-divider"></span>
                     <button class="search-btn" type="button" aria-label="Suchen">
                         <img src="/assets/icons_sprint2/search.svg" alt="" class="icon-search" />
                     </button>
+                    @if (!hasSearchResults()) {
+                        <div class="search-no-results">No tasks found</div>
+                    }
                 </div>
-
                 <button class="btn-add-main desktop-only" type="button">
                     <span>Add task</span>
                     <img src="/assets/icons_sprint2/add2.svg" alt="" class="icon-plus" />

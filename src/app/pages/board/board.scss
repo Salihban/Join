@@ -140,6 +140,14 @@ $font-inter-2: 'Open Sans', sans-serif;
     }
 }
 
+.search-no-results {
+    position: absolute;
+    top: 56px;
+    font-size: 16px;
+    color: #ff0000;
+    font-family: $font-inter;
+}
+
 .columns-grid {
     display: flex;
     flex-direction: column;
