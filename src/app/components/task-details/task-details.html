@@ -1,6 +1,9 @@
 <section class="task-details">
+    <div class="task-details__topbar">
     <button class="close-button" (click)="closeDetails.emit()">X</button>
+    </div>
 
+    <div class="task-details__body" [class.editing]="isEditing">
     @if (!isEditing) {
     <span class="category" [class.technical-task]="task.category === 'technical_task'">
     {{ categoryName }}</span>
@@ -48,11 +51,17 @@
     </button>
 
     <button type="button" (click)="requestDelete()">
-    <img src="/assets/icons_sprint2/delete.svg" alt="">
-    Delete
+    <img src="/assets/icons_sprint2/delete.svg" alt="">Delete
     </button>
 </div>
 } @else {
-    <app-task-form [task]="task" (taskUpdated)="onTaskUpdate($event)" (cancelled)="cancelEditing()"></app-task-form>
+    <app-task-form [task]="task" [detailsModus]="true"
+    (taskUpdated)="onTaskUpdate($event)" (cancelled)="cancelEditing() "></app-task-form>
+}
+</div>
+@if (isEditing) {
+    <div class="task-details__footer">
+        <button type="submit" form="task-details-form" class="ok-button">ok <img src="/assets/icons_sprint2/check.svg" alt=""></button>
+    </div>
 }
 </section>

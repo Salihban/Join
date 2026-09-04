@@ -11,7 +11,6 @@
 
 /* #endregion */
 
-
 /* #region Task Form */
 .task-form {
     /* #region Layout */
@@ -486,7 +485,6 @@
 
     /* #endregion */
 }
-
 .required-star {
     color: $star;
     margin-left: 2px;
@@ -498,7 +496,6 @@
 /* #region Media Queries Desktop */
 @media (min-width: 768px) {
     .task-form {
-        padding: 20px 100px 100px;
 
         &__title {
             margin-bottom: 40px;
@@ -566,12 +563,40 @@
     }
 }
 
-/* #endregion */
+.task-form.details-mode{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
 
-/* #region Media Queries Mobile */
-@media (max-width: 767px) {
-    .task-form {
-        padding: 40px 16px 100px;
+    .task-form__content{
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .task-form__left, .task-form__right{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    }
+
+    .task-form__required-hint{
+        display: none;
+    }
+
+    .task-form__actions {
+    position: static;
+    flex-shrink: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 16px 0 0;
+    padding: 8px 0;
+    background: white;
     }
 }
+
 /* #endregion */
