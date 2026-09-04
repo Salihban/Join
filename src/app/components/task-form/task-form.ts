@@ -1,7 +1,7 @@
 import { Component, computed, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { Contact, ContactService } from '../../services/contact';
 import { TaskService, Task } from '../../services/task';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { TitleCasePipe } from '@angular/common';
 
 type Priority = 'urgent' | 'medium' | 'low';
@@ -109,9 +109,9 @@ export class TaskForm implements OnInit {
     }
 
     taskForm = this.formBuilder.nonNullable.group({
-        title: ['', Validators.required],
+        title: ['', [Validators.required, Validators.minLength(3)]],
         description: [''],
-        dueDate: ['', Validators.required],
+        dueDate: ['', [Validators.required, this.noPastDateValidator()]],
         priority: ['medium' as Priority],
         assignedContactIds: this.formBuilder.nonNullable.control<string[]>([]),
         category: ['', Validators.required],
@@ -229,5 +229,15 @@ export class TaskForm implements OnInit {
             this.cancelled.emit();
         }
         this.clearForm();
+    }
+
+    private noPastDateValidator(): ValidatorFn {
+        return (control: AbstractControl) => {
+            if (!control.value) return null;
+            const selected = new Date(control.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return selected < today ? { pastDate: true } : null;
+        };
     }
 }

@@ -8,7 +8,11 @@
                 [class.input-error]="taskForm.controls.title.touched && taskForm.controls.title.invalid">
             <p class="task-form__error"
                 [style.visibility]="taskForm.controls.title.touched && taskForm.controls.title.invalid ? 'visible' : 'hidden'">
-                This field is required
+                @if (taskForm.controls.title.errors?.['required']) {
+                    This field is required
+                } @else if (taskForm.controls.title.errors?.['minlength']) {
+                    Title must be at least 3 characters
+                }
             </p>
 
             <label class="task-form__label" for="description">Description</label>
@@ -20,7 +24,11 @@
                 [class.input-error]="taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid">
             <p class="task-form__error"
                 [style.visibility]="taskForm.controls.dueDate.touched && taskForm.controls.dueDate.invalid ? 'visible' : 'hidden'">
-                This field is required
+                @if (taskForm.controls.dueDate.errors?.['required']) {
+                    This field is required
+                } @else if (taskForm.controls.dueDate.errors?.['pastDate']) {
+                    Date cannot be in the past
+                }
             </p>
 
         </div>
