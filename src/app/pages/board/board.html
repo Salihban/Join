@@ -9,11 +9,14 @@
             </div>
             <div class="header-actions">
                 <div class="search-container">
-                    <input type="text" placeholder="Find Task" class="search-input" />
+                    <input type="text" placeholder="Find Task" class="search-input" (input)="onSearch($event)"/>
                     <span class="search-divider"></span>
                     <button class="search-btn" type="button" aria-label="Suchen">
                         <img src="/assets/icons_sprint2/search.svg" alt="" class="icon-search" />
                     </button>
+                    @if (!hasSearchResults()) {
+                        <div class="search-no-results">No tasks found</div>
+                    }
                 </div>
 
                 <button class="btn-add-main desktop-only" type="button" (click)="openAddTaskDialog()">
@@ -27,78 +30,70 @@
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">To do</h2>
-                    <button class="btn-add-column" type="button" (click)="openAddTaskDialog()">
-                        <img
-                            src="/assets/icons_sprint2/plus button mobile.svg"
-                            alt=""
-                            class="icon-plus-col"
-                        />
+                    <button class="btn-add-column" type="button">
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col"/>
                     </button>
                 </div>
 
-                <div class="column-content" cdkDropList id="todoList" [cdkDropListData]="todoTasks()" (cdkDropListDropped)="drop($event)">
+                <div class="column-content" cdkDropList id="todoList" [cdkDropListData]="todoTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of todoTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
-                    <div class="empty-state">No tasks To do</div>
-                    } 
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    @if (todoTasks().length === 0) {
+                        <div class="empty-state">No tasks To do</div>
+                    }
                 </div>
             </div>
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">In progress</h2>
-                    <button class="btn-add-column" type="button" (click)="openAddTaskDialog()">
-                        <img
-                            src="/assets/icons_sprint2/plus button mobile.svg"
-                            alt=""
-                            class="icon-plus-col"
-                        />
+                    <button class="btn-add-column" type="button">
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col"/>
                     </button>
                 </div>
-                <div class="column-content" cdkDropList id="inProgressList" [cdkDropListData]="inProgressTasks()" (cdkDropListDropped)="drop($event)">
+
+                <div class="column-content" cdkDropList id="inProgressList" [cdkDropListData]="inProgressTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of inProgressTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    @if (inProgressTasks().length === 0) {
                         <div class="empty-state">No tasks In progress</div>
                     }
                 </div>
             </div>
-
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">Await feedback</h2>
-                    <button class="btn-add-column" type="button" (click)="openAddTaskDialog()">
-                        <img
-                            src="/assets/icons_sprint2/plus button mobile.svg"
-                            alt=""
-                            class="icon-plus-col"
-                        />
+                    <button class="btn-add-column" type="button">
+                        <img src="/assets/icons_sprint2/plus button mobile.svg" alt="" class="icon-plus-col"/>
                     </button>
                 </div>
-                <div class="column-content" cdkDropList id="awaitFeedbackList" [cdkDropListData]="awaitFeedbackTasks()" (cdkDropListDropped)="drop($event)">
+
+                <div class="column-content" cdkDropList id="awaitFeedbackList" [cdkDropListData]="awaitFeedbackTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of awaitFeedbackTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    @if (awaitFeedbackTasks().length === 0) {
                         <div class="empty-state">No tasks Await feedback</div>
                     }
                 </div>
             </div>
-
             <div class="board-column">
                 <div class="column-header">
                     <h2 class="column-title">Done</h2>
                 </div>
-                <div class="column-content" cdkDropList id="doneList" [cdkDropListData]="doneTasks()" (cdkDropListDropped)="drop($event)">
+
+                <div class="column-content" cdkDropList id="doneList" [cdkDropListData]="doneTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of doneTasks(); track task.id) {
-                        <app-task-card cdkDrag [task]="task" (click)="selectedTask.set(task)"></app-task-card>
-                    } @empty {
+                        <app-task-card cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                    }
+                    @if (doneTasks().length === 0) {
                         <div class="empty-state">No tasks Done</div>
                     }
                 </div>
             </div>
         </section>
     </div>
-
     @if (selectedTask(); as task) {
         <div class="task-overlay" (click)="selectedTask.set(null)">
             <div (click)="$event.stopPropagation()">
