@@ -6,6 +6,7 @@
 :host {
     display: block;
     width: 100%;
+    height: 100%;
 }
 
 /* #endregion */
@@ -311,8 +312,16 @@
     /* #endregion */
 
     /* #region Subtasks */
+    &__subtask-area {
+        display: flex;
+        flex-direction: column;
+        height: 120px;
+        overflow: hidden;
+    }
+
     &__subtask-input {
         position: relative;
+        flex-shrink: 0;
     }
 
     &__subtask-input .task-form__input {
@@ -351,8 +360,8 @@
 
     &__subtask-list {
         width: 100%;
-        margin: 8px 0 0 0;
-        max-height: 70px;
+        flex: 1;
+        min-height: 0;
         overflow-y: auto;
     }
 
@@ -522,7 +531,12 @@
             min-height: 46px;
         }
 
+        &__subtask-area {
+            max-height: 120px;
+        }
+
         &__bottom {
+            margin-top: auto;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;

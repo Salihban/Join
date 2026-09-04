@@ -1,38 +1,52 @@
-.task-card{
+.task-card {
     width: 250px;
     height: 260px;
     border-radius: 24px;
     background-color: rgba(255, 255, 255, 1);
-    padding: 20px ;
+    padding: 20px;
 
-    .task-card-content-headline{
+    .task-card-content-headline {
         display: flex;
         justify-content: flex-start;
         margin-bottom: 10px;
-        .catagory-name{
+
+        .catagory-name {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 56, 255, 1);
+            background-color: #0038ff;
             width: 100px;
             height: 30px;
             border-radius: 8px;
             color: white;
             font-family: Inter;
+
+            &.technical-task {
+                background-color: #1fd7c1;
+            }
         }
     }
-    .task-card-text-content{
+
+    .task-card-text-content {
         margin-bottom: 10px;
-        .task-title{
+
+        h3 {
+            font-size: 16px;
+        }
+
+        .task-title {
             margin-bottom: 10px;
             font-family: Inter;
             font-weight: bold;
         }
-        .task-card-description{
+
+        .task-card-description {
             font-family: Inter;
+            font-size: 16px;
         }
     }
-    .subtask-content-wrapper{
+
+    .subtask-content-wrapper {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -41,33 +55,55 @@
     }
 }
 
-.initial-wrapper{
+.initial-wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .initial-content{
-        display: flex;
-    }
+
     .initial-content {
         display: flex;
+        align-items: center;
 
-        p {
+        .initials {
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            margin-left: -12px;
-            color: white;
-            background-color: red;
-            font-family: Inter;
-            font-size: 20px;
 
-            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-family: Inter;
+            font-size: 18px;
+
+            border: 2px solid white;
+
+            margin-left: -10px;
+        }
+
+        .initials:first-child {
+            margin-left: 0;
         }
     }
+}
+
+.initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    font-family: Inter;
+}
+.initials--more {
+    background-color: #d1d1d1;
+    color: #2a3647;
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: -6px;
 }
 
 .progress-container {
@@ -77,11 +113,12 @@
 }
 
 .progress-bar {
-    width: 80%;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
-    p{
+
+    p {
         display: flex;
         width: 100%;
     }

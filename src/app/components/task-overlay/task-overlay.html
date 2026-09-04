@@ -1,1 +1,6 @@
-<p>task-overlay works!</p>
+<div class="dialog-header">
+    <button class="dialog-close" (click)="onClose()">
+        <span class="material-symbols-outlined">close</span>
+    </button>
+</div>
+<app-task-form (taskCreated)="onTaskCreated()"></app-task-form>
