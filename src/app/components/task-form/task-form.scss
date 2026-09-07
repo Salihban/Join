@@ -7,6 +7,7 @@
     display: block;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
 
 /* #endregion */
@@ -17,8 +18,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 40px 16px 150px;
+    padding: 0 20px;
     color: $text-color;
+    box-sizing: border-box;
 
     &__title {
         @include mixin.font-bold;
@@ -409,6 +411,7 @@
     &__bottom {
         display: flex;
         flex-direction: column;
+        padding-bottom: 20px;
     }
 
     &__required-hint {
@@ -542,6 +545,7 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 40px;
+            padding-bottom: 0;
         }
 
         &__required-hint {
