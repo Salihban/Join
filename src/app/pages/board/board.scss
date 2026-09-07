@@ -1,5 +1,6 @@
 @use '../../styles/main' as styles;
 @use '../../styles/mixin' as mixin;
+
 $font-inter: 'Inter', sans-serif;
 $font-inter-2: 'Open Sans', sans-serif;
 
@@ -97,6 +98,7 @@ $font-inter-2: 'Open Sans', sans-serif;
     padding: 8px 16px;
     gap: 10px;
     transition: border-color 0.15s ease-in-out;
+    position: relative;
 
     &:hover {
         border-color: transparent;
@@ -110,24 +112,26 @@ $font-inter-2: 'Open Sans', sans-serif;
         font-family: $font-inter;
         font-size: 16px;
         color: styles.$main-color;
+        min-width: 0;
     }
 
     .search-divider {
         width: 1px;
         height: 31px;
         background-color: styles.$border-search;
+        flex-shrink: 0;
     }
 
     .search-btn {
         background: none;
         border: none;
-        padding: 0;
+        padding: 6px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 6px;
         border-radius: 50%;
+        flex-shrink: 0;
 
         .icon-search {
             width: 18px;
@@ -143,6 +147,7 @@ $font-inter-2: 'Open Sans', sans-serif;
 .search-no-results {
     position: absolute;
     top: 56px;
+    left: 0;
     font-size: 16px;
     color: #ff0000;
     font-family: $font-inter;
@@ -153,6 +158,7 @@ $font-inter-2: 'Open Sans', sans-serif;
     flex-direction: column;
     gap: 24px;
     min-height: 0;
+    width: 100%;
 }
 
 .board-column {
@@ -161,6 +167,7 @@ $font-inter-2: 'Open Sans', sans-serif;
     height: auto;
     max-height: none;
     gap: 16px;
+    min-width: 0;
 
     .column-header {
         display: flex;
@@ -181,6 +188,7 @@ $font-inter-2: 'Open Sans', sans-serif;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            flex-shrink: 0;
 
             .icon-plus-col {
                 width: 30px;
@@ -247,17 +255,19 @@ $font-inter-2: 'Open Sans', sans-serif;
 app-task-card {
     cursor: pointer;
     display: block;
-
-    &:active {
-        cursor: pointer;
-    }
 }
+
+app-task-card:active {
+    cursor: pointer;
+}
+
 
 @include mixin.tablet {
     .board-container {
         gap: 32px;
     }
 }
+
 
 @include mixin.desktop {
     .board-container {
@@ -335,62 +345,99 @@ app-task-card {
     }
 }
 
-.task-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgb(0, 0, 0, 0.35);
-
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-}
-
-.task-overlay > div{
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
 @media (max-width: 1024px) {
-    .board-container, .board-inner, .columns-grid {
-    height: auto;
-    max-height: none;
-    min-height: 0;
+    .board-container,
+    .board-inner,
+    .columns-grid {
+        height: auto;
+        max-height: none;
+        min-height: 0;
     }
-}
 
-@media screen and (max-width: 1024px) {
-    main {
-    padding-bottom: 100px;
+    .board-container {
+        padding-bottom: 100px;
+    }
+
+    .columns-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .board-column {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+    }
+
+    .column-content {
+        width: 100%;
+        max-height: none;
+        min-height: 120px;
+        overflow-y: visible;
+        padding-right: 0;
+        flex: none;
     }
 }
 
 @media (max-width: 768px) {
     .columns-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 100%;
     }
 
     .board-column {
-    width: 100%;
-    height: auto;
+        width: 100%;
+        min-width: 0;
+        height: auto;
     }
 
-    .column-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 120px;
-    max-height: none;
-    overflow-y: visible;
-    padding-right: 0;
-    gap: 16px;
-    flex: none;
+    .board-column .column-content {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+        width: 100%;
+        min-width: 0;
+        min-height: 120px;
+        height: auto;
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: visible;
+        padding-right: 0;
+        padding-bottom: 8px;
+        flex: none;
     }
 
-    app-task-card {
-    display: block;
-    min-width: 0;
+    .board-column .column-content app-task-card {
+        display: block;
+        flex: 0 0 252px;
+        width: 252px;
+        min-width: 252px;
+        max-width: 252px;
+    }
+
+    .board-column .column-content .empty-state {
+        flex: 0 0 100%;
+        width: 100%;
+        min-width: 100%;
     }
 }
+
+.task-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(0, 0, 0, 0.35);
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.task-overlay > div {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
