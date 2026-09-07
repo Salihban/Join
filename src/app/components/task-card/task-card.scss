@@ -1,3 +1,4 @@
+@use '../../styles/mixin' as mixin;
 .task-card {
     width: 250px;
     height: 260px;
@@ -29,8 +30,9 @@
 
     .task-card-text-content {
         margin-bottom: 10px;
-
+        @include mixin.font-regular;
         h3 {
+            @include mixin.font-bold;
             font-size: 16px;
         }
 
