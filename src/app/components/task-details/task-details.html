@@ -24,7 +24,7 @@
     <h3>Assigned To:</h3>
 
     <div class="contacts">
-        @for (contact of task.assignedContacts; track contact.id) {
+        @for (contact of showAllContacts ? task.assignedContacts: task.assignedContacts.slice(0, 3); track contact.id) {
             <div class="contact">
                 <span class="contact-avatar" [style.background-color]="contact.color">
                     {{ contact.initials }}
@@ -32,6 +32,15 @@
                 <span>{{ contact.name }}</span>
             </div>
         }
+        @if (task.assignedContacts.length > 3) {
+            <button type="button" class="more-contacts" (click)="toggleShowAllContacts()">
+                @if (showAllContacts) {
+                    <span class="material-symbol-outlined">expand_less</span>
+                } @else {
+                    +{{ task.assignedContacts.length - 3 }}
+                }
+            </button>
+            } 
     </div>
 
 <h3>Subtasks</h3>

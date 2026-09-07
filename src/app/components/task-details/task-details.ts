@@ -53,4 +53,10 @@ export class TaskDetails {
     get categoryName(): string {
         return this.task.category === 'user_story' ? 'User Story' : 'Technical Task';
     }
+
+    showAllContacts = false;
+
+    toggleShowAllContacts(): void {
+        this.showAllContacts = !this.showAllContacts;
+    }
 }
