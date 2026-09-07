@@ -41,6 +41,16 @@ export class Board implements OnInit {
         }
     }
 
+    async onStatusChanged(event: {
+        taskId: number;
+        status: Task['status'];
+    }): Promise<void>{
+        const success = await this.taskService.updateTaskStatus(event.taskId, event.status);
+        if(success){
+            await this.loadTasks();
+        }
+    }
+
     onSearch(event: Event): void {
         const input = event.target as HTMLInputElement;
         const searchTerm = input.value.trim();

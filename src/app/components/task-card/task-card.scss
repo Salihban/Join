@@ -141,8 +141,8 @@
     position: absolute;
     top: 40px;
     right: -40px;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     background-color: rgba(42, 54, 71, 1);
     color: white;
     border-top-right-radius: 12px;
@@ -152,9 +152,20 @@
     font-family: inter;
     display: none;
     flex-direction: column;
+    gap: 6px;
     padding: 10px;
     z-index: 1000;
+
+    button{
+        text-align: start;
+    }
 }
 .dropdown.open {
     display: flex;
+    flex-direction: column;
+}
+@media  (min-width: 768px) {
+    .user-button{
+        display: none;
+    }
 }

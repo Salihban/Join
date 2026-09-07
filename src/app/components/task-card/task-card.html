@@ -21,9 +21,11 @@
                 <div
                     class="dropdown"
                     [class.open]="menuOpen">
-                    <h2>Move to</h2>
-                    <p>To-do</p>
-                    <p>Review</p>
+                    <h2>Move to :</h2>
+                    <button type="button" (click)="currentStatus('todo', $event)">todo</button>
+                    <button type="button" (click)="currentStatus('in_progress', $event)">in_progress</button>
+                    <button type="button" (click)="currentStatus('await_feedback', $event)">await_feedback</button>
+                    <button type="button" (click)="currentStatus('done', $event)">done</button>
                 </div>
             </div>
 

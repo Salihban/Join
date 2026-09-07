@@ -86,6 +86,14 @@ import { Contact } from './contact';
     return assigneesSaved && subtasksSaved;
 }
 
+    async updateTaskStatus(taskId: number , status: Task['status']): Promise<boolean>{
+        const {error } = await this.dbService.supabase.from('task').update({status}).eq('id', taskId);
+        if(error) {
+            return false;
+        }
+        return true;
+    }
+
     async deleteTask(taskId: number): Promise<boolean> {
     const { error } = await this.dbService.supabase.from('task').delete().eq('id', taskId);
     return !error;
