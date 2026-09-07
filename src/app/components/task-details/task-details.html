@@ -9,7 +9,7 @@
     {{ categoryName }}</span>
 
     <h1>{{ task.title }}</h1>
-    <p>{{ task.description }}</p>
+    <p class="task-discription">{{ task.description }}</p>
 
     <div class="detail-row">
         <span>Due Date:</span>
@@ -35,7 +35,7 @@
         @if (task.assignedContacts.length > 3) {
             <button type="button" class="more-contacts" (click)="toggleShowAllContacts()">
                 @if (showAllContacts) {
-                    <span class="material-symbol-outlined">expand_less</span>
+                    <span class="material-symbols-outlined">expand_less</span>
                 } @else {
                     +{{ task.assignedContacts.length - 3 }}
                 }
