@@ -383,11 +383,14 @@
         display: flex;
         align-items: center;
         flex: 1;
+        min-width: 0;
     }
 
     &__subtask-text {
         flex: 1;
         font-size: 16px;
+        overflow-wrap: anywhere;
+        word-break: break-all;
     }
 
     &__subtask-action {
@@ -411,7 +414,7 @@
     &__bottom {
         display: flex;
         flex-direction: column;
-        padding-bottom: 20px;
+        padding-bottom: 90px;
     }
 
     &__required-hint {

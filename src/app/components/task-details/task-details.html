@@ -9,7 +9,7 @@
     {{ categoryName }}</span>
 
     <h1>{{ task.title }}</h1>
-    <p>{{ task.description }}</p>
+    <p class="task-discription">{{ task.description }}</p>
 
     <div class="detail-row">
         <span>Due Date:</span>
@@ -24,7 +24,7 @@
     <h3>Assigned To:</h3>
 
     <div class="contacts">
-        @for (contact of showAllContacts ? task.assignedContacts: task.assignedContacts.slice(0, 3); track contact.id) {
+        @for (contact of task.assignedContacts; track contact.id) {
             <div class="contact">
                 <span class="contact-avatar" [style.background-color]="contact.color">
                     {{ contact.initials }}
@@ -32,15 +32,6 @@
                 <span>{{ contact.name }}</span>
             </div>
         }
-        @if (task.assignedContacts.length > 3) {
-            <button type="button" class="more-contacts" (click)="toggleShowAllContacts()">
-                @if (showAllContacts) {
-                    <span class="material-symbol-outlined">expand_less</span>
-                } @else {
-                    +{{ task.assignedContacts.length - 3 }}
-                }
-            </button>
-            } 
     </div>
 
 <h3>Subtasks</h3>
@@ -56,11 +47,11 @@
 
 <div class="actions-btn">
     <button type="button" (click)="startEditing()">
-        <img src="/assets/icons_sprint2/edit.svg" alt="">Edit
+        <img src="assets/icons_sprint2/edit.svg" alt="">Edit
     </button>
 
     <button type="button" (click)="requestDelete()">
-    <img src="/assets/icons_sprint2/delete.svg" alt="">Delete
+    <img src="assets/icons_sprint2/delete.svg" alt="">Delete
     </button>
 </div>
 } @else {
@@ -70,7 +61,7 @@
 </div>
 @if (isEditing) {
     <div class="task-details__footer">
-        <button type="submit" form="task-details-form" class="ok-button">ok <img src="/assets/icons_sprint2/check.svg" alt=""></button>
+        <button type="submit" form="task-details-form" class="ok-button">ok <img src="assets/icons_sprint2/check.svg" alt=""></button>
     </div>
 }
 </section>

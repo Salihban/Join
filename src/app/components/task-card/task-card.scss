@@ -34,6 +34,10 @@
         h3 {
             @include mixin.font-bold;
             font-size: 16px;
+            font-family: 'inter';
+            width: 100%;
+            overflow: clip;
+            text-overflow: ellipsis;
         }
 
         .task-title {
@@ -45,6 +49,8 @@
         .task-card-description {
             font-family: Inter;
             font-size: 16px;
+            overflow: clip;
+            text-overflow: ellipsis;
         }
     }
 

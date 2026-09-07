@@ -64,6 +64,7 @@
     color: white;
     background: #2a3647;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .task-details__body.editing{
@@ -92,11 +93,13 @@
 }
 
 .task-details h1 {
-    max-width: 430px;
+    max-width: 100%;
     margin: 24px 0 16px;
     font-size: 48px;
     line-height: 1.1;
     overflow-wrap: anywhere;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .task-details > p {
@@ -121,12 +124,32 @@
 
 p{
     margin-bottom: 16px;
+    font-family: 'inter';
+    font-size: 16px;
+}
+
+.task-discription{
+    max-width: 100%;
+    min-width: 0;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.task-details__body{
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .contacts {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-height: 180px;
+    overflow-y: auto;
+    padding: 8px;
 }
 
 .contact {
@@ -155,7 +178,10 @@ p{
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding-left: 20px;
+    max-height: 100px;
+    overflow-y: auto;
+    padding-right: 8px;
+    flex-shrink: 0;
 }
 
 .subtasks label {
@@ -164,6 +190,13 @@ p{
     gap: 12px;
     font-size: 17px;
     cursor: pointer;
+}
+
+.subtasks label, .subtasks span{
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .subtasks input {

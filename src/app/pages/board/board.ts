@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, HostListener } from '@angular/core';
 import { CdkDragDrop, CdkDropList, CdkDropListGroup, CdkDrag } from '@angular/cdk/drag-drop';
 import { TaskService, Task, NewTask } from '../../services/task';
 import { TaskDetails } from '../../components/task-details/task-details';
@@ -224,5 +224,12 @@ export class Board implements OnInit {
         this.filterTasksByStatus(this.allTasks());
         this.selectedTask.set(null);
     }
+
+    isMobile = signal(window.innerWidth < 1025);
+
+@HostListener('window:resize')
+checkScreenSize(): void {
+    this.isMobile.set(window.innerWidth < 1025);
+}
 }
 
