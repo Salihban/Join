@@ -147,6 +147,9 @@ p{
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-height: 180px;
+    overflow-y: auto;
+    padding: 8px;
 }
 
 .contact {
@@ -175,7 +178,8 @@ p{
     display: flex;
     flex-direction: column;
     gap: 12px;
-    padding-left: 20px;
+    overflow-y: auto;
+    padding-right: 8px;
 }
 
 .subtasks label {
@@ -184,6 +188,13 @@ p{
     gap: 12px;
     font-size: 17px;
     cursor: pointer;
+}
+
+.subtasks label, .subtasks span{
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .subtasks input {
