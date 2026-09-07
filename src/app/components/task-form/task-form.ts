@@ -193,6 +193,11 @@ export class TaskForm implements OnInit {
     due_date: formValue.dueDate,
     priority: formValue.priority,
     category: formValue.category as Task['category'],
+    subtasks: (formValue.subtasks ?? []).map((title, index) => ({
+        id: this.task!.subtasks[index]?.id ?? Date.now() + index,
+        title: title,
+        completed: this.task!.subtasks[index]?.completed ?? false,
+        })),
     });
 
     this.contactService.triggerToast('Task successfully updated');
