@@ -33,7 +33,6 @@ export class Board implements OnInit {
     async loadTasks(): Promise<void> {
         try {
             const allTasks = await this.taskService.getTasks();
-
             this.allTasks.set(allTasks ?? []);
             this.filterTasksByStatus(allTasks ?? []);
         } catch (error) {
@@ -44,7 +43,7 @@ export class Board implements OnInit {
     async onStatusChanged(event: {
         taskId: number;
         status: Task['status'];
-    }): Promise<void>{
+    }): Promise<void> {
         const success = await this.taskService.updateTaskStatus(event.taskId, event.status);
         if(success){
             await this.loadTasks();
@@ -74,7 +73,6 @@ export class Board implements OnInit {
         if (this.searchTerm().length < 3) {
             return true;
         }
-
         return (
             this.todoTasks().length > 0 ||
             this.inProgressTasks().length > 0 ||
@@ -87,7 +85,6 @@ export class Board implements OnInit {
         this.todoTasks.set(
             allTasks.filter(t => (t.status as string) === 'todo')
         );
-
         this.inProgressTasks.set(
             allTasks.filter(
                 t =>
@@ -95,7 +92,6 @@ export class Board implements OnInit {
                     (t.status as string) === 'inProgress'
             )
         );
-
         this.awaitFeedbackTasks.set(
             allTasks.filter(
                 t =>
@@ -103,7 +99,6 @@ export class Board implements OnInit {
                     (t.status as string) === 'awaitFeedback'
             )
         );
-
         this.doneTasks.set(
             allTasks.filter(t => (t.status as string) === 'done')
         );
@@ -131,13 +126,11 @@ export class Board implements OnInit {
 
     async drop(event: CdkDragDrop<Task[]>): Promise<void> {
         const movedTask = event.item.data as Task;
-
         if (!movedTask) {
             return;
         }
-
         if (event.previousContainer === event.container) {
-            this.updateListSignal(event.container.id, (currentList) => {
+            this.updateListSignal(event.container.id, (currentList) => { 
                 const list = [...currentList];
                 const [item] = list.splice(event.previousIndex, 1);
                 list.splice(event.currentIndex, 0, item);
@@ -147,13 +140,10 @@ export class Board implements OnInit {
             this.updateListSignal(event.previousContainer.id, (currentList) =>
                 currentList.filter(t => t.id !== movedTask.id)
             );
-
             const newStatus = this.getStatusFromContainerId(event.container.id);
-
             if (newStatus) {
                 movedTask.status = newStatus as any;
             }
-
             this.updateListSignal(event.container.id, (currentList) => {
                 const list = [...currentList];
                 list.splice(event.currentIndex, 0, movedTask);
@@ -173,10 +163,7 @@ export class Board implements OnInit {
                 };
 
                 try {
-                    await this.taskService.updateTask(
-                        movedTask.id,
-                        updatedTaskPayload
-                    );
+                    await this.taskService.updateTask( movedTask.id, updatedTaskPayload);
                 } catch (error) {
                     console.error('[Board] Fehler beim Speichern', error);
                 }
@@ -186,36 +173,26 @@ export class Board implements OnInit {
 
     private updateListSignal(
         containerId: string,
-        updateFn: (tasks: Task[]) => Task[]
-    ): void {
+        updateFn: (tasks: Task[]) => Task[]): void {
         switch (containerId) {
-            case 'todoList':
-                this.todoTasks.update(updateFn);
+            case 'todoList': this.todoTasks.update(updateFn);
                 break;
-            case 'inProgressList':
-                this.inProgressTasks.update(updateFn);
+            case 'inProgressList': this.inProgressTasks.update(updateFn);
                 break;
-            case 'awaitFeedbackList':
-                this.awaitFeedbackTasks.update(updateFn);
+            case 'awaitFeedbackList': this.awaitFeedbackTasks.update(updateFn);
                 break;
-            case 'doneList':
-                this.doneTasks.update(updateFn);
+            case 'doneList': this.doneTasks.update(updateFn);
                 break;
         }
     }
 
     private getStatusFromContainerId(containerId: string): string | null {
         switch (containerId) {
-            case 'todoList':
-                return 'todo';
-            case 'inProgressList':
-                return 'in_progress';
-            case 'awaitFeedbackList':
-                return 'await_feedback';
-            case 'doneList':
-                return 'done';
-            default:
-                return null;
+            case 'todoList': return 'todo';
+            case 'inProgressList': return 'in_progress';
+            case 'awaitFeedbackList': return 'await_feedback';
+            case 'doneList': return 'done';
+            default: return null;
         }
     }
 
