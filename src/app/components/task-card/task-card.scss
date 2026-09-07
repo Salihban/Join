@@ -1,3 +1,4 @@
+@use '../../styles/mixin' as mixin;
 .task-card {
     width: 250px;
     height: 260px;
@@ -7,7 +8,7 @@
 
     .task-card-content-headline {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         margin-bottom: 10px;
 
         .catagory-name {
@@ -29,8 +30,9 @@
 
     .task-card-text-content {
         margin-bottom: 10px;
-
+        @include mixin.font-regular;
         h3 {
+            @include mixin.font-bold;
             font-size: 16px;
             font-family: 'inter';
             width: 100%;
@@ -127,5 +129,49 @@
     p {
         display: flex;
         width: 100%;
+    }
+}
+
+.user-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+.dropdown {
+    position: absolute;
+    top: 40px;
+    right: -40px;
+    width: 130px;
+    height: 130px;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: inter;
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    z-index: 1000;
+
+    button{
+        text-align: start;
+    }
+}
+.dropdown.open {
+    display: flex;
+    flex-direction: column;
+}
+@media  (min-width: 768px) {
+    .user-button{
+        display: none;
     }
 }

@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../../services/task';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
 @Component({
     selector: 'app-task-card',
     imports: [MatProgressBarModule],
@@ -10,8 +9,18 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class TaskCard {
     @Input({ required: true }) task!: Task;
-    
+    @Output() statusChanged = new EventEmitter<{
+        taskId: number;
+        status: Task['status'];
+    }>();
 
+    currentStatus(status: Task['status'], event: Event): void{
+        event.stopPropagation();
+        this.statusChanged.emit({
+            taskId: this.task.id,status
+        });
+    this.menuOpen = false;
+    }
     get categoryName(): string {
         return this.task.category === 'user_story' ? 'User Story' : 'Technical Task';
     }
@@ -27,5 +36,11 @@ export class TaskCard {
     get progressValue(): number {
         if (this.totalSubtasks === 0) return 0;
         return (this.completedSubtasks / this.totalSubtasks) * 100;
+    }
+
+    menuOpen = false;
+    toggleMenu(event: Event): void {
+        event.stopPropagation();
+        this.menuOpen = !this.menuOpen;
     }
 }
