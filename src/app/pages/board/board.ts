@@ -22,7 +22,6 @@ export class Board implements OnInit {
     doneTasks = signal<Task[]>([]);
     selectedTask = signal<Task | null>(null);
     searchTerm = signal('');
-
     private allTasks = signal<Task[]>([]);
     private taskService = inject(TaskService);
 
@@ -157,8 +156,7 @@ export class Board implements OnInit {
                     dueDate: movedTask.due_date ?? '',
                     priority: movedTask.priority ?? 'medium',
                     category: movedTask.category ?? 'technical_task',
-                    status: newStatus,
-                    assignedContactIds: movedTask.assignedContacts ? movedTask.assignedContacts.map((c: any) => c.id) : [],
+                    status: newStatus, assignedContactIds: movedTask.assignedContacts ? movedTask.assignedContacts.map((c: any) => c.id) : [],
                     subtasks: movedTask.subtasks ? movedTask.subtasks.map((s: any) => s.title) : []
                 };
 
@@ -176,36 +174,26 @@ export class Board implements OnInit {
 
     private updateListSignal(
         containerId: string,
-        updateFn: (tasks: Task[]) => Task[]
-    ): void {
+        updateFn: (tasks: Task[]) => Task[]): void {
         switch (containerId) {
-            case 'todoList':
-                this.todoTasks.update(updateFn);
+            case 'todoList': this.todoTasks.update(updateFn); 
+            break;
+            case 'inProgressList': this.inProgressTasks.update(updateFn);
                 break;
-            case 'inProgressList':
-                this.inProgressTasks.update(updateFn);
+                case 'awaitFeedbackList': this.awaitFeedbackTasks.update(updateFn);
                 break;
-            case 'awaitFeedbackList':
-                this.awaitFeedbackTasks.update(updateFn);
-                break;
-            case 'doneList':
-                this.doneTasks.update(updateFn);
+            case 'doneList': this.doneTasks.update(updateFn);
                 break;
         }
     }
 
     private getStatusFromContainerId(containerId: string): string | null {
         switch (containerId) {
-            case 'todoList':
-                return 'todo';
-            case 'inProgressList':
-                return 'in_progress';
-            case 'awaitFeedbackList':
-                return 'await_feedback';
-            case 'doneList':
-                return 'done';
-            default:
-                return null;
+            case 'todoList': return 'todo';
+            case 'inProgressList': return 'in_progress';
+            case 'awaitFeedbackList': return 'await_feedback';
+            case 'doneList': return 'done';
+            default: return null;
         }
     }
 
