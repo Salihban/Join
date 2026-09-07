@@ -43,6 +43,8 @@
         .task-card-description {
             font-family: Inter;
             font-size: 16px;
+            overflow: clip;
+            text-overflow: ellipsis;
         }
     }
 
