@@ -8,7 +8,7 @@
 
     .task-card-content-headline {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         margin-bottom: 10px;
 
         .catagory-name {
@@ -124,4 +124,37 @@
         display: flex;
         width: 100%;
     }
+}
+
+.user-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+.dropdown {
+    position: absolute;
+    top: 40px;
+    right: -40px;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: inter;
+    display: none;
+    flex-direction: column;
+    padding: 10px;
+    z-index: 1000;
+}
+.dropdown.open {
+    display: flex;
 }

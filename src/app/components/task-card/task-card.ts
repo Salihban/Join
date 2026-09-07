@@ -10,7 +10,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class TaskCard {
     @Input({ required: true }) task!: Task;
-    
 
     get categoryName(): string {
         return this.task.category === 'user_story' ? 'User Story' : 'Technical Task';
@@ -27,5 +26,11 @@ export class TaskCard {
     get progressValue(): number {
         if (this.totalSubtasks === 0) return 0;
         return (this.completedSubtasks / this.totalSubtasks) * 100;
+    }
+
+    menuOpen = false;
+    toggleMenu(event: Event): void {
+        event.stopPropagation();
+        this.menuOpen = !this.menuOpen;
     }
 }
