@@ -18,7 +18,11 @@
     
     <div class="detail-row">
         <span>Priority:</span>
-        <span>{{ task.priority }}</span>
+        <span>{{ task.priority }}  
+            <img
+                [src]="'assets/icons_sprint2/prio_' + (task.priority || 'medium') + '.svg'"
+                [alt]="task.priority">
+        </span>
     </div>
 
     <h3>Assigned To:</h3>
