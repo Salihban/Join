@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TaskOverlay } from '../../components/task-overlay/task-overlay';
 
-
 @Component({
     selector: 'app-board',
     standalone: true,
@@ -22,12 +21,23 @@ export class Board implements OnInit {
     doneTasks = signal<Task[]>([]);
     selectedTask = signal<Task | null>(null);
     searchTerm = signal('');
-
+    activeTaskId = signal<number | null>(null);
     private allTasks = signal<Task[]>([]);
     private taskService = inject(TaskService);
-
+    private dialog = inject(MatDialog);
+    private router = inject(Router);
     async ngOnInit(): Promise<void> {
         await this.loadTasks();
+    }
+
+    toggleTaskMenu(taskId: number, event?: Event): void {
+        event?.stopPropagation();
+        this.activeTaskId.update((current) => (current === taskId ? null : taskId));
+    }
+
+    @HostListener('document:click')
+    closeActiveMenu(): void {
+        this.activeTaskId.set(null);
     }
 
     async loadTasks(): Promise<void> {
@@ -40,12 +50,9 @@ export class Board implements OnInit {
         }
     }
 
-    async onStatusChanged(event: {
-        taskId: number;
-        status: Task['status'];
-    }): Promise<void> {
+    async onStatusChanged(event: { taskId: number; status: Task['status'] }): Promise<void> {
         const success = await this.taskService.updateTaskStatus(event.taskId, event.status);
-        if(success){
+        if (success) {
             await this.loadTasks();
         }
     }
@@ -61,7 +68,7 @@ export class Board implements OnInit {
         }
 
         const search = searchTerm.toLowerCase();
-        const filteredTasks = allTasks.filter(task => {
+        const filteredTasks = allTasks.filter((task) => {
             const title = (task.title ?? '').toLowerCase();
             const description = (task.description ?? '').toLowerCase();
             return title.includes(search) || description.includes(search);
@@ -82,47 +89,43 @@ export class Board implements OnInit {
     }
 
     private filterTasksByStatus(allTasks: Task[]): void {
-        this.todoTasks.set(
-            allTasks.filter(t => (t.status as string) === 'todo')
-        );
+        this.todoTasks.set(allTasks.filter((t) => (t.status as string) === 'todo'));
         this.inProgressTasks.set(
             allTasks.filter(
-                t =>
-                    (t.status as string) === 'in_progress' ||
-                    (t.status as string) === 'inProgress'
-            )
+                (t) =>
+                    (t.status as string) === 'in_progress' || (t.status as string) === 'inProgress',
+            ),
         );
         this.awaitFeedbackTasks.set(
             allTasks.filter(
-                t =>
+                (t) =>
                     (t.status as string) === 'await_feedback' ||
-                    (t.status as string) === 'awaitFeedback'
-            )
+                    (t.status as string) === 'awaitFeedback',
+            ),
         );
-        this.doneTasks.set(
-            allTasks.filter(t => (t.status as string) === 'done')
-        );
+        this.doneTasks.set(allTasks.filter((t) => (t.status as string) === 'done'));
     }
 
-    private dialog = inject(MatDialog);
-    private router = inject(Router);
 
     openAddTaskDialog(): void {
         if (window.innerWidth < 768) {
             this.router.navigate(['/add-task']);
             return;
         }
-        this.dialog.open(TaskOverlay, {
-            width: '1200px',
-            maxWidth: '90dvh',
-            height: 'auto',
-            maxHeight: '120dvh',
-            panelClass: 'task-dialog-panel'
-        }).afterClosed().subscribe(result => {
-            if (result) {
-                this.loadTasks();
-            }
-        });
+        this.dialog
+            .open(TaskOverlay, {
+                width: '1200px',
+                maxWidth: '90dvh',
+                height: 'auto',
+                maxHeight: '120dvh',
+                panelClass: 'task-dialog-panel',
+            })
+            .afterClosed()
+            .subscribe((result) => {
+                if (result) {
+                    this.loadTasks();
+                }
+            });
     }
 
     async drop(event: CdkDragDrop<Task[]>): Promise<void> {
@@ -131,7 +134,7 @@ export class Board implements OnInit {
             return;
         }
         if (event.previousContainer === event.container) {
-            this.updateListSignal(event.container.id, (currentList) => { 
+            this.updateListSignal(event.container.id, (currentList) => {
                 const list = [...currentList];
                 const [item] = list.splice(event.previousIndex, 1);
                 list.splice(event.currentIndex, 0, item);
@@ -139,7 +142,7 @@ export class Board implements OnInit {
             });
         } else {
             this.updateListSignal(event.previousContainer.id, (currentList) =>
-                currentList.filter(t => t.id !== movedTask.id)
+                currentList.filter((t) => t.id !== movedTask.id),
             );
             const newStatus = this.getStatusFromContainerId(event.container.id);
             if (newStatus) {
@@ -159,12 +162,14 @@ export class Board implements OnInit {
                     priority: movedTask.priority ?? 'medium',
                     category: movedTask.category ?? 'technical_task',
                     status: newStatus,
-                    assignedContactIds: movedTask.assignedContacts ? movedTask.assignedContacts.map((c: any) => c.id) : [],
-                    subtasks: movedTask.subtasks ? movedTask.subtasks.map((s: any) => s.title) : []
+                    assignedContactIds: movedTask.assignedContacts
+                        ? movedTask.assignedContacts.map((c: any) => c.id)
+                        : [],
+                    subtasks: movedTask.subtasks ? movedTask.subtasks.map((s: any) => s.title) : [],
                 };
 
                 try {
-                    await this.taskService.updateTask( movedTask.id, updatedTaskPayload);
+                    await this.taskService.updateTask(movedTask.id, updatedTaskPayload);
                 } catch (error) {
                     console.error('[Board] Fehler beim Speichern', error);
                 }
@@ -172,42 +177,48 @@ export class Board implements OnInit {
         }
     }
 
-    private updateListSignal(
-        containerId: string,
-        updateFn: (tasks: Task[]) => Task[]): void {
+    private updateListSignal(containerId: string, updateFn: (tasks: Task[]) => Task[]): void {
         switch (containerId) {
-            case 'todoList': this.todoTasks.update(updateFn);
+            case 'todoList':
+                this.todoTasks.update(updateFn);
                 break;
-            case 'inProgressList': this.inProgressTasks.update(updateFn);
+            case 'inProgressList':
+                this.inProgressTasks.update(updateFn);
                 break;
-            case 'awaitFeedbackList': this.awaitFeedbackTasks.update(updateFn);
+            case 'awaitFeedbackList':
+                this.awaitFeedbackTasks.update(updateFn);
                 break;
-            case 'doneList': this.doneTasks.update(updateFn);
+            case 'doneList':
+                this.doneTasks.update(updateFn);
                 break;
         }
     }
 
     private getStatusFromContainerId(containerId: string): string | null {
         switch (containerId) {
-            case 'todoList': return 'todo';
-            case 'inProgressList': return 'in_progress';
-            case 'awaitFeedbackList': return 'await_feedback';
-            case 'doneList': return 'done';
-            default: return null;
+            case 'todoList':
+                return 'todo';
+            case 'inProgressList':
+                return 'in_progress';
+            case 'awaitFeedbackList':
+                return 'await_feedback';
+            case 'doneList':
+                return 'done';
+            default:
+                return null;
         }
     }
 
-    onTaskDelete(taskId: number): void{
-        this.allTasks.update(tasks => tasks.filter(task => task.id !== taskId));
+    onTaskDelete(taskId: number): void {
+        this.allTasks.update((tasks) => tasks.filter((task) => task.id !== taskId));
         this.filterTasksByStatus(this.allTasks());
         this.selectedTask.set(null);
     }
 
     isMobile = signal(window.innerWidth < 1025);
 
-@HostListener('window:resize')
-checkScreenSize(): void {
-    this.isMobile.set(window.innerWidth < 1025);
+    @HostListener('window:resize')
+    checkScreenSize(): void {
+        this.isMobile.set(window.innerWidth < 1025);
+    }
 }
-}
-

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, HostListener } from '@angular/core';
 import { Task } from '../../services/task';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 @Component({
     selector: 'app-task-card',
     imports: [MatProgressBarModule],
@@ -9,20 +10,30 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class TaskCard {
     @Input({ required: true }) task!: Task;
+    @Input() isMenuOpen = false;
+    @Output() menuToggled = new EventEmitter<Event>();
     @Output() statusChanged = new EventEmitter<{
         taskId: number;
         status: Task['status'];
     }>();
 
-    currentStatus(status: Task['status'], event: Event): void{
+toggleMenu(event: Event): void {
+        event.stopPropagation();
+        this.menuToggled.emit(event);
+    }
+
+    currentStatus(status: Task['status'], event: Event): void {
         event.stopPropagation();
         this.statusChanged.emit({
-            taskId: this.task.id,status
+            taskId: this.task.id,
+            status: status
         });
-    this.menuOpen = false;
     }
+
     get categoryName(): string {
-        return this.task.category === 'user_story' ? 'User Story' : 'Technical Task';
+        return this.task.category === 'user_story'
+            ? 'User Story'
+            : 'Technical Task';
     }
 
     get totalSubtasks(): number {
@@ -30,17 +41,16 @@ export class TaskCard {
     }
 
     get completedSubtasks(): number {
-        return this.task.subtasks?.filter((subtask) => subtask.completed).length ?? 0;
+        return this.task.subtasks?.filter(
+            subtask => subtask.completed
+        ).length ?? 0;
     }
 
     get progressValue(): number {
-        if (this.totalSubtasks === 0) return 0;
-        return (this.completedSubtasks / this.totalSubtasks) * 100;
-    }
+        if (this.totalSubtasks === 0) {
+            return 0;
+        }
 
-    menuOpen = false;
-    toggleMenu(event: Event): void {
-        event.stopPropagation();
-        this.menuOpen = !this.menuOpen;
+        return (this.completedSubtasks / this.totalSubtasks) * 100;
     }
 }
