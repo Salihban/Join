@@ -9,19 +9,17 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     styleUrl: './task-card.scss',
 })
 export class TaskCard {
-
     @Input({ required: true }) task!: Task;
-
+    @Input() isMenuOpen = false;
+    @Output() menuToggled = new EventEmitter<Event>();
     @Output() statusChanged = new EventEmitter<{
         taskId: number;
         status: Task['status'];
     }>();
 
-    menuOpen = false;
-
     toggleMenu(event: Event): void {
         event.stopPropagation();
-        this.menuOpen = !this.menuOpen;
+        this.menuToggled.emit(event);
     }
 
     currentStatus(status: Task['status'], event: Event): void {
@@ -30,7 +28,6 @@ export class TaskCard {
             taskId: this.task.id,
             status: status
         });
-        this.menuOpen = false;
     }
 
     get categoryName(): string {

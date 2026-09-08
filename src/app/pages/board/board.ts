@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TaskOverlay } from '../../components/task-overlay/task-overlay';
 
-
 @Component({
     selector: 'app-board',
     standalone: true,
@@ -22,12 +21,25 @@ export class Board implements OnInit {
     doneTasks = signal<Task[]>([]);
     selectedTask = signal<Task | null>(null);
     searchTerm = signal('');
+    activeTaskId = signal<number | null>(null);
 
     private allTasks = signal<Task[]>([]);
     private taskService = inject(TaskService);
+    private dialog = inject(MatDialog);
+    private router = inject(Router);
 
     async ngOnInit(): Promise<void> {
         await this.loadTasks();
+    }
+
+    toggleTaskMenu(taskId: number, event?: Event): void {
+        event?.stopPropagation();
+        this.activeTaskId.update(current => current === taskId ? null : taskId);
+    }
+
+    @HostListener('document:click')
+    closeActiveMenu(): void {
+        this.activeTaskId.set(null);
     }
 
     async loadTasks(): Promise<void> {
@@ -50,7 +62,6 @@ export class Board implements OnInit {
         );
         if (success) {
             await this.loadTasks();
-            console.log('TASKS NACH LOAD:', this.allTasks());
         }
     }
 
@@ -108,9 +119,6 @@ export class Board implements OnInit {
         );
     }
 
-    private dialog = inject(MatDialog);
-    private router = inject(Router);
-
     openAddTaskDialog(): void {
         if (window.innerWidth < 768) {
             this.router.navigate(['/add-task']);
@@ -156,26 +164,13 @@ export class Board implements OnInit {
             });
 
             if (newStatus && movedTask.id) {
-                const updateTaskStatus: NewTask = {
-                    title: movedTask.title ?? '',
-                    description: movedTask.description ?? '',
-                    dueDate: movedTask.due_date ?? '',
-                    priority: movedTask.priority ?? 'medium',
-                    category: movedTask.category ?? 'technical_task',
-                    status: newStatus,
-                    assignedContactIds: movedTask.assignedContacts ? movedTask.assignedContacts.map((c: any) => c.id) : [],
-                    subtasks: movedTask.subtasks ? movedTask.subtasks.map((s: any) => s.title) : []
-                };
-
-                if (newStatus && movedTask.id) {
-                    try {
-                        await this.taskService.updateTaskStatus(
-                            movedTask.id,
-                            newStatus as Task['status']
-                        );
-                    } catch (error) {
-                        console.error('[Board] Fehler beim Speichern', error);
-                    }
+                try {
+                    await this.taskService.updateTaskStatus(
+                        movedTask.id,
+                        newStatus as Task['status']
+                    );
+                } catch (error) {
+                    console.error('[Board] Fehler beim Speichern', error);
                 }
             }
         }
@@ -219,4 +214,3 @@ export class Board implements OnInit {
         this.isMobile.set(window.innerWidth < 1025);
     }
 }
-

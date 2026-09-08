@@ -9,7 +9,7 @@
                 <button class="user-button" type="button" (click)="toggleMenu($event)">
                     <img src="assets/icons/Frame 375.png" alt="Menu" />
                 </button>
-                <div class="dropdown" [class.open]="menuOpen" (click)="$event.stopPropagation()">
+                <div class="dropdown" [class.open]="isMenuOpen" (click)="$event.stopPropagation()">
                     <h2>Move to:</h2>
                     @if (task.status !== 'todo') {
                         <button type="button" (click)="currentStatus('todo', $event)">To Do</button>
@@ -81,4 +81,3 @@
         </div>
     </div>
 </section>
-
