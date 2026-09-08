@@ -1,12 +1,12 @@
 <section class="task-details">
-    <div class="task-details__topbar">
-    <button class="close-button" (click)="closeDetails.emit()">X</button>
-    </div>
 
     <div class="task-details__body" [class.editing]="isEditing">
     @if (!isEditing) {
+    <div class="category-row">
     <span class="category" [class.technical-task]="task.category === 'technical_task'">
     {{ categoryName }}</span>
+    <button class="close-button" (click)="closeDetails.emit()">X</button>
+    </div>
 
     <h1>{{ task.title }}</h1>
     <p class="task-discription">{{ task.description }}</p>
