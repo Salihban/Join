@@ -165,11 +165,13 @@
 
     button{
         text-align: start;
+        cursor: pointer;
     }
 }
 .dropdown.open {
     display: flex;
     flex-direction: column;
+    z-index: 1;
 }
 @media  (min-width: 768px) {
     .user-button{
