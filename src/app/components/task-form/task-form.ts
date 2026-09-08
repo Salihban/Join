@@ -3,6 +3,7 @@ import { Contact, ContactService } from '../../services/contact';
 import { TaskService, Task } from '../../services/task';
 import { AbstractControl, FormBuilder, FormControl, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { TitleCasePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 type Priority = 'urgent' | 'medium' | 'low';
 
@@ -25,6 +26,7 @@ export class TaskForm implements OnInit {
     categoryDropdownOpen = false;
     showAllContacts = false;
     editingIndex: number | null = null;
+    private router = inject(Router);
 
     @Input() task?: Task;
     @Input() detailsModus = false;
@@ -193,6 +195,7 @@ export class TaskForm implements OnInit {
     due_date: formValue.dueDate,
     priority: formValue.priority,
     category: formValue.category as Task['category'],
+    assignedContacts: [...this.selectContacts],
     subtasks: (formValue.subtasks ?? []).map((title, index) => ({
         id: this.task!.subtasks[index]?.id ?? Date.now() + index,
         title: title,
@@ -215,6 +218,10 @@ export class TaskForm implements OnInit {
         this.contactService.triggerToast('Task successfully created');
         this.taskCreated.emit();
         this.clearForm();
+
+        if (window.innerWidth < 768){
+            await this.router.navigate(['/board']);
+        }
     }
 
     clearForm(): void {
