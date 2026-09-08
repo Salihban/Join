@@ -173,7 +173,6 @@ p{
     flex-direction: column;
     gap: 12px;
     max-height: 64px;
-    overflow-y: auto;
     padding-right: 8px;
     flex-shrink: 0;
 }
@@ -198,6 +197,12 @@ p{
     height: 20px;
     accent-color: #2a3647;
     cursor: pointer;
+}
+
+.subtasks.scrollable{
+    max-height: 100px;
+    overflow-y: auto;
+    padding-right: 8px;
 }
 
 .actions-btn {

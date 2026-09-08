@@ -40,7 +40,7 @@
 
 <h3>Subtasks</h3>
 
-<div class="subtasks">
+<div class="subtasks" [class.scrollable]="task.subtasks.length >= 4">
     @for (Subtask of task?.subtasks; track Subtask.id) {
     <label>
         <input type="checkbox" [checked]="Subtask.completed" (change)="toggleSubtask(Subtask, $event)">
