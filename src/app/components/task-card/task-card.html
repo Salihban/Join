@@ -34,7 +34,7 @@
         <div class="task-card-text-content">
             <h3>{{ task.title }}</h3>
             <p class="task-card-description">
-                {{ task.description }}
+                {{ task.description.length > 90 ? task.description.slice(0, 90) + '...': task.description }}
             </p>
         </div>
 
