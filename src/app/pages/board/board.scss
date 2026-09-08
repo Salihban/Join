@@ -1,6 +1,5 @@
 @use '../../styles/main' as styles;
 @use '../../styles/mixin' as mixin;
-
 $font-inter: 'Inter', sans-serif;
 $font-inter-2: 'Open Sans', sans-serif;
 
@@ -267,7 +266,6 @@ app-task-card:active {
         gap: 32px;
     }
 }
-
 
 @include mixin.desktop {
     .board-container {
