@@ -168,6 +168,10 @@ body {
     overflow-x: clip;
 }
 
+main{
+    background-color: rgba(246, 247, 248, 1);
+}
+
 app-root {
     display: block;
     width: 100%;
@@ -204,5 +208,7 @@ app-root {
         position: static !important;
     }
 }
+
+
 
 
