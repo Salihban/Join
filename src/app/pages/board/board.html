@@ -37,7 +37,16 @@
 
                 <div class="column-content" cdkDropList id="todoList" [cdkDropListData]="todoTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of todoTasks(); track task.id) {
-                        <app-task-card [cdkDragDisabled]="isMobile()" (statusChanged)="onStatusChanged($event)" cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                        <app-task-card 
+                            [task]="task"
+                            [isMenuOpen]="activeTaskId() === task.id"
+                            (menuToggled)="toggleTaskMenu(task.id, $event)"
+                            (statusChanged)="onStatusChanged($event)"
+                            [cdkDragDisabled]="isMobile()" 
+                            cdkDrag 
+                            [cdkDragData]="task" 
+                            (click)="selectedTask.set(task)">
+                        </app-task-card>
                     }
                     @if (todoTasks().length === 0) {
                         <div class="empty-state">No tasks To do</div>
@@ -54,7 +63,16 @@
 
                 <div class="column-content" cdkDropList id="inProgressList" [cdkDropListData]="inProgressTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of inProgressTasks(); track task.id) {
-                        <app-task-card [cdkDragDisabled]="isMobile()" (statusChanged)="onStatusChanged($event)" cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                        <app-task-card 
+                            [task]="task"
+                            [isMenuOpen]="activeTaskId() === task.id"
+                            (menuToggled)="toggleTaskMenu(task.id, $event)"
+                            (statusChanged)="onStatusChanged($event)"
+                            [cdkDragDisabled]="isMobile()" 
+                            cdkDrag 
+                            [cdkDragData]="task" 
+                            (click)="selectedTask.set(task)">
+                        </app-task-card>
                     }
                     @if (inProgressTasks().length === 0) {
                         <div class="empty-state">No tasks In progress</div>
@@ -71,7 +89,16 @@
 
                 <div class="column-content" cdkDropList id="awaitFeedbackList" [cdkDropListData]="awaitFeedbackTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of awaitFeedbackTasks(); track task.id) {
-                        <app-task-card [cdkDragDisabled]="isMobile()" (statusChanged)="onStatusChanged($event)" cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                        <app-task-card 
+                            [task]="task"
+                            [isMenuOpen]="activeTaskId() === task.id"
+                            (menuToggled)="toggleTaskMenu(task.id, $event)"
+                            (statusChanged)="onStatusChanged($event)"
+                            [cdkDragDisabled]="isMobile()" 
+                            cdkDrag 
+                            [cdkDragData]="task" 
+                            (click)="selectedTask.set(task)">
+                        </app-task-card>
                     }
                     @if (awaitFeedbackTasks().length === 0) {
                         <div class="empty-state">No tasks Await feedback</div>
@@ -85,7 +112,16 @@
 
                 <div class="column-content" cdkDropList id="doneList" [cdkDropListData]="doneTasks()" (cdkDropListDropped)="drop($any($event))">
                     @for (task of doneTasks(); track task.id) {
-                        <app-task-card [cdkDragDisabled]="isMobile()" (statusChanged)="onStatusChanged($event)" cdkDrag [cdkDragData]="task" [task]="task" (click)="selectedTask.set(task)"></app-task-card>
+                        <app-task-card 
+                            [task]="task"
+                            [isMenuOpen]="activeTaskId() === task.id"
+                            (menuToggled)="toggleTaskMenu(task.id, $event)"
+                            (statusChanged)="onStatusChanged($event)"
+                            [cdkDragDisabled]="isMobile()" 
+                            cdkDrag 
+                            [cdkDragData]="task" 
+                            (click)="selectedTask.set(task)">
+                        </app-task-card>
                     }
                     @if (doneTasks().length === 0) {
                         <div class="empty-state">No tasks Done</div>

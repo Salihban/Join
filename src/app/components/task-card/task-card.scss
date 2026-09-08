@@ -141,6 +141,7 @@
     img {
         width: 24px;
         height: 24px;
+        z-index: 200;
     }
 }
 .dropdown {
@@ -174,4 +175,7 @@
     .user-button{
         display: none;
     }
+    .dropdown.open {
+        display: none;
+}
 }
