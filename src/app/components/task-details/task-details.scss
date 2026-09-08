@@ -205,6 +205,9 @@ p{
     justify-content: flex-end;
     gap: 20px;
     padding: 24px 24px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
 
 .actions-btn button {
