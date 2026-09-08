@@ -114,7 +114,8 @@ export class Board implements OnInit {
         }
         this.dialog.open(TaskOverlay, {
             width: '1200px',
-            maxWidth: '90dvw',
+            maxWidth: '90dvh',
+            height: 'auto',
             maxHeight: '120dvh',
             panelClass: 'task-dialog-panel'
         }).afterClosed().subscribe(result => {

@@ -182,6 +182,7 @@ app-root {
 
 .task-dialog-panel {
     height: 90dvh;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
     border-radius: 16px;
