@@ -51,6 +51,7 @@ export class Board implements OnInit {
     }
 
     async onStatusChanged(event: { taskId: number; status: Task['status'] }): Promise<void> {
+        this.activeTaskId.set(null);
         const success = await this.taskService.updateTaskStatus(event.taskId, event.status);
         if (success) {
             await this.loadTasks();
