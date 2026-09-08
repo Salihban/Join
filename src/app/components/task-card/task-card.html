@@ -1,67 +1,67 @@
 <section class="task-card">
     <div class="task-card-content-wrapper">
-
         <div class="task-card-content-headline">
-
-            <span
-                class="catagory-name"
-                [class.technical-task]="task.category === 'technical_task'">
+            <span class="catagory-name" [class.technical-task]="task.category === 'technical_task'">
                 {{ categoryName }}
             </span>
 
             <div class="task-menu">
-                <button
-                    class="user-button"
-                    (click)="toggleMenu($event)">
-                    <img
-                        src="assets/icons/Frame 375.png"
-                        alt="Menu">
+                <button class="user-button" type="button" (click)="toggleMenu($event)">
+                    <img src="assets/icons/Frame 375.png" alt="Menu" />
                 </button>
-
-                <div
-                    class="dropdown"
-                    [class.open]="menuOpen">
-                    <h2>Move to :</h2>
-                    <button type="button" (click)="currentStatus('todo', $event)">todo</button>
-                    <button type="button" (click)="currentStatus('in_progress', $event)">in_progress</button>
-                    <button type="button" (click)="currentStatus('await_feedback', $event)">await_feedback</button>
-                    <button type="button" (click)="currentStatus('done', $event)">done</button>
+                <div class="dropdown" [class.open]="menuOpen" (click)="$event.stopPropagation()">
+                    <h2>Move to:</h2>
+                    @if (task.status !== 'todo') {
+                        <button type="button" (click)="currentStatus('todo', $event)">To Do</button>
+                    }
+                    @if (task.status !== 'in_progress') {
+                        <button type="button" (click)="currentStatus('in_progress', $event)">
+                            In Progress
+                        </button>
+                    }
+                    @if (task.status !== 'await_feedback') {
+                        <button type="button" (click)="currentStatus('await_feedback', $event)">
+                            Await Feedback
+                        </button>
+                    }
+                    @if (task.status !== 'done') {
+                        <button type="button" (click)="currentStatus('done', $event)">Done</button>
+                    }
                 </div>
             </div>
-
         </div>
 
         <div class="task-card-text-content">
-            <h3>{{ task.title.length > 22 ? task.title.slice(0, 22) + '...': task.title }}</h3>
+            <h3>
+                {{ task.title.length > 22 ? task.title.slice(0, 22) + '...' : task.title }}
+            </h3>
+
             <p class="task-card-description">
-                {{ task.description.length > 90 ? task.description.slice(0, 90) + '...': task.description }}
+                {{
+                    task.description.length > 90
+                        ? task.description.slice(0, 90) + '...'
+                        : task.description
+                }}
             </p>
         </div>
 
         <div class="subtask-content-wrapper">
             <div class="progress-bar">
-                <mat-progress-bar
-                    mode="determinate"
-                    [value]="progressValue">
-                </mat-progress-bar>
+                <mat-progress-bar mode="determinate" [value]="progressValue"> </mat-progress-bar>
 
                 <p>{{ completedSubtasks }}/{{ totalSubtasks }} Subtasks</p>
             </div>
         </div>
-
     </div>
 
     <div class="initial-wrapper">
         <div class="initial-content">
-
-            @for (
-                contact of task.assignedContacts.slice(0, 3);
-                track contact.id
-            ) {
+            @for (contact of task.assignedContacts.slice(0, 3); track contact.id) {
                 <span
                     class="initials"
                     [style.backgroundColor]="contact.color"
-                    [title]="contact.name">
+                    [title]="contact.name"
+                >
                     {{ contact.initials }}
                 </span>
             }
@@ -71,13 +71,14 @@
                     +{{ task.assignedContacts.length - 3 }}
                 </span>
             }
-
         </div>
 
         <div>
             <img
                 [src]="'assets/icons_sprint2/prio_' + (task.priority || 'medium') + '.svg'"
-                [alt]="task.priority">
+                [alt]="task.priority"
+            />
         </div>
     </div>
 </section>
+

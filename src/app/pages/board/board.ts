@@ -44,9 +44,13 @@ export class Board implements OnInit {
         taskId: number;
         status: Task['status'];
     }): Promise<void> {
-        const success = await this.taskService.updateTaskStatus(event.taskId, event.status);
-        if(success){
+        const success = await this.taskService.updateTaskStatus(
+            event.taskId,
+            event.status
+        );
+        if (success) {
             await this.loadTasks();
+            console.log('TASKS NACH LOAD:', this.allTasks());
         }
     }
 
@@ -131,7 +135,7 @@ export class Board implements OnInit {
             return;
         }
         if (event.previousContainer === event.container) {
-            this.updateListSignal(event.container.id, (currentList) => { 
+            this.updateListSignal(event.container.id, (currentList) => {
                 const list = [...currentList];
                 const [item] = list.splice(event.previousIndex, 1);
                 list.splice(event.currentIndex, 0, item);
@@ -152,7 +156,7 @@ export class Board implements OnInit {
             });
 
             if (newStatus && movedTask.id) {
-                const updatedTaskPayload: NewTask = {
+                const updateTaskStatus: NewTask = {
                     title: movedTask.title ?? '',
                     description: movedTask.description ?? '',
                     dueDate: movedTask.due_date ?? '',
@@ -163,10 +167,15 @@ export class Board implements OnInit {
                     subtasks: movedTask.subtasks ? movedTask.subtasks.map((s: any) => s.title) : []
                 };
 
-                try {
-                    await this.taskService.updateTask( movedTask.id, updatedTaskPayload);
-                } catch (error) {
-                    console.error('[Board] Fehler beim Speichern', error);
+                if (newStatus && movedTask.id) {
+                    try {
+                        await this.taskService.updateTaskStatus(
+                            movedTask.id,
+                            newStatus as Task['status']
+                        );
+                    } catch (error) {
+                        console.error('[Board] Fehler beim Speichern', error);
+                    }
                 }
             }
         }
@@ -197,7 +206,7 @@ export class Board implements OnInit {
         }
     }
 
-    onTaskDelete(taskId: number): void{
+    onTaskDelete(taskId: number): void {
         this.allTasks.update(tasks => tasks.filter(task => task.id !== taskId));
         this.filterTasksByStatus(this.allTasks());
         this.selectedTask.set(null);
@@ -205,9 +214,9 @@ export class Board implements OnInit {
 
     isMobile = signal(window.innerWidth < 1025);
 
-@HostListener('window:resize')
-checkScreenSize(): void {
-    this.isMobile.set(window.innerWidth < 1025);
-}
+    @HostListener('window:resize')
+    checkScreenSize(): void {
+        this.isMobile.set(window.innerWidth < 1025);
+    }
 }
 
