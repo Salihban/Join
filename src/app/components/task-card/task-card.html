@@ -32,7 +32,7 @@
         </div>
 
         <div class="task-card-text-content">
-            <h3>{{ task.title }}</h3>
+            <h3>{{ task.title.length > 22 ? task.title.slice(0, 22) + '...': task.title }}</h3>
             <p class="task-card-description">
                 {{ task.description.length > 90 ? task.description.slice(0, 90) + '...': task.description }}
             </p>
