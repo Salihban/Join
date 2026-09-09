@@ -36,16 +36,7 @@ constructor() {
     this.contactService.getContacts();
   }
 
-  onContactSaved() {
-        this.contactService.triggerToast('Contact succesfully created');
-    }
-
     onContactDeleted() {
-        this.triggerToast('Contact Delete succsessfull');
-    }
-
-    private triggerToast(message: string) {
-        this.toastMessage.set(message);
-        setTimeout(() => this.toastMessage.set(''), 3000);
+        this.contactService.triggerToast('Contact Delete successful');
     }
 }

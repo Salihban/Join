@@ -7,5 +7,10 @@
         <main>
             <router-outlet></router-outlet>
         </main>
+        @if (contactService.toastMessage()) {
+            <div class="toast-notification">
+                {{ contactService.toastMessage() }}
+            </div>
+        }
     </div>
 </div>

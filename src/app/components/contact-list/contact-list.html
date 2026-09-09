@@ -5,7 +5,7 @@
         <img src="assets/icons/person_add.svg" alt="">
     </button>
 
-        <app-contact-dialog #dialog (contactSaved)="onContactSaved()"></app-contact-dialog>
+        <app-contact-dialog #dialog></app-contact-dialog>
 
         <div class="contact-list__scroll">
         @for (group of contactService.groupedContacts(); track group.letter) {
@@ -38,8 +38,3 @@
     </section>
 </div>
 
-@if (contactService.toastMessage()) {
-    <div class="toast-notification">
-        {{ contactService.toastMessage() }}
-    </div>
-}

@@ -199,7 +199,6 @@ export class ContactService {
 
     triggerToast(message: string): void {
         this.toastMessage.set(message);
-
         setTimeout(() => {
             this.toastMessage.set('');
         }, 3000);

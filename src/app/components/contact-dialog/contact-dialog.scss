@@ -1,4 +1,6 @@
 @use '../../styles/main.scss' as *;
+@use'../../styles/mixin' as mixin;
+@use'../../styles/main' as styles;
 
 .add-btn {
     position: fixed;
