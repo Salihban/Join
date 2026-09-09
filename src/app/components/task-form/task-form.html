@@ -89,8 +89,7 @@
                             {{ contact.initials }}
                         </span>
 
-                        <span>{{ contact.name }}</span>
-
+                        <span class="contactName" [title]="contact.name">{{ contact.name }}</span>
                         <input type="checkbox" [checked]="isSelected(contact.id)" (change)="toggleContact(contact.id)">
                     </label>
                     } @empty {
