@@ -49,6 +49,7 @@ aside {
     }
     a {
         color: rgba(255, 255, 255, 1);
+        font-size: 16px;
     }
     &:active{
         background-color: rgba(9, 25, 49, 1);
@@ -62,6 +63,7 @@ aside {
 .privacy-policy-legal-notice-wrapper{
     display: none;
     a{
+        font-size: 16px;
 }
 }
 
