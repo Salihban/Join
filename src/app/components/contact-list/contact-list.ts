@@ -37,6 +37,6 @@ constructor() {
   }
 
     onContactDeleted() {
-        this.contactService.triggerToast('Contact Delete successful');
+        this.contactService.triggerToast('Contact delete successful');
     }
 }
