@@ -162,10 +162,17 @@ p{
     width: 42px;
     height: 42px;
     flex-shrink: 0;
-
     border: 2px solid white;
     border-radius: 50%;
     color: white;
+}
+
+.contactName {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .subtasks {
