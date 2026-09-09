@@ -2,6 +2,10 @@
 @use'../../styles/mixin' as mixin;
 @use'../../styles/main' as styles;
 
+:host {
+    font-family: 'Inter', sans-serif;
+}
+
 .contact-list-wrapper {
     @include mixin.flex($justify: center, $align: stretch);
     width: 100%;
@@ -17,7 +21,6 @@
     height: 100%;
     padding: 24px;
     box-sizing: border-box;
-    font-family: inter;
     cursor: pointer;
 
     &__scroll {
@@ -115,33 +118,6 @@
     }
 }
 
-.toast-notification {
-    @include styles.font-bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 60dvh;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: slideUp 350ms ease-out;
-    height: 70px;
-    width: 320px;
-    padding: 20px;
-    background-color: rgba(42, 54, 71, 1);
-    color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    font-weight: 500;
-    z-index: 99;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateX(100vh);
-    }
-}
-
 @keyframes slideDown {
     to {
         transform: translateX(100vh);
@@ -208,32 +184,4 @@
         }
     }
 
-    .toast-notification {
-        @include styles.font-bold;
-        position: fixed;
-        top: 70dvh;
-        left: 50%;
-        transform: translateX(-50%);
-        animation: slideUp 350ms ease-out;
-        height: 70px;
-        width: 320px;
-        padding: 20px 20px;
-        background-color: rgba(42, 54, 71, 1);
-        color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        font-weight: 500;
-    }
-
-    @keyframes slideUp {
-        from {
-            transform: translateX(100vh);
-        }
-    }
-
-    @keyframes slideDown {
-        to {
-            transform: translateX(100vh);
-        }
-    }
 }

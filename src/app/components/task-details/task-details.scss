@@ -1,6 +1,7 @@
 :host {
     display: block;
     animation: slide-in 100ms ease-out both;
+    font-family: 'inter', sans-serif;
 }
 
 .task-details {
@@ -24,6 +25,7 @@
     justify-content: flex-end;
 
     flex-shrink: 0;
+    gap: 16px;
     border-radius: 30px;
     background: white;
     padding: 20px;
@@ -88,8 +90,8 @@
 
 .task-details h1 {
     max-width: 100%;
-    margin: 24px 0 16px;
-    font-size: clamp(24px, 5dvw, 38px);
+    margin: 16px 0 16px;
+    font-size: clamp(36px, 5dvw, 51px);
     line-height: 1.1;
     overflow-wrap: anywhere;
     white-space: normal;
@@ -111,14 +113,17 @@
 }
 
 .task-details h3 {
-    margin: 24px 0 14px;
+    margin: 28px 0 14px;
     font-size: clamp(16px, 2dvw, 20px);
     font-weight: 400;
 }
 
+.label-details {
+    color: #42526E;
+}
+
 p{
-    margin-bottom: 16px;
-    font-family: 'inter';
+    margin-bottom: 28px;
     font-size: 16px;
 }
 
@@ -162,10 +167,17 @@ p{
     width: 42px;
     height: 42px;
     flex-shrink: 0;
-
     border: 2px solid white;
     border-radius: 50%;
     color: white;
+}
+
+.contactName {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .subtasks {
@@ -237,6 +249,16 @@ p{
     height: 18px;
 }
 
+.cancel-button{
+    padding: 12px 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background: #2a3647;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 @keyframes slide-in {
     from {
         transform: translateX(100%);
@@ -255,7 +277,8 @@ p{
     }
 
 .task-details__footer{
-        padding: 0;
+        padding: 16px;
+        gap: 16px;
     }
 
     .detail-row {

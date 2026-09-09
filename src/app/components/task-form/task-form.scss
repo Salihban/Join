@@ -8,6 +8,7 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    font-family: 'Inter',sans-serif;
 }
 
 /* #endregion */
@@ -305,6 +306,7 @@
         background: transparent;
         color: $text-color;
         text-align: left;
+        font-size: 16px;
 
 
         &:hover {
@@ -495,6 +497,14 @@
 .required-star {
     color: $star;
     margin-left: 2px;
+}
+
+.contactName{
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* #endregion */
