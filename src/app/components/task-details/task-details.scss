@@ -1,6 +1,7 @@
 :host {
     display: block;
     animation: slide-in 100ms ease-out both;
+    font-family: 'inter', sans-serif;
 }
 
 .task-details {
@@ -89,8 +90,8 @@
 
 .task-details h1 {
     max-width: 100%;
-    margin: 24px 0 16px;
-    font-size: clamp(24px, 5dvw, 38px);
+    margin: 16px 0 16px;
+    font-size: clamp(36px, 5dvw, 51px);
     line-height: 1.1;
     overflow-wrap: anywhere;
     white-space: normal;
@@ -112,14 +113,17 @@
 }
 
 .task-details h3 {
-    margin: 24px 0 14px;
+    margin: 28px 0 14px;
     font-size: clamp(16px, 2dvw, 20px);
     font-weight: 400;
 }
 
+.label-details {
+    color: #42526E;
+}
+
 p{
-    margin-bottom: 16px;
-    font-family: 'inter';
+    margin-bottom: 28px;
     font-size: 16px;
 }
 

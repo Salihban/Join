@@ -2,6 +2,10 @@
 @use'../../styles/mixin' as mixin;
 @use'../../styles/main' as styles;
 
+:host {
+    font-family: 'Inter', sans-serif;
+}
+
 .contact-list-wrapper {
     @include mixin.flex($justify: center, $align: stretch);
     width: 100%;
@@ -17,7 +21,6 @@
     height: 100%;
     padding: 24px;
     box-sizing: border-box;
-    font-family: inter;
     cursor: pointer;
 
     &__scroll {
