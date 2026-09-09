@@ -217,7 +217,7 @@ export class Board implements OnInit {
         this.allTasks.update((tasks) => tasks.filter((task) => task.id !== taskId));
         this.filterTasksByStatus(this.allTasks());
         this.selectedTask.set(null);
-        this.contactService.triggerToast('Task Delete successful');
+        this.contactService.triggerToast('Task delete successful');
     }
 
     isMobile = signal(window.innerWidth < 1025);
