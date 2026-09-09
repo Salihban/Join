@@ -246,7 +246,7 @@ export class TaskForm implements OnInit {
 
     private noPastDateValidator(): ValidatorFn {
         return (control: AbstractControl) => {
-            if (!control.value) return null;
+            if (!control.value || this.task) return null;
             const selected = new Date(control.value);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
