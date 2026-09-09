@@ -12,7 +12,7 @@ import { ContactService } from '../../services/contact';
 
 export class ContactDialog {
   private fb = inject(FormBuilder);
-  private contactService = inject(ContactService);
+  public contactService = inject(ContactService);
 
   contactSaved = output<void>();
   closing = false;
@@ -40,8 +40,6 @@ export class ContactDialog {
       ]]
   });
 
-
-
   async saveContact(): Promise<void> {
     this.submitted = true;
     this.databaseError.set('');
@@ -61,11 +59,11 @@ export class ContactDialog {
       this.databaseError.set(errorMessage);
       return;
     }
+
+    this.contactService.triggerToast('Contact succesfully created');
     this.closeDialog();
     this.contactSaved.emit();
   }
-
-
 
   closeDialog() {
     this.contactForm.reset({
@@ -75,11 +73,8 @@ export class ContactDialog {
     });
     this.submitted = false;
     this.databaseError.set('');
-
     this.closing = true;
   }
-
-
 
   onInput(controlName: 'name' | 'email' | 'phone'): void {
     this.contactForm.get(controlName)?.markAsDirty();

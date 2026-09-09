@@ -6,6 +6,7 @@ import { TaskCard } from '../../components/task-card/task-card';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TaskOverlay } from '../../components/task-overlay/task-overlay';
+import { ContactService } from '../../services/contact';
 
 @Component({
     selector: 'app-board',
@@ -26,6 +27,8 @@ export class Board implements OnInit {
     private taskService = inject(TaskService);
     private dialog = inject(MatDialog);
     private router = inject(Router);
+    private contactService = inject(ContactService);
+
     async ngOnInit(): Promise<void> {
         await this.loadTasks();
     }
@@ -214,6 +217,7 @@ export class Board implements OnInit {
         this.allTasks.update((tasks) => tasks.filter((task) => task.id !== taskId));
         this.filterTasksByStatus(this.allTasks());
         this.selectedTask.set(null);
+        this.contactService.triggerToast('Task Delete successful');
     }
 
     isMobile = signal(window.innerWidth < 1025);
