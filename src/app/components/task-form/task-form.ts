@@ -238,8 +238,9 @@ export class TaskForm implements OnInit {
     }
 
     cancelForm(): void {
-        if (this.task) {
+        if (this.detailsModus && this.task) {
             this.cancelled.emit();
+            return;
         }
         this.clearForm();
     }
