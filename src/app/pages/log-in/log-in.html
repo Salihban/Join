@@ -6,26 +6,66 @@
             </div>
             <div class="signup-container">
                 <span class="signup-text">Not a Join user?</span>
-                <button type="button" class="btn btn-dark">Sign up</button>
+                <a href="sign-up" type="button" class="btn btn-dark">Sign up</a>
             </div>
         </header>
 
         <div class="login-card">
             <h1 class="login-title">Log in</h1>
 
-            <form class="login-form">
+            <form class="login-form" id="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                
                 <div class="input-group">
-                    <input type="email" id="email" placeholder="Email" required class="form-input" />
+                    <input type="email" id="email" placeholder="Email" formControlName="email" class="form-input"
+                        [ngClass]="{'error': email?.invalid && (email?.touched || submitted)}"/>
                     <span class="input-icon">
                         <img src="assets/icons_sprint3/mail.png" alt="Email Icon" />
                     </span>
-                </div>
-                <div class="input-group">
-                    <input type="password" id="password" placeholder="Password" required class="form-input"/>
-                    <span class="input-icon">
-                        <img src="assets/icons_sprint3/lock.png" alt="Password Icon"/>
+                    <span class="error-message" id="emailError">
+                        @if (email?.invalid && (email?.touched || submitted)) {
+                            @if (email?.errors?.['required']) {
+                                <span>Please enter your email.</span>
+                            }
+                            @if (email?.errors?.['email']) {
+                                <span>Please enter a correct email address.</span>
+                            }
+                        }
                     </span>
                 </div>
+
+                <div class="input-group">
+                    <input [type]="passwordVisible ? 'text' : 'password'" id="password" placeholder="Password" formControlName="password" class="form-input"
+                        [ngClass]="{'error': password?.invalid && (password?.touched || submitted)}"/>
+                    <span class="input-icon" (click)="togglePasswordVisibility()" style="cursor: pointer; pointer-events: auto;" title="Passwort anzeigen/verbergen">
+                        @if (!password?.value) {
+                            <img src="assets/icons_sprint3/lock.png" alt="Password Icon"/>
+                        } @else {
+                            @if (!passwordVisible) {
+                                <img src="assets/icons_sprint3/visibility_off.png" alt="Hide Password Icon"/>
+                            } @else {
+                                <img src="assets/icons_sprint3/visibility.png" alt="Show Password Icon"/>
+                            }
+                        }
+                    </span>
+
+                    <span class="error-message" id="passwordError">
+                        @if (password?.invalid && (password?.touched || submitted)) {
+                            @if (password?.errors?.['required']) {
+                                <span>Check your email and password. Please try again.</span>
+                            }
+                            @if (password?.errors?.['minlength']) {
+                                <span>Password must be at least 6 characters.</span>
+                            }
+                        }
+                    </span>
+                </div>
+                
+                @if (generalError) {
+                    <div class="error-message general-error" id="generalError">
+                        {{ generalError }}
+                    </div>
+                }
+                
                 <div class="button-group">
                     <button type="submit" class="btn btn-primary btn-login">Log in</button>
                     <button type="button" class="btn btn-secondary btn-guest">Guest Log in</button>
