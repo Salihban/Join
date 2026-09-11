@@ -1,1 +1,48 @@
-<p>log-in works!</p>
+<div class="login-outer-container">
+    <main class="login-container">
+        <header class="login-header">
+            <div class="logo-wrapper">
+                <img src="assets/icons/logo.svg" alt="Join Logo" class="logo-icon" />
+            </div>
+            <div class="signup-container">
+                <span class="signup-text">Not a Join user?</span>
+                <button type="button" class="btn btn-dark">Sign up</button>
+            </div>
+        </header>
+
+        <div class="login-card">
+            <h1 class="login-title">Log in</h1>
+
+            <form class="login-form">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required class="form-input" />
+                    <span class="input-icon">
+                        <img src="assets/icons_sprint3/mail.png" alt="Email Icon" />
+                    </span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required class="form-input"/>
+                    <span class="input-icon">
+                        <img src="assets/icons_sprint3/lock.png" alt="Password Icon"/>
+                    </span>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary btn-login">Log in</button>
+                    <button type="button" class="btn btn-secondary btn-guest">Guest Log in</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="signup-container">
+            <span class="signup-text">Not a Join user?</span>
+            <button type="button" class="btn btn-dark">Sign up</button>
+        </div>
+
+        <footer class="login-footer">
+            <div class="legal-links">
+                <a href="privacy-policy" class="legal-link">Privacy Policy</a>
+                <a href="legal-notice" class="legal-link">Legal notice</a>
+            </div>
+        </footer>
+    </main>
+</div>
