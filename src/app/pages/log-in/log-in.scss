@@ -48,6 +48,10 @@ $font-inter: 'Inter', sans-serif;
             height: auto;
         }
     }
+
+    .signup-container {
+        display: none;
+    }
 }
 
 .login-card {
@@ -253,6 +257,12 @@ $font-inter: 'Inter', sans-serif;
     .login-container {
         position: relative;
         min-height: 100dvh;
+    }
+
+    app-auth-form{
+        position: absolute;
+        top: 30%;
+        
     }
 
     .login-header {
