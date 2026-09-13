@@ -48,10 +48,6 @@ $font-inter: 'Inter', sans-serif;
             height: auto;
         }
     }
-
-    .signup-container {
-        display: none;
-    }
 }
 
 .login-card {
@@ -255,7 +251,8 @@ $font-inter: 'Inter', sans-serif;
 
 @include mixin.desktop {
     .login-container {
-        padding: 40px;
+        position: relative;
+        min-height: 100dvh;
     }
 
     .login-header {
