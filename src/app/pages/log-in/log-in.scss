@@ -255,7 +255,14 @@ $font-inter: 'Inter', sans-serif;
 
 @include mixin.desktop {
     .login-container {
-        padding: 40px;
+        position: relative;
+        min-height: 100dvh;
+    }
+
+    app-auth-form{
+        position: absolute;
+        top: 30%;
+        
     }
 
     .login-header {
