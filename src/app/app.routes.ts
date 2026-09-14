@@ -3,8 +3,13 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'contacts',
+        redirectTo: 'log-in',
         pathMatch: 'full'
+    },
+    {
+        path: 'log-in',
+        loadComponent: () =>
+            import('./pages/log-in/log-in').then((m) => m.LogIn)
     },
     {
         path: 'contacts',

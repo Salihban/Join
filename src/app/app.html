@@ -1,17 +1,21 @@
-<!-- <div class="app-layout">
+@if (router.url === '/' || router.url.startsWith('/log-in') || router.url.startsWith('/sign-up')) {
+<router-outlet></router-outlet>
+} @else {
+<div class="app-layout">
     <app-aside></app-aside>
 
-    <div class="page">
+        <div class="page">
         <app-header></app-header>
 
         <main>
             <router-outlet></router-outlet>
         </main>
-        @if (contactService.toastMessage()) {
-            <div class="toast-notification">
-                {{ contactService.toastMessage() }}
-            </div>
-        }
-    </div> -->
-    <app-summary></app-summary>
-<!-- </div> -->
+
+    @if (contactService.toastMessage()) {
+        <div class="toast-notification">
+            {{ contactService.toastMessage() }}
+        </div>
+    }
+    </div>
+</div>
+}

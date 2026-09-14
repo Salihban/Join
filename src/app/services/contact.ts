@@ -8,6 +8,7 @@ export interface Contact {
     email: string;
     phone: string;
     color: string;
+    auth_user_id?: string | null;
 }
 
 export interface ContactGroup {
@@ -86,13 +87,11 @@ export class ContactService {
     async getContacts(): Promise<void> {
         const { data, error } = await this.supabaseService.supabase
             .from('contacts')
-            .select('id, name, initials, email, phone, color');
-
+            .select('id, name, initials, email, phone, color, auth_user_id');
         if (error) {
             console.error('Fehler beim Laden', error);
             return;
         }
-
         this.contacts.set(data ?? []);
     }
 
