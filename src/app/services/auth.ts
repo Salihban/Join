@@ -14,6 +14,10 @@ readonly isLoggedIn = computed(() => this.currentUser() !== null);
     this.watchAuthChanges();
     }
 
+async guestLogin() {
+    return this.dbService.supabase.auth.signInAnonymously();
+}
+
 async signUp(name: string, email: string, password: string) {
     return this.dbService.supabase.auth.signUp({
     email,
