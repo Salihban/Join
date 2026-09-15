@@ -2,6 +2,18 @@
 @use '../../styles/mixin' as mixin;
 $font-inter: 'Inter', sans-serif;
 
+header{
+    height: 8dvh;
+}
+
+main{
+    height: 84dvh;
+}
+
+footer{
+    height: 8dvh;
+}
+
 .login-intro {
     position: fixed;
     inset: 0;
@@ -115,6 +127,7 @@ $font-inter: 'Inter', sans-serif;
     100% {
         opacity: 1;
     }
+}
 app-auth-form{
     display: block;
     width: 100%;
@@ -122,8 +135,8 @@ app-auth-form{
 
 .login-outer-container {
     width: 100%;
-    max-width: 1440px;
-    height: 100vh;
+    // max-width: 1440px;
+    // height: 100vh;
     margin: 0 auto;
     position: relative;
     background-color: #f6f7f8;
@@ -132,7 +145,7 @@ app-auth-form{
 .login-container {
     font-family: $font-inter;
     background-color: #f6f7f8;
-    height: 100%;
+    // height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -344,8 +357,8 @@ app-auth-form{
 
 .login-footer {
     width: 100%;
-    max-width: 396px;
-    margin: 0 auto;
+    // max-width: 396px;
+    // margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -423,10 +436,10 @@ app-auth-form{
     }
 }
 
-.login-container {
-    position: relative;
-    min-height: 100dvh;
-}
+// .login-container {
+//     position: relative;
+//     // min-height: 100dvh;
+// }
 
 app-auth-form {
     position: absolute;
@@ -435,11 +448,12 @@ app-auth-form {
 }
 
 .login-header {
-    position: absolute;
-    top: 40px;
-    left: 0;
+    // position: absolute;
+    // top: 40px;
+    // left: 0;
     width: 100%;
-    padding: 0 40px;
+    padding: 0px 40px;
+    // padding-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;

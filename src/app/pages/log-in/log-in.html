@@ -3,29 +3,28 @@
 </div>
 
 <div class="login-outer-container">
-    <main class="login-container">
-        <header class="login-header">
+    <header class="login-header">
             <div class="logo-wrapper">
                 <img src="assets/icons/logo.svg" alt="Join Logo" class="logo-icon" />
             </div>
-            <div class="signup-container">
-                <span class="signup-text">Not a Join user?</span>
-                <a href="sign-up" type="button" class="btn btn-dark">Sign up</a>
-            </div>
-        </header>
-        
-            <app-auth-form mode="login" (formSubmit)="login($event)" (guestSubmit)="guestLogin()"></app-auth-form>
-        
         <div class="signup-container">
             <span class="signup-text">Not a Join user?</span>
             <button type="button" routerLink="/sign-up" class="btn btn-dark">Sign up</button>
         </div>
+        </header>
+    <main class="login-container">
+        
+        
+            <app-auth-form mode="login" (formSubmit)="login($event)" (guestSubmit)="guestLogin()"></app-auth-form>
+        
 
-        <footer class="login-footer">
+
+    </main>
+            
+</div>
+<footer class="login-footer">
             <div class="legal-links">
                 <a href="privacy-policy" class="legal-link">Privacy Policy</a>
                 <a href="legal-notice" class="legal-link">Legal notice</a>
             </div>
         </footer>
-    </main>
-</div>
