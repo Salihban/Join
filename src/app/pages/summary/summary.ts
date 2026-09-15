@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RealtimeChannel } from '@supabase/supabase-js';
 import { Supabase } from '../../services/supabase';
 import { Task, TaskService } from '../../services/task';
+import { AuthService } from '../../services/auth';
 
 @Component({
     imports: [CommonModule],
@@ -15,6 +16,8 @@ export class Summary implements OnInit, OnDestroy{
     private taskService = inject(TaskService);
     private dbService = inject(Supabase);
     private realtimeChannel?: RealtimeChannel;
+    private authService = inject(AuthService);
+    greeting =this.getGreeting();
     task = signal<Task[]>([]);
     totalTasks = computed(() => this.task().length);
 
@@ -54,5 +57,21 @@ export class Summary implements OnInit, OnDestroy{
         if (this.realtimeChannel) {
             void this.dbService.supabase.removeChannel(this.realtimeChannel);
         }
+    }
+
+    userName = computed(() => {
+        const user = this.authService.currentUser();
+        if (!user || user.is_anonymous) {
+            return'';
+        }
+        return user.user_metadata?.['name'] ?? '';
+    });
+
+    private getGreeting(): string {
+        const hour = new Date().getHours();
+
+        if (hour <12) return 'Good morning';
+        if (hour <18) return 'Good afternoon';
+        return 'Good evening';
     }
 }

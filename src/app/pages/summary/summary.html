@@ -67,8 +67,10 @@
             </div>
         </div>
         <div class="greeting-wrapper">
-            <p>Good morning, </p>
-            <p>Sofia Müller</p>
+            <p>{{ greeting }}{{ userName()? ',': '' }}</p>
+            @if (userName()) {
+                <p>{{ userName() }}</p>
+            }
         </div>
     </div>
 </section>
