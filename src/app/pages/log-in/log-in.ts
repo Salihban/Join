@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthForm } from '../../components/auth-form/auth-form';
-import { Router } from '@angular/router';
+import { AuthForm, AuthFormValue } from '../../components/auth-form/auth-form';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth';
 
 @Component({
     selector: 'app-log-in',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, AuthForm],
+    imports: [CommonModule, ReactiveFormsModule, AuthForm, RouterLink],
     styleUrl: './log-in.scss',
     templateUrl: './log-in.html',
 })
@@ -23,6 +23,15 @@ export class LogIn {
     passwordVisible: boolean = false;
     private authService = inject(AuthService);
     private router = inject(Router);
+
+    async login(value: AuthFormValue): Promise<void> {
+        const { error } = await this.authService.login(value.email, value.password);
+        if (error) {
+            this.generalError = error.message;
+            return;
+        }
+        await this.router.navigate(['/board']);
+    }
 
     async guestLogin(): Promise<void> {
         const { error } = await this.authService.guestLogin();
