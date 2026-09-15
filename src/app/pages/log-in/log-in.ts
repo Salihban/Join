@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthForm } from '../../components/auth-form/auth-form';
-import { Router } from '@angular/router';
+import { AuthForm, AuthFormValue } from '../../components/auth-form/auth-form';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth';
 
 @Component({
     selector: 'app-log-in',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, AuthForm],
+    imports: [CommonModule, ReactiveFormsModule, AuthForm, RouterLink],
     styleUrl: './log-in.scss',
     templateUrl: './log-in.html',
 })
@@ -35,6 +35,13 @@ export class LogIn {
         introLogo.style.setProperty('--logo-target-left', `${logoRect.left}px`); 
         introLogo.style.setProperty('--logo-target-top', `${logoRect.top}px`); 
         introLogo.style.setProperty('--logo-target-width', `${logoRect.width}px`);
+    async login(value: AuthFormValue): Promise<void> {
+        const { error } = await this.authService.login(value.email, value.password);
+        if (error) {
+            this.generalError = error.message;
+            return;
+        }
+        await this.router.navigate(['/board']);
     }
 
     async guestLogin(): Promise<void> {

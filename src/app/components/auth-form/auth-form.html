@@ -1,5 +1,14 @@
 <div class="login-card">
-    <h1 class="login-title">{{ isSignup ? 'Sign up' : 'Log in' }}</h1>
+    <div class="title-wrapper">
+    @if (isSignup) {
+        <a routerLink="/log-in" class="back-button">
+            <img src="assets/icons/arrow_left.svg" alt="">
+        </a>
+    }
+        <h1 class="login-title">
+            {{ isSignup ? 'Sign up' : 'Log in' }}
+        </h1>
+    </div>
     @if (authForm) {
     <form class="login-form" [formGroup]="authForm" (ngSubmit)="submit()">
         @if (isSignup) {
@@ -69,7 +78,7 @@
 
         <label class="privacy-checkbox">
         <input type="checkbox" formControlName="privacy"/>
-            <span>I accept the<a routerLink="/privacy-policy">Privacy Policy</a></span>
+            <span>I accept the<a routerLink="/privacy-policy"> Privacy Policy</a></span>
         </label>
         }
 

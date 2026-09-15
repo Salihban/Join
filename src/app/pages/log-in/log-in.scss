@@ -115,6 +115,9 @@ $font-inter: 'Inter', sans-serif;
     100% {
         opacity: 1;
     }
+app-auth-form{
+    display: block;
+    width: 100%;
 }
 
 .login-outer-container {
@@ -511,24 +514,11 @@ app-auth-form {
                 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
             }
         }
-
-        .btn-guest {
-            font-size: 21px;
-            max-width: 177px;
-            height: 48px;
-
-            &:hover {
-                border: 2px solid;
-                border-color: #124658;
-                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-            }
-        }
     }
-
     .login-footer {
-        position: relative;
-        max-width: none;
-        justify-content: center;
-        margin: 0;
-    }
+            position: absolute;
+            left: 40%;
+            bottom: 32px;
+            margin: 0;
+        }
 }
