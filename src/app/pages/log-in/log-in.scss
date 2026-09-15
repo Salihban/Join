@@ -2,6 +2,11 @@
 @use '../../styles/mixin' as mixin;
 $font-inter: 'Inter', sans-serif;
 
+app-auth-form{
+    display: block;
+    width: 100%;
+}
+
 .login-outer-container {
     width: 100%;
     max-width: 1440px;
