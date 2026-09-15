@@ -10,11 +10,11 @@
             </div>
         </header>
         
-            <app-auth-form mode="login" (guestSubmit)="guestLogin()"></app-auth-form>
+            <app-auth-form mode="login" (formSubmit)="login($event)" (guestSubmit)="guestLogin()"></app-auth-form>
         
         <div class="signup-container">
             <span class="signup-text">Not a Join user?</span>
-            <button type="button" class="btn btn-dark">Sign up</button>
+            <button type="button" routerLink="/sign-up" class="btn btn-dark">Sign up</button>
         </div>
 
         <footer class="login-footer">
