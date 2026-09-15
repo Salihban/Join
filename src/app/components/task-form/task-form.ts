@@ -18,9 +18,11 @@ export class TaskForm implements OnInit {
     readonly contactService = inject(ContactService);
     readonly taskService = inject(TaskService);
     readonly contacts = this.contactService.contacts;
-    readonly sortedContacts = computed(() =>
-        [...this.contacts()].sort((a, b) => a.name.localeCompare(b.name))
-    );
+    readonly sortedContacts = computed(() => {
+        const alphabeticalContacts = [...this.contacts()].sort(
+            (a, b) => a.name.localeCompare(b.name));
+        return this.contactService.currentUserFirst(alphabeticalContacts);
+    });
     subtaskInput = this.formBuilder.nonNullable.control('');
     dropdownOpen = false;
     categoryDropdownOpen = false;

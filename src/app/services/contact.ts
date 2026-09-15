@@ -1,5 +1,6 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Supabase } from '../services/supabase';
+import { AuthService } from './auth';
 
 export interface Contact {
     id: string;
@@ -43,6 +44,7 @@ interface ContactInsert extends NewContact {
 export class ContactService {
     readonly contacts = signal<Contact[]>([]);
     readonly selectedContact = signal<Contact | null>(null);
+    private authService = inject(AuthService);
 
     readonly contactColors = [
         '#FF7A00', '#FF5EB3', '#6E52FF', '#9327FF',
@@ -201,5 +203,20 @@ export class ContactService {
         setTimeout(() => {
             this.toastMessage.set('');
         }, 3000);
+    }
+
+    isCurrentUser(contact: Contact): boolean {
+        const user = this.authService.currentUser();
+        return !!user && !user.is_anonymous && contact.auth_user_id === user.id;
+    }
+
+    currentUserFirst(contact: Contact[]): Contact[] {
+        const user = this.authService.currentUser();
+
+        if (!user || user.is_anonymous) {
+            return contact;
+        }
+        return [...contact].sort((a, b) => Number(this.isCurrentUser(b)) - Number(this.isCurrentUser(a))
+    );
     }
 }

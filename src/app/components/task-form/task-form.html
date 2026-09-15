@@ -89,7 +89,12 @@
                             {{ contact.initials }}
                         </span>
 
-                        <span class="contactName" [title]="contact.name">{{ contact.name }}</span>
+                        <span class="contactName" [title]="contact.name">
+                            {{ contact.name }}
+                            @if (contactService.isCurrentUser(contact)) {
+                                (You)
+                            }
+                        </span>
                         <input type="checkbox" [checked]="isSelected(contact.id)" (change)="toggleContact(contact.id)">
                     </label>
                     } @empty {
