@@ -359,12 +359,11 @@ $font-inter: 'Inter', sans-serif;
                 }
             }
         }
-
-        .login-footer {
-            position: relative;
-            max-width: none;
-            justify-content: center;
+    }
+    .login-footer {
+            position: absolute;
+            left: 40%;
+            bottom: 32px;
             margin: 0;
         }
-    }
 }

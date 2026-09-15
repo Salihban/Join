@@ -18,6 +18,24 @@ $font-inter: "Inter", sans-serif;
     max-width: 396px;
     margin: 0 auto;
 
+    .title-wrapper {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #2a3647;
+    font-size: 40px;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    }
+}
+
     .login-title {
         font-size: 42px;
         font-weight: 700;
@@ -112,6 +130,18 @@ $font-inter: "Inter", sans-serif;
         align-items: center;
         margin-top: 8px;
     }
+
+    .privacy-checkbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+
+        a{
+            color: rgba(18, 70, 88, 1);
+        }
+}
 }
 
 .btn {

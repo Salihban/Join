@@ -1,1 +1,9 @@
 @use "../log-in/log-in";
+
+.login-container{
+    position: relative;
+
+    .signup-container{
+        display: none;
+    }
+}
