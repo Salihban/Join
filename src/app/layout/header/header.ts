@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth';
 })
 export class Header {
   menuOpen = false;
-  private authService = inject(AuthService);
+  readonly authService = inject(AuthService);
   private router = inject(Router);
 
   readonly userInitials = computed(() => {

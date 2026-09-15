@@ -2,6 +2,8 @@
     <section class="header-content-section">
         <img src="assets/icons/logo.svg" alt="">
         <p>Kanban Project Management Tool</p>
+
+        @if (authService.currentUser()) {
         <div class="user-menu">
             <button class="user-button" (click)="toggleMenu($event)">
                 {{ userInitials() }}
@@ -19,5 +21,6 @@
                 </button>
             </div>
         </div>
+        }
     </section>
 </header>

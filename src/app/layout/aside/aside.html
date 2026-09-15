@@ -3,6 +3,8 @@
         <div class="join-icon-wrapper">
             <img class="d-none" src="assets/icons/Capa 1.png" alt="">
         </div>
+
+        @if (authService.currentUser()) {
         <nav class="nav-bar">
             <div class="nav-icon-wrapper">
                 <a routerLink="/summary"><img src="assets/icons/nav_summary.svg" alt=""></a>
@@ -21,6 +23,16 @@
                 <a routerLink="/contacts">Contacts</a>
             </div>
         </nav>
+        } @else {
+            <nav class="nav-bar">
+                <div class="nav-icon-wrapper">
+                    <a [routerLink]="'/log-in'">
+                        <span class="material-symbols-outlined">login</span>
+                    </a>
+                    <a [routerLink]="'/log-in'">Log in</a>
+                </div>
+            </nav>
+        }
         <div class="privacy-policy-legal-notice-wrapper">
             <a routerLink="/privacy-policy">Privacy Policy</a>
             <a routerLink="/legal-notice">Legal notice</a>
