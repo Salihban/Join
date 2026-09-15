@@ -19,11 +19,22 @@ export class LogIn {
     });
 
     generalError: string = '';
-    submitted: boolean = false; 
+    submitted: boolean = false;
     passwordVisible: boolean = false;
     private authService = inject(AuthService);
     private router = inject(Router);
 
+    ngAfterViewInit(): void { 
+        requestAnimationFrame(() => { this.setIntroLogoTarget(); }); 
+    }
+
+    private setIntroLogoTarget(): void {
+        const loginLogo = document.querySelector('.login-header .logo-icon') as HTMLElement | null; 
+        const introLogo = document.querySelector('.intro-logo') as HTMLElement | null; 
+        if (!loginLogo || !introLogo) { return; } const logoRect = loginLogo.getBoundingClientRect(); 
+        introLogo.style.setProperty('--logo-target-left', `${logoRect.left}px`); 
+        introLogo.style.setProperty('--logo-target-top', `${logoRect.top}px`); 
+        introLogo.style.setProperty('--logo-target-width', `${logoRect.width}px`);
     async login(value: AuthFormValue): Promise<void> {
         const { error } = await this.authService.login(value.email, value.password);
         if (error) {
@@ -52,7 +63,7 @@ export class LogIn {
     }
 
     onSubmit() {
-        this.submitted = true; 
+        this.submitted = true;
 
         if (this.loginForm.invalid) {
             this.loginForm.markAllAsTouched();
