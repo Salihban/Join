@@ -33,6 +33,10 @@ $font-inter: "Inter", sans-serif;
     line-height: 1;
     text-decoration: none;
     cursor: pointer;
+
+    :hover {
+    transform: scale(1.1);
+}
     }
 }
 
@@ -138,6 +142,7 @@ $font-inter: "Inter", sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
+        font-size: 16px;
         gap: 8px;
         width: 100%;
 
@@ -165,7 +170,8 @@ $font-inter: "Inter", sans-serif;
         height: 51px;
 
         &:hover {
-            background-color: #091931;
+            background-color: rgba(18, 70, 88, 1);
+            box-shadow: 0px 0px 4px 0px black;
         }
     }
 
@@ -178,7 +184,7 @@ $font-inter: "Inter", sans-serif;
         height: 48px;
 
         &:hover {
-            background-color: #f8fafc;
+            border: 2px solid rgba(18, 70, 88, 1);
         }
     }
 

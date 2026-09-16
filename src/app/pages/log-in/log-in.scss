@@ -152,13 +152,15 @@ $font-inter: 'Inter', sans-serif;
 
     .signup-container {
         order: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: static;
         width: auto;
         margin: 0 auto;
         padding: 16px 0 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        font-family: 'inter';
+        font-size: 16px;
         gap: 24px;
         z-index: 20;
 
@@ -223,6 +225,8 @@ app-auth-form {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'inter';
+    font-size: 16px;
 
     .legal-links {
         display: flex;
