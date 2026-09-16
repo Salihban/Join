@@ -1,1 +1,121 @@
-<p>auth-form works!</p>
+<div class="login-card">
+    <div class="title-wrapper">
+        @if (isSignup) {
+            <a routerLink="/log-in" class="back-button">
+                <img src="assets/icons/arrow_left.svg" alt="" />
+            </a>
+        }
+        <h1 class="login-title">
+            {{ isSignup ? 'Sign up' : 'Log in' }}
+        </h1>
+    </div>
+    @if (authForm) {
+        <form class="login-form" [formGroup]="authForm" (ngSubmit)="submit()">
+            @if (isSignup) {
+                <div class="input-group">
+                    <input type="text" placeholder="Name" formControlName="name" class="form-input"/>
+                    <span class="input-icontwo">
+                        <img src="assets/icons_sprint3/person.png" alt="Name"/>
+                    </span>
+                    @if (
+                        authForm.get('name')?.invalid &&
+                        (authForm.get('name')?.touched || submitted)
+                    ) {
+                        <span class="error-message">Please enter your name.</span>
+                    }
+                </div>
+            }
+            <div class="input-group">
+                <input type="email" placeholder="Email" formControlName="email" class="form-input"/>
+                <span class="input-icontwo">
+                    <img src="assets/icons_sprint3/mail.png" alt="Email" />
+                </span>
+
+                @if (email?.invalid && (email?.touched || submitted)) {
+                    <span class="error-message">
+                        @if (email?.errors?.['required']) {
+                            Please enter your email.
+                        } @else if (email?.errors?.['email']) {
+                            Please enter a correct email address.
+                        }
+                    </span>
+                }
+            </div>
+
+            <div class="input-group">
+                @if (passwordVisible) {
+                    <input type="text" placeholder="Password" formControlName="password" class="form-input"/>
+                } @else {
+                    <input type="password" placeholder="Password" formControlName="password" class="form-input" />
+                }
+                <button type="button" class="input-icon" (click)="togglePasswordVisibility()">
+                    @if (!password?.value) {
+                        <img src="assets/icons_sprint3/lock.png" alt="Password" />
+                    } @else if (passwordVisible) {
+                        <img src="assets/icons_sprint3/visibility_off.png" alt="Hide password" />
+                    } @else {
+                        <img src="assets/icons_sprint3/visibility.png" alt="Show password" />
+                    }
+                </button>
+                @if (password?.invalid && (password?.touched || submitted)) {
+                    <span class="error-message">
+                        @if (password?.errors?.['required']) {
+                            Please enter a password.
+                        } @else if (password?.errors?.['minlength']) {
+                            Password must be at least 6 characters.
+                        }
+                    </span>
+                }
+            </div>
+            @if (isSignup) {
+                <div class="input-group">
+                    @if (confirmPasswordVisible) {
+                        <input type="text" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input"/>
+                    } @else {
+                        <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input"/>
+                    }
+                    <button type="button" class="input-icon" (click)="toggleConfirmPasswordVisibility()">
+                        @if (!confirmPassword?.value) {
+                            <img src="assets/icons_sprint3/lock.png" alt="Confirm Password" />
+                        } @else if (confirmPasswordVisible) {
+                            <img src="assets/icons_sprint3/visibility_off.png" alt="Hide password" />
+                        } @else {
+                            <img src="assets/icons_sprint3/visibility.png" alt="Show password" />
+                        }
+                    </button>
+
+                    @if (
+                        (authForm.get('confirmPassword')?.invalid || authForm.errors?.['passwordsMismatch']) &&
+                        (authForm.get('confirmPassword')?.touched || submitted)
+                    ) {
+                        <span class="error-message">
+                            @if (authForm.get('confirmPassword')?.errors?.['required']) {
+                                Please confirm your password.
+                            } @else if (authForm.errors?.['passwordsMismatch']) {
+                                Passwords don't match. Please try again.
+                            }
+                        </span>
+                    }
+                </div>
+
+                <div class="privacy-checkbox">
+                    <input type="checkbox" formControlName="privacy" id="privacy" />
+                    <label for="privacy">
+                        I accept the <a routerLink="/privacy-policy">Privacy policy</a>
+                    </label>
+                </div>
+            }
+
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary btn-login"[disabled]="authForm.invalid">
+                    {{ isSignup ? 'Sign up' : 'Log in' }}
+                </button>
+                @if (!isSignup) {
+                    <button type="button" class="btn btn-secondary btn-guest" (click)="guestSubmit.emit()">
+                        Guest Log in
+                    </button>
+                }
+            </div>
+        </form>
+    }
+</div>

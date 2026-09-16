@@ -1,0 +1,23 @@
+@use "../log-in/log-in";
+@use "../../styles/mixin" as mixin;
+
+// .login-container{
+//     position: relative;
+
+//     .signup-container{
+//         display: none;
+//     }
+// }
+
+@include mixin.desktop {
+    // .login-container {
+    //     justify-content: space-between; 
+    // }
+
+    app-auth-form {
+        position: static; 
+        transform: none;
+        margin: auto;    
+        width: 100%;
+    }
+}

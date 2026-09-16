@@ -1,0 +1,285 @@
+@use "../../styles/main" as styles;
+@use "../../styles/mixin" as mixin;
+
+$font-inter: "Inter", sans-serif;
+
+:host {
+    display: block;
+    width: 100%;
+    font-family: $font-inter;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 30px;
+    padding: 32px 16px;
+    box-shadow: 0px 0px 14px 0px #00000066;
+    width: 100%;
+    max-width: 396px;
+    height: 595px;
+    margin: 0 auto;
+    height: auto;
+
+    .title-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+
+        .back-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #2a3647;
+            font-size: 40px;
+            line-height: 1;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+
+    .login-title {
+        font-size: 47px;
+        font-weight: 700;
+        text-align: center;
+        color: #000000;
+        margin: 0 0 16px 0;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 88px;
+            height: 4px;
+            background-color: #29abe2;
+            margin: 12px auto 0 auto;
+            border-radius: 2px;
+            margin-top: 35px;
+        }
+    }
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .input-group {
+        position: relative;
+        width: 100%;
+        max-width: 364px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 15px;
+
+        .form-input {
+            position: relative;
+            width: 100%;
+            height: 48px;
+            padding: 0 48px 0 16px;
+            border: 1px solid #686868;
+            border-radius: 12px;
+            background-color: #ffffff;
+            outline: none;
+            transition: border-color 0.2s ;
+            font-size: 16px;
+
+            &::placeholder {
+                color: #686868;
+            }
+
+            &:focus {
+                border-color: #29abe2;
+            }
+
+            &.error {
+                border-color: #ff001e;
+            }
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 20;
+
+            img {
+                width: 20px;
+                pointer-events: none;
+            }
+        }
+
+        .input-icontwo {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            border: none;
+            background: transparent;
+            pointer-events: auto;
+            z-index: 20;
+
+            img {
+                width: 20px;
+                pointer-events: none;
+            }
+        }
+    }
+
+    .error-message {
+        color: #ff001e;
+        font-size: 16px;
+        display: block;
+
+        &.general-error {
+            text-align: center;
+            margin-top: -10px;
+        }
+    }
+
+    .privacy-checkbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        max-width: 364px;
+        margin: 0 auto;
+        font-size: 16px;
+        color: #2a3647;
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #2a3647;
+        }
+
+        a {
+            color: rgba(18, 70, 88, 1);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        margin-top: 8px;
+    }
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+    &.btn-primary {
+        background-color: #2a3647;
+        color: #ffffff;
+        width: 100%;
+        max-width: 180px;
+        height: 51px;
+        font-size: 16px;
+
+        &:hover {
+            background-color: #124658;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        }
+    }
+
+    &.btn-secondary {
+        background-color: #ffffff;
+        color: #2A3647;
+        border: 1px solid #2A3647;
+        width: 100%;
+        max-width: 180px;
+        height: 48px;
+
+        &:hover {
+            background-color: #f8fafc;
+        }
+    }
+
+    &.btn-dark {
+        background-color: #2a3647;
+        color: #ffffff;
+        width: 104px;
+        height: 49px;
+        padding: 0;
+
+        &:hover {
+            background-color: #091931;
+        }
+    }
+}
+
+@include mixin.desktop {
+    .login-container {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px;
+    }
+
+    app-auth-form {
+        width: 100%;
+    }
+
+    .login-card {
+        max-width: 652px;
+        height: auto;
+        padding: 40px 32px;
+        margin: auto;
+
+        .login-title {
+            font-size: 61px;
+
+            &::after {
+                width: 150px;
+                margin-top: 50px;
+            }
+        }
+    }
+
+    .login-form {
+        margin-top: 25px;
+        gap: 16px;
+
+        .input-group {
+            max-width: 422px;
+        }
+
+        .privacy-checkbox {
+            max-width: 422px;
+            font-size: 16px;
+        }
+
+        .button-group {
+            flex-direction: row;
+            justify-content: center;
+            gap: 35px;
+
+            .btn-primary {
+                font-size: 21px;
+                max-width: 126px;
+                height: 55px;
+            }
+        }
+    }
+}

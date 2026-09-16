@@ -1,1 +1,76 @@
-<p>summary works!</p>
+<section>
+    <div class="summary-headline-wrapper">
+        <h2>Join 360</h2>
+        <div class="v-line"></div>
+        <p>Key Metrics at a Glance</p>
+        <div class="line"></div>
+    </div>
+    <div class="summary-content-wrapper">
+        <div class="summary-content">
+            <div class="first-row">
+                <div class="to-do-wrapper" routerLink="/board">
+                    <p class="img-bg">
+                        <img src="/assets/icons_sprint3/edit.png" alt="">
+                    </p>
+                    <div class="to-do-container">
+                        <p>{{ todoTasks() }}</p>
+                        <p>To-do</p>
+                    </div>
+                </div>
+                <div class="done-wrapper" routerLink="/board">
+                    <p class="img-bg">
+                        <img src="/assets/icons_sprint3/Vector (4).png" alt="">
+                    </p>
+                    <div class="done-container">
+                        <p>{{ doneTasks() }}</p>
+                        <p>Done</p>
+                    </div>
+                </div>
+            </div>
+<div class="secound-row">
+                <div class="urgent-wrapper" routerLink="/board">
+                    <div class="urgent-content-wrapper">
+                        <img src="/assets/icons_sprint3/Frame 59.png" alt="">
+                        <div class="urgent-content">
+                            <p>{{ urgentTasks() }}</p>
+                            <p>Urgent</p>
+                        </div>
+                    </div>
+                    <p class="sec-line"></p>
+                    <div class="urgent-data-wrapper">
+                        @if (nextUrgentTask()) {
+                        <p>{{ nextUrgentTask()?.due_date | date: 'MMM d, y' }}</p>
+                        <p>Upcoming Deadline</p>
+                        }
+                    </div>
+                </div>
+            </div>
+<div class="third-row">
+                <div class="task-wrapper" routerLink="/board">
+                    <div class="task">
+                        <p>{{ totalTasks() }}</p>
+                        <p>Tasks in Board</p>
+                    </div>
+                </div>
+                <div class="progress-wrapper" routerLink="/board">
+                    <div class="progress">
+                        <p>{{ inProgressTasks() }}</p>
+                        <p>Tasks In Progress</p>
+                    </div>
+                </div>
+                <div class="feedback-wrapper" routerLink="/board">
+                    <div class="feedback">
+                        <p>{{ feedbackTasks() }}</p>
+                        <p>Awaiting Feedback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="greeting-wrapper">
+            <p>{{ greeting }}{{ userName()? ',': '' }}</p>
+            @if (userName()) {
+                <p>{{ userName() }}</p>
+            }
+        </div>
+    </div>
+</section>
