@@ -1,7 +1,7 @@
-@use "../../styles/main" as styles;
-@use "../../styles/mixin" as mixin;
+@use '../../styles/main' as styles;
+@use '../../styles/mixin' as mixin;
 
-$font-inter: "Inter", sans-serif;
+$font-inter: 'Inter', sans-serif;
 
 :host {
     display: block;
@@ -20,21 +20,21 @@ $font-inter: "Inter", sans-serif;
 
     .title-wrapper {
         display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
 
-    .back-button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #2a3647;
-    font-size: 40px;
-    line-height: 1;
-    text-decoration: none;
-    cursor: pointer;
+        .back-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #2a3647;
+            font-size: 40px;
+            line-height: 1;
+            text-decoration: none;
+            cursor: pointer;
+        }
     }
-}
 
     .login-title {
         font-size: 42px;
@@ -56,7 +56,7 @@ $font-inter: "Inter", sans-serif;
     }
 }
 
-    .login-form {
+.login-form {
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -79,7 +79,7 @@ $font-inter: "Inter", sans-serif;
             background-color: #ffffff;
             outline: none;
             transition: border-color 0.2s;
-            font-size: 16px; 
+            font-size: 16px;
 
             &::placeholder {
                 color: #9ca3af;
@@ -90,14 +90,14 @@ $font-inter: "Inter", sans-serif;
             }
 
             &.error {
-                border-color: #ff001e; 
+                border-color: #ff001e;
             }
         }
 
         .input-icon {
             position: absolute;
             right: 16px;
-            top: 24px; 
+            top: 24px;
             transform: translateY(-50%);
             display: flex;
             align-items: center;
@@ -138,10 +138,10 @@ $font-inter: "Inter", sans-serif;
         gap: 8px;
         width: 100%;
 
-        a{
+        a {
             color: rgba(18, 70, 88, 1);
         }
-}
+    }
 }
 
 .btn {
@@ -152,7 +152,11 @@ $font-inter: "Inter", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
 
     &.btn-primary {
         background-color: #2a3647;
@@ -162,14 +166,14 @@ $font-inter: "Inter", sans-serif;
         height: 51px;
 
         &:hover {
-            background-color: #091931;
+            background-color: #124658;
         }
     }
 
     &.btn-secondary {
         background-color: #ffffff;
-        color: #2A3647;
-        border: 1px solid #2A3647;
+        color: #2a3647;
+        border: 1px solid #2a3647;
         width: 100%;
         max-width: 180px;
         height: 48px;
@@ -193,57 +197,57 @@ $font-inter: "Inter", sans-serif;
 }
 
 @include mixin.desktop {
-.login-container {
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-}
+    .login-container {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+    }
 
-app-auth-form {
-    width: 100%;
-    margin: auto;
-}
+    app-auth-form {
+        width: 100%;
+        margin: auto;
+    }
 
-.login-card {
-    max-width: 652px;
-    min-height: 449px;
-    padding: 40px 32px;
-    margin: auto;
+    .login-card {
+        max-width: 652px;
+        min-height: 449px;
+        padding: 40px 32px;
+        margin: auto;
 
-    .login-title {
-        font-size: 61px;
+        .login-title {
+            font-size: 61px;
 
-    &::after {
-        width: 150px;
-        margin-top: 50px;
+            &::after {
+                width: 150px;
+                margin-top: 50px;
+            }
         }
     }
-}
 
-.login-form {
-    margin-top: 32px;
-    gap: 24px;
+    .login-form {
+        margin-top: 32px;
+        gap: 24px;
 
-    .input-group {
-        max-width: 422px;
+        .input-group {
+            max-width: 422px;
+        }
+
+        .button-group {
+            flex-direction: row;
+            justify-content: center;
+            gap: 35px;
+
+            .btn-login {
+                font-size: 21px;
+                max-width: 110px;
+                height: 48px;
+            }
+
+            .btn-guest {
+                font-size: 21px;
+                max-width: 177px;
+                height: 48px;
+            }
+        }
     }
-
-    .button-group {
-        flex-direction: row;
-        justify-content: center;
-        gap: 35px;
-
-    .btn-login {
-        font-size: 21px;
-        max-width: 110px;
-        height: 48px;
-    }
-
-    .btn-guest {
-        font-size: 21px;
-        max-width: 177px;
-        height: 48px;
-    }
-    }
-}
 }
