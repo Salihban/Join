@@ -2,18 +2,11 @@
 @use '../../styles/mixin' as mixin;
 $font-inter: 'Inter', sans-serif;
 
-header{
-    height: 8dvh;
+:host{
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
 }
-
-main{
-    height: 84dvh;
-}
-
-footer{
-    height: 8dvh;
-}
-
 .login-intro {
     position: fixed;
     inset: 0;
@@ -46,15 +39,12 @@ footer{
     0% {
         opacity: 1;
     }
-
     72% {
         opacity: 1;
     }
-
     88% {
         opacity: 0;
     }
-
     100% {
         opacity: 0;
         visibility: hidden;
@@ -69,7 +59,6 @@ footer{
         transform: translate(-50%, -50%);
         opacity: 1;
     }
-
     22% {
         left: 50%;
         top: 50%;
@@ -77,7 +66,6 @@ footer{
         transform: translate(-50%, -50%);
         opacity: 1;
     }
-
     45% {
         left: 50%;
         top: 50%;
@@ -85,7 +73,6 @@ footer{
         transform: translate(-50%, -50%);
         opacity: 1;
     }
-
     78% {
         left: var(--logo-target-left);
         top: var(--logo-target-top);
@@ -93,7 +80,6 @@ footer{
         transform: translate(0, 0);
         opacity: 1;
     }
-
     88% {
         left: var(--logo-target-left);
         top: var(--logo-target-top);
@@ -101,7 +87,6 @@ footer{
         transform: translate(0, 0);
         opacity: 1;
     }
-
     100% {
         left: var(--logo-target-left);
         top: var(--logo-target-top);
@@ -115,75 +100,92 @@ footer{
     0% {
         opacity: 0;
     }
-
     82% {
         opacity: 0;
     }
-
     88% {
         opacity: 1;
     }
-
     100% {
         opacity: 1;
     }
 }
 
-app-auth-form{
-    display: block;
+.login-outer-container{
+    display: flex;
+    flex-direction: column;
     width: 100%;
-}
-
-.login-outer-container {
-    width: 100%;
-    // max-width: 1440px;
-    // height: 100vh;
-    margin: 0 auto;
-    position: relative;
-    background-color: #f6f7f8;
+    flex: 1;
+    height: 76dvh;
 }
 
 .login-container {
+    order: 2;
+    flex: 1;
     font-family: $font-inter;
     background-color: #f6f7f8;
-    // height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 24px 16px;
     width: 100%;
-    position: relative;
+    height: auto;
 
-    input,
-    button,
-    a,
-    span,
-    p {
+    input, button, a, span, p {
         font-size: 16px;
     }
 }
 
 .login-header {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
+    display: contents;
+    
     .logo-wrapper {
-        width: 64px;
-        height: 78px;
-        display: flex;
-        align-items: center;
+        order: 1;
+        margin: 20px 0 0 20px;
 
-        .logo-icon {
-            width: 100%;
-            height: auto;
+        .logo-icon{
+            width: 64px;
+            height: 78px;
         }
+
     }
 
     .signup-container {
-        display: none;
+        order: 3;
+        position: static;
+        width: auto;
+        margin: 0 auto;
+        padding: 16px 0 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        z-index: 20;
+
+        .signup-text{
+            font-size: 24px;
+        }
     }
+}
+
+.btn{
+    background-color: #2a3647;
+    color: #ffffff;
+    width: 104px;
+    height: 49px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    }
+
+    .btn-dark:hover{
+        background-color: rgba(18, 70, 88, 1);
+    }
+
+app-auth-form {
+    display: block;
+    width: 100%;
 }
 
 .login-card {
@@ -193,7 +195,7 @@ app-auth-form{
     box-shadow: 0px 0px 14px 0px #00000066;
     width: 100%;
     max-width: 396px;
-    margin: 0 auto;
+    margin: auto;
 
     .login-title {
         font-size: 42px;
@@ -215,151 +217,9 @@ app-auth-form{
     }
 }
 
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-top: 24px;
-
-    .input-group {
-        position: relative;
-        width: 100%;
-        max-width: 364px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-
-        .form-input {
-            width: 100%;
-            height: 48px;
-            padding: 0 48px 0 16px;
-            border: 1px solid #d1d5db;
-            border-radius: 12px;
-            background-color: #ffffff;
-            outline: none;
-            transition: border-color 0.2s;
-            font-size: 16px;
-
-            &::placeholder {
-                color: #9ca3af;
-            }
-
-            &:focus {
-                border-color: #29abe2;
-            }
-
-            &.error {
-                border-color: #ff001e;
-            }
-        }
-
-        .input-icon {
-            position: absolute;
-            right: 16px;
-            top: 24px;
-            transform: translateY(-50%);
-            display: flex;
-            align-items: center;
-            pointer-events: none;
-
-            img {
-                width: 20px;
-                height: auto;
-            }
-        }
-    }
-
-    .error-message {
-        color: #ff001e;
-        font-size: 16px;
-        margin-top: 4px;
-        min-height: 18px;
-        display: block;
-
-        &.general-error {
-            text-align: center;
-            margin-top: -10px;
-        }
-    }
-
-    .button-group {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        align-items: center;
-        margin-top: 8px;
-    }
-}
-
-.btn {
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-
-    &.btn-primary {
-        background-color: #2a3647;
-        color: #ffffff;
-        width: 100%;
-        max-width: 180px;
-        height: 51px;
-        font-size: 16px;
-
-        &:hover {
-            background-color: #091931;
-        }
-    }
-
-    &.btn-secondary {
-        background-color: #ffffff;
-        color: #2A3647;
-        border: 1px solid #2A3647;
-        width: 100%;
-        max-width: 180px;
-        height: 48px;
-
-        &:hover {
-            background-color: #f8fafc;
-        }
-    }
-
-    &.btn-dark {
-        background-color: #2a3647;
-        color: #ffffff;
-        width: 104px;
-        height: 49px;
-        padding: 0;
-
-        &:hover {
-            background-color: #091931;
-        }
-    }
-}
-
-.signup-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 292px;
-
-    .signup-text {
-        color: #000000;
-        font-weight: 400;
-        font-size: 20px;
-    }
-}
-
 .login-footer {
     width: 100%;
-    // max-width: 396px;
-    // margin: 0 auto;
+    height: 12dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -380,160 +240,56 @@ app-auth-form{
     }
 }
 
-@include mixin.tablet {
-    .login-container {
-        padding: 32px 40px;
-    }
-}
-
-
-
 @include mixin.desktop {
-    .intro-logo {
-        width: 250px;
-        animation-name: intro-logo-desktop;
+    .login-outer-container {
+        flex: 1;
+        min-height: 0;
     }
 
-    @keyframes intro-logo-desktop {
-        0% {
-            left: 50%;
-            top: 50%;
-            width: 250px;
-            transform: translate(-50%, -50%);
-            opacity: 1;
-        }
+    .login-header {
+        display: flex; 
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        padding: 40px 64px 0;
 
-        25% {
-            left: 50%;
-            top: 50%;
-            width: 250px;
-            transform: translate(-50%, -50%);
-            opacity: 1;
-        }
-
-        70% {
-            left: 40px;
-            top: 40px;
-            width: 100px;
-            transform: translate(0, 0);
-            opacity: 1;
-        }
-
-        82% {
-            left: 40px;
-            top: 40px;
-            width: 100px;
-            transform: translate(0, 0);
-            opacity: 1;
-        }
-
-        100% {
-            left: 40px;
-            top: 40px;
-            width: 100px;
-            transform: translate(0, 0);
-            opacity: 0;
-        }
-    }
-}
-
-// .login-container {
-//     position: relative;
-//     // min-height: 100dvh;
-// }
-
-app-auth-form {
-    position: absolute;
-    top: 30%;
-
-}
-
-.login-header {
-    // position: absolute;
-    // top: 40px;
-    // left: 0;
-    width: 100%;
-    padding: 0px 40px;
-    // padding-top: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .logo-wrapper {
-        width: 100px;
-        height: 122px;
-        display: flex;
-        align-items: center;
-    }
-
-    .signup-container {
-        display: flex;
-        align-items: center;
-        margin: 0;
-        width: auto;
-        max-width: none;
-        gap: 35px;
-
-        .btn-dark {
-            width: 91px;
-            height: 49px;
-
-            &:hover {
-                background-color: #124658;
-                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-            }
-        }
-    }
-}
-
-.login-card {
-    max-width: 652px;
-    min-height: 449px;
-    padding: 40px 32px;
-    margin: auto;
-
-    .login-title {
-        font-size: 61px;
-
-        &::after {
-            width: 150px;
-            margin-top: 50px;
-        }
-    }
-}
-
-.login-container>.signup-container {
-    display: none;
-}
-
-.login-form {
-    margin-top: 32px;
-    gap: 24px;
-
-    .input-group {
-        max-width: 422px;
-    }
-
-    .button-group {
-        flex-direction: row;
-        justify-content: center;
-        gap: 35px;
-
-        .btn-login {
-            font-size: 21px;
-            max-width: 110px;
-            height: 48px;
-
-            &:hover {
-                background-color: #124658;
-                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-            }
-        }
-    }
-    .login-footer {
-            position: absolute;
-            left: 40%;
-            bottom: 32px;
+        .logo-wrapper {
+            order: initial;
             margin: 0;
+            width: 100px;
+            height: 122px;
         }
+
+        .signup-container {
+            order: initial;
+            display: flex;
+            width: auto;
+            margin: 0;
+            padding: 0;
+            gap: 35px;
+        }
+    }
+
+    .login-container {
+        order: initial;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 24px 40px;
+    }
+
+    app-auth-form {
+        position: static;
+        display: block;
+        width: 100%;
+        max-width: 652px;
+    }
+
+    .login-footer {
+        min-height: 64px;
+        margin-top: auto;
+        padding: 16px 24px 32px;
+    }
 }
