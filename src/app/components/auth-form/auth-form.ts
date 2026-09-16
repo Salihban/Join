@@ -25,6 +25,7 @@ export class AuthForm implements OnInit {
 @Input() mode: AuthMode = 'login';
 @Output() formSubmit = new EventEmitter<AuthFormValue>();
 @Output() guestSubmit = new EventEmitter<void>();
+private readonly signupDraftKey  = 'signupDraft';
 
 authForm!: FormGroup;
 submitted = false;
@@ -33,6 +34,12 @@ passwordVisible = false;
 ngOnInit(): void {
     this.authForm = 
     this.mode === 'signup'? this.createSignupForm(): this.createLoginForm();
+    if (this.isSignup) {
+        this.restoreSignupDraft();
+        this.authForm.valueChanges.subscribe(() => {
+            this.saveSignupDraft();
+        });
+    }
 }
 
 private createLoginForm(): FormGroup {
@@ -61,9 +68,7 @@ private passwordsMatch(
     }
 
 togglePasswordVisibility(): void {
-    if (this.password?.value) {
     this.passwordVisible = !this.passwordVisible;
-    }
 }
 
 submit(): void {
@@ -86,4 +91,20 @@ get password() {
 get isSignup(): boolean {
     return this.mode === 'signup';
     }
+
+private saveSignupDraft(): void {
+const { name, email, privacy } = this.authForm.getRawValue();
+
+sessionStorage.setItem(
+    this.signupDraftKey,
+    JSON.stringify({ name, email, privacy })
+    );
+}
+private restoreSignupDraft(): void {
+    const draft = sessionStorage.getItem(this.signupDraftKey);
+    if (!draft) return;
+    this.authForm.patchValue(JSON.parse(draft), {
+        emitEvent: false,
+    });
+}
 }
