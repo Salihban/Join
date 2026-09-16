@@ -35,6 +35,8 @@ export class LogIn {
         introLogo.style.setProperty('--logo-target-left', `${logoRect.left}px`); 
         introLogo.style.setProperty('--logo-target-top', `${logoRect.top}px`); 
         introLogo.style.setProperty('--logo-target-width', `${logoRect.width}px`);
+    }
+    
     async login(value: AuthFormValue): Promise<void> {
         const { error } = await this.authService.login(value.email, value.password);
         if (error) {
