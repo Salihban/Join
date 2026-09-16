@@ -59,14 +59,14 @@ section {
 .first-row {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 30px;
     width: 100%;
 }
 
 .to-do-wrapper,
 .done-wrapper {
-    width: 150px;
-    height: 150px;
+    width: 264px;
+    height: 168px;
     background: rgba(255, 255, 255, 1);
 
     display: flex;
@@ -76,9 +76,27 @@ section {
 
     border: 1px solid black;
     border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 
     p:nth-child(2) {
-        margin-top: 10px;
+        margin-top: 20px;
+    }
+
+    &:hover {
+        background-color: #2A3647;
+
+        p {
+            color: white;
+        }
+
+        .img-bg {
+            background-color: white;
+
+            img {
+                filter: brightness(0) saturate(100%);
+            }
+        }
     }
 }
 
@@ -128,8 +146,8 @@ section {
 
 .urgent-wrapper {
     width: 100%;
-    max-width: 320px;
-    height: 150px;
+    max-width: 560px;
+    height: 168px;
 
     display: flex;
     justify-content: space-evenly;
@@ -137,10 +155,24 @@ section {
 
     border: 1px solid black;
     border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 
     img {
         width: 50px;
         height: 50px;
+    }
+
+    &:hover {
+        background-color: #2A3647;
+
+        p {
+            color: white;
+        }
+
+        .sec-line {
+            background-color: white;
+        }
     }
 }
 
@@ -154,7 +186,7 @@ section {
         text-align: center;
     }
     p:nth-child(2) {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 }
 
@@ -189,14 +221,14 @@ section {
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 30px;
 }
 
 .task-wrapper,
 .progress-wrapper,
 .feedback-wrapper {
-    width: 100px;
-    height: 110px;
+    width: 168px;
+    height: 168px;
 
     display: flex;
     justify-content: center;
@@ -204,6 +236,8 @@ section {
 
     border: 1px solid black;
     border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 
     p {
         margin: 0;
@@ -217,9 +251,24 @@ section {
     }
 
     p:nth-child(2) {
-        font-size: 16px;
+        font-size: clamp(16px, 2.5dvw, 20px);
+        line-height: 120%;
         color: rgba(42, 54, 71, 1);
-        margin-top: 10px;
+        margin-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    &:hover {
+        background-color: #2A3647;
+
+        p:nth-child(1) {
+            color: white;
+        }
+
+        p:nth-child(2) {
+            color: white;
+        }
     }
 }
 
@@ -311,7 +360,7 @@ section {
         justify-content: center;
         p:nth-child(1){
             font-family: Inter;
-            font-size: 24px;
+            font-size: clamp(36px, 5dvw, 47px);
             margin-bottom: 15px;
         }
         p:nth-child(2){
@@ -329,7 +378,7 @@ section {
     .first-row {
         display: flex;
         justify-content: center;
-        gap: 10px;
+        gap: 30px;
         width: 100%;
     }
 }
