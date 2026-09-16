@@ -20,7 +20,6 @@ export class LogIn {
 
     generalError: string = '';
     submitted: boolean = false;
-    passwordVisible: boolean = false;
     private authService = inject(AuthService);
     private router = inject(Router);
 
@@ -55,14 +54,6 @@ export class LogIn {
     }
 
     get email() { return this.loginForm.get('email'); }
-    get password() { return this.loginForm.get('password'); }
-
-    togglePasswordVisibility() {
-        const passwordValue = this.password?.value;
-        if (passwordValue && passwordValue.length > 0) {
-            this.passwordVisible = !this.passwordVisible;
-        }
-    }
 
     onSubmit() {
         this.submitted = true;

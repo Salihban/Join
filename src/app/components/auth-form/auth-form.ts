@@ -68,9 +68,7 @@ private passwordsMatch(
     }
 
 togglePasswordVisibility(): void {
-    if (this.password?.value) {
     this.passwordVisible = !this.passwordVisible;
-    }
 }
 
 submit(): void {

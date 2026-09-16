@@ -38,18 +38,21 @@
     </div>
 
     <div class="input-group">
-        <input [type]="passwordVisible ? 'text' : 'password'"placeholder="Password"
-        formControlName="password" class="form-input"/>
+    @if (passwordVisible) {
+        <input type="text" placeholder="Password" formControlName="password" class="form-input"/>
+    } @else {
+        <input type="password" placeholder="Password" formControlName="password" class="form-input"/>
+    }
 
-        <span class="input-icon clickable" (click)="togglePasswordVisibility()">
-        @if (!password?.value) {
-            <img src="assets/icons_sprint3/lock.png" alt="Password" />
-            } @else if (passwordVisible) {
-                <img src="assets/icons_sprint3/visibility_off.png" alt="Hide password"/>
-            } @else {
-                <img src="assets/icons_sprint3/visibility.png" alt="Show password"/>
-            }
-        </span>
+    <button type="button" class="input-icon" (click)="togglePasswordVisibility()">
+    @if (!password?.value) {
+        <img src="assets/icons_sprint3/lock.png" alt="Password" />
+    } @else if (passwordVisible) {
+        <img src="assets/icons_sprint3/visibility_off.png" alt="Hide password" />
+    } @else {
+        <img src="assets/icons_sprint3/visibility.png" alt="Show password" />
+    }
+    </button>
 
         @if (password?.invalid && (password?.touched || submitted)) {
             <span class="error-message">
