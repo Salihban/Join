@@ -4,9 +4,10 @@ import { RealtimeChannel } from '@supabase/supabase-js';
 import { Supabase } from '../../services/supabase';
 import { Task, TaskService } from '../../services/task';
 import { AuthService } from '../../services/auth';
+import { RouterLink } from '@angular/router';
 
 @Component({
-    imports: [CommonModule],
+    imports: [CommonModule, RouterLink],
     standalone: true,
     selector: 'app-summary',
     styleUrl: './summary.scss',
