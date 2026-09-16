@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthForm, AuthFormValue} from '../../components/auth-form/auth-form';
 import { AuthService } from '../../services/auth';
+import { ContactService } from '../../services/contact';
 
 @Component({
 selector: 'app-sign-up',
@@ -13,6 +14,7 @@ styleUrl: './sign-up.scss',
 export class SignUp {
 private authService = inject(AuthService);
 private router = inject(Router);
+private contactService = inject(ContactService);
 
 async signUp(value: AuthFormValue): Promise<void> {
     if (!value.name) return;
@@ -27,6 +29,13 @@ async signUp(value: AuthFormValue): Promise<void> {
     console.error('Registrierung fehlgeschlagen:', error);
     return;
     }
+
+    this.contactService.toastMessage.set('Sign up succesful');
+
+    setTimeout(() => {
+    this.contactService.toastMessage.set('');
+    }, 3000);
+    await this.router.navigate(['/log-in']);
 
     if (data.session) {
         await this.router.navigate(['/summary']);
