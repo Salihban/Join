@@ -13,7 +13,7 @@
                         <img src="/assets/icons_sprint3/edit.png" alt="">
                     </p>
                     <div class="to-do-container">
-                        <p>1</p>
+                        <p>{{ todoTasks() }}</p>
                         <p>To-do</p>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         <img src="/assets/icons_sprint3/Vector (4).png" alt="">
                     </p>
                     <div class="done-container">
-                        <p>1</p>
+                        <p>{{ doneTasks() }}</p>
                         <p>Done</p>
                     </div>
                 </div>
@@ -32,41 +32,45 @@
                     <div class="urgent-content-wrapper">
                         <img src="/assets/icons_sprint3/Frame 59.png" alt="">
                         <div class="urgent-content">
-                            <p>1</p>
+                            <p>{{ urgentTasks() }}</p>
                             <p>Urgent</p>
                         </div>
                     </div>
                     <p class="sec-line"></p>
                     <div class="urgent-data-wrapper">
-                        <p>October 16, 2022</p>
+                        @if (nextUrgentTask()) {
+                        <p>{{ nextUrgentTask()?.due_date | date: 'MMM d, y' }}</p>
                         <p>Upcoming Deadline</p>
+                        }
                     </div>
                 </div>
             </div>
             <div class="third-row">
                 <div class="task-wrapper">
                     <div class="task">
-                        <p>5</p>
+                        <p>{{ totalTasks() }}</p>
                         <p>Tasks in Board</p>
                     </div>
                 </div>
                 <div class="progress-wrapper">
                     <div class="progress">
-                        <p>2</p>
+                        <p>{{ inProgressTasks() }}</p>
                         <p>Tasks In Progress</p>
                     </div>
                 </div>
                 <div class="feedback-wrapper">
                     <div class="feedback">
-                        <p>2</p>
+                        <p>{{ feedbackTasks() }}</p>
                         <p>Awaiting Feedback</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="greeting-wrapper">
-            <p>Good morning, </p>
-            <p>Sofia Müller</p>
+            <p>{{ greeting }}{{ userName()? ',': '' }}</p>
+            @if (userName()) {
+                <p>{{ userName() }}</p>
+            }
         </div>
     </div>
 </section>

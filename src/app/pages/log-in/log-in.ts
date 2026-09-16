@@ -41,7 +41,7 @@ export class LogIn {
             this.generalError = error.message;
             return;
         }
-        await this.router.navigate(['/board']);
+        await this.router.navigate(['/summary']);
     }
 
     async guestLogin(): Promise<void> {
@@ -49,7 +49,7 @@ export class LogIn {
         if (error) {
             return;
         }
-        await this.router.navigate(['/board']);
+        await this.router.navigate(['/summary']);
     }
 
     get email() { return this.loginForm.get('email'); }
