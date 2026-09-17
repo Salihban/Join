@@ -2,7 +2,7 @@
 @use '../../styles/mixin' as mixin;
 $font-inter: 'Inter', sans-serif;
 
-:host{
+:host {
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
@@ -31,6 +31,7 @@ $font-inter: 'Inter', sans-serif;
 }
 
 .login-header .logo-icon {
+    background-color: #f6f7f8;
     opacity: 0;
     animation: login-logo-appear 2.8s ease-in-out forwards;
 }
@@ -111,7 +112,7 @@ $font-inter: 'Inter', sans-serif;
     }
 }
 
-.login-outer-container{
+.login-outer-container {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -131,23 +132,28 @@ $font-inter: 'Inter', sans-serif;
     width: 100%;
     height: auto;
 
-    input, button, a, span, p {
+    input,
+    button,
+    a,
+    span,
+    p {
         font-size: 16px;
     }
 }
 
 .login-header {
     display: contents;
-    
+    background-color: #f6f7f8;
     .logo-wrapper {
         order: 1;
         margin: 20px 0 0 20px;
 
-        .logo-icon{
+        width: 64px;
+        height: 78px;
+        .logo-icon {
             width: 64px;
             height: 78px;
         }
-
     }
 
     .signup-container {
@@ -163,14 +169,14 @@ $font-inter: 'Inter', sans-serif;
         font-size: 16px;
         gap: 24px;
         z-index: 20;
-
-        .signup-text{
+        background-color: #f6f7f8;
+        .signup-text {
             font-size: 24px;
         }
     }
 }
 
-.btn{
+.btn {
     background-color: #2a3647;
     color: #ffffff;
     width: 104px;
@@ -179,11 +185,11 @@ $font-inter: 'Inter', sans-serif;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    }
+}
 
-    .btn-dark:hover{
-        background-color: rgba(18, 70, 88, 1);
-    }
+.btn-dark:hover {
+    background-color: rgba(18, 70, 88, 1);
+}
 
 app-auth-form {
     display: block;
@@ -227,18 +233,19 @@ app-auth-form {
     align-items: center;
     font-family: 'inter';
     font-size: 16px;
-
+    background-color: #f6f7f8;
     .legal-links {
         display: flex;
         gap: 24px;
 
         .legal-link {
-            color: #9ca3af;
+            color: #686868;
             text-decoration: none;
 
             &:hover {
-                text-decoration: underline;
-                color: #6b7280;
+                font-weight: bold;
+                color: #124658;
+                transform: scale(1.1);
             }
         }
     }
@@ -251,7 +258,7 @@ app-auth-form {
     }
 
     .login-header {
-        display: flex; 
+        display: flex;
         justify-content: space-between;
         align-items: flex-start;
         width: 100%;
@@ -262,6 +269,10 @@ app-auth-form {
             margin: 0;
             width: 100px;
             height: 122px;
+            .logo-icon {
+                width: 100px;
+                height: 122px;
+            }
         }
 
         .signup-container {
