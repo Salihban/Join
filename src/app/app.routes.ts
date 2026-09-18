@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './services/auth';
 
 export const routes: Routes = [
     {
@@ -14,7 +15,8 @@ export const routes: Routes = [
     {
         path: 'summary',
         loadComponent: () =>
-            import('./pages/summary/summary').then((m) => m.Summary)
+            import('./pages/summary/summary').then((m) => m.Summary),
+            canActivate: [authGuard]
     },
     {
         path: 'sign-up',
@@ -24,7 +26,8 @@ export const routes: Routes = [
     {
         path: 'contacts',
         loadComponent: () =>
-            import('./components/contacts-view/contacts-view').then(m => m.ContactsView)
+            import('./components/contacts-view/contacts-view').then(m => m.ContactsView),
+        canActivate: [authGuard]
     },
     {
         path: 'legal-notice',
@@ -44,11 +47,13 @@ export const routes: Routes = [
     {
         path: 'add-task',
         loadComponent: () =>
-            import('./pages/add-task/add-task').then(m => m.AddTask)
+            import('./pages/add-task/add-task').then(m => m.AddTask),
+        canActivate: [authGuard]
     },
     {
         path: 'board',
         loadComponent: () =>
-            import('./pages/board/board').then(m => m.Board)
+            import('./pages/board/board').then(m => m.Board),
+        canActivate: [authGuard]
     }
 ];
