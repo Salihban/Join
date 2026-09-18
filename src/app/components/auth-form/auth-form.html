@@ -17,7 +17,13 @@
         <span class="input-icon"><img src="assets/icons_sprint3/person.png" alt="Name" /></span>
         @if (authForm.get('name')?.invalid &&
         (authForm.get('name')?.touched || submitted)) {
-            <span class="error-message">Please enter your name.</span>
+            <span class="error-message">
+                @if (authForm.get('name')?.errors?.['required']) {
+                    Please enter your name.
+                } @else if (authForm.get('name')?.errors?.['pattern']) {
+                    Name cannot be empty or only spaces.
+                }
+            </span>
         }
         </div>
         }

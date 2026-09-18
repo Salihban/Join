@@ -51,7 +51,7 @@ return new FormGroup({
 
 private createSignupForm(): FormGroup {
 return new FormGroup({
-        name: new FormControl('', Validators.required),
+        name: new FormControl('', [Validators.required, Validators.pattern(/\S/)]),
         email: new FormControl('', [Validators.required, Validators.email,]),
         password: new FormControl('', [Validators.required, Validators.minLength(6),]),
         confirmPassword: new FormControl('', Validators.required),
