@@ -142,6 +142,22 @@ $font-inter: 'Inter', sans-serif;
         margin-top: 8px;
     }
 
+    .privacy-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .privacy-error {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin-top: 4px;
+        }
+    }
+
     .privacy-checkbox {
         display: flex;
         justify-content: center;
