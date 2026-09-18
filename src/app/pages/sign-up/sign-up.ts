@@ -20,9 +20,7 @@ async signUp(value: AuthFormValue): Promise<void> {
     if (!value.name) return;
 
     const { data, error } = await this.authService.signUp(
-    value.name,
-    value.email,
-    value.password
+    value.name, value.email, value.password
     );
 
     if (error) {

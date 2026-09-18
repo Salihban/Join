@@ -1,6 +1,7 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { User } from '@supabase/supabase-js';
 import { Supabase } from './supabase';
+import { CanActivateFn, Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
@@ -53,4 +54,16 @@ private watchAuthChanges(): void {
     this.currentUser.set(session?.user ?? null);
     });
 }
+
+async hasSession(): Promise<boolean> {
+    const { data } = await this.dbService.supabase.auth.getSession();
+    return data.session !==null;
+}
+}
+
+export const authGuard: CanActivateFn = async () => {
+    const authService = inject(AuthService);
+    const router = inject(Router);
+
+    return await authService.hasSession()? true: router.createUrlTree(['/log-in']);
 }
