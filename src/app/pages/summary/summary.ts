@@ -63,7 +63,7 @@ export class Summary implements OnInit, OnDestroy{
     userName = computed(() => {
         const user = this.authService.currentUser();
         if (!user || user.is_anonymous) {
-            return'';
+            return 'Guest!';
         }
         return user.user_metadata?.['name'] ?? '';
     });

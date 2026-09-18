@@ -17,7 +17,13 @@
         <span class="input-icon"><img src="assets/icons_sprint3/person.png" alt="Name" /></span>
         @if (authForm.get('name')?.invalid &&
         (authForm.get('name')?.touched || submitted)) {
-            <span class="error-message">Please enter your name.</span>
+            <span class="error-message">
+                @if (authForm.get('name')?.errors?.['required']) {
+                    Please enter your name.
+                } @else if (authForm.get('name')?.errors?.['pattern']) {
+                    Name cannot be empty or only spaces.
+                }
+            </span>
         }
         </div>
         }
@@ -79,14 +85,19 @@
         }
         </div>
 
+        <div class="privacy-group">
         <label class="privacy-checkbox">
         <input type="checkbox" formControlName="privacy"/>
             <span>I accept the<a routerLink="/privacy-policy"> Privacy Policy</a></span>
         </label>
+        @if (authForm.get('privacy')?.invalid && (authForm.get('privacy')?.touched || submitted)) {
+            <span class="error-message privacy-error">Please accept the Privacy Policy.</span>
+        }
+        </div>
         }
 
     <div class="button-group">
-        <button type="submit" class="btn btn-primary btn-login" [disabled]="authForm.invalid">
+        <button type="submit" class="btn btn-primary btn-login">
             {{isSignup ? 'Sign up': 'Log in'}}
         </button>
 
