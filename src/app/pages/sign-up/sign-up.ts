@@ -35,12 +35,8 @@ async signUp(value: AuthFormValue): Promise<void> {
     setTimeout(() => {
     this.contactService.toastMessage.set('');
     }, 3000);
-    await this.router.navigate(['/log-in']);
 
-    if (data.session) {
-        await this.router.navigate(['/summary']);
-    } else {
-        await this.router.navigate(['/log-in']);
-    }
+    await this.authService.logout();
+    await this.router.navigate(['/log-in']);
 }
 }

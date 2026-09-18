@@ -1,7 +1,7 @@
-@use "../../styles/main" as styles;
-@use "../../styles/mixin" as mixin;
+@use '../../styles/main' as styles;
+@use '../../styles/mixin' as mixin;
 
-$font-inter: "Inter", sans-serif;
+$font-inter: 'Inter', sans-serif;
 
 :host {
     display: block;
@@ -20,25 +20,25 @@ $font-inter: "Inter", sans-serif;
 
     .title-wrapper {
         display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
 
-    .back-button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #2a3647;
-    font-size: 40px;
-    line-height: 1;
-    text-decoration: none;
-    cursor: pointer;
+        .back-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #2a3647;
+            font-size: 40px;
+            line-height: 1;
+            text-decoration: none;
+            cursor: pointer;
 
-    :hover {
-    transform: scale(1.1);
-}
+            :hover {
+                transform: scale(1.1);
+            }
+        }
     }
-}
 
     .login-title {
         font-size: 42px;
@@ -60,7 +60,7 @@ $font-inter: "Inter", sans-serif;
     }
 }
 
-    .login-form {
+.login-form {
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -79,7 +79,7 @@ $font-inter: "Inter", sans-serif;
             width: 100%;
             height: 48px;
             padding: 0 48px 0 16px;
-            border: 1px solid #d1d5db;
+            border: 1px solid #686868;
             border-radius: 12px;
             background-color: #ffffff;
             outline: none;
@@ -88,7 +88,7 @@ $font-inter: "Inter", sans-serif;
             z-index: 1;
 
             &::placeholder {
-                color: #9ca3af;
+                color: #686868;
             }
 
             &:focus {
@@ -96,25 +96,25 @@ $font-inter: "Inter", sans-serif;
             }
 
             &.error {
-                border-color: #ff001e; 
+                border-color: #ff001e;
             }
         }
 
-    .input-icon {
-        position: absolute;
-        top: 16px;
-        right: 20px;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-        pointer-events: auto;
-        z-index: 20;
+        .input-icon {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 20;
 
-    img{
-        width: 20px;
-        pointer-events: none;
-    }
-}
+            img {
+                width: 20px;
+                pointer-events: none;
+            }
+        }
     }
 
     .error-message {
@@ -142,6 +142,22 @@ $font-inter: "Inter", sans-serif;
         margin-top: 8px;
     }
 
+    .privacy-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .privacy-error {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin-top: 4px;
+        }
+    }
+
     .privacy-checkbox {
         display: flex;
         justify-content: center;
@@ -150,10 +166,10 @@ $font-inter: "Inter", sans-serif;
         gap: 8px;
         width: 100%;
 
-        a{
+        a {
             color: rgba(18, 70, 88, 1);
         }
-}
+    }
 }
 
 .btn {
@@ -164,9 +180,14 @@ $font-inter: "Inter", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
 
     &.btn-primary {
+        font-size: 16px;
         background-color: #2a3647;
         color: #ffffff;
         width: 100%;
@@ -180,15 +201,18 @@ $font-inter: "Inter", sans-serif;
     }
 
     &.btn-secondary {
+        font-size: 16px;
         background-color: #ffffff;
-        color: #2A3647;
-        border: 1px solid #2A3647;
+        color: #2a3647;
+        border: 1px solid #2a3647;
         width: 100%;
         max-width: 180px;
         height: 48px;
 
         &:hover {
-            border: 2px solid rgba(18, 70, 88, 1);
+            border: 2px solid;
+            border-color: #124658;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
     }
 
@@ -206,54 +230,60 @@ $font-inter: "Inter", sans-serif;
 }
 
 @include mixin.desktop {
-.login-container {
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-}
+    .login-container {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+    }
 
-app-auth-form {
-    width: 100%;
-    margin: auto;
-}
+    app-auth-form {
+        width: 100%;
+        margin: auto;
+    }
 
-.login-card {
-    max-width: 652px;
-    min-height: 449px;
-    padding: 40px 32px;
-    margin: auto;
+    .login-card {
+        max-width: 652px;
+        min-height: 449px;
+        padding: 40px 32px;
+        margin: auto;
 
-    .login-title {
-        font-size: 61px;
+        .login-title {
+            font-size: 61px;
 
-    &::after {
-        width: 150px;
-        margin-top: 50px;
+            &::after {
+                width: 150px;
+                margin-top: 50px;
+            }
         }
     }
-}
 
-.login-form {
-    .input-group {
-        max-width: 422px;
-    }
+    .login-form {
+        .input-group {
+            max-width: 422px;
+        }
 
-    .button-group {
-        flex-direction: row;
-        justify-content: center;
-        gap: 35px;
+        .button-group {
+            flex-direction: row;
+            justify-content: center;
+            gap: 35px;
 
-    .btn-login {
-        font-size: 21px;
-        max-width: 110px;
-        height: 48px;
-    }
+            .btn-login {
+                font-size: 21px;
+                max-width: 110px;
+                height: 48px;
+            }
 
-    .btn-guest {
-        font-size: 21px;
-        max-width: 177px;
-        height: 48px;
+            .btn-guest {
+                font-size: 21px;
+                max-width: 177px;
+                height: 48px;
+
+                &:hover {
+                    border: 2px solid;
+                    border-color: #124658;
+                    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                }
+            }
+        }
     }
-    }
-}
 }
