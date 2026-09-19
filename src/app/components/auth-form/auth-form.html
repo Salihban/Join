@@ -13,18 +13,12 @@
         <form class="login-form" [formGroup]="authForm" (ngSubmit)="submit()">
             @if (isSignup) {
                 <div class="input-group">
-                    <input
-                        type="text"
-                        placeholder="Name"
-                        formControlName="name"
-                        class="form-input"
-                    />
-                    <span class="input-icon"
-                        ><img src="assets/icons_sprint3/person.png" alt="Name"
-                    /></span>
+                    <input type="text" placeholder="Name" formControlName="name" class="form-input"/>
+                    <span class="input-icon">
+                        <img src="assets/icons_sprint3/person.png" alt="Name"/>
+                    </span>
                     @if (
-                        authForm.get('name')?.invalid &&
-                        (authForm.get('name')?.touched || submitted)
+                        authForm.get('name')?.invalid && (authForm.get('name')?.touched || submitted)
                     ) {
                         <span class="error-message">
                             @if (authForm.get('name')?.errors?.['required']) {
@@ -38,16 +32,10 @@
             }
 
             <div class="input-group">
-                <input
-                    type="email"
-                    placeholder="Email"
-                    formControlName="email"
-                    class="form-input"
-                />
-                <span class="input-icon"
-                    ><img src="assets/icons_sprint3/mail.png" alt="Email"
-                /></span>
-
+                <input type="email" placeholder="Email" formControlName="email" class="form-input"/>
+                <span class="input-icon">
+                    <img src="assets/icons_sprint3/mail.png" alt="Email"/>
+                </span>
                 @if (email?.invalid && (email?.touched || submitted)) {
                     <span class="error-message">
                         @if (email?.errors?.['required']) {
@@ -61,21 +49,10 @@
 
             <div class="input-group">
                 @if (passwordVisible) {
-                    <input
-                        type="text"
-                        placeholder="Password"
-                        formControlName="password"
-                        class="form-input"
-                    />
+                    <input type="text" placeholder="Password" formControlName="password" class="form-input"/>
                 } @else {
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        formControlName="password"
-                        class="form-input"
-                    />
+                    <input type="password" placeholder="Password" formControlName="password" class="form-input"/>
                 }
-
                 <button type="button" class="input-icon" (click)="togglePasswordVisibility()">
                     @if (!password?.value) {
                         <img src="assets/icons_sprint3/lock.png" alt="Password" />
@@ -90,6 +67,8 @@
                     <span class="error-message">
                         @if (password?.errors?.['required']) {
                             Please enter a password.
+                        } @else if (password?.errors?.['minlength']) {
+                            Password must be at least 6 characters
                         }
                     </span>
                 }
@@ -101,16 +80,21 @@
 
             @if (isSignup) {
                 <div class="input-group">
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        formControlName="confirmPassword"
-                        class="form-input"
-                    />
+                    @if (confirmPasswordVisible) {
+                        <input type="text" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input"/>
+                    } @else {
+                        <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input"/>
+                    }
 
-                    <span class="input-icon">
-                        <img src="assets/icons_sprint3/lock.png" alt="Confirm password" />
-                    </span>
+                    <button type="button" class="input-icon" (click)="toggleConfirmPasswordVisibility()">
+                        @if (!authForm.get('confirmPassword')?.value) {
+                            <img src="assets/icons_sprint3/lock.png" alt="Confirm password"/>
+                        } @else if (confirmPasswordVisible) {
+                            <img src="assets/icons_sprint3/visibility_off.png" alt="Hide password"/>
+                        } @else {
+                            <img src="assets/icons_sprint3/visibility.png" alt="Show password"/>
+                        }
+                    </button>
 
                     @if (
                         authForm.hasError('passwordsMismatch') &&
@@ -140,13 +124,8 @@
                 <button type="submit" class="btn btn-primary btn-login">
                     {{ isSignup ? 'Sign up' : 'Log in' }}
                 </button>
-
                 @if (!isSignup) {
-                    <button
-                        type="button"
-                        class="btn btn-secondary btn-guest"
-                        (click)="guestSubmit.emit()"
-                    >
+                    <button type="button" class="btn btn-secondary btn-guest" (click)="guestSubmit.emit()">
                         Guest Log in
                     </button>
                 }

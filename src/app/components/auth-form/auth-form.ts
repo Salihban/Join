@@ -30,6 +30,7 @@ private readonly signupDraftKey  = 'signupDraft';
 authForm!: FormGroup;
 submitted = false;
 passwordVisible = false;
+confirmPasswordVisible = false;
 
 ngOnInit(): void {
     this.authForm = 
@@ -69,6 +70,10 @@ private passwordsMatch(
 
 togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
+}
+
+toggleConfirmPasswordVisibility(): void {
+    this.confirmPasswordVisible = !this.confirmPasswordVisible;
 }
 
 setWrongPasswordError(): void {
