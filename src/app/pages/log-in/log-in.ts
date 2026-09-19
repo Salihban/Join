@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthForm, AuthFormValue } from '../../components/auth-form/auth-form';
@@ -13,9 +13,9 @@ import { AuthService } from '../../services/auth';
     templateUrl: './log-in.html',
 })
 export class LogIn {
+    @ViewChild(AuthForm) authFormComponent!: AuthForm;
     loginForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
 
     generalError: string = '';
@@ -39,7 +39,7 @@ export class LogIn {
     async login(value: AuthFormValue): Promise<void> {
         const { error } = await this.authService.login(value.email, value.password);
         if (error) {
-            this.generalError = error.message;
+            this.authFormComponent.setWrongPasswordError(); 
             return;
         }
         await this.router.navigate(['/summary']);

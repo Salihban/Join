@@ -416,7 +416,7 @@
     &__bottom {
         display: flex;
         flex-direction: column;
-        padding-bottom: 90px;
+        padding-bottom: 40px;
     }
 
     &__required-hint {
@@ -557,8 +557,6 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            padding-top: 40px;
-            padding-bottom: 0;
         }
 
         &__required-hint {

@@ -45,7 +45,7 @@ ngOnInit(): void {
 private createLoginForm(): FormGroup {
 return new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email,]),
-    password: new FormControl('', [Validators.required,Validators.minLength(6),]),
+    password: new FormControl('', [Validators.required]),
     });
 }
 
@@ -69,6 +69,11 @@ private passwordsMatch(
 
 togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
+}
+
+setWrongPasswordError(): void {
+    this.authForm.setErrors({ wrongPassword: true });
+    this.password?.markAsTouched();
 }
 
 submit(): void {
