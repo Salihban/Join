@@ -221,7 +221,7 @@ export class TaskForm implements OnInit {
         this.taskCreated.emit();
         this.clearForm();
 
-        if (window.innerWidth < 768){
+        if (this.router.url === '/add-task'){
             await this.router.navigate(['/board']);
         }
     }
