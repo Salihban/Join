@@ -5,8 +5,8 @@
 }
 
 .task-card {
-    width: 270px;
-    height: 270px;
+    width: 252px;
+    height: 100%;
     border-radius: 24px;
     background-color: rgba(255, 255, 255, 1);
     padding: 20px;
@@ -73,19 +73,15 @@
         align-items: center;
 
         .initials {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             color: white;
-            font-size: 18px;
-
+            font-size: 16px;
             border: 2px solid white;
-
             margin-left: -10px;
         }
 
@@ -95,15 +91,16 @@
     }
 }
 
-.initials {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    color: white;
-}
+// .initials {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 30px;
+//     height: 30px;
+//     border-radius: 50%;
+//     color: white;
+// }
+
 .initials--more {
     background-color: #d1d1d1;
     color: #2a3647;
