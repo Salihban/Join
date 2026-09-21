@@ -6,9 +6,9 @@ import { createClient } from '@supabase/supabase-js';
 })
 
 export class Supabase {
-    readonly supabaseUrl: string = 'https://nykpukuugpmurwpmdkjc.supabase.co';
+    readonly supabaseUrl: string = 'https://iqtazjkqlvyevyxktbtp.supabase.co';
 
-    readonly supabaseKey: string = 'sb_publishable_U0gfFBH_95Vfkbcm9nxQPQ_13uGLKr4';
+    readonly supabaseKey: string = 'sb_publishable_AM62FvBqBsCXGImh7p-6vQ_ZAA2vw38';
     
     readonly supabase = createClient(this.supabaseUrl, this.supabaseKey);
 }
