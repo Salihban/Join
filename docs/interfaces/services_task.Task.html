@@ -11,9 +11,12 @@
 <li><a href="../modules/services_task.html">services/task</a></li>
 <li><a href="" aria-current="page">Task</a></li></ul>
 <h1>Interface Task</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>Represents a task entity with full details including subtasks and assigned contacts.</p>
+</div></section>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">Task</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#assignedcontacts">assignedContacts</a><span class="tsd-signature-symbol">:</span> <a href="services_contact.Contact.html" class="tsd-signature-type tsd-kind-interface">Contact</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#category">category</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;technical_task&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;user_story&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#description">description</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#due_date">due_date</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#id">id</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#priority">priority</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;urgent&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;medium&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;low&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#status">status</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;todo&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;in_progress&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;await_feedback&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;done&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#subtasks">subtasks</a><span class="tsd-signature-symbol">:</span> <a href="services_task.Subtask.html" class="tsd-signature-type tsd-kind-interface">Subtask</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#title">title</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L22">src/app/services/task.ts:22</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L37">src/app/services/task.ts:37</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -38,47 +41,47 @@
 <h3 class="tsd-anchor-link" id="assignedcontacts"><span>assigned<wbr/>Contacts</span><a href="#assignedcontacts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">assignedContacts</span><span class="tsd-signature-symbol">:</span> <a href="services_contact.Contact.html" class="tsd-signature-type tsd-kind-interface">Contact</a><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L31">src/app/services/task.ts:31</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L46">src/app/services/task.ts:46</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="category"><span>category</span><a href="#category" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">category</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;technical_task&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;user_story&quot;</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L28">src/app/services/task.ts:28</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L43">src/app/services/task.ts:43</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="description"><span>description</span><a href="#description" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">description</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L25">src/app/services/task.ts:25</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L40">src/app/services/task.ts:40</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="due_date"><span>due_<wbr/>date</span><a href="#due_date" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">due_date</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L26">src/app/services/task.ts:26</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L41">src/app/services/task.ts:41</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="id"><span>id</span><a href="#id" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L23">src/app/services/task.ts:23</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L38">src/app/services/task.ts:38</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="priority"><span>priority</span><a href="#priority" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">priority</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;urgent&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;medium&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;low&quot;</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L27">src/app/services/task.ts:27</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L42">src/app/services/task.ts:42</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="status"><span>status</span><a href="#status" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">status</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;todo&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;in_progress&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;await_feedback&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;done&quot;</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L29">src/app/services/task.ts:29</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L44">src/app/services/task.ts:44</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="subtasks"><span>subtasks</span><a href="#subtasks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">subtasks</span><span class="tsd-signature-symbol">:</span> <a href="services_task.Subtask.html" class="tsd-signature-type tsd-kind-interface">Subtask</a><span class="tsd-signature-symbol">[]</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L30">src/app/services/task.ts:30</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L45">src/app/services/task.ts:45</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="title"><span>title</span><a href="#title" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">title</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L24">src/app/services/task.ts:24</a></li></ul></aside></section></section></details></div>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L39">src/app/services/task.ts:39</a></li></ul></aside></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
