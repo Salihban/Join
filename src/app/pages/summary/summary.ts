@@ -29,10 +29,9 @@ export class Summary implements OnInit, OnDestroy{
     urgentTasks = computed(() => this.task().filter((task) => task.priority === 'urgent').length);
 
     nextUrgentTask = computed(() => {
-    const today = new Date().toISOString().slice(0,10);
 
-    return [...this.task()].filter((task) => task.priority === 'urgent' &&
-    task.due_date >= today).sort((a, b) => a.due_date.localeCompare(b.due_date))[0]?? null;
+    return [...this.task()].filter((task) => task.priority === 'urgent')
+    .sort((a, b) => a.due_date.localeCompare(b.due_date))[0]?? null;
     });
 
     async ngOnInit():Promise<void> {
