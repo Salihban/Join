@@ -12,7 +12,7 @@
 <li><a href="" aria-current="page">TaskService</a></li></ul>
 <h1>Class TaskService</h1></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L38">src/app/services/task.ts:38</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L53">src/app/services/task.ts:53</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -50,77 +50,111 @@
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="addtask-1"><span class="tsd-kind-call-signature">addTask</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">task</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/services_task.NewTask.html" class="tsd-signature-type tsd-kind-interface">NewTask</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#addtask-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a new task in the database and saves its related assignees and subtasks.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">task</span>: <a href="../interfaces/services_task.NewTask.html" class="tsd-signature-type tsd-kind-interface">NewTask</a></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">task</span>: <a href="../interfaces/services_task.NewTask.html" class="tsd-signature-type tsd-kind-interface">NewTask</a></span>
+<div class="tsd-comment tsd-typography"><p>The task data to insert.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><p>True if the task was saved successfully, false otherwise.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L41">src/app/services/task.ts:41</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L63">src/app/services/task.ts:63</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="deletetask"><span>delete<wbr/>Task</span><a href="#deletetask" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="deletetask-1"><span class="tsd-kind-call-signature">deleteTask</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">taskId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#deletetask-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Deletes a task from the database.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">taskId</span>: <span class="tsd-signature-type">number</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">taskId</span>: <span class="tsd-signature-type">number</span></span>
+<div class="tsd-comment tsd-typography"><p>The ID of the task to delete.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><p>True if the deletion was successful, false otherwise.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L97">src/app/services/task.ts:97</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L150">src/app/services/task.ts:150</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="gettasks"><span>get<wbr/>Tasks</span><a href="#gettasks" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="gettasks-1"><span class="tsd-kind-call-signature">getTasks</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/services_task.Task.html" class="tsd-signature-type tsd-kind-interface">Task</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><a href="#gettasks-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/services_task.Task.html" class="tsd-signature-type tsd-kind-interface">Task</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<div class="tsd-comment tsd-typography"><p>Retrieves all tasks with their subtasks and assigned contacts.</p>
+</div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/services_task.Task.html" class="tsd-signature-type tsd-kind-interface">Task</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4><p>A promise resolving to an array of Task objects.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L148">src/app/services/task.ts:148</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L234">src/app/services/task.ts:234</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="updatesubtaskcompleted"><span>update<wbr/>Subtask<wbr/>Completed</span><a href="#updatesubtaskcompleted" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="updatesubtaskcompleted-1"><span class="tsd-kind-call-signature">updateSubtaskCompleted</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">completed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#updatesubtaskcompleted-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates the completion state of a subtask.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">number</span></span></li>
-<li><span><span class="tsd-kind-parameter">completed</span>: <span class="tsd-signature-type">boolean</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">id</span>: <span class="tsd-signature-type">number</span></span>
+<div class="tsd-comment tsd-typography"><p>The ID of the subtask to update.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">completed</span>: <span class="tsd-signature-type">boolean</span></span>
+<div class="tsd-comment tsd-typography"><p>The new completion state.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><p>True if the update was successful, false otherwise.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L58">src/app/services/task.ts:58</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L88">src/app/services/task.ts:88</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="updatetask"><span>update<wbr/>Task</span><a href="#updatetask" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="updatetask-1"><span class="tsd-kind-call-signature">updateTask</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">taskId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">task</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/services_task.NewTask.html" class="tsd-signature-type tsd-kind-interface">NewTask</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#updatetask-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates an existing task and replaces its assignees and subtasks.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">taskId</span>: <span class="tsd-signature-type">number</span></span></li>
-<li><span><span class="tsd-kind-parameter">task</span>: <a href="../interfaces/services_task.NewTask.html" class="tsd-signature-type tsd-kind-interface">NewTask</a></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">taskId</span>: <span class="tsd-signature-type">number</span></span>
+<div class="tsd-comment tsd-typography"><p>The ID of the task to update.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">task</span>: <a href="../interfaces/services_task.NewTask.html" class="tsd-signature-type tsd-kind-interface">NewTask</a></span>
+<div class="tsd-comment tsd-typography"><p>The updated task data.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><p>True if the task was updated successfully, false otherwise.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L68">src/app/services/task.ts:68</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L106">src/app/services/task.ts:106</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="updatetaskstatus"><span>update<wbr/>Task<wbr/>Status</span><a href="#updatetaskstatus" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
 <div class="tsd-signature tsd-anchor-link" id="updatetaskstatus-1"><span class="tsd-kind-call-signature">updateTaskStatus</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">taskId</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">status</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;todo&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;in_progress&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;await_feedback&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;done&quot;</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#updatetaskstatus-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates the status of a task.</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">taskId</span>: <span class="tsd-signature-type">number</span></span></li>
-<li><span><span class="tsd-kind-parameter">status</span>: <span class="tsd-signature-type">&quot;todo&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;in_progress&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;await_feedback&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;done&quot;</span></span></li></ul></div>
-<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<li><span><span class="tsd-kind-parameter">taskId</span>: <span class="tsd-signature-type">number</span></span>
+<div class="tsd-comment tsd-typography"><p>The ID of the task to update.</p>
+</div></li>
+<li><span><span class="tsd-kind-parameter">status</span>: <span class="tsd-signature-type">&quot;todo&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;in_progress&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;await_feedback&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;done&quot;</span></span>
+<div class="tsd-comment tsd-typography"><p>The new status value.</p>
+</div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><p>True if the update was successful, false otherwise.</p>
+<aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Salihban/Join/blob/8400369ca645b7a4854ae39d3d4952c32163e7e4/src/app/services/task.ts#L89">src/app/services/task.ts:89</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/Salihban/Join/blob/a24172e7bc220aa16155e0a6a2b4e8f8ea89d892/src/app/services/task.ts#L135">src/app/services/task.ts:135</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
