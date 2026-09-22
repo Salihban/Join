@@ -228,12 +228,37 @@ export class TaskService {
      * Retrieves all tasks with their subtasks and assigned contacts.
      * @returns A promise resolving to an array of Task objects.
      */
+    // async getTasks(): Promise<Task[]> {
+    //     const { data, error } = await this.dbService.supabase.from('task').select(`*, subtasks:subtask!subtask_task_id_fkey(*), task_assignees(contact:contacts(*))`);
+    //     if (error) return [];
+    //     return (data ?? []).map((task: any) => ({
+    //         ...task, subtasks: task.subtasks ?? [], assignedContacts: (task.task_assignees ?? []).map(
+    //             (item: any) => item.contact),
+    //     })) as Task[];
+    // }
+
     async getTasks(): Promise<Task[]> {
-        const { data, error } = await this.dbService.supabase.from('task').select(`*, subtasks:subtask!subtask_task_id_fkey(*), task_assignees(contact:contacts(*))`);
-        if (error) return [];
-        return (data ?? []).map((task: any) => ({
-            ...task, subtasks: task.subtasks ?? [], assignedContacts: (task.task_assignees ?? []).map(
-                (item: any) => item.contact),
-        })) as Task[];
+    const { data, error } = await this.dbService.supabase
+        .from('task')
+        .select(`
+            *,
+            subtasks:subtask!subtask_task_id_fkey(*),
+            task_assignees:task_assignees!task_assignees_task_id_fkey(
+                contact:contacts!task_assignees_contact_id_fkey(*)
+            )
+        `);
+
+    if (error) {
+        console.error('Fehler beim Laden der Tasks:', error);
+        return [];
     }
+
+    return (data ?? []).map((task: any) => ({
+        ...task,
+        subtasks: task.subtasks ?? [],
+        assignedContacts: (task.task_assignees ?? [])
+            .map((item: any) => item.contact)
+            .filter(Boolean),
+    })) as Task[];
+}
 }
