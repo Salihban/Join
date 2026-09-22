@@ -18,36 +18,6 @@ export class SignUp {
 
     @ViewChild(AuthForm) authFormComp!: AuthForm;
 
-    // async signUp(value: AuthFormValue): Promise<void> {
-    //     if (!value.name) return;
-
-    //     const { data, error } = await this.authService.signUp(
-    //         value.name, value.email, value.password
-    //     );
-
-    //     if (error) {
-    //         console.error('Registrierung fehlgeschlagen:', error);
-    //         return;
-    //     }
-
-    //     if (this.authFormComp && this.authFormComp.authForm) {
-    //         this.authFormComp.authForm.reset();
-    //     }
-
-    //     if (this.authFormComp) {
-    //         this.authFormComp.clearDraft();
-    //     }
-
-    //     this.contactService.toastMessage.set('Sign up succesful');
-
-    //     setTimeout(() => {
-    //         this.contactService.toastMessage.set('');
-    //     }, 3500);
-
-    //     await this.authService.logout();
-    //     await this.router.navigate(['/log-in']);
-    // }
-
     async signUp(value: AuthFormValue): Promise<void> {
         if (!value.name) return;
 
@@ -70,6 +40,6 @@ export class SignUp {
             this.contactService.toastMessage.set('');
             await this.authService.logout();
             await this.router.navigate(['/log-in']);
-        }, 3000);
+        }, 2500);
     }
 }
