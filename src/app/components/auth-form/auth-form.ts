@@ -194,6 +194,7 @@ export class AuthForm implements OnInit {
     public clearDraft(): void {
         sessionStorage.removeItem(this.signupDraftKey);
         this.authForm.reset();
+        this.submitted = false;
     }
 
     /**
