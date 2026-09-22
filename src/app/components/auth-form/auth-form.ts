@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 
@@ -188,7 +188,13 @@ export class AuthForm implements OnInit {
         );
     }
 
-
+    /**
+ * Clears the signup draft from session storage and resets the form.
+ */
+    public clearDraft(): void {
+        sessionStorage.removeItem(this.signupDraftKey);
+        this.authForm.reset();
+    }
 
     /**
      * Restores previously saved signup draft data from session storage.
