@@ -40,6 +40,6 @@ export class SignUp {
             this.contactService.toastMessage.set('');
             await this.authService.logout();
             await this.router.navigate(['/log-in']);
-        }, 2500);
+        }, 1500);
     }
 }
