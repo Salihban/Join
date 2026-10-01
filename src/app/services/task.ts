@@ -113,12 +113,9 @@ export class TaskService {
             ...(task.status && { status: task.status })
         }).eq('id', taskId);
         if (error) return false;
-
         const { error: assigneeError } = await this.dbService.supabase.from('task_assignees').delete().eq('task_id', taskId);
         const { error: subtaskError } = await this.dbService.supabase.from('subtask').delete().eq('task_id', taskId);
-
         if (assigneeError || subtaskError) return false;
-
         const assigneesSaved = await this.addTaskAssignees(taskId, task.assignedContactIds);
         const subtasksSaved = await this.addSubtasks(taskId, task.subtasks);
         return assigneesSaved && subtasksSaved;
@@ -232,11 +229,35 @@ export class TaskService {
      * @returns A promise resolving to an array of Task objects.
      */
     async getTasks(): Promise<Task[]> {
-        const { data, error } = await this.dbService.supabase.from('task').select(`*, subtasks:subtask!subtask_task_id_fkey(*), task_assignees(contact:contacts(*))`);
-        if (error) return [];
+        const { data, error } = await this.dbService.supabase
+            .from('task')
+            .select(`
+            *,
+            subtasks:subtask!subtask_task_id_fkey(*),
+            task_assignees:task_assignees!task_assignees_task_id_fkey(
+                contact:contacts!task_assignees_contact_id_fkey(*)
+                )
+                `);
+
+        if (error) {
+            console.error('Fehler beim Laden der Tasks:', error);
+            return [];
+        }
+
         return (data ?? []).map((task: any) => ({
-            ...task, subtasks: task.subtasks ?? [], assignedContacts: (task.task_assignees ?? []).map(
-                (item: any) => item.contact),
+            ...task,
+            subtasks: task.subtasks ?? [],
+            assignedContacts: (task.task_assignees ?? [])
+                .map((item: any) => item.contact)
+                .filter(Boolean),
         })) as Task[];
     }
+    // async getTasks(): Promise<Task[]> {
+    //     const { data, error } = await this.dbService.supabase.from('task').select(`*, subtasks:subtask!subtask_task_id_fkey(*), task_assignees(contact:contacts(*))`);
+    //     if (error) return [];
+    //     return (data ?? []).map((task: any) => ({
+    //         ...task, subtasks: task.subtasks ?? [], assignedContacts: (task.task_assignees ?? []).map(
+    //             (item: any) => item.contact),
+    //     })) as Task[];
+    // }
 }

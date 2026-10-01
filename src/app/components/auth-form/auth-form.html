@@ -13,7 +13,7 @@
         <form class="login-form" [formGroup]="authForm" (ngSubmit)="submit()">
             @if (isSignup) {
                 <div class="input-group">
-                    <input type="text" placeholder="Name" formControlName="name" class="form-input"/>
+                    <input type="text" placeholder="Name" formControlName="name" class="form-input" autocomplete="off" name="no-autofill-name"/>
                     <span class="input-icon">
                         <img src="assets/icons_sprint3/person.png" alt="Name"/>
                     </span>
@@ -32,7 +32,7 @@
             }
 
             <div class="input-group">
-                <input type="email" placeholder="Email" formControlName="email" class="form-input"/>
+                <input type="email" placeholder="Email" formControlName="email" class="form-input" autocomplete="off" name="no-autofill-email"/>
                 <span class="input-icon">
                     <img src="assets/icons_sprint3/mail.png" alt="Email"/>
                 </span>
@@ -49,9 +49,9 @@
 
             <div class="input-group">
                 @if (passwordVisible) {
-                    <input type="text" placeholder="Password" formControlName="password" class="form-input"/>
+                    <input type="text" placeholder="Password" formControlName="password" class="form-input" autocomplete="new-password"/>
                 } @else {
-                    <input type="password" placeholder="Password" formControlName="password" class="form-input"/>
+                    <input type="password" placeholder="Password" formControlName="password" class="form-input" autocomplete="new-password"/>
                 }
                 <button type="button" class="input-icon" (click)="togglePasswordVisibility()">
                     @if (!password?.value) {
@@ -81,9 +81,9 @@
             @if (isSignup) {
                 <div class="input-group">
                     @if (confirmPasswordVisible) {
-                        <input type="text" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input"/>
+                        <input type="text" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input" autocomplete="new-password"/>
                     } @else {
-                        <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input"/>
+                        <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" class="form-input" autocomplete="new-password"/>
                     }
 
                     <button type="button" class="input-icon" (click)="toggleConfirmPasswordVisibility()">
